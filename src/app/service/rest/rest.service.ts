@@ -6,6 +6,8 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {catchError} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import {never} from 'rxjs/observable/never';
 
 @Injectable()
 export class RestService {
@@ -20,17 +22,22 @@ export class RestService {
 
   public get(adress: string, asResponse?: boolean) {
     return this.http.get(environment.rest + adress, this.buildOptions(asResponse))
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((e) => this.handleError(e)));
   }
 
-  public  post(adress: string, body: any, asResponse?: boolean) {
+  public post(adress: string, body: any, asResponse?: boolean) {
     return this.http.post(environment.rest + adress, body, this.buildOptions(asResponse))
       .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
+
+    if (error.status === 0) {
+      this.messageService.add({severity: 'error', summary: 'Server nicht erreichbar'});
+      return never();
+    }
     this.messageService.add({severity: 'error', summary: error.message})
-    return Observable.throw(error);
+    return ErrorObservable.create(error);
   }
 
   private buildOptions(asResponse?: boolean): any {

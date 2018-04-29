@@ -21,6 +21,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import { HomeComponent } from './home/home.component';
 import {MessageService} from './service/message/message.service';
+import { MeineHeldenComponent } from './meine-helden/meine-helden.component';
+import { NutzerVerwaltungComponent } from './nutzer-verwaltung/nutzer-verwaltung.component';
+import { GruppenAnsichtComponent } from './gruppen-ansicht/gruppen-ansicht.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +32,10 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' }
   },
+  { path: 'users/manage', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
+  { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
+  { path: 'groups', component: GruppenAnsichtComponent, data: {title: 'Gruppen-Ansicht'}},
+
   { path: '**', redirectTo : '/home' }
 ]
 
@@ -38,7 +45,10 @@ const appRoutes: Routes = [
     HeaderComponent,
     LoginComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    MeineHeldenComponent,
+    NutzerVerwaltungComponent,
+    GruppenAnsichtComponent
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule, HttpClientModule,

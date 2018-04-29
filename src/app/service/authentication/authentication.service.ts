@@ -6,6 +6,7 @@ import {Message} from 'primeng/api';
 import {UserAuthentication} from './UserAuthentication';
 import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 
 
 @Injectable()
@@ -14,21 +15,25 @@ export class AuthenticationService {
   public onLogin = new EventEmitter<void>();
   public onLogout = new EventEmitter<void>();
 
-  private _authenticated;
+  public rights: string[] = [];
+
+  public authenticated;
 
   constructor(private restService: RestService, private messageService: MessageService) {
   }
 
-  public authenticate(authentication: UserAuthentication): Observable<Response> {
-    return this.restService.post('login', authentication)
-      .pipe(catchError(this.handleAuthenticationError))
-      .pipe(tap( () => this._authenticated = true))
-      .pipe(tap( () => this.onLogin.emit()));
+  public authenticate(authentication: UserAuthentication): Observable<string[]> {
+    this.restService.authentication = authentication;
+    return this.restService.get('user/login')
+      .pipe(catchError((e) => this.handleAuthenticationError(e)),
+        tap((data: string[]) => this.rights = data),
+        tap( () => this.authenticated = true),
+        tap( () => this.onLogin.emit()));
   }
 
   private handleAuthenticationError(error: HttpErrorResponse) {
     let errorMsg = '';
-    if (error.status === 403) {
+    if (error.status === 401) {
       errorMsg = 'Falsche Logindaten';
     } else {
       console.error(error)
@@ -40,12 +45,15 @@ export class AuthenticationService {
       summary: errorMsg
     }
     this.messageService.add(msg)
-    return Observable.throw(errorMsg);
+    return ErrorObservable.create(errorMsg);
   }
 
   public logout() {
-    this._authenticated = false;
+    this.authenticated = false;
     this.restService.authentication = null;
+    this.onLogout.emit();
+    this.rights = [];
+
   }
 
 }
