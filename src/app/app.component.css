@@ -1,0 +1,12 @@
+
+.flex-container {
+  display:flex;
+}
+
+.content {
+  padding-left:5px;
+}
+
+.invisible {
+  display:none;
+}

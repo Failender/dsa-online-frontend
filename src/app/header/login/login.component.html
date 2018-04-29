@@ -1,0 +1,18 @@
+<p-dialog [visible]="visible" header="Einloggen" (onHide)="hideDialog.emit()" width="500">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="ui-g">
+      <label class="ui-g-3">Username</label>
+      <input pInput type="text" class="ui-g-9" formControlName="username" #userinput>
+    </div>
+
+    <div class="ui-g">
+      <label class="ui-g-3">Password</label>
+      <input pInput type="password" class="ui-g-9" formControlName="password">
+    </div>
+    <div class="ui-g">
+      <button pButton type="submit" label="Einloggen"></button>
+    </div>
+  </form>
+
+</p-dialog>

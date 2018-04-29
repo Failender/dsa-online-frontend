@@ -1,0 +1,13 @@
+<app-header (iconClicked)="onIconClick()"></app-header>
+<div class="flex-container">
+  <div class="flex-grow-1" [class.invisible]="!menuVisible">
+    <app-menu></app-menu>
+  </div>
+  <div class="flex-grow-4 content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+<p-growl life="300" [(value)]="messages" sticky="false"></p-growl>

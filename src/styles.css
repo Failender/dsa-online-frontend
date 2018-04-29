@@ -1,0 +1,41 @@
+
+.ui-tabview .ui-tabview-panel {
+  padding: 0px !important;
+  padding-top: 4px !important;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-grow-1 {
+  flex-grow:1;
+}
+
+.flex-grow-2 {
+  flex-grow:2;
+}
+
+.flex-grow-3 {
+  flex-grow:3;
+}
+
+.flex-grow-4 {
+  flex-grow:4;
+}
+
+.round-border {
+  border:solid black 1px;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  padding:2px;
+  overflow:hidden;
+}
+
+.fullsize {
+  width: 100%;
+}
+
+.flex-wrap{
+  flex-flow: wrap;
+}

@@ -1,0 +1,40 @@
+.header {
+
+  font-size: 16px;
+  background-color:#404c51;
+  height: 50px;
+  line-height:50px;
+  border: 2px solid #404c51;
+  border-radius:4px;
+}
+
+.fa-bars {
+  width:40px;
+  line-height:50px;
+  margin-left:10px;
+  cursor:pointer;
+}
+
+.title {
+  text-align: center;
+  width: calc(100% - 170px);
+  height:50%;
+  line-height:50px;
+}
+
+
+.new {
+  font-size: 32px;
+}
+
+.btn-container {
+  width: 110px;
+  height:20px;
+  line-height:50px;
+  margin-right:10px;
+
+}
+
+button {
+  width: 100%;
+}

@@ -1,0 +1,15 @@
+
+<div class="header ui-g">
+  <i class="fa fa-bars" (click)="onClick()"></i>
+  <span class="title">
+    DSA-Online
+  </span>
+  <div class="btn-container">
+    <button *ngIf="!auth.authenticated" pButton label="Login"  icon="fa-sign-out" (click)="login()"><i class="icon-repeat" ></i> </button>
+    <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa-sign-out" (click)="logout()"><i class="icon-repeat" ></i> </button>
+
+  </div>
+
+</div>
+
+<app-login [visible]="showLogin" (hideDialog)="showLogin=false"></app-login>
