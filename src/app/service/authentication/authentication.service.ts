@@ -28,6 +28,7 @@ export class AuthenticationService {
       .pipe(catchError((e) => this.handleAuthenticationError(e)),
         tap((data: string[]) => this.rights = data),
         tap( () => this.authenticated = true),
+        tap( () => this.messageService.info('Einloggt als ' + authentication.username)),
         tap( () => this.onLogin.emit()));
   }
 

@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, S
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication/authentication.service';
 import {MessageService} from '../../service/message/message.service';
+import {SessionService} from '../../service/session/session.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,18 @@ export class LoginComponent implements OnInit, OnChanges {
   @ViewChild('userinput')public userinput: ElementRef;
   public form: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
+    rememberMe: new FormControl(false)
   });
 
-  constructor(private messageService: MessageService, private authenticationService: AuthenticationService) { }
+  constructor(private messageService: MessageService, private authenticationService: AuthenticationService, private sessionService: SessionService) { }
 
 
   ngOnInit() {
+    if (this.sessionService.userAuthentication.value) {
+      this.authenticationService.authenticate(this.sessionService.userAuthentication.value)
+        .subscribe();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,14 +42,24 @@ export class LoginComponent implements OnInit, OnChanges {
 
   onSubmit() {
     if (this.form.valid) {
+      const formValue = this.form.value;
+      const rememberMe = formValue.rememberMe;
+      delete formValue.rememberMe;
       this.authenticationService.authenticate(this.form.value)
         .subscribe(
-          () => this.hideDialog.emit()
-        );
+          () => {
+            this.hideDialog.emit();
+            if (rememberMe) {
+              this.sessionService.userAuthentication.value = formValue;
+            } else {
+              this.sessionService.userAuthentication.value = null;
+            }
+          });
     } else {
       this.messageService.add({severity: 'error', summary: 'Formular wurde nicht korrekt ausgefüllt'});
 
     }
   }
+
 
 }

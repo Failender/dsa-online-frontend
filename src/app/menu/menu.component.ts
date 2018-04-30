@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {AuthenticationService} from '../service/authentication/authentication.service';
+import {HeldenService} from '../meine-helden/helden.service';
 
 @Component({
   selector: 'app-menu',
@@ -38,8 +39,28 @@ export class MenuComponent implements OnInit {
     ]
   }
 
+  private heldenItem: MenuItem =
+    {
+      label: 'Held',
+      items: [
+        {
+          label: 'Übersicht',
+          routerLink: 'held/uebersicht'
+        },
+        {
+          label: 'Ereignisse',
+          routerLink: 'held/ereignisse'
+        }
+      ]
 
-  constructor(private auth: AuthenticationService) {
+    }
+
+
+
+  constructor(auth: AuthenticationService, heldenService: HeldenService) {
+    heldenService.heldLoaded.subscribe(
+      () => this.items.push(this.heldenItem)
+    )
     auth.onLogin.subscribe(
       () => {
         const itemsToAdd = this.authenticatedItems;
@@ -55,7 +76,7 @@ export class MenuComponent implements OnInit {
     auth.onLogout.subscribe(
       () => {
         const itemsToRemove = this.authenticatedItems;
-        this.auth.rights.forEach(right => {
+        auth.rights.forEach(right => {
           const items = this.protectedItems[right]
           if (items) {
             itemsToRemove.push(...items);

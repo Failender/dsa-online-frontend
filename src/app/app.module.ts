@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 
 import { AppComponent } from './app.component';
@@ -13,7 +13,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
-import {PanelMenuModule} from 'primeng/primeng';
+import {CheckboxModule, DataTableModule, PanelMenuModule} from 'primeng/primeng';
 import {AuthenticationService} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -24,7 +24,17 @@ import {MessageService} from './service/message/message.service';
 import { MeineHeldenComponent } from './meine-helden/meine-helden.component';
 import { NutzerVerwaltungComponent } from './nutzer-verwaltung/nutzer-verwaltung.component';
 import { GruppenAnsichtComponent } from './gruppen-ansicht/gruppen-ansicht.component';
+import {SessionService} from './service/session/session.service';
+import { HeldenInfoTabelleComponent } from './shared/helden-info-tabelle/helden-info-tabelle.component';
+import {TableModule} from 'primeng/table';
+import {registerLocaleData} from '@angular/common';
 
+import localeDe from '@angular/common/locales/de';
+import { AuthenticationRequiredComponent } from './shared/authentication-required/authentication-required.component';
+import {HeldenService} from './meine-helden/helden.service';
+import { HeldUebersichtComponent } from './held/held-uebersicht/held-uebersicht.component';
+import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.component';
+import { HeldenComponent } from './held/helden-component/helden-component.component';
 
 const appRoutes: Routes = [
   {
@@ -35,9 +45,13 @@ const appRoutes: Routes = [
   { path: 'users/manage', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'groups', component: GruppenAnsichtComponent, data: {title: 'Gruppen-Ansicht'}},
+  { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
+  { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
 
   { path: '**', redirectTo : '/home' }
 ]
+
+registerLocaleData(localeDe, 'de');
 
 @NgModule({
   declarations: [
@@ -48,17 +62,24 @@ const appRoutes: Routes = [
     HomeComponent,
     MeineHeldenComponent,
     NutzerVerwaltungComponent,
-    GruppenAnsichtComponent
+    GruppenAnsichtComponent,
+    HeldenInfoTabelleComponent,
+    AuthenticationRequiredComponent,
+    HeldUebersichtComponent,
+    HeldEreignisseComponent,
+    HeldenComponent,
   ],
   imports: [
-    BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule, HttpClientModule,
-    BrowserAnimationsModule, ButtonModule,
+    BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
+    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
-    )
+    ),
+
   ],
-  providers: [AuthenticationService, RestService, MessageService],
+  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService,
+    { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

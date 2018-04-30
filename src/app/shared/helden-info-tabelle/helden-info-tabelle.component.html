@@ -1,0 +1,20 @@
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Letzte Änderung</th>
+      <th>Gruppe</th>
+      <th>Version</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{data.name}}</td>
+      <td>{{data.lastChanged |date}}</td>
+      <td>{{data.gruppe}}</td>
+      <td>{{data.version}}</td>
+      <td><button pButton label="Laden" (click)="heldLaden(data)"></button></td>
+    </tr>
+  </ng-template>
+</p-table>
