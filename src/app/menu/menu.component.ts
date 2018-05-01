@@ -48,18 +48,33 @@ export class MenuComponent implements OnInit {
           routerLink: 'held/uebersicht'
         },
         {
+          label: 'Talente',
+          routerLink: 'held/talente'
+        },
+
+        {
           label: 'Ereignisse',
           routerLink: 'held/ereignisse'
         }
       ]
 
-    }
+    };
 
 
 
   constructor(auth: AuthenticationService, heldenService: HeldenService) {
     heldenService.heldLoaded.subscribe(
-      () => this.items.push(this.heldenItem)
+      () => {
+        const deepCopy = JSON.parse(JSON.stringify(this.heldenItem));
+        if (heldenService.held.zauberliste.zauber.length >0) {
+          deepCopy.items.push({
+            label: 'Zauber',
+            routerLink: 'held/zauber',
+          });
+        }
+        this.items.push(deepCopy);
+
+      }
     )
     auth.onLogin.subscribe(
       () => {

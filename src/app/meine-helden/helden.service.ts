@@ -18,8 +18,10 @@ export class HeldenService {
 
   public loadHeld(id: number) {
     this.restService.get('helden/held/' + id)
-      .pipe(tap(() => this.heldLoaded.emit()))
-      .subscribe(data => this.held = data);
+      .subscribe(data => {
+          this.held = data;
+          this.heldLoaded.emit();
+        });
   }
 
 }

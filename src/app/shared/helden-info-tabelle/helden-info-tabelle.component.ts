@@ -21,7 +21,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
     const sub = this.heldenService.heldLoaded.subscribe(
       () => {
         sub.unsubscribe();
-        this.router.navigateByUrl('held/uebersicht');
+        this.router.navigateByUrl('held/zauber');
       }
     )
     this.heldenService.loadHeld(held.id);

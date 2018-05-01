@@ -35,6 +35,8 @@ import {HeldenService} from './meine-helden/helden.service';
 import { HeldUebersichtComponent } from './held/held-uebersicht/held-uebersicht.component';
 import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.component';
 import { HeldenComponent } from './held/helden-component/helden-component.component';
+import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
+import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
 
 const appRoutes: Routes = [
   {
@@ -47,6 +49,8 @@ const appRoutes: Routes = [
   { path: 'groups', component: GruppenAnsichtComponent, data: {title: 'Gruppen-Ansicht'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
+  { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
+  { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
 
   { path: '**', redirectTo : '/home' }
 ]
@@ -68,6 +72,8 @@ registerLocaleData(localeDe, 'de');
     HeldUebersichtComponent,
     HeldEreignisseComponent,
     HeldenComponent,
+    HeldTalenteComponent,
+    HeldZauberComponent,
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
@@ -79,7 +85,8 @@ registerLocaleData(localeDe, 'de');
 
   ],
   providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService,
-    { provide: LOCALE_ID, useValue: 'de' }],
+    { provide: LOCALE_ID, useValue: 'de' }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
