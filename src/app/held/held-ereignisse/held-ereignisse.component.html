@@ -1,0 +1,24 @@
+<p-table [value]="held.ereignisse.ereignis" *ngIf="held" (sortFunction)="customSort($event)" [customSort]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Probe</th>
+      <th>Lernmethode</th>
+      <th class="small">AP</th>
+      <th class="medium">Änderung</th>
+      <th>Kommentar</th>
+      <th pSortableColumn="date">Datum</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{data.aktion}}</td>
+      <td>{{data.object}}</td>
+      <td>{{data.bemerkung}}</td>
+      <td>{{data.ap}}</td>
+      <td>{{getChange(data)}}</td>
+      <td>{{data.kommentar}}</td>
+      <td>{{data.date | date: 'dd.MM.yyyy'}}</td>
+    </tr>
+  </ng-template>
+</p-table>

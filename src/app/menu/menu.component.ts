@@ -61,12 +61,16 @@ export class MenuComponent implements OnInit {
     };
 
 
-
+  private heldItemsLoaded = false;
   constructor(auth: AuthenticationService, heldenService: HeldenService) {
     heldenService.heldLoaded.subscribe(
       () => {
+        if (this.heldItemsLoaded) {
+          this.unloadHeldItems();
+        }
+        this.heldItemsLoaded = true;
         const deepCopy = JSON.parse(JSON.stringify(this.heldenItem));
-        if (heldenService.held.zauberliste.zauber.length >0) {
+        if (heldenService.held.zauberliste.zauber.length > 0) {
           deepCopy.items.push({
             label: 'Zauber',
             routerLink: 'held/zauber',
@@ -105,6 +109,10 @@ export class MenuComponent implements OnInit {
       }
 
     );
+  }
+
+  private unloadHeldItems(): void {
+    this.items.splice(this.items.findIndex(e => e.label === 'Held'), 1);
   }
 
   ngOnInit() {

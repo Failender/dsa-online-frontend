@@ -68,10 +68,8 @@ registerLocaleData(localeDe, 'de');
     NutzerVerwaltungComponent,
     GruppenAnsichtComponent,
     HeldenInfoTabelleComponent,
-    AuthenticationRequiredComponent,
     HeldUebersichtComponent,
     HeldEreignisseComponent,
-    HeldenComponent,
     HeldTalenteComponent,
     HeldZauberComponent,
   ],
@@ -84,8 +82,8 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService,
-    { provide: LOCALE_ID, useValue: 'de' }
+  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService
+    , { provide: LOCALE_ID, useValue: 'de' }
     ],
   bootstrap: [AppComponent]
 })
