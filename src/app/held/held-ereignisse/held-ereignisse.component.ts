@@ -27,7 +27,6 @@ export class HeldEreignisseComponent extends HeldenComponent {
   }
 
   public customSort(event: SortEvent) {
-    console.debug(event)
     if (event.field === 'date') {
       event.data.sort((data1, data2) => {
         return event.order * (data2.date - data1.date);
