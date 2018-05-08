@@ -5,3 +5,4 @@ pipeline:
     tags: latest
     dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
+    debug: true
