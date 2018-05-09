@@ -3,6 +3,8 @@ import {HeldenInfo, HeldenService} from './helden.service';
 import {AuthenticationRequiredComponent} from '../shared/authentication-required/authentication-required.component';
 import {AuthenticationService} from '../service/authentication/authentication.service';
 import {Router} from '@angular/router';
+import {SelectItem} from 'primeng/api';
+import {GruppenService} from './gruppen.service';
 
 @Component({
   selector: 'app-meine-helden',
@@ -11,7 +13,9 @@ import {Router} from '@angular/router';
 })
 export class MeineHeldenComponent extends AuthenticationRequiredComponent{
 
+
   public helden: HeldenInfo[];
+
 
   constructor(private meineHeldenService: HeldenService, authenticationService: AuthenticationService, router: Router) {
     super(authenticationService, router);
@@ -23,5 +27,6 @@ export class MeineHeldenComponent extends AuthenticationRequiredComponent{
       .subscribe(
         data => this.helden = data
       );
+
   }
 }

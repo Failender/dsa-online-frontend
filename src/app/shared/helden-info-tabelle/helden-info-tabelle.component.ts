@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {Router} from '@angular/router';
+import {SelectItem} from 'primeng/api';
+import {GruppenService} from '../../meine-helden/gruppen.service';
 
 @Component({
   selector: 'app-helden-info-tabelle',
@@ -11,10 +13,13 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   @Input()
   public data: HeldenInfo[];
+  public gruppen: SelectItem[];
 
-  constructor(private router: Router, private heldenService: HeldenService) { }
+  constructor(private router: Router, private heldenService: HeldenService , private gruppenService: GruppenService) { }
 
   ngOnInit() {
+    this.gruppenService.getGruppen()
+      .subscribe(data => this.gruppen = data);
   }
 
   heldLaden(held: HeldenInfo) {
@@ -25,6 +30,15 @@ export class HeldenInfoTabelleComponent implements OnInit {
       }
     )
     this.heldenService.loadHeld(held.id);
+  }
+
+  onDropdownSelected(gruppeId, heldenId) {
+    this.gruppenService.updateGruppe(heldenId, gruppeId)
+      .subscribe(
+        () => {
+
+        }
+      )
   }
 
 }

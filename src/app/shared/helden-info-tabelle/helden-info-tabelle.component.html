@@ -12,7 +12,8 @@
     <tr>
       <td>{{data.name}}</td>
       <td>{{data.lastChanged |date}}</td>
-      <td>{{data.gruppe}}</td>
+      <!--<td>{{data.gruppe}}</td>-->
+      <td><p-dropdown [options]="gruppen" (onChange)="onDropdownSelected($event.value, data.id)" [placeholder]="data.gruppe"></p-dropdown></td>
       <td>{{data.version}}</td>
       <td><button pButton label="Laden" (click)="heldLaden(data)"></button></td>
     </tr>

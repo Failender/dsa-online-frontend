@@ -13,7 +13,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
-import {CheckboxModule, DataTableModule, PanelMenuModule} from 'primeng/primeng';
+import {CheckboxModule, DataTableModule, DropdownModule, PanelMenuModule} from 'primeng/primeng';
 import {AuthenticationService} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -37,6 +37,7 @@ import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.
 import { HeldenComponent } from './held/helden-component/helden-component.component';
 import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
 import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
+import {GruppenService} from './meine-helden/gruppen.service';
 
 const appRoutes: Routes = [
   {
@@ -75,14 +76,14 @@ registerLocaleData(localeDe, 'de');
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
-    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule,
+    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService
+  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService
     , { provide: LOCALE_ID, useValue: 'de' }
     ],
   bootstrap: [AppComponent]
