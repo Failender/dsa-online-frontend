@@ -13,7 +13,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
-import {CheckboxModule, DataTableModule, DropdownModule, PanelMenuModule} from 'primeng/primeng';
+import {AccordionModule, CheckboxModule, DataTableModule, DropdownModule, PanelMenuModule} from 'primeng/primeng';
 import {AuthenticationService} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -76,7 +76,7 @@ registerLocaleData(localeDe, 'de');
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
-    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule,
+    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

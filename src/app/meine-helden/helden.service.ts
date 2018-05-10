@@ -27,8 +27,9 @@ export class HeldenService {
 }
 
 export interface HeldenInfo {
+  gruppe: string;
   heldenid: number;
   name: string;
   lastChanged: number;
-  id: number
+  id: number;
 }

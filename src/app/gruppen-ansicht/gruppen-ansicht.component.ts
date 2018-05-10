@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {GruppeInlcludingHeld, GruppenService} from '../meine-helden/gruppen.service';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-gruppen-ansicht',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GruppenAnsichtComponent implements OnInit {
 
-  constructor() { }
+  public gruppen: GruppeInlcludingHeld[];
+
+  constructor(private gruppenService: GruppenService) { }
 
   ngOnInit() {
+    this.gruppenService.getGruppenIncludingHeld()
+      .subscribe((data) => this.gruppen = data);
+  }
+
+  onTabOpen(gruppe: SelectItem) {
+    console.debug(gruppe);
   }
 
 }
