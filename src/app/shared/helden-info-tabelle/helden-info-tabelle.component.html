@@ -15,7 +15,12 @@
       <!--<td>{{data.gruppe}}</td>-->
       <td><p-dropdown [options]="gruppen" (onChange)="onDropdownSelected($event.value, data.id)" [placeholder]="data.gruppe"></p-dropdown></td>
       <td>{{data.version}}</td>
-      <td><button pButton label="Laden" (click)="heldLaden(data)"></button></td>
+      <td>
+        <button pButton label="Laden" (click)="heldLaden(data)"></button>
+        <button pButton label="Alte Version laden" (click)="alteVersionLaden(data)"></button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
+
+<app-alte-version-laden-dialog [held]="alteVersionLadenHeld" (dialogClosed)="dialogClosed($event)"></app-alte-version-laden-dialog>

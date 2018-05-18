@@ -15,6 +15,8 @@ export class HeldenInfoTabelleComponent implements OnInit {
   public data: HeldenInfo[];
   public gruppen: SelectItem[];
 
+  public alteVersionLadenHeld: HeldenInfo;
+
   constructor(private router: Router, private heldenService: HeldenService , private gruppenService: GruppenService) { }
 
   ngOnInit() {
@@ -23,13 +25,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
   }
 
   heldLaden(held: HeldenInfo) {
-    const sub = this.heldenService.heldLoaded.subscribe(
-      () => {
-        sub.unsubscribe();
-        this.router.navigateByUrl('held/ereignisse');
-      }
-    )
-    this.heldenService.loadHeld(held.id);
+    this._heldLaden(held.id, held.version);
   }
 
   onDropdownSelected(gruppeId, heldenId) {
@@ -38,7 +34,28 @@ export class HeldenInfoTabelleComponent implements OnInit {
         () => {
 
         }
-      )
+      );
+  }
+
+  private _heldLaden(id: number, version: number) {
+    const sub = this.heldenService.heldLoaded.subscribe(
+      () => {
+        sub.unsubscribe();
+        this.router.navigateByUrl('held/ereignisse');
+      }
+    )
+    this.heldenService.loadHeld(id, version);
+  }
+
+  alteVersionLaden(held: HeldenInfo) {
+    this.alteVersionLadenHeld = held;
+  }
+
+  dialogClosed(version) {
+    if (version) {
+      this._heldLaden(this.alteVersionLadenHeld.id, version);
+      this.alteVersionLadenHeld = null;
+    }
   }
 
 }

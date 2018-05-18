@@ -16,8 +16,8 @@ export class HeldenService {
     return this.restService.get('helden');
   }
 
-  public loadHeld(id: number) {
-    this.restService.get('helden/held/' + id)
+  public loadHeld(id: number, version: number) {
+    this.restService.get('helden/held/' + id + '/' + version)
       .subscribe(data => {
           this.held = data;
           this.heldLoaded.emit();
@@ -32,4 +32,5 @@ export interface HeldenInfo {
   name: string;
   lastChanged: number;
   id: number;
+  version: number;
 }

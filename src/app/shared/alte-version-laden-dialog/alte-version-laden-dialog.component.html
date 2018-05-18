@@ -1,0 +1,3 @@
+<p-dialog [visible]="held" (onHide)="onHide()" [header]="held?.name">
+  <button pButton [label]="version" *ngFor="let version of versions" (click)="loadVersion(version)"></button>
+</p-dialog>

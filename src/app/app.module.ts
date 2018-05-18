@@ -38,6 +38,7 @@ import { HeldenComponent } from './held/helden-component/helden-component.compon
 import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
 import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './meine-helden/gruppen.service';
+import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -73,6 +74,7 @@ registerLocaleData(localeDe, 'de');
     HeldEreignisseComponent,
     HeldTalenteComponent,
     HeldZauberComponent,
+    AlteVersionLadenDialogComponent,
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
