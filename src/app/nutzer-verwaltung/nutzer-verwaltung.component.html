@@ -1,3 +1,27 @@
-<p>
-  nutzer-verwaltung works!
-</p>
+<form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+  <div class="ui-g">
+    <label class="ui-g-3">Username</label>
+    <input pInput type="text" class="ui-g-9" formControlName="name" #userinput >
+  </div>
+
+  <div class="ui-g">
+    <label class="ui-g-3">Password</label>
+    <input pInput type="password" class="ui-g-9" formControlName="password" autocomplete="off">
+  </div>
+
+  <div class="ui-g">
+    <label class="ui-g-3">Token</label>
+    <input pInput type="password" class="ui-g-9" formControlName="token">
+  </div>
+
+
+
+  <div class="ui-g">
+    <p-dropdown [options]="gruppen" formControlName="gruppe" placeholder="Bitte eine Gruppe auswählen"></p-dropdown>
+  </div>
+
+  <div class="ui-g">
+    <button pButton type="submit" label="Erstellen"></button>
+  </div>
+
+</form>

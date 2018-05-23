@@ -1,3 +1,22 @@
 <p-dialog [visible]="held" (onHide)="onHide()" [header]="held?.name">
-  <button pButton [label]="version" *ngFor="let version of versions" (click)="loadVersion(version)"></button>
+  <p-table [value]="versions">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Version</th>
+        <th>Datum</th>
+        <th>Letztes Abenteuer</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.version}}</td>
+        <td>{{data.datum | date}}</td>
+        <td>{{data.letztesAbenteuer}}</td>
+        <td><button pButton label="Laden"(click)="loadVersion(data.version)"></button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
 </p-dialog>
+

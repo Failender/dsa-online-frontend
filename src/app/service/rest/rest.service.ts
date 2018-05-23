@@ -27,7 +27,7 @@ export class RestService {
 
   public post(adress: string, body: any, asResponse?: boolean) {
     return this.http.post(environment.rest + adress, body, this.buildOptions(asResponse))
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((event) => this.handleError(event)));
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
@@ -36,7 +36,7 @@ export class RestService {
       this.messageService.add({severity: 'error', summary: 'Server nicht erreichbar'});
       return never();
     }
-    this.messageService.add({severity: 'error', summary: error.message})
+    //this.messageService.add({severity: 'error', summary: error.message})
     return ErrorObservable.create(error);
   }
 

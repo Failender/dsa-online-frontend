@@ -20,7 +20,7 @@ export class HeldEreignisseComponent extends HeldenComponent {
   }
 
   public getChange(data: any) {
-    if (data.alterzustand && data.neuerzustand) {
+    if (data.alterzustand === 0 || data.alterzustand && (data.neuerzustand !== 0 || data.alterzustand !== 0 )) {
       return data.alterzustand + '->' + data.neuerzustand;
     }
     return '';

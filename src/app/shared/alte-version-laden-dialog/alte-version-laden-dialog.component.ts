@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {InputSwitch} from 'primeng/primeng';
 import {HeldenInfo} from '../../meine-helden/helden.service';
+import {VersionService} from './version.service';
 
 @Component({
   selector: 'app-alte-version-laden-dialog',
   templateUrl: './alte-version-laden-dialog.component.html',
-  styleUrls: ['./alte-version-laden-dialog.component.css']
+  styleUrls: ['./alte-version-laden-dialog.component.css'],
+  providers: [VersionService]
 })
 export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
 
@@ -18,7 +20,7 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   @Output()
   public dialogClosed = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private versionService: VersionService) { }
 
   ngOnInit() {
   }
@@ -30,9 +32,7 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.versions = [];
     if (this.held) {
-      for (let i = 0; i < this.held.version; i++) {
-        this.versions.push(i + 1);
-      }
+      this.versionService.getVersionen(this.held.id).subscribe((data) => this.versions = data)
     }
 
   }
