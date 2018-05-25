@@ -9,6 +9,7 @@ export class HeldenService {
   constructor(private restService: RestService) { }
 
   public held: any;
+  public versionInfo;
 
   public heldLoaded = new EventEmitter();
 
@@ -19,6 +20,9 @@ export class HeldenService {
   public loadHeld(id: number, version: number) {
     this.restService.get('helden/held/' + id + '/' + version)
       .subscribe(data => {
+        this.versionInfo = {
+          id, version
+        }
           this.held = data;
           this.heldLoaded.emit();
         });

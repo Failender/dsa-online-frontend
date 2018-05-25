@@ -15,7 +15,6 @@ export class HeldUebersichtComponent extends HeldenComponent{
 
 
 
-  public pdfSrc = 'http://localhost:8080/api/helden/held/pdf/36222/14';
   public pdfOptions;
 
   constructor(heldenService: HeldenService, private authenticationService: AuthenticationService, router: Router) {
@@ -24,8 +23,10 @@ export class HeldUebersichtComponent extends HeldenComponent{
   }
 
   protected init(): void {
+    console.debug(this.held)
+    const url = `http://localhost:8080/api/helden/held/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
     this.pdfOptions = {
-      url: this.pdfSrc,
+      url,
       httpHeaders: {
         'X-USER': this.authenticationService.authentication.username,
         'X-PASSWORD' : this.authenticationService.authentication.password

@@ -21,4 +21,8 @@ export abstract class HeldenComponent implements OnInit {
     return this.heldenService.held;
   }
 
+  get versioninfo() {
+    return this.heldenService.versionInfo;
+  }
+
 }
