@@ -22,6 +22,10 @@ export class AuthenticationService {
   constructor(private restService: RestService, private messageService: MessageService) {
   }
 
+  get authentication(): UserAuthentication {
+    return this.restService.authentication;
+}
+
   public authenticate(authentication: UserAuthentication): Observable<string[]> {
     this.restService.authentication = authentication;
     return this.restService.get('user/login')

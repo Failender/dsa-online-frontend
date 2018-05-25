@@ -5,6 +5,7 @@
         <th>Version</th>
         <th>Datum</th>
         <th>Letztes Abenteuer</th>
+        <th>PDF</th>
         <th></th>
       </tr>
     </ng-template>
@@ -13,7 +14,11 @@
         <td>{{data.version}}</td>
         <td>{{data.datum | date}}</td>
         <td>{{data.letztesAbenteuer}}</td>
-        <td><button pButton label="Laden"(click)="loadVersion(data.version)"></button></td>
+        <td><p-checkbox [value]="data.pdfCached"></p-checkbox></td>
+        <td>
+          <button pButton label="Laden"(click)="loadVersion(data.version)"></button>
+
+        </td>
       </tr>
     </ng-template>
   </p-table>

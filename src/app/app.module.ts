@@ -39,6 +39,8 @@ import { HeldTalenteComponent } from './held/held-talente/held-talente.component
 import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './meine-helden/gruppen.service';
 import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 
 const appRoutes: Routes = [
   {
@@ -78,7 +80,7 @@ registerLocaleData(localeDe, 'de');
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, PanelMenuModule,
-    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule,
+    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

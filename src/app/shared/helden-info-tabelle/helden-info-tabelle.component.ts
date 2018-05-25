@@ -52,11 +52,11 @@ export class HeldenInfoTabelleComponent implements OnInit {
   }
 
   dialogClosed(version) {
-    this.alteVersionLadenHeld = null;
+
     if (version) {
       this._heldLaden(this.alteVersionLadenHeld.id, version);
-
     }
+    this.alteVersionLadenHeld = null;
   }
 
 }
