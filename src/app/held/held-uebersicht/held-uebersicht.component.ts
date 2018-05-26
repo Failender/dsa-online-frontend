@@ -23,7 +23,6 @@ export class HeldUebersichtComponent extends HeldenComponent{
   }
 
   protected init(): void {
-    console.debug(this.held)
     const url = `http://localhost:8080/api/helden/held/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
     this.pdfOptions = {
       url,

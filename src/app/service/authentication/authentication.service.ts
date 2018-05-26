@@ -10,6 +10,7 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
 import {Router} from '@angular/router';
+import {toPromise} from 'rxjs/operator/toPromise';
 
 
 @Injectable()
@@ -66,13 +67,18 @@ export class AuthenticationService {
     this.rights = [];
   }
 
-  public initialize(): Promise<string[]> {
+  public initialize(): Promise<any> {
     if (this.sessionService.userAuthentication.value) {
       return this.authenticate(this.sessionService.userAuthentication.value)
+        .pipe(catchError(this.handleError))
         .toPromise();
     } else {
       return Promise.resolve([]);
     }
+  }
+
+  handleError() {
+    return Observable.of([]);
   }
 
 }
