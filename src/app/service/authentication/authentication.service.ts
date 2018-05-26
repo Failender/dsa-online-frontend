@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from '../rest/rest.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Message} from 'primeng/api';
 import {UserAuthentication} from './UserAuthentication';
@@ -9,8 +9,6 @@ import {MessageService} from '../message/message.service';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
-import {Router} from '@angular/router';
-import {toPromise} from 'rxjs/operator/toPromise';
 
 
 @Injectable()
