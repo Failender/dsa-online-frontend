@@ -5,6 +5,7 @@ import {AuthenticationService} from '../../service/authentication/authentication
 import {Router} from '@angular/router';
 import {MeineHeldenComponent} from '../../meine-helden/meine-helden.component';
 import {HeldenComponent} from '../helden-component/helden-component.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-held-uebersicht',
@@ -23,7 +24,7 @@ export class HeldUebersichtComponent extends HeldenComponent{
   }
 
   protected init(): void {
-    const url = `http://localhost:8080/api/helden/held/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
+    const url = environment.rest + `helden/held/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
     this.pdfOptions = {
       url,
       httpHeaders: {
