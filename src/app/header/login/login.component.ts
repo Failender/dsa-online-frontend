@@ -26,10 +26,6 @@ export class LoginComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    if (this.sessionService.userAuthentication.value) {
-      this.authenticationService.authenticate(this.sessionService.userAuthentication.value)
-        .subscribe();
-    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

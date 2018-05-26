@@ -7,6 +7,7 @@ import {UserAuthentication} from './UserAuthentication';
 import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import {SessionService} from "../session/session.service";
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class AuthenticationService {
 
   public authenticated;
 
-  constructor(private restService: RestService, private messageService: MessageService) {
+  constructor(private restService: RestService, private messageService: MessageService, private sessionService: SessionService) {
   }
 
   get authentication(): UserAuthentication {
@@ -61,4 +62,19 @@ export class AuthenticationService {
 
   }
 
+  public initialize(): Promise<string[]> {
+    if (this.sessionService.userAuthentication.value) {
+      return this.authenticate(this.sessionService.userAuthentication.value)
+        .toPromise();
+    } else {
+      return Promise.resolve([]);
+    }
+  }
+
+}
+
+
+export function init(authenticationService: AuthenticationService) {
+
+  return () => authenticationService.initialize();
 }

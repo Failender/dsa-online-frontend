@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
 
 
 import { AppComponent } from './app.component';
@@ -14,7 +14,7 @@ import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
 import {AccordionModule, CheckboxModule, DataTableModule, DropdownModule, PanelMenuModule} from 'primeng/primeng';
-import {AuthenticationService} from './service/authentication/authentication.service';
+import {AuthenticationService, init} from "./service/authentication/authentication.service";
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -40,6 +40,7 @@ import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './meine-helden/gruppen.service';
 import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {MenuService} from "./menu/menu.service";
 
 
 const appRoutes: Routes = [
@@ -87,8 +88,14 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService
-    , { provide: LOCALE_ID, useValue: 'de' }
+  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService, MenuService
+    , { provide: LOCALE_ID, useValue: 'de' },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init,
+      multi: true,
+      deps: [AuthenticationService, MenuService]
+    }
     ],
   bootstrap: [AppComponent]
 })
