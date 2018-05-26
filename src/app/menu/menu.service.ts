@@ -3,6 +3,8 @@ import {SessionService} from "../service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
+import {RouterConfigLoader} from '@angular/router/src/router_config_loader';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class MenuService {
@@ -36,81 +38,76 @@ export class MenuService {
     ]
   }
 
-  private heldenItem: MenuItem =
-    {
-      label: 'Held',
-      items: [
-        {
-          label: 'Übersicht',
-          routerLink: 'held/uebersicht'
-        },
-        {
-          label: 'Talente',
-          routerLink: 'held/talente'
-        },
+  private heldenItems: MenuItem[] =
+    [
+      {
+        label: 'Übersicht',
+        routerLink: 'held/uebersicht'
+      },
+      {
+        label: 'Talente',
+        routerLink: 'held/talente'
+      },
 
-        {
-          label: 'Ereignisse',
-          routerLink: 'held/ereignisse'
-        }
-      ]
-
-    };
+      {
+        label: 'Ereignisse',
+        routerLink: 'held/ereignisse'
+      }
+    ];
 
 
-  private heldItemsLoaded = false;
-  private unloadHeldItems(): void {
-    this.items.splice(this.items.findIndex(e => e.label === 'Held'), 1);
+  private itemsToUnload: MenuItem[] = [];
+  private heldItems: MenuItem[] = [];
+
+  private removeHeldItems() {
+    this.heldItems.forEach(item => {
+      this.removeItem(item);
+    })
+    this.heldItems = [];
   }
-
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService) {
-
+    this.removeHeldItems();
     heldenService.heldLoaded.subscribe(
       () => {
-        if (this.heldItemsLoaded) {
-          this.unloadHeldItems();
-        }
-        this.heldItemsLoaded = true;
-        const deepCopy = JSON.parse(JSON.stringify(this.heldenItem));
+
         if (heldenService.held.zauberliste.zauber.length > 0) {
-          deepCopy.items.push({
+          const zauberItem = {
             label: 'Zauber',
             routerLink: 'held/zauber',
-          });
+          };
+          this.heldItems.push(zauberItem);
         }
-        this.items.push(deepCopy);
+        this.heldItems.push(... this.heldenItems)
+        this.items.push(... this.heldItems);
 
       }
     )
     authenticationService.onLogin.subscribe(
       () => {
-        const itemsToAdd = this.authenticatedItems;
+        this.itemsToUnload = [];
+        this.items.push(...this.authenticatedItems);
+        this.itemsToUnload.push(...this.authenticatedItems);
         authenticationService.rights.forEach(right => {
           const items = this.protectedItems[right]
           if (items) {
-            itemsToAdd.push(...items);
+            this.items.push(...items)
+            this.itemsToUnload.push(...items);
           }
 
-        })
-        this.items.push(...itemsToAdd);
+        });
       });
     authenticationService.onLogout.subscribe(
       () => {
-        const itemsToRemove = this.authenticatedItems;
-        authenticationService.rights.forEach(right => {
-          const items = this.protectedItems[right]
-          if (items) {
-            itemsToRemove.push(...items);
-          }
-
-        })
-        itemsToRemove.forEach(item => {
-          const index = this.items.findIndex(l => l === item);
-          this.items.splice(index, 1);
-        });
+        this.removeHeldItems();
+        this.itemsToUnload.forEach(item => this.removeItem(item));
+        this.itemsToUnload = [];
       }
-
     );
+  }
+
+  private removeItem(item: MenuItem) {
+    console.debug('REMOVING ITEM ', item)
+    this.items.splice(this.items.indexOf(item), 1);
   }
 }
 

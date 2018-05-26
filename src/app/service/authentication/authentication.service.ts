@@ -8,6 +8,8 @@ import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {SessionService} from "../session/session.service";
+import {HeldenService} from '../../meine-helden/helden.service';
+import {Router} from '@angular/router';
 
 
 @Injectable()
@@ -20,7 +22,8 @@ export class AuthenticationService {
 
   public authenticated;
 
-  constructor(private restService: RestService, private messageService: MessageService, private sessionService: SessionService) {
+  constructor(private restService: RestService, private messageService: MessageService,
+              private sessionService: SessionService, private heldenService: HeldenService) {
   }
 
   get authentication(): UserAuthentication {
@@ -55,11 +58,12 @@ export class AuthenticationService {
   }
 
   public logout() {
+    this.heldenService.held = null;
     this.authenticated = false;
     this.restService.authentication = null;
+
     this.onLogout.emit();
     this.rights = [];
-
   }
 
   public initialize(): Promise<string[]> {
