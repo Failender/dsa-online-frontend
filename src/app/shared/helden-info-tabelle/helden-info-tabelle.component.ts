@@ -3,6 +3,7 @@ import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {Router} from '@angular/router';
 import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
+import {MessageService} from '../../service/message/message.service';
 
 @Component({
   selector: 'app-helden-info-tabelle',
@@ -17,7 +18,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   public alteVersionLadenHeld: HeldenInfo;
 
-  constructor(private router: Router, private heldenService: HeldenService , private gruppenService: GruppenService) { }
+  constructor(private router: Router, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.gruppenService.getGruppen()
@@ -29,10 +30,11 @@ export class HeldenInfoTabelleComponent implements OnInit {
   }
 
   onDropdownSelected(gruppeId, heldenId) {
+    this.messageService.info('Gruppe wird geändert..')
     this.gruppenService.updateGruppe(heldenId, gruppeId)
       .subscribe(
         () => {
-
+          this.messageService.info('Gruppe erfolgreich geändert');
         }
       );
   }
