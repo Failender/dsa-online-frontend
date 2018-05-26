@@ -5,6 +5,7 @@ import {AuthenticationService} from '../service/authentication/authentication.se
 import {Router} from '@angular/router';
 import {SelectItem} from 'primeng/api';
 import {GruppenService} from './gruppen.service';
+import {MessageService} from '../service/message/message.service';
 
 @Component({
   selector: 'app-meine-helden',
@@ -17,7 +18,7 @@ export class MeineHeldenComponent extends AuthenticationRequiredComponent{
   public helden: HeldenInfo[];
 
 
-  constructor(private meineHeldenService: HeldenService, authenticationService: AuthenticationService, router: Router) {
+  constructor(private meineHeldenService: HeldenService, authenticationService: AuthenticationService, router: Router, private messageService: MessageService) {
     super(authenticationService, router);
   }
 
@@ -28,5 +29,14 @@ export class MeineHeldenComponent extends AuthenticationRequiredComponent{
         data => this.helden = data
       );
 
+  }
+
+  reloadHelden() {
+    this.messageService.info('Lade Helden neu..')
+    this.meineHeldenService.reloadHelden()
+      .subscribe((data) => {
+        this.messageService.info('Laden abgeschlossen');
+          this.helden = data;
+      });
   }
 }

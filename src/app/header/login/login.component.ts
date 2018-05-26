@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit, OnChanges {
   @ViewChild('userinput')public userinput: ElementRef;
   public form: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    password: new FormControl(''),
     rememberMe: new FormControl(false)
   });
 

@@ -28,6 +28,9 @@ export class HeldenService {
         });
   }
 
+  public reloadHelden() {
+    return this.restService.get('helden/reload');
+  }
 }
 
 export interface HeldenInfo {
