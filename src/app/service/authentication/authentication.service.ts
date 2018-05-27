@@ -24,6 +24,7 @@ export class AuthenticationService {
 
   constructor(private restService: RestService, private messageService: MessageService,
               private sessionService: SessionService, private heldenService: HeldenService) {
+    this.onLogout.subscribe(() => heldenService.held = null);
   }
 
   get authentication(): UserAuthentication {
@@ -70,16 +71,25 @@ export class AuthenticationService {
     const url = window.location.toString();
     const heldid = getQueryVariableInt('held');
     const version = getQueryVariableInt('version');
-    console.debug(heldid);
+
 
 
 
     if (this.sessionService.userAuthentication.value) {
+      if (heldid && version) {
+        return this.authenticate(this.sessionService.userAuthentication.value)
+          .flatMap(() => this.heldenService.loadHeld(heldid, version))
+          .pipe(catchError(this.handleError))
+          .toPromise();
+      }
       return this.authenticate(this.sessionService.userAuthentication.value)
         .pipe(catchError(this.handleError))
         .toPromise();
     } else {
-      if (heldid) {
+      if (heldid && version) {
+        return this.heldenService.loadHeld(heldid, version)
+          .pipe(catchError(this.handleError))
+          .toPromise();
       }
       return Promise.resolve([]);
     }

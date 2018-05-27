@@ -7,6 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public roadMap = [
+    {
+      label: 'PDF-Download',
+      done: false
+    },
+    {
+      label: 'XML-Download',
+      done: false
+    },
+    {
+      label: 'PDF Einzel-Seitenansicht',
+      done: false
+    },
+    {
+      label: 'Öffentlich sichtbare Helden',
+      done: false
+    },
+    {
+      label: 'Laden von Helden über URL',
+      done: true
+    },
+
+
+  ]
+
   constructor() { }
 
   ngOnInit() {

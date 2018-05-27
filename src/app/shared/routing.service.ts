@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {Router} from "@angular/router";
 import {HeldenService} from "../meine-helden/helden.service";
 
 @Injectable()
 export class RoutingService {
 
-  constructor(private heldenService: HeldenService, private router: Router) { }
+  constructor(private heldenService: HeldenService, private injector: Injector) {
+  }
 
   public navigateByUrl(url: string) {
     if (this.heldenService.held) {
-      url += `?held= ${this.heldenService.held.id}&version=${this.heldenService.held.version}`;
+      url += `?held= ${this.heldenService.versionInfo.id}&version=${this.heldenService.versionInfo.version}`;
 
     }
-    this.router.navigateByUrl(url);
+    this.injector.get(Router).navigateByUrl(url);
 
   }
 

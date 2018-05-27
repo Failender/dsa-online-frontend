@@ -3,56 +3,41 @@ import {SessionService} from "../service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
+import {RoutingService} from '../shared/routing.service';
 
 @Injectable()
 export class MenuService {
 
   public items: MenuItem[] = [
-    {
-      label: 'Home',
-      routerLink: 'home'
-    }
+    this.createItem('Home', 'home')
   ];
 
   public authenticatedItems: MenuItem[] = [
-    {
-      label: 'Meine Helden',
-      routerLink: 'helden'
-    }
+    this.createItem('Meine Helden', 'helden')
   ]
 
   public protectedItems = {
     'CREATE_USER': [
-      {
-        label: 'Nutzer-Verwaltung',
-        routerLink: 'users/manage'
-      }
+      this.createItem('Nutzer-Verwaltung', 'users/manage')
     ],
     'VIEW_ALL': [
-      {
-        label: 'Gruppen-Ansicht',
-        routerLink: 'groups'
-      }
+      this.createItem('Gruppen-Ansicht', 'groups')
     ]
   }
 
   private heldenItems: MenuItem[] =
     [
-      {
-        label: 'Übersicht',
-        routerLink: 'held/uebersicht'
-      },
-      {
-        label: 'Talente',
-        routerLink: 'held/talente'
-      },
-
-      {
-        label: 'Ereignisse',
-        routerLink: 'held/ereignisse'
-      }
+      this.createItem('Übersicht', 'held/uebersicht'),
+      this.createItem('Talente', 'held/talente'),
+      this.createItem('Ereignisse', 'held/ereignisse')
     ];
 
+  private createItem(label: string, link: string) {
+    return {
+      label,
+      command: () => this.routingService.navigateByUrl(link)
+    };
+  }
 
   private itemsToUnload: MenuItem[] = [];
   private heldItems: MenuItem[] = [];
@@ -63,16 +48,13 @@ export class MenuService {
     })
     this.heldItems = [];
   }
-  constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService) {
+  constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
     this.removeHeldItems();
     heldenService.heldLoaded.subscribe(
       () => {
 
         if (heldenService.held.zauberliste.zauber.length > 0) {
-          const zauberItem = {
-            label: 'Zauber',
-            routerLink: 'held/zauber',
-          };
+          const zauberItem = this.createItem('Zauber', 'held/zauber')
           this.heldItems.push(zauberItem);
         }
         this.heldItems.push(... this.heldenItems)

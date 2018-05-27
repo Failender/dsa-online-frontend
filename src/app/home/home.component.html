@@ -1,3 +1,13 @@
-<p>
-  &lt;epischer Startseitentext &gt;
-</p>
+
+<div>Roadmap</div>
+
+
+<div *ngFor="let task of roadMap" class="ui-g">
+  <span>
+    <i class="fa fa-check fa-1x" *ngIf="task.done;else notDone"></i>
+    {{task.label}}</span>
+</div>
+
+<ng-template #notDone>
+  <i class="fa fa-times fa-1x"></i>
+</ng-template>
