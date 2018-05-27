@@ -3,8 +3,6 @@ import {SessionService} from "../service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
-import {RouterConfigLoader} from '@angular/router/src/router_config_loader';
-import {Router} from '@angular/router';
 
 @Injectable()
 export class MenuService {

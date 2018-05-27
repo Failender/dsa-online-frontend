@@ -9,7 +9,7 @@ import {DialogModule} from 'primeng/dialog';
 import {MessageModule} from 'primeng/message';
 import { MenuComponent } from './menu/menu.component';
 import {PanelModule} from 'primeng/panel';
-import {Router, RouterModule, Routes} from '@angular/router';
+import {ActivatedRoute, Router, RouterModule, Routes} from "@angular/router";
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
@@ -41,6 +41,7 @@ import {GruppenService} from './meine-helden/gruppen.service';
 import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
+import {RoutingService} from "./shared/routing.service";
 
 
 const appRoutes: Routes = [
@@ -88,7 +89,7 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService, MenuService
+  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService, MenuService, RoutingService
     , { provide: LOCALE_ID, useValue: 'de' },
     {
       provide: APP_INITIALIZER,

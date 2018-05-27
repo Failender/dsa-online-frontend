@@ -9,6 +9,7 @@ import {MessageService} from '../message/message.service';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
+import {ActivatedRoute} from "@angular/router";
 
 
 @Injectable()
@@ -66,11 +67,20 @@ export class AuthenticationService {
   }
 
   public initialize(): Promise<any> {
+    const url = window.location.toString();
+    const heldid = getQueryVariableInt('held');
+    const version = getQueryVariableInt('version');
+    console.debug(heldid);
+
+
+
     if (this.sessionService.userAuthentication.value) {
       return this.authenticate(this.sessionService.userAuthentication.value)
         .pipe(catchError(this.handleError))
         .toPromise();
     } else {
+      if (heldid) {
+      }
       return Promise.resolve([]);
     }
   }
@@ -85,4 +95,20 @@ export class AuthenticationService {
 export function init(authenticationService: AuthenticationService) {
 
   return () => authenticationService.initialize();
+}
+
+export function getQueryVariable(variable) {
+  const query = window.location.search.substring(1);
+  const vars = query.split('&');
+  for (let i = 0; i < vars.length; i++) {
+    const pair = vars[i].split('=');
+    if (decodeURIComponent(pair[0]) === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+  console.log('Query variable %s not found', variable);
+}
+
+export function getQueryVariableInt(variable) {
+  return parseInt(getQueryVariable(variable), 10);
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../service/authentication/authentication.service';
-import {Router} from '@angular/router';
+import {RoutingService} from "../routing.service";
 
 export abstract class AuthenticationRequiredComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private router: RoutingService) {
   }
 
   ngOnInit() {

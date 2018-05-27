@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
-import {Router} from '@angular/router';
 import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
 import {MessageService} from '../../service/message/message.service';
+import {RoutingService} from "../routing.service";
 
 @Component({
   selector: 'app-helden-info-tabelle',
@@ -18,7 +18,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   public alteVersionLadenHeld: HeldenInfo;
 
-  constructor(private router: Router, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService) { }
+  constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.gruppenService.getGruppen()
@@ -43,7 +43,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
     const sub = this.heldenService.heldLoaded.subscribe(
       () => {
         sub.unsubscribe();
-        this.router.navigateByUrl('held/ereignisse');
+        this.router.navigateByUrl('held/uebersicht');
       }
     )
     this.heldenService.loadHeld(id, version);

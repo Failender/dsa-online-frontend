@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {HeldenService} from '../../meine-helden/helden.service';
-import {Router} from '@angular/router';
+import {RoutingService} from "../../shared/routing.service";
 
 
 export abstract class HeldenComponent implements OnInit {
 
-  constructor(private heldenService: HeldenService, private router: Router) { }
+  constructor(private heldenService: HeldenService, private routingService: RoutingService) { }
 
   ngOnInit() {
     if (!this.heldenService.held) {
-      this.router.navigateByUrl('home');
+      this.routingService.navigateByUrl('home');
     } else {
       this.init();
     }

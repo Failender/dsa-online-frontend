@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
-import {Router} from '@angular/router';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {SortEvent} from 'primeng/api';
+import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-held-ereignisse',
@@ -11,7 +11,7 @@ import {SortEvent} from 'primeng/api';
 })
 export class HeldEreignisseComponent extends HeldenComponent {
 
-  constructor(heldenService: HeldenService, router: Router) {
+  constructor(heldenService: HeldenService, router: RoutingService) {
     super(heldenService, router);
   }
 

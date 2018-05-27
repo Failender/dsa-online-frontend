@@ -3,7 +3,7 @@ import {MenuItem} from 'primeng/api';
 import {AuthenticationService} from '../service/authentication/authentication.service';
 import {HeldenService} from '../meine-helden/helden.service';
 import {MenuService} from "./menu.service";
-import {Router} from '@angular/router';
+import {RoutingService} from "../shared/routing.service";
 
 @Component({
   selector: 'app-menu',
@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   get items() {
     return this.menuService.items;
   }
-  constructor(private menuService: MenuService, router: Router, authenticationService: AuthenticationService) {
+  constructor(private menuService: MenuService, router: RoutingService, authenticationService: AuthenticationService) {
     authenticationService.onLogout.subscribe(() => router.navigateByUrl('/home'));
   }
 
