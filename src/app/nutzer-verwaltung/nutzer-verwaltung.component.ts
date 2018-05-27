@@ -35,9 +35,9 @@ export class NutzerVerwaltungComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.form.valid) {
+    if (this.form.valid) {
       this.userService.createUser(this.form.value)
-        .pipe(catchError((error) =>this.handleError(error)))
+        .pipe(catchError((error) => this.handleError(error)))
         .subscribe(
           () => {
             this.messageService.info('Nutzer erstellt');
@@ -56,6 +56,24 @@ export class NutzerVerwaltungComponent implements OnInit {
     }
 
     return ErrorObservable.create(error);
+  }
+
+  fileChange(event) {
+    const files = event.target.files;
+    if (files.length === 1) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = fileObj => {
+        const contents: any = fileObj.target;
+        const text = contents.result;
+        this.messageService.info('Nutzer werden erstellt..')
+        this.userService.createUsers(text)
+          .subscribe(
+            () => this.messageService.info('Nutzer wurden erstellt')
+          );
+      }
+      reader.readAsText(file);
+    }
   }
 
 }

@@ -11,4 +11,8 @@ export class UserService {
     return this.restService.post('user/register', data);
   }
 
+  public createUsers(data: any): Observable<void> {
+    return this.restService.post('user/create', data);
+  }
+
 }

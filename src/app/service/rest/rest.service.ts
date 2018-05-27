@@ -51,7 +51,8 @@ export class RestService {
   }
 
   private buildHeader(): HttpHeaders {
-    const header: HttpHeaders = new HttpHeaders();
+    let header: HttpHeaders = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
     return this.appendAuthorization(header);
   }
 
