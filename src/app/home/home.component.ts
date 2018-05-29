@@ -9,6 +9,10 @@ export class HomeComponent implements OnInit {
 
   public roadMap = [
     {
+      label: 'Regelmäßiges updaten der Helden',
+      done: false
+    },
+    {
       label: 'PDF-Download',
       done: false
     },
