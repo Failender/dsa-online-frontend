@@ -4,6 +4,11 @@ import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
 import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../routing.service";
+import {catchError} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import {Observable} from 'rxjs/Observable';
+import {never} from 'rxjs/observable/never';
 
 @Component({
   selector: 'app-helden-info-tabelle',
@@ -39,6 +44,7 @@ export class HeldenInfoTabelleComponent implements OnInit {
       );
   }
 
+
   private _heldLaden(id: number, version: number) {
     this.heldenService.loadHeld(id, version)
       .subscribe(() => {
@@ -56,6 +62,17 @@ export class HeldenInfoTabelleComponent implements OnInit {
       this._heldLaden(this.alteVersionLadenHeld.id, version);
     }
     this.alteVersionLadenHeld = null;
+  }
+
+  updatePublic(data, event) {
+    this.heldenService.updatePublic(data.id, event)
+      .subscribe(() => {
+        if (event) {
+          this.messageService.info(`Held ${data.name} ist jetzt öffentlich`);
+        } else {
+          this.messageService.info(`Held ${data.name} ist jetzt privat`);
+        }
+      });
   }
 
 }

@@ -14,8 +14,12 @@ export class GruppenService {
     return this.restService.get('gruppen');
   }
 
-  public getGruppenIncludingHeld(): Observable<GruppeInlcludingHeld[]> {
+  public getGruppenIncludingHeld(): Observable<GruppeIncludingHeld[]> {
     return this.restService.get('gruppen/includeHelden');
+  }
+
+  public getGruppenIncludingHeldPublic(): Observable<GruppeIncludingHeld[]> {
+    return this.restService.get('gruppen/includeHelden/public');
   }
 
   public updateGruppe(heldid: number, gruppeid: number): Observable<void> {
@@ -23,7 +27,7 @@ export class GruppenService {
   }
 }
 
-export interface GruppeInlcludingHeld {
+export interface GruppeIncludingHeld {
   name: string;
   id: number;
   helden: HeldenInfo[];

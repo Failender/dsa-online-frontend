@@ -36,6 +36,9 @@ export class RestService {
       this.messageService.add({severity: 'error', summary: 'Server nicht erreichbar'});
       return never();
     }
+    if(error.status === 401) {
+      this.messageService.error('Sie haben nicht das Recht dies zu tun');
+    }
     //this.messageService.add({severity: 'error', summary: error.message})
     return ErrorObservable.create(error);
   }

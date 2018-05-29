@@ -2,11 +2,11 @@
   <p-table [value]="versions">
     <ng-template pTemplate="header">
       <tr>
-        <th>Version</th>
-        <th>Datum</th>
+        <th style="width:50px">Version</th>
+        <th style="width:100px">Datum</th>
         <th>Letztes Abenteuer</th>
-        <th>PDF</th>
-        <th></th>
+        <th style="width:100px">PDF verfügbar</th>
+        <th style="width:100px"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
@@ -14,7 +14,7 @@
         <td>{{data.version}}</td>
         <td>{{data.datum | date}}</td>
         <td>{{data.letztesAbenteuer}}</td>
-        <td><p-checkbox [value]="data.pdfCached"></p-checkbox></td>
+        <td><p-checkbox binary="true" [ngModel]="data.pdfCached"></p-checkbox></td>
         <td>
           <button pButton label="Laden"(click)="loadVersion(data.version)"></button>
 

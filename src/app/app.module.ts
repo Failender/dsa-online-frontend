@@ -43,6 +43,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
 import { PdfComponent } from './shared/pdf/pdf.component';
+import { OeffentlicheHeldenComponent } from './oeffentliche-helden/oeffentliche-helden.component';
 
 
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
   { path: 'users/manage', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'groups', component: GruppenAnsichtComponent, data: {title: 'Gruppen-Ansicht'}},
+  { path: 'groups/public', component: OeffentlicheHeldenComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
@@ -81,6 +83,7 @@ registerLocaleData(localeDe, 'de');
     HeldTalenteComponent,
     HeldZauberComponent,
     PdfComponent,
+    OeffentlicheHeldenComponent,
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,

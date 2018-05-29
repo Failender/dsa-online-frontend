@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     },
     {
       label: 'PDF-Download',
-      done: false
+      done: true
     },
     {
       label: 'XML-Download',
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     },
     {
       label: 'Öffentlich sichtbare Helden',
-      done: false
+      done: true
     },
     {
       label: 'Laden von Helden über URL',

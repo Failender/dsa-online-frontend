@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GruppeInlcludingHeld, GruppenService} from '../meine-helden/gruppen.service';
+import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.service';
 import {SelectItem} from 'primeng/api';
 
 @Component({
@@ -9,7 +9,7 @@ import {SelectItem} from 'primeng/api';
 })
 export class GruppenAnsichtComponent implements OnInit {
 
-  public gruppen: GruppeInlcludingHeld[];
+  public gruppen: GruppeIncludingHeld[];
 
   constructor(private gruppenService: GruppenService) { }
 
@@ -18,8 +18,5 @@ export class GruppenAnsichtComponent implements OnInit {
       .subscribe((data) => this.gruppen = data);
   }
 
-  onTabOpen(gruppe: SelectItem) {
-    console.debug(gruppe);
-  }
 
 }

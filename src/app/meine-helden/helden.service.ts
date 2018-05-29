@@ -20,6 +20,10 @@ export class HeldenService {
     return this.restService.get('helden');
   }
 
+  public getPublicHelden(): Observable<HeldenInfo[]> {
+    return this.restService.get('helden');
+  }
+
   public loadHeld(id: number, version: number): Observable<any> {
 
     return this.restService.get('helden/held/' + id + '/' + version)
@@ -34,6 +38,10 @@ export class HeldenService {
 
   public reloadHelden() {
     return this.restService.get('helden/reload');
+  }
+
+  public updatePublic(id: number, value: boolean) {
+    return this.restService.post(`helden/public/${id}/${value}`, {});
   }
 }
 

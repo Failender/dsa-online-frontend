@@ -2,9 +2,10 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Name</th>
-      <th>Letzte Änderung</th>
+      <th style="width:100px">Letzte Änderung</th>
       <th>Gruppe</th>
-      <th>Version</th>
+      <th style="width:100px">Öffentlich</th>
+      <th style="width:100px">Version</th>
       <th></th>
     </tr>
   </ng-template>
@@ -14,6 +15,7 @@
       <td>{{data.lastChanged |date}}</td>
       <!--<td>{{data.gruppe}}</td>-->
       <td><p-dropdown [options]="gruppen" (onChange)="onDropdownSelected($event.value, data.id)" [placeholder]="data.gruppe"></p-dropdown></td>
+      <td><p-checkbox binary=true [ngModel]="data.oeffentlich" (onChange)="updatePublic(data, $event)"></p-checkbox></td>
       <td>{{data.version}}</td>
       <td>
         <button pButton label="Laden" (click)="heldLaden(data)"></button>

@@ -9,7 +9,8 @@ import {RoutingService} from '../shared/routing.service';
 export class MenuService {
 
   public items: MenuItem[] = [
-    this.createItem('Home', 'home')
+    this.createItem('Home', 'home'),
+    this.createItem('Öffentliche Helden', 'groups/public')
   ];
 
   public authenticatedItems: MenuItem[] = [
@@ -49,11 +50,12 @@ export class MenuService {
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
-    this.removeHeldItems();
+
     heldenService.heldLoaded.subscribe(
       () => {
-
+        this.removeHeldItems();
         if (heldenService.held.zauberliste.zauber.length > 0) {
+
           const zauberItem = this.createItem('Zauber', 'held/zauber')
           this.heldItems.push(zauberItem);
         }
@@ -86,7 +88,6 @@ export class MenuService {
   }
 
   private removeItem(item: MenuItem) {
-    console.debug('REMOVING ITEM ', item)
     this.items.splice(this.items.indexOf(item), 1);
   }
 }
