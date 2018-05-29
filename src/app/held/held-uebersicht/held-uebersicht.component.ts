@@ -24,7 +24,7 @@ export class HeldUebersichtComponent extends HeldenComponent{
   }
 
   protected init(): void {
-    const url = environment.rest + `helden/held/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
+    const url = environment.rest + `download/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
     this.pdfOptions = {
       url,
       httpHeaders: {

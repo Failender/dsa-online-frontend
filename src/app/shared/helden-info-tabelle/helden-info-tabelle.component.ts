@@ -40,13 +40,10 @@ export class HeldenInfoTabelleComponent implements OnInit {
   }
 
   private _heldLaden(id: number, version: number) {
-    const sub = this.heldenService.heldLoaded.subscribe(
-      () => {
-        sub.unsubscribe();
+    this.heldenService.loadHeld(id, version)
+      .subscribe(() => {
         this.router.navigateByUrl('held/uebersicht');
-      }
-    )
-    this.heldenService.loadHeld(id, version);
+      });
   }
 
   alteVersionLaden(held: HeldenInfo) {

@@ -21,6 +21,7 @@ export class HeldenService {
   }
 
   public loadHeld(id: number, version: number): Observable<any> {
+
     return this.restService.get('helden/held/' + id + '/' + version)
       .pipe(tap((data) => {
         this.versionInfo = {

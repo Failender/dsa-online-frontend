@@ -42,6 +42,7 @@ import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dia
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
+import { PdfComponent } from './shared/pdf/pdf.component';
 
 
 const appRoutes: Routes = [
@@ -75,10 +76,11 @@ registerLocaleData(localeDe, 'de');
     GruppenAnsichtComponent,
     HeldenInfoTabelleComponent,
     HeldUebersichtComponent,
+    AlteVersionLadenDialogComponent,
     HeldEreignisseComponent,
     HeldTalenteComponent,
     HeldZauberComponent,
-    AlteVersionLadenDialogComponent,
+    PdfComponent,
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
