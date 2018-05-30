@@ -57,7 +57,7 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
 
     if (this.compareForm.valid) {
       let from = this.compareForm.value.from;
-      let to = this.compareForm.value.from;
+      let to = this.compareForm.value.to;
       if (from === to) {
         this.messageService.info('Bitte zwei unterschiedliche Versionen auswählen');
         return;
