@@ -19,8 +19,8 @@
       <td>{{data.version}}</td>
       <td>
         <button pButton label="Laden" (click)="heldLaden(data)"></button>
-        <button pButton label="Alte Version laden" (click)="alteVersionLaden(data)"></button>
-        <button pButton label="Mit voriger Version vergleichen" (click)="vorigeVersionVergleich(data)"></button>
+        <button pButton label="Alte Version laden" (click)="alteVersionLaden(data)" *ngIf="data.version != 1"></button>
+        <button pButton label="Mit voriger Version vergleichen" (click)="vorigeVersionVergleich(data)" *ngIf="data.version != 1"></button>
       </td>
     </tr>
   </ng-template>
