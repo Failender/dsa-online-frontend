@@ -3,8 +3,9 @@ import {InputSwitch} from 'primeng/primeng';
 import {HeldenInfo} from '../../meine-helden/helden.service';
 import {VersionService} from './version.service';
 import {SelectItem} from 'primeng/api';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {RoutingService} from '../routing.service';
+import {MessageService} from '../../service/message/message.service';
 
 @Component({
   selector: 'app-alte-version-laden-dialog',
@@ -25,14 +26,16 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   public compareForm = new FormGroup({
     from: new FormControl('', Validators.required),
     to: new FormControl('', Validators.required)
-  }, {
-    validator: this.customValidation
-  });
+  }
+  // , {
+  //   validator: this.customValidation
+  // }
+  );
 
   @Output()
   public dialogClosed = new EventEmitter<number>();
 
-  constructor(private versionService: VersionService, private routingService: RoutingService) { }
+  constructor(private versionService: VersionService, private routingService: RoutingService, private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -41,17 +44,30 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
     this.dialogClosed.emit();
   }
 
-  customValidation(group: any) {
-
-    return {
-      areDifferent: true
-    };
-  }
+  // customValidation(group: AbstractControl): ValidationErrors {
+  //   console.debug(group.get('from').value);
+  //   console.debug(group.get('to').value);
+  //   const errors: ValidationErrors = {
+  //     areDifferent: false
+  //   };
+  //   return errors;
+  // }
 
   onSubmit() {
 
     if (this.compareForm.valid) {
-      const url = `/held/vergleichen/${this.held.id}/${this.compareForm.value.from}/${this.compareForm.value.to}`;
+      let from = this.compareForm.value.from;
+      let to = this.compareForm.value.from;
+      if (from === to) {
+        this.messageService.info('Bitte zwei unterschiedliche Versionen auswählen');
+        return;
+      }
+      if (from > to) {
+        const temp = from;
+        from = to;
+        to = temp;
+      }
+      const url = `/held/vergleichen/${this.held.id}/${from}/${to}`;
       this.routingService.navigateByUrl(url);
     }
   }
