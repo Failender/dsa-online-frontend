@@ -25,13 +25,20 @@ export class HeldUebersichtComponent extends HeldenComponent{
 
   protected init(): void {
     const url = environment.rest + `download/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
-    this.pdfOptions = {
-      url,
-      httpHeaders: {
-        'X-USER': this.authenticationService.authentication.username,
-        'X-PASSWORD' : this.authenticationService.authentication.password
-      }
-    };
+    if(this.authenticationService.authenticated) {
+      this.pdfOptions = {
+        url,
+        httpHeaders: {
+          'X-USER': this.authenticationService.authentication.username,
+          'X-PASSWORD' : this.authenticationService.authentication.password
+        }
+      };
+    } else {
+      this.pdfOptions = {
+        url
+      };
+    }
+
   }
 
 }
