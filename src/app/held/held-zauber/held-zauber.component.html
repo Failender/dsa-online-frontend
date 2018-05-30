@@ -1,20 +1,2 @@
-<p-table [value]="held.zauberliste.zauber" *ngIf="held">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Name</th>
-      <th>Probe</th>
-      <th>REP</th>
-      <th>TAW</th>
-      <th></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-data>
-    <tr>
-      <td>{{data.name}}</td>
-      <td>{{data.probe}}</td>
-      <td>{{data.repraesentation}}</td>
 
-      <td>{{data.wert}}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<app-zauber-tabelle [data]="held.zauberliste.zauber" *ngIf="held"></app-zauber-tabelle>

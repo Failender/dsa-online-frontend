@@ -1,0 +1,23 @@
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Probe / AT|PA</th>
+      <th>BE</th>
+      <th>TAW</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{data.name}}</td>
+
+      <ng-container [ngSwitch]="data.pa">
+        <td *ngSwitchCase="null">{{data.probe}}</td>
+        <td *ngSwitchCase="''">{{data.at}}</td>
+        <td *ngSwitchDefault>{{data.at}} | {{data.pa}}</td>
+      </ng-container>
+      <td>{{data.behinderung}}</td>
+      <td>{{data.wert}}</td>
+    </tr>
+  </ng-template>
+</p-table>

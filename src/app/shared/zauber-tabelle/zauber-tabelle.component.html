@@ -1,0 +1,19 @@
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Probe</th>
+      <th>REP</th>
+      <th>TAW</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{data.name}}</td>
+      <td>{{data.probe}}</td>
+      <td>{{data.repraesentation}}</td>
+
+      <td>{{data.wert}}</td>
+    </tr>
+  </ng-template>
+</p-table>

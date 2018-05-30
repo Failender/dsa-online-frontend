@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {RoutingService} from "../../shared/routing.service";
@@ -9,6 +9,8 @@ import {RoutingService} from "../../shared/routing.service";
   styleUrls: ['./held-talente.component.css']
 })
 export class HeldTalenteComponent extends HeldenComponent {
+
+
 
   constructor(heldenService: HeldenService, router: RoutingService) {
     super(heldenService, router);

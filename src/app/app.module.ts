@@ -44,6 +44,10 @@ import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
 import { PdfComponent } from './shared/pdf/pdf.component';
 import { OeffentlicheHeldenComponent } from './oeffentliche-helden/oeffentliche-helden.component';
+import { HeldVergleichComponent } from './held/held-vergleich/held-vergleich.component';
+import { EreignisseTabelleComponent } from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
+import { TalenteTabelleComponent } from './shared/talente-tabelle/talente-tabelle.component';
+import { ZauberTabelleComponent } from './shared/zauber-tabelle/zauber-tabelle.component';
 
 
 const appRoutes: Routes = [
@@ -60,6 +64,7 @@ const appRoutes: Routes = [
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
+  { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Zauber'}},
 
   { path: '**', redirectTo : '/home' }
 ]
@@ -84,6 +89,10 @@ registerLocaleData(localeDe, 'de');
     HeldZauberComponent,
     PdfComponent,
     OeffentlicheHeldenComponent,
+    HeldVergleichComponent,
+    EreignisseTabelleComponent,
+    TalenteTabelleComponent,
+    ZauberTabelleComponent,
   ],
   imports: [
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,

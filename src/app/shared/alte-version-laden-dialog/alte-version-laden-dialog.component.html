@@ -1,8 +1,16 @@
 <p-dialog [visible]="held" (onHide)="onHide()" [header]="held?.name">
+  <div class="ui-g">
+    <form [formGroup]="compareForm" (submit)="onSubmit()">
+      <p-dropdown [options]="versionsDropdown" placeholder="von" formControlName="from"></p-dropdown>
+      <p-dropdown [options]="versionsDropdown" placeholder="bis" formControlName="to"></p-dropdown>
+      <button pButton label="Vergleichen" type="submit" [disabled]="!compareForm.valid"></button>
+    </form>
+
+  </div>
   <p-table [value]="versions">
     <ng-template pTemplate="header">
       <tr>
-        <th style="width:50px">Version</th>
+        <th style="width:100px">Version</th>
         <th style="width:100px">Datum</th>
         <th>Letztes Abenteuer</th>
         <th style="width:100px">PDF verfügbar</th>

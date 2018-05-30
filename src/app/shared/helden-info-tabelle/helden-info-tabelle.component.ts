@@ -23,7 +23,8 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   public alteVersionLadenHeld: HeldenInfo;
 
-  constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService) { }
+  constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService,
+              private routingService: RoutingService) { }
 
   ngOnInit() {
     this.gruppenService.getGruppen()
@@ -42,6 +43,11 @@ export class HeldenInfoTabelleComponent implements OnInit {
           this.messageService.info('Gruppe erfolgreich geändert');
         }
       );
+  }
+
+  vorigeVersionVergleich(data) {
+    const url = `/held/vergleichen/${data.id}/${data.version - 1}/${data.version}`;
+    this.routingService.navigateByUrl(url);
   }
 
 

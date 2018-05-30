@@ -1,0 +1,53 @@
+<p-accordion *ngIf="data">
+  <p-accordionTab header="Ereignisse">
+    <app-ereignisse-tabelle [data]="data.ereignis.neu" ></app-ereignisse-tabelle>
+  </p-accordionTab>
+  <p-accordionTab header="Talente">
+    <div>Änderungen</div>
+    <p-table [value]="data.talente.aenderungen" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Alt</th>
+          <th>Neu</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.alt}}</td>
+          <td>{{data.neu}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div>Neu</div>
+    <app-talente-tabelle [data]="data.talente.neu"></app-talente-tabelle>
+    <div>Entfernt</div>
+    <app-talente-tabelle [data]="data.talente.entfernt"></app-talente-tabelle>
+  </p-accordionTab>
+
+  <p-accordionTab header="Zauber">
+    <div>Änderungen</div>
+    <p-table [value]="data.zauber.aenderungen" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Alt</th>
+          <th>Neu</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.alt}}</td>
+          <td>{{data.neu}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div>Neu</div>
+    <app-zauber-tabelle [data]="data.zauber.neu"></app-zauber-tabelle>
+    <div>Entfernt</div>
+    <app-zauber-tabelle [data]="data.zauber.entfernt"></app-zauber-tabelle>
+  </p-accordionTab>
+
+</p-accordion>

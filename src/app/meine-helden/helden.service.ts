@@ -43,11 +43,14 @@ export class HeldenService {
   public updatePublic(id: number, value: boolean) {
     return this.restService.post(`helden/public/${id}/${value}`, {});
   }
+
+  public compareHeldVersionen(id: number, from: number, to: number): Observable<any> {
+    return this.restService.get(`helden/held/unterschied/${id}/${from}/${to}`);
+  }
 }
 
 export interface HeldenInfo {
   gruppe: string;
-  heldenid: number;
   name: string;
   lastChanged: number;
   id: number;
