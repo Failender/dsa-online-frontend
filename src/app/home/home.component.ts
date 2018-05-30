@@ -32,7 +32,14 @@ export class HomeComponent implements OnInit {
       label: 'Laden von Helden über URL',
       done: true
     },
-
+    {
+      label: 'Versions-Vergleich',
+      done: true
+    },
+    {
+      label: 'PDF für alte Helden',
+      done: false
+    }
 
   ]
 
