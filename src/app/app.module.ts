@@ -48,6 +48,10 @@ import { HeldVergleichComponent } from './held/held-vergleich/held-vergleich.com
 import { EreignisseTabelleComponent } from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
 import { TalenteTabelleComponent } from './shared/talente-tabelle/talente-tabelle.component';
 import { ZauberTabelleComponent } from './shared/zauber-tabelle/zauber-tabelle.component';
+import { KalenderComponent } from './kalender/kalender.component';
+import {CalendarDateFormatter, CalendarModule, CalendarUtils} from 'angular-calendar';
+import {CalendarUtilsExtendedService} from './kalender/calendar-utils-extended.service';
+import {CalendarDateFormatterExtendedService} from './kalender/calendar-date-formatter-extended.service';
 
 
 const appRoutes: Routes = [
@@ -64,6 +68,7 @@ const appRoutes: Routes = [
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
+  { path: 'kalender', component: KalenderComponent, data: {title: 'Zauber'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Zauber'}},
 
   { path: '**', redirectTo : '/home' }
@@ -93,10 +98,12 @@ registerLocaleData(localeDe, 'de');
     EreignisseTabelleComponent,
     TalenteTabelleComponent,
     ZauberTabelleComponent,
+    KalenderComponent,
   ],
   imports: [
+    BrowserAnimationsModule, CalendarModule.forRoot(),
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
-    HttpClientModule, BrowserAnimationsModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule,
+    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
@@ -105,6 +112,8 @@ registerLocaleData(localeDe, 'de');
   ],
   providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService, MenuService, RoutingService
     , { provide: LOCALE_ID, useValue: 'de' },
+    {provide: CalendarUtils, useClass: CalendarUtilsExtendedService},
+    {provide: CalendarDateFormatter, useClass: CalendarDateFormatterExtendedService},
     {
       provide: APP_INITIALIZER,
       useFactory: init,
