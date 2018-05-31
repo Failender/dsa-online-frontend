@@ -3,11 +3,9 @@ import {UserAuthentication} from '../authentication/UserAuthentication';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
+import {Observable, NEVER as never, of, NEVER} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
-import {never} from 'rxjs/observable/never';
 
 @Injectable()
 export class RestService {
@@ -34,13 +32,12 @@ export class RestService {
 
     if (error.status === 0) {
       this.messageService.add({severity: 'error', summary: 'Server nicht erreichbar'});
-      return never();
+      return NEVER;
     }
     if(error.status === 401) {
       this.messageService.error('Sie haben nicht das Recht dies zu tun');
     }
-    //this.messageService.add({severity: 'error', summary: error.message})
-    return ErrorObservable.create(error);
+    return of(error);
   }
 
   private buildOptions(asResponse?: boolean): any {

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../meine-helden/gruppen.service';
 import {UserService} from './user.service';
 import {MessageService} from '../service/message/message.service';
 import {catchError} from 'rxjs/operators';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import {of} from 'rxjs/index';
 
 @Component({
   selector: 'app-nutzer-verwaltung',
@@ -54,8 +53,7 @@ export class NutzerVerwaltungComponent implements OnInit {
     } else {
       this.messageService.error('Unerwarteter Fehler ' + error.message);
     }
-
-    return ErrorObservable.create(error);
+    return of(error);
   }
 
   fileChange(event) {

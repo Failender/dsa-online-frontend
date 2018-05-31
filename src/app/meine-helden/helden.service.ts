@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from '../service/rest/rest.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {AuthenticationService} from '../service/authentication/authentication.service';
 import {tap} from 'rxjs/operators';
 

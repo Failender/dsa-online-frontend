@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from './helden.service';

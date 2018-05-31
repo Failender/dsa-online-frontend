@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {RestService} from '../../service/rest/rest.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class VersionService {

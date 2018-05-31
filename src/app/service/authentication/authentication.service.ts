@@ -1,15 +1,16 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from '../rest/rest.service';
-import {Observable} from 'rxjs/Rx';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Message} from 'primeng/api';
 import {UserAuthentication} from './UserAuthentication';
 import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
 import {ActivatedRoute} from "@angular/router";
+import {Observable, of} from 'rxjs';
+import {flatMap} from 'tslint/lib/utils';
+import {mergeMap} from 'rxjs/internal/operators';
 
 
 @Injectable()
@@ -55,7 +56,7 @@ export class AuthenticationService {
       summary: errorMsg
     }
     this.messageService.add(msg)
-    return ErrorObservable.create(errorMsg);
+    return of(errorMsg);
   }
 
   public logout() {
@@ -78,8 +79,8 @@ export class AuthenticationService {
     if (this.sessionService.userAuthentication.value) {
       if (heldid && version) {
         return this.authenticate(this.sessionService.userAuthentication.value)
-          .flatMap(() => this.heldenService.loadHeld(heldid, version))
-          .pipe(catchError(this.handleError))
+          .pipe(mergeMap(() => this.heldenService.loadHeld(heldid, version)),
+            catchError(this.handleError))
           .toPromise();
       }
       return this.authenticate(this.sessionService.userAuthentication.value)
@@ -96,7 +97,7 @@ export class AuthenticationService {
   }
 
   handleError() {
-    return Observable.of([]);
+    return of([]);
   }
 
 }
