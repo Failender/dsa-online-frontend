@@ -39,6 +39,22 @@ export class HomeComponent implements OnInit {
     {
       label: 'PDF für alte Helden',
       done: false
+    },
+    {
+      label: 'Aventurischer Kalender',
+      done: false
+    },
+    {
+      label: 'Einträge für Gruppen im Kalender',
+      done: false
+    },
+    {
+      label: 'Einträge für Helden im Kalender',
+      done: false
+    },
+    {
+      label: 'Wecker für Helden (z.B. für Rüstungsgewöhnung)',
+      done: false
     }
 
   ]
