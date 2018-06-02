@@ -6,8 +6,10 @@ export interface KalenderDaten {
 
 export class DsaDatum {
 
-  constructor(public jahr: number, public monat: string, public monatValue: number, public tag: number) {
 
+  public monat: string;
+  constructor(public jahr: number, public monatValue: number, public tag: number) {
+    this.calcMonat();
   }
 
   public addTage(tage: number) {
@@ -79,12 +81,7 @@ export function toDsaDatum(value: number): DsaDatum {
   const jahr = START_YEAR + Math.floor(value / YEAR_LENGTH);
   const tag = value % YEAR_LENGTH;
   const monatValue = Math.floor(tag / 30);
-  return {
-    jahr,
-    tag,
-    monatValue,
-    monat: MONATE[monatValue]
-  };
+  return new DsaDatum(jahr, monatValue, tag);
 }
 
 export function buildMonth(datum: DsaDatum): KalenderDaten {
@@ -96,18 +93,18 @@ export function buildMonth(datum: DsaDatum): KalenderDaten {
     const firstDay = (1 + dayOffset) % 7;
     if (firstDay > 2) {
       wochen = [0, 7];
-      tage = this.buildDays(dayOffset, datum.tag % 30, 14, 5);
+      tage = buildDays(dayOffset, datum.tag % 30, 14, 5);
     } else {
       wochen = [0];
-      tage = this.buildDays(dayOffset, datum.tag % 30, 7, 5);
+      tage = buildDays(dayOffset, datum.tag % 30, 7, 5);
     }
   } else {
     if (dayOffset === 6) {
       wochen = [0, 7, 14 , 21, 28, 35];
-      tage = this.buildDays(dayOffset, datum.tag % 30, 42);
+      tage = buildDays(dayOffset, datum.tag % 30, 42);
     } else {
       wochen = [0, 7, 14 , 21, 28];
-      tage = this.buildDays(dayOffset, datum.tag % 30, 35);
+      tage = buildDays(dayOffset, datum.tag % 30, 35);
     }
   }
   return {

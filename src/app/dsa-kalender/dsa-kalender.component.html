@@ -1,0 +1,34 @@
+
+<ng-container *ngIf="monat">
+
+  <div class="ui-g centered" >
+    <button pButton icon="fa fa-angle-double-left"></button>
+    <button pButton icon="fa fa-angle-left"></button>
+    <span>{{monat.jetzt.tag}}. {{monat.jetzt.monat}} {{monat.jetzt.jahr}} BF</span>
+    <button pButton icon="fa fa-angle-right"></button>
+    <button pButton icon="fa fa-angle-double-right"></button>
+  </div>
+
+  <table *ngIf="monat">
+    <tr *ngFor="let woche of monat.wochen">
+      <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat">
+
+        <div class="ui-g date-row">
+          <div class="date-display">{{tag.tag}}</div>
+        </div>
+        <div class="ui-g event-row">
+          <div class="" *ngFor="let event of tag.events" [style.background-color]="event.color">
+            {{event.name}}
+          </div>
+        </div>
+
+
+
+      </td>
+    </tr>
+
+
+  </table>
+
+</ng-container>
+

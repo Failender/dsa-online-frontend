@@ -1,0 +1,59 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+}
+
+tr {
+  height: 100px;
+}
+
+
+table {
+
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  width: 14%;
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.date-row {
+  height: 15px;
+  margin-top: 5px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.past {
+  background-color:#DCDCDC;
+}
+.event-row {
+  height:80px;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.date-display {
+  width: 100%;
+  text-align: right;
+
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 0.5;
+
+}
+
+
+.align-right {
+  flex-direction: column-reverse;
+}
