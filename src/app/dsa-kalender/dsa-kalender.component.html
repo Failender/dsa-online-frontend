@@ -2,16 +2,16 @@
 <ng-container *ngIf="monat">
 
   <div class="ui-g centered" >
-    <button pButton icon="fa fa-angle-double-left"></button>
-    <button pButton icon="fa fa-angle-left"></button>
+    <button pButton icon="fa fa-angle-double-left" (click)="letzterMonat()"></button>
+    <button pButton icon="fa fa-angle-left" (click)="letzterTag()"></button>
     <span>{{monat.jetzt.tag}}. {{monat.jetzt.monat}} {{monat.jetzt.jahr}} BF</span>
-    <button pButton icon="fa fa-angle-right"></button>
-    <button pButton icon="fa fa-angle-double-right"></button>
+    <button pButton icon="fa fa-angle-right" (click)="naechsterTag()"></button>
+    <button pButton icon="fa fa-angle-double-right"(click)="naechsterMonat()"></button>
   </div>
 
   <table *ngIf="monat">
     <tr *ngFor="let woche of monat.wochen">
-      <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat">
+      <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat" [class.heute]="tag.heute">
 
         <div class="ui-g date-row">
           <div class="date-display">{{tag.tag}}</div>

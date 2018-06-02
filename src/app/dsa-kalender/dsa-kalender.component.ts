@@ -9,9 +9,9 @@ import {buildMonth, DsaDatum, KalenderDaten, toDsaDatum} from './data';
 export class DsaKalenderComponent implements OnInit {
 
 
-  private heute: DsaDatum = new DsaDatum(1015, 3, 20);
+  public heute: DsaDatum = new DsaDatum(1015, 3, 30);
 
-  private monat: KalenderDaten = buildMonth(this.heute);
+  public monat: KalenderDaten = buildMonth(this.heute);
 
   constructor() { }
 
@@ -27,6 +27,28 @@ export class DsaKalenderComponent implements OnInit {
         name: 'Baguette'
       }
     ];
+  }
+
+  naechsterMonat() {
+    this.heute.naechsterMonat()
+    this.monat = buildMonth(this.heute);
+
+  }
+
+  naechsterTag() {
+    this.heute.addTage(1)
+    this.monat = buildMonth(this.heute);
+
+  }
+
+  letzterTag() {
+    this.heute.removeTage(1)
+    this.monat = buildMonth(this.heute);
+  }
+
+  letzterMonat() {
+    this.heute.letzterMonat();
+    this.monat = buildMonth(this.heute);
   }
 
 }

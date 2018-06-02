@@ -12,35 +12,81 @@ export class DsaDatum {
     this.calcMonat();
   }
 
-  public addTage(tage: number) {
+  public addTage(tage: number): boolean {
     this.tag += tage;
-    if (this.tag > YEAR_LENGTH) {
-      this.tag %= YEAR_LENGTH;
-      this.jahr ++;
-    } else if(this.tag < YEAR_LENGTH) {
-      this.tag += YEAR_LENGTH;
-      this.jahr --;
+    if(this.monatValue === 12) {
+     if(this.tag > 4) {
+       this.monatValue = 0;
+       this.tag = this.tag - 5;
+       this.jahr ++;
+       this.monat = MONATE[0];
+       return true;
+     }
+    } else {
+      if(this.tag > 30) {
+        this.monatValue ++;
+        this.tag -= 30;
+        this.calcMonat();
+        return true;
+      }
     }
-    this.monatValue = this.tag % 30;
-    this.calcMonat();
+    return false;
   }
 
-  public naechsterMonat() {
+  public removeTage(tage: number): boolean {
+    this.tag -= tage;
+
+    if(this.monatValue == 0) {
+      if(this.tag <= 0) {
+        this.monatValue = 12;
+        this.jahr -= 1;
+        this.tag +=5;
+        this.calcMonat();
+        return true;
+      }
+    } else {
+      if(this.tag <= 0) {
+        this.monatValue -= 1;
+        this.tag +=30;
+        this.calcMonat();
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public naechsterMonat(): boolean {
     this.monatValue ++;
     if (this.monatValue === 13) {
       this.monatValue = 0;
       this.jahr ++;
+      this.calcMonat();
+      return true;
     } else if (this.monatValue === 12 && this.tag > 4) {
       this.tag = 4;
     }
+    this.calcMonat();
+    return false;
   }
 
   private calcMonat() {
     this.monat = MONATE[this.monatValue];
   }
 
-  public letzterMonat() {
-
+  public letzterMonat(): boolean {
+    this.monatValue --;
+    if(this.monatValue === -1) {
+      this.monatValue = 12;
+      this.jahr --;
+      if(this.tag > 4) {
+        this.tag = 4;
+      }
+      this.calcMonat();
+      return true;
+    }
+    this.calcMonat();
+    return false;
   }
 }
 
@@ -93,18 +139,18 @@ export function buildMonth(datum: DsaDatum): KalenderDaten {
     const firstDay = (1 + dayOffset) % 7;
     if (firstDay > 2) {
       wochen = [0, 7];
-      tage = buildDays(dayOffset, datum.tag % 30, 14, 5);
+      tage = buildDays(dayOffset, datum.tag, 14, 5);
     } else {
       wochen = [0];
-      tage = buildDays(dayOffset, datum.tag % 30, 7, 5);
+      tage = buildDays(dayOffset, datum.tag, 7, 5);
     }
   } else {
     if (dayOffset === 6) {
       wochen = [0, 7, 14 , 21, 28, 35];
-      tage = buildDays(dayOffset, datum.tag % 30, 42);
+      tage = buildDays(dayOffset, datum.tag, 42);
     } else {
       wochen = [0, 7, 14 , 21, 28];
-      tage = buildDays(dayOffset, datum.tag % 30, 35);
+      tage = buildDays(dayOffset, datum.tag , 35);
     }
   }
   return {
@@ -125,12 +171,17 @@ export function buildDays(offset: number, day: number, total: number = 35, month
     });
   }
   for (let i = 0; i < total - offset ; i++) {
+    let _day = i+1;
+    if(_day > monthlength) {
+      _day = _day % monthlength;
+    }
+    
     days.push({
-      tag: i + 1,
+      tag: _day,
       events: [],
       inMonat: i < monthlength,
       isWeekend: false,
-      heute: i === day
+      heute: _day === day
     });
   }
   return days;

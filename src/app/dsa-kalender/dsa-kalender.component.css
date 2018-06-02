@@ -37,11 +37,16 @@ td {
 .past {
   background-color:#DCDCDC;
 }
+
+.heute {
+  background-color:lightblue;
+}
 .event-row {
   height:80px;
   flex-direction: column;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .date-display {
   width: 100%;
