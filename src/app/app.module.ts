@@ -52,6 +52,7 @@ import { KalenderComponent } from './kalender/kalender.component';
 import {CalendarDateFormatter, CalendarModule, CalendarUtils} from 'angular-calendar';
 import {CalendarUtilsExtendedService} from './kalender/calendar-utils-extended.service';
 import {CalendarDateFormatterExtendedService} from './kalender/calendar-date-formatter-extended.service';
+import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
 
 
 const appRoutes: Routes = [
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
-  { path: 'kalender', component: KalenderComponent, data: {title: 'Zauber'}},
+  { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Zauber'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Zauber'}},
 
   { path: '**', redirectTo : '/home' }
@@ -99,6 +100,7 @@ registerLocaleData(localeDe, 'de');
     TalenteTabelleComponent,
     ZauberTabelleComponent,
     KalenderComponent,
+    DsaKalenderComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(),
