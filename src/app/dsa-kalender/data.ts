@@ -2,6 +2,16 @@ export interface KalenderDaten {
   jetzt: DsaDatum;
   wochen: number[];
   tage: KalendarTag[];
+  legende: Legende;
+}
+
+export interface Legende {
+  items: LegendeItem[];
+}
+
+export interface LegendeItem {
+  name: string;
+  farbe: string;
 }
 
 export class DsaDatum {
@@ -123,66 +133,4 @@ export const MONATE = [
   'Praios', 'Rondra', 'Efferd', 'Travia', 'Boron', 'Hesinde', 'Firun', 'Tsa', 'Phex', 'Peraine', 'Ingerimm', 'Rahja', 'Namenlose Tage'
 ];
 
-export function toDsaDatum(value: number): DsaDatum {
-  const jahr = START_YEAR + Math.floor(value / YEAR_LENGTH);
-  const tag = value % YEAR_LENGTH;
-  const monatValue = Math.floor(tag / 30);
-  return new DsaDatum(jahr, monatValue, tag);
-}
 
-export function buildMonth(datum: DsaDatum): KalenderDaten {
-  const dayOffset = (datum.jahr - START_YEAR + datum.monatValue * 2) % 7;
-  let tage: KalendarTag[];
-  let wochen;
-  // Namenlose Tage
-  if (datum.monatValue === 12) {
-    const firstDay = (1 + dayOffset) % 7;
-    if (firstDay > 2) {
-      wochen = [0, 7];
-      tage = buildDays(dayOffset, datum.tag, 14, 5);
-    } else {
-      wochen = [0];
-      tage = buildDays(dayOffset, datum.tag, 7, 5);
-    }
-  } else {
-    if (dayOffset === 6) {
-      wochen = [0, 7, 14 , 21, 28, 35];
-      tage = buildDays(dayOffset, datum.tag, 42);
-    } else {
-      wochen = [0, 7, 14 , 21, 28];
-      tage = buildDays(dayOffset, datum.tag , 35);
-    }
-  }
-  return {
-    jetzt: datum,
-    tage, wochen
-  };
-}
-
-
-export function buildDays(offset: number, day: number, total: number = 35, monthlength: number = 30) {
-  const days = [];
-  for (let i = offset - 1 ; i >= 0; i--) {
-    days.push({
-      tag:  30 - i,
-      heute: false,
-      inMonat: false,
-      events: []
-    });
-  }
-  for (let i = 0; i < total - offset ; i++) {
-    let _day = i+1;
-    if(_day > monthlength) {
-      _day = _day % monthlength;
-    }
-    
-    days.push({
-      tag: _day,
-      events: [],
-      inMonat: i < monthlength,
-      isWeekend: false,
-      heute: _day === day
-    });
-  }
-  return days;
-}
