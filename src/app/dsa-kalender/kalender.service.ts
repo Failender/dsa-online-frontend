@@ -28,9 +28,8 @@ export class KalenderService {
   }
 
   public buildMonth(datum: DsaDatum, gruppe: number): Observable<KalenderDaten> {
-    this.restService.get(`events/${gruppe}/${datum.jahr}/${datum.monat}`)
-      .pipe(map((data) => this.mapEventResponse(data, datum, gruppe)))
-
+    return this.restService.get(`events/${gruppe}/${datum.jahr}/${datum.monat}`)
+      .pipe(map((data) => this.mapEventResponse(data, datum, gruppe)));
 
   }
 
@@ -71,12 +70,10 @@ export class KalenderService {
         }
       });
     });
-
-
-    return of({
+    return {
       jetzt: datum,
-      tage, wochen
-    });
+      tage, wochen, legende: null
+    }
   }
 
 

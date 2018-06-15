@@ -2,6 +2,6 @@ pipeline:
   frontend:
     image: plugins/docker
     repo: failender/dsa-online-frontend
-    tags: latest
+    tags: kalender
     dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
