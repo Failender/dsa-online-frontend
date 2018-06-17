@@ -18,6 +18,9 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   public alteVersionLadenHeld: HeldenInfo;
 
+  @Input() public editOeffentlich = true;
+  @Input() public editGruppe = true;
+
   constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService,
               private routingService: RoutingService) { }
 

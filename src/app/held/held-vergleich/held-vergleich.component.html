@@ -1,10 +1,10 @@
 <p-accordion *ngIf="data">
-  <p-accordionTab header="Ereignisse">
+  <p-accordionTab header="Ereignisse" *ngIf="!data.ereignis.empty">
     <app-ereignisse-tabelle [data]="data.ereignis.neu" ></app-ereignisse-tabelle>
   </p-accordionTab>
   <p-accordionTab header="Talente">
     <div>Änderungen</div>
-    <p-table [value]="data.talente.aenderungen" >
+    <p-table [value]="data.talente.aenderungen" *ngIf="!data.talente.empty">
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
@@ -26,7 +26,7 @@
     <app-talente-tabelle [data]="data.talente.entfernt"></app-talente-tabelle>
   </p-accordionTab>
 
-  <p-accordionTab header="Zauber">
+  <p-accordionTab header="Zauber" *ngIf="!data.zauber.empty">
     <div>Änderungen</div>
     <p-table [value]="data.zauber.aenderungen" >
       <ng-template pTemplate="header">
@@ -48,6 +48,11 @@
     <app-zauber-tabelle [data]="data.zauber.neu"></app-zauber-tabelle>
     <div>Entfernt</div>
     <app-zauber-tabelle [data]="data.zauber.entfernt"></app-zauber-tabelle>
+  </p-accordionTab>
+  <p-accordionTab header="Ausrüstung" *ngIf="!data.gegenstaende.empty">
+    <p-table [value]="data.gegenstaende.neu">
+
+    </p-table>
   </p-accordionTab>
 
 </p-accordion>
