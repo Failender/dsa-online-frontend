@@ -8,4 +8,5 @@ jobs:
        - docker login -u $DOCKER_USER -p $DOCKER_PASS
       - docker build -t $REPO:$TRAVIS_BRANCH .
       - docker images
+      - echo $REPO
       - docker push $REPO
