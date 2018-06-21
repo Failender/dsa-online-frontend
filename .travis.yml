@@ -25,6 +25,8 @@ before_script:
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH .
+  - tagname = $REPO:$TRAVIS_BRANCH | tr '/' '_'
+    echo tagname
+    docker build -f Dockerfile -t tagname .
   - docker push $REPO
 
