@@ -27,6 +27,6 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   -
   - echo ($REPO:$TRAVIS_BRANCH | tr '/' '_' )
-  - docker build -f Dockerfile -t ($REPO:$TRAVIS_BRANCH | tr '/' '_' ) .
+  - docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH | tr '/' '_'  .
   - docker push $REPO
 
