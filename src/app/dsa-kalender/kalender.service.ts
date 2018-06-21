@@ -6,8 +6,7 @@ import {map} from "rxjs/internal/operators";
 
 interface Event {
   name: string;
-  startDate: number;
-  endDate: number;
+  date: number;
   id: number;
 }
 
@@ -28,7 +27,7 @@ export class KalenderService {
   }
 
   public buildMonth(datum: DsaDatum, gruppe: number): Observable<KalenderDaten> {
-    return this.restService.get(`events/${gruppe}/${datum.jahr}/${datum.monat}`)
+    return this.restService.get(`events/${gruppe}/${datum.jahr}/${datum.monatValue}`)
       .pipe(map((data) => this.mapEventResponse(data, datum, gruppe)));
 
   }
@@ -60,14 +59,14 @@ export class KalenderService {
       }
     }
     const mappedData = new Map();
-    Object.keys(data.events).forEach(key => {
-      const events: Event[] = data.events[key];
+    Object.keys(data).forEach(key => {
+      const events: Event[] = data[key];
+      console.debug(tage)
       events.forEach(event => {
-        if (event.endDate ) {
+        console.debug(event)
+        const relativeDay = (event.date % YEAR_LENGTH) % 30 + dayOffset;
+        tage[relativeDay].events.push({color: 'red', name: event.name});
 
-        } else {
-
-        }
       });
     });
     return {
