@@ -26,5 +26,6 @@ before_script:
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH .
+  - echo $REPO
   - docker push $REPO
 
