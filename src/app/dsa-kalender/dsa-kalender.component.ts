@@ -21,16 +21,6 @@ export class DsaKalenderComponent implements OnInit {
   ngOnInit() {
     this.kalenderService.buildMonth(this.heute, this.gruppe)
       .subscribe(data => this.monat = data);
-    // this.monat.tage[4].events = [
-    //   {
-    //     color: 'red',
-    //     name: 'THIS IS AN EVENT YES HELLO'
-    //   },
-    //   {
-    //     color: '',
-    //     name: 'Baguette'
-    //   }
-    ];
   }
 
   naechsterMonat() {
