@@ -5,12 +5,18 @@ import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
 
+export class CustomMenuItem implements MenuItem {
+  mobile: boolean;
+}
+
+
 @Injectable()
 export class MenuService {
 
   public items: MenuItem[] = [
     this.createItem('Home', 'home'),
-    this.createItem('Öffentliche Helden', 'groups/public')
+    this.createItem('Öffentliche Helden', 'groups/public'),
+    this.createItem('Kalender', 'kalender'),
   ];
 
   public authenticatedItems: MenuItem[] = [
@@ -50,7 +56,6 @@ export class MenuService {
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
-
     heldenService.heldLoaded.subscribe(
       () => {
         this.removeHeldItems();
@@ -90,5 +95,11 @@ export class MenuService {
   private removeItem(item: MenuItem) {
     this.items.splice(this.items.indexOf(item), 1);
   }
+
+  private isMobile(): boolean {
+
+    return screen.width < 1000;
+  }
 }
+
 
