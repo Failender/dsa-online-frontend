@@ -1,0 +1,14 @@
+sudo: required
+
+language: node_js
+node_js:
+  - "8"
+services:
+  - docker
+
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH .
+  - docker push $REPO
+
