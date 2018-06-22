@@ -5,7 +5,7 @@ import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
 
-export class CustomMenuItem implements MenuItem {
+export interface CustomMenuItem extends MenuItem {
   mobile: boolean;
 }
 
@@ -13,13 +13,13 @@ export class CustomMenuItem implements MenuItem {
 @Injectable()
 export class MenuService {
 
-  public items: MenuItem[] = [
+  public items: CustomMenuItem[] = [
     this.createItem('Home', 'home'),
     this.createItem('Öffentliche Helden', 'groups/public'),
-    this.createItem('Kalender', 'kalender'),
+    this.createNoMobileItem('Kalender', 'kalender'),
   ];
 
-  public authenticatedItems: MenuItem[] = [
+  public authenticatedItems: CustomMenuItem[] = [
     this.createItem('Meine Helden', 'helden')
   ]
 
@@ -32,22 +32,31 @@ export class MenuService {
     ]
   }
 
-  private heldenItems: MenuItem[] =
+  private heldenItems: CustomMenuItem[] =
     [
       this.createItem('Übersicht', 'held/uebersicht'),
       this.createItem('Talente', 'held/talente'),
       this.createItem('Ereignisse', 'held/ereignisse')
     ];
 
-  private createItem(label: string, link: string) {
+  private createItem(label: string, link: string): CustomMenuItem {
     return {
       label,
-      command: () => this.routingService.navigateByUrl(link)
+      command: () => this.routingService.navigateByUrl(link),
+      mobile: true
     };
   }
 
-  private itemsToUnload: MenuItem[] = [];
-  private heldItems: MenuItem[] = [];
+  private createNoMobileItem(label: string, link: string): CustomMenuItem {
+    return {
+      label,
+      command: () => this.routingService.navigateByUrl(link),
+      mobile: false
+    };
+  }
+
+  private itemsToUnload: CustomMenuItem[] = [];
+  private heldItems: CustomMenuItem[] = [];
 
   private removeHeldItems() {
     this.heldItems.forEach(item => {
@@ -65,19 +74,19 @@ export class MenuService {
           this.heldItems.push(zauberItem);
         }
         this.heldItems.push(... this.heldenItems)
-        this.items.push(... this.heldItems);
+        this.heldItems.forEach(item => this.addItem(item));
 
       }
     )
     authenticationService.onLogin.subscribe(
       () => {
         this.itemsToUnload = [];
-        this.items.push(...this.authenticatedItems);
+        this.authenticatedItems.forEach(item => this.addItem(item));
         this.itemsToUnload.push(...this.authenticatedItems);
         authenticationService.rights.forEach(right => {
           const items = this.protectedItems[right]
           if (items) {
-            this.items.push(...items)
+            items.forEach(item => this.addItem(item));
             this.itemsToUnload.push(...items);
           }
 
@@ -92,8 +101,18 @@ export class MenuService {
     );
   }
 
-  private removeItem(item: MenuItem) {
-    this.items.splice(this.items.indexOf(item), 1);
+  private removeItem(item: CustomMenuItem) {
+    const index = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items.splice(this.items.indexOf(item), 1);
+    }
+  }
+
+  private addItem(item: CustomMenuItem) {
+    if (!item.mobile && this.isMobile()) {
+      return;
+    }
+    this.items.push(item);
   }
 
   private isMobile(): boolean {
