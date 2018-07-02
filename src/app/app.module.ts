@@ -13,7 +13,10 @@ import {ActivatedRoute, Router, RouterModule, Routes} from "@angular/router";
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
-import {AccordionModule, CheckboxModule, DataTableModule, DropdownModule, PanelMenuModule, TabMenuModule} from 'primeng/primeng';
+import {
+  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, InputTextareaModule, InputTextModule, PanelMenuModule,
+  TabMenuModule, TooltipModule
+} from "primeng/primeng";
 import {AuthenticationService, init} from "./service/authentication/authentication.service";
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -53,6 +56,7 @@ import {CalendarDateFormatter, CalendarModule, CalendarUtils} from 'angular-cale
 import {CalendarUtilsExtendedService} from './kalender/calendar-utils-extended.service';
 import {CalendarDateFormatterExtendedService} from './kalender/calendar-date-formatter-extended.service';
 import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
+import { SkriptComponent } from './skripte/skript/skript.component';
 
 
 const appRoutes: Routes = [
@@ -69,7 +73,8 @@ const appRoutes: Routes = [
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
-  { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Zauber'}},
+  { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
+  { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Zauber'}},
 
   { path: '**', redirectTo : '/home' }
@@ -101,11 +106,12 @@ registerLocaleData(localeDe, 'de');
     ZauberTabelleComponent,
     KalenderComponent,
     DsaKalenderComponent,
+    SkriptComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(),
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
-    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule,
+    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

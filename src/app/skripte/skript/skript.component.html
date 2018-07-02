@@ -1,0 +1,18 @@
+
+
+<div class="ui-g">
+  <label for="name" class="ui-g-3">Name</label>
+  <input class="ui-g-9" pInputText id="name" type="text" [(ngModel)]="current.name">
+</div>
+
+<div class="ui-g">
+  <p-dropdown [options]="typesSelect" [(ngModel)]="selectedType" class="ui-g-9">
+    <ng-template let-data pTemplate="item">
+        <div pTooltip="{{data.value.description}}">{{data.label}}</div>
+    </ng-template>
+  </p-dropdown>
+  <button pButton label="Hinzufügen" (click)="addVariable()"></button>
+</div>
+<span >function calculate(params) {{'{'}}</span>
+<textarea rows="30" cols="50" style="width:100%" pInputTextarea></textarea>
+<span>{{'}'}}</span>

@@ -17,6 +17,7 @@ export class MenuService {
     this.createItem('Home', 'home'),
     this.createItem('Öffentliche Helden', 'groups/public'),
     this.createNoMobileItem('Kalender', 'kalender'),
+    this.createNoMobileItem('Skripte', 'scripts'),
   ];
 
   public authenticatedItems: CustomMenuItem[] = [
