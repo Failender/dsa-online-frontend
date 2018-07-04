@@ -17,6 +17,17 @@ export class SkriptService {
   public getTypes(): Observable<any> {
     return this.restService.get('scripts/types');
   }
+
+  public getHelper(): Observable<any> {
+    return this.restService.get('scripts/helper');
+  }
+
+  public test(script: Skript) {
+    return this.restService.post('scripts/test', script);
+  }
+  public save(script: Skript) {
+    return this.restService.post('scripts/save', script);
+  }
 }
 
 
@@ -25,11 +36,12 @@ export interface Skript {
   id: number;
   body: string;
   scriptVariables: SkriptVariable[];
+  scriptHelper: string[];
 }
 
 export interface SkriptVariable {
-  id: number;
-  scriptId: number;
+  id?: number;
+  scriptId?: number;
   name: string;
   type: string;
   value: string;

@@ -1,18 +1,64 @@
 
 
+
+
+<div class="ui-g">
+  <label class="ui-g-3">Skript laden</label>
+  <p-dropdown [options]="skriptSelect" class="ui-g-9" placeholder="..." (onChange)="onSkriptSelect($event)"></p-dropdown>
+</div>
 <div class="ui-g">
   <label for="name" class="ui-g-3">Name</label>
   <input class="ui-g-9" pInputText id="name" type="text" [(ngModel)]="current.name">
 </div>
-
 <div class="ui-g">
-  <p-dropdown [options]="typesSelect" [(ngModel)]="selectedType" class="ui-g-9">
+  <label class="ui-g-3">Helper</label>
+  <p-multiSelect class="ui-g-9" [options]="helperSelect" [(ngModel)]="current.scriptHelper" [panelStyle]="{minWidth:'12em'}" [filter]="false">
+  </p-multiSelect>
+</div>
+<div class="ui-g">
+  <p-dropdown [options]="typesSelect" [(ngModel)]="selectedType" class="ui-g-9" placeholder="...">
     <ng-template let-data pTemplate="item">
         <div pTooltip="{{data.value.description}}">{{data.label}}</div>
     </ng-template>
   </p-dropdown>
   <button pButton label="Hinzufügen" (click)="addVariable()"></button>
 </div>
+
+<div class="ui-g" *ngFor="let variable of current.scriptVariables;let i=index">
+  <div class="ui-g-3">
+    {{variable.type}}
+  </div>
+  <div class="ui-g-3">
+    <input type="text" pInputText [(ngModel)]="variable.name">
+  </div>
+  <div class="ui-g-3" *ngIf="valuesFor(variable);else freeText">
+    <p-dropdown [options]="valuesFor(variable)" [(ngModel)]="variable.value" placeholder="...">
+    </p-dropdown>
+  </div>
+  <div class="ui-g-3">
+    <button pButton icon="fa-trash" (click)="deleteVariable(i)"></button>
+  </div>
+  <ng-template #freeText>
+    <div class="ui-g-3">
+      <input type="text" pInputText [(ngModel)]="variable.value">
+    </div>
+
+  </ng-template>
+</div>
 <span >function calculate(params) {{'{'}}</span>
-<textarea rows="30" cols="50" style="width:100%" pInputTextarea></textarea>
+<textarea rows="30" cols="50" style="width:100%" pInputTextarea [(ngModel)]="current.body"></textarea>
 <span>{{'}'}}</span>
+
+<div class="ui-g">
+  <button pButton label="Testlauf" (click)="testrun()"></button>
+  <button pButton label="Save" (click)="save()"></button>
+</div>
+
+<ng-container *ngIf="testResult">
+  <div class="ui-g">Logs</div>
+  <div class="ui-g" *ngFor="let log of testResult.logs">
+    {{log}}
+  </div>
+  <div class="ui-g">Result</div>
+  <div class="ui-g">{{testResult.result}}</div>
+</ng-container>

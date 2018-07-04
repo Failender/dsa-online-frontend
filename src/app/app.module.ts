@@ -14,9 +14,10 @@ import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
 import {
-  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, InputTextareaModule, InputTextModule, PanelMenuModule,
+  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, InputTextareaModule, InputTextModule, MultiSelectModule,
+  PanelMenuModule,
   TabMenuModule, TooltipModule
-} from "primeng/primeng";
+} from 'primeng/primeng';
 import {AuthenticationService, init} from "./service/authentication/authentication.service";
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -109,7 +110,7 @@ registerLocaleData(localeDe, 'de');
     SkriptComponent,
   ],
   imports: [
-    BrowserAnimationsModule, CalendarModule.forRoot(),
+    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
