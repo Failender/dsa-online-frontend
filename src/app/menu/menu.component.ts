@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
 import {AuthenticationService} from '../service/authentication/authentication.service';
-import {HeldenService} from '../meine-helden/helden.service';
 import {MenuService} from "./menu.service";
 import {RoutingService} from "../shared/routing.service";
 

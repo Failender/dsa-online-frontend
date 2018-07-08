@@ -5,7 +5,6 @@ import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './header/login/login.component';
-import {DialogModule} from 'primeng/dialog';
 import {MessageModule} from 'primeng/message';
 import { MenuComponent } from './menu/menu.component';
 import {PanelModule} from 'primeng/panel';
@@ -58,6 +57,7 @@ import {CalendarUtilsExtendedService} from './kalender/calendar-utils-extended.s
 import {CalendarDateFormatterExtendedService} from './kalender/calendar-date-formatter-extended.service';
 import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
 import { SkriptComponent } from './skripte/skript/skript.component';
+import {DialogModule} from "primeng/dialog";
 
 
 const appRoutes: Routes = [

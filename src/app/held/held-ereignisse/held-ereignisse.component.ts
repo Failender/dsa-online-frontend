@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {HeldenService} from '../../meine-helden/helden.service';
-import {SortEvent} from 'primeng/api';
 import {RoutingService} from "../../shared/routing.service";
+import {SortEvent} from "primeng/api";
 
 @Component({
   selector: 'app-held-ereignisse',

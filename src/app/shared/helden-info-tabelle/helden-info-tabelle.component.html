@@ -18,7 +18,7 @@
       <td *ngIf="editOeffentlich"><p-checkbox binary=true [ngModel]="data.oeffentlich" (onChange)="updatePublic(data, $event)"></p-checkbox></td>
       <td>{{data.version}}</td>
       <td>
-        <button pButton label="Laden" (click)="heldLaden(data)"></button>
+        <button pButton icon="pi pi-external-link" (click)="heldLaden(data)" pTooltip="Held laden"></button>
         <button pButton label="Alte Version laden" (click)="alteVersionLaden(data)" *ngIf="data.version != 1"></button>
         <button pButton label="Mit voriger Version vergleichen" (click)="vorigeVersionVergleich(data)" *ngIf="data.version != 1"></button>
       </td>
