@@ -27,16 +27,13 @@ export class MenuService {
   public protectedItems = {
     'CREATE_USER': [
       this.createItem('Nutzer-Verwaltung', 'users/manage')
-    ],
-    'VIEW_ALL': [
-      this.createItem('Gruppen-Ansicht', 'groups')
     ]
   }
 
   private heldenItems: CustomMenuItem[] =
     [
       this.createItem('Übersicht', 'held/uebersicht'),
-      this.createItem('Talente', 'held/talente'),
+      // this.createItem('Talente', 'held/talente'),
       this.createItem('Ereignisse', 'held/ereignisse')
     ];
 

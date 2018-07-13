@@ -11,7 +11,6 @@ import {MessageService} from '../../service/message/message.service';
   selector: 'app-alte-version-laden-dialog',
   templateUrl: './alte-version-laden-dialog.component.html',
   styleUrls: ['./alte-version-laden-dialog.component.css'],
-  providers: [VersionService]
 })
 export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
@@ -17,9 +17,12 @@ export class HeldenInfoTabelleComponent implements OnInit {
   public gruppen: SelectItem[];
 
   public alteVersionLadenHeld: HeldenInfo;
+  public alteVersionHochladenHeld: HeldenInfo;
 
   @Input() public editOeffentlich = true;
   @Input() public editGruppe = true;
+
+  @Output() public forceReload = new EventEmitter<void>();
 
   constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService,
               private routingService: RoutingService) { }
@@ -68,6 +71,10 @@ export class HeldenInfoTabelleComponent implements OnInit {
     this.alteVersionLadenHeld = null;
   }
 
+  hochladenDialogClosed() {
+    this.alteVersionHochladenHeld = null;
+  }
+
   updatePublic(data, event) {
     this.heldenService.updatePublic(data.id, event)
       .subscribe(() => {
@@ -77,6 +84,14 @@ export class HeldenInfoTabelleComponent implements OnInit {
           this.messageService.info(`Held ${data.name} ist jetzt privat`);
         }
       });
+  }
+
+  alteVersionHochladen(data) {
+    this.alteVersionHochladenHeld = data;
+  }
+
+  onForceReload() {
+    this.forceReload.emit();
   }
 
 }

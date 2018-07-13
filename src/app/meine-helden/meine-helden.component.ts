@@ -24,11 +24,14 @@ export class MeineHeldenComponent extends AuthenticationRequiredComponent{
 
 
   protected init(): void {
+    this.loadMeineHelden();
+  }
+
+  private loadMeineHelden() {
     this.meineHeldenService.getMeineHelden()
       .subscribe(
         data => this.helden = data
       );
-
   }
 
   reloadHelden() {
@@ -38,5 +41,9 @@ export class MeineHeldenComponent extends AuthenticationRequiredComponent{
         this.messageService.info('Laden abgeschlossen');
           this.helden = data;
       });
+  }
+
+  forceReload() {
+    this.loadMeineHelden();
   }
 }

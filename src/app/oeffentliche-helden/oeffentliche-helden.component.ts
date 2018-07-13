@@ -15,11 +15,28 @@ export class OeffentlicheHeldenComponent implements OnInit {
 
   public gruppen: GruppeIncludingHeld[];
 
-  constructor(private gruppenService: GruppenService) { }
+  constructor(private gruppenService: GruppenService, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.gruppenService.getGruppenIncludingHeldPublic()
-      .subscribe((data) => this.gruppen = data);
+    this.loadGruppen(true);
+  }
+
+  loadGruppen(publicOnly: boolean) {
+    if (publicOnly) {
+      this.gruppenService.getGruppenIncludingHeldPublic()
+        .subscribe((data) => this.gruppen = data);
+    } else {
+      this.gruppenService.getGruppenIncludingHeld()
+        .subscribe((data) => this.gruppen = data);
+    }
+  }
+
+  onChange(event) {
+    this.loadGruppen(event.checked);
+  }
+
+  get canViewAll(): boolean {
+    return this.authenticationService.rights.includes('VIEW_ALL');
   }
 
 

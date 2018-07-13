@@ -13,10 +13,12 @@ import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
 import {
-  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, InputTextareaModule, InputTextModule, MultiSelectModule,
+  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, FileUploadModule, InputSwitchModule, InputTextareaModule,
+  InputTextModule,
+  MultiSelectModule,
   PanelMenuModule,
   TabMenuModule, TooltipModule
-} from 'primeng/primeng';
+} from "primeng/primeng";
 import {AuthenticationService, init} from "./service/authentication/authentication.service";
 import {RestService} from './service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -58,6 +60,8 @@ import {CalendarDateFormatterExtendedService} from './kalender/calendar-date-for
 import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
 import { SkriptComponent } from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
+import { AlteVersionHochladenComponent } from './shared/alte-version-hochladen/alte-version-hochladen.component';
+import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
 
 
 const appRoutes: Routes = [
@@ -108,9 +112,10 @@ registerLocaleData(localeDe, 'de');
     KalenderComponent,
     DsaKalenderComponent,
     SkriptComponent,
+    AlteVersionHochladenComponent,
   ],
   imports: [
-    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule,
+    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
@@ -119,7 +124,7 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, SessionService, HeldenService, GruppenService, MenuService, RoutingService
+  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, GruppenService, MenuService, RoutingService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: CalendarUtils, useClass: CalendarUtilsExtendedService},
     {provide: CalendarDateFormatter, useClass: CalendarDateFormatterExtendedService},
