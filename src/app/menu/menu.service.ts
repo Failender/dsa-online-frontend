@@ -16,6 +16,7 @@ export class MenuService {
   public items: CustomMenuItem[] = [
     this.createItem('Home', 'home'),
     this.createItem('Öffentliche Helden', 'groups/public'),
+    this.createItem('Abenteuerlog', 'abenteuerlog'),
     this.createNoMobileItem('Kalender', 'kalender'),
     this.createNoMobileItem('Skripte', 'scripts'),
   ];
@@ -27,6 +28,9 @@ export class MenuService {
   public protectedItems = {
     'CREATE_USER': [
       this.createItem('Nutzer-Verwaltung', 'users/manage')
+    ],
+    'MEISTER': [
+      this.createItem('Abenteuerlog erstellen', 'abenteuerlog/create')
     ]
   }
 
@@ -63,6 +67,9 @@ export class MenuService {
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
+    if (this.isMobile()) {
+      this.items = this.items.filter(item => item.mobile);
+    }
     heldenService.heldLoaded.subscribe(
       () => {
         this.removeHeldItems();
@@ -114,7 +121,6 @@ export class MenuService {
   }
 
   private isMobile(): boolean {
-
     return screen.width < 1000;
   }
 }

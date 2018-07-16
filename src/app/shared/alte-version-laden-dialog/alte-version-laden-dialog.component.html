@@ -13,7 +13,6 @@
         <th style="width:100px">Version</th>
         <th style="width:100px">Datum</th>
         <th>Letztes Abenteuer</th>
-        <th style="width:100px">PDF verfügbar</th>
         <th style="width:100px"></th>
       </tr>
     </ng-template>
@@ -22,7 +21,6 @@
         <td>{{data.version}}</td>
         <td>{{data.datum | date}}</td>
         <td>{{data.letztesAbenteuer}}</td>
-        <td><p-checkbox binary="true" [ngModel]="data.pdfCached"></p-checkbox></td>
         <td>
           <button pButton label="Laden"(click)="loadVersion(data.version)"></button>
 

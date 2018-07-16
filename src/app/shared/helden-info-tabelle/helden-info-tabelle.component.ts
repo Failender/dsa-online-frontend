@@ -4,6 +4,7 @@ import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
 import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../routing.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-helden-info-tabelle',
@@ -61,6 +62,15 @@ export class HeldenInfoTabelleComponent implements OnInit {
 
   alteVersionLaden(held: HeldenInfo) {
     this.alteVersionLadenHeld = held;
+  }
+
+  versionenHerunterladen(data) {
+    const id = data.id;
+    const a = document.createElement('a');
+    a.href = environment.rest + 'helden/download/' + id + '/xml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   dialogClosed(version) {

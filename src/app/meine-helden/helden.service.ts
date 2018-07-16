@@ -47,6 +47,7 @@ export class HeldenService {
   public compareHeldVersionen(id: number, from: number, to: number): Observable<any> {
     return this.restService.get(`helden/held/unterschied/${id}/${from}/${to}`);
   }
+
 }
 
 export interface HeldenInfo {

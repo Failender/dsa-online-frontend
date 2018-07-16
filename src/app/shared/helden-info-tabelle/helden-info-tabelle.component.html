@@ -19,13 +19,15 @@
       <td>{{data.version}}</td>
       <td>
         <button pButton icon="pi pi-user" (click)="heldLaden(data)" pTooltip="Held laden"></button>
-        <button pButton icon="pi pi-upload" (click)="alteVersionHochladen(data)" pTooltip="Alte Version hochladen"></button>
+        <button pButton icon="pi pi-upload" (click)="alteVersionHochladen(data)" pTooltip="Alte Version hochladen" *ngIf="editGruppe"></button>
         <button pButton icon="pi pi-users" pTooltip="Alle Versionen anzeigen" (click)="alteVersionLaden(data)" *ngIf="data.version != 1"></button>
         <button pButton icon="pi pi-search" pTooltip="Mit voriger Version vergleichen" (click)="vorigeVersionVergleich(data)" *ngIf="data.version != 1"></button>
+        <button pButton icon="pi pi-cloud-download" pTooltip="Versionen herunterladen" (click)="versionenHerunterladen(data)"></button>
+
       </td>
     </tr>
   </ng-template>
 </p-table>
 
 <app-alte-version-laden-dialog [held]="alteVersionLadenHeld" (dialogClosed)="dialogClosed($event)"></app-alte-version-laden-dialog>
-<app-alte-version-hochladen [held]="alteVersionHochladenHeld" (dialogClosed)="hochladenDialogClosed($event)" (versionUploaded)="onForceReload()"></app-alte-version-hochladen>
+<app-alte-version-hochladen [held]="alteVersionHochladenHeld" (dialogClosed)="hochladenDialogClosed()" (versionUploaded)="onForceReload()"></app-alte-version-hochladen>

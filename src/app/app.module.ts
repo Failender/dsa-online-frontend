@@ -62,6 +62,8 @@ import { SkriptComponent } from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
 import { AlteVersionHochladenComponent } from './shared/alte-version-hochladen/alte-version-hochladen.component';
 import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
+import { AbenteuerlogComponent } from './abenteuer/abenteuerlog/abenteuerlog.component';
+import { AbenteuerErstellenComponent } from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
 
 
 const appRoutes: Routes = [
@@ -80,7 +82,9 @@ const appRoutes: Routes = [
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
   { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
-  { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Zauber'}},
+  { path: 'abenteuerlog', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
+  { path: 'abenteuerlog/create', component: AbenteuerErstellenComponent, data: {title: 'Abenteuerlog erstellen'}},
+  { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
 
   { path: '**', redirectTo : '/home' }
 ]
@@ -113,6 +117,8 @@ registerLocaleData(localeDe, 'de');
     DsaKalenderComponent,
     SkriptComponent,
     AlteVersionHochladenComponent,
+    AbenteuerlogComponent,
+    AbenteuerErstellenComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule,

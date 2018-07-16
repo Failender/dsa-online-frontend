@@ -25,6 +25,10 @@ export class GruppenService {
   public updateGruppe(heldid: number, gruppeid: number): Observable<void> {
     return this.restService.post('gruppen/' + heldid + '/' + gruppeid, null);
   }
+
+  public getHeldenForGruppe(gruppeid: number ): Observable<any> {
+    return this.restService.get('gruppen/helden/' + gruppeid);
+  }
 }
 
 export interface GruppeIncludingHeld {

@@ -1,0 +1,23 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="ui-g">
+    <label class="ui-g-3">Name</label>
+    <input pInput type="text" class="ui-g-9" formControlName="name" #userinput>
+  </div>
+
+  <div class="ui-g">
+    <label class="ui-g-3">Gruppe</label>
+    <p-dropdown class=ui-g-9 formControlName="gruppe" [options]="gruppen" placeholder="..." (onChange)="onGruppeChange($event)"></p-dropdown>
+  </div>
+
+  <div class="ui-g">
+    <label class="ui-g-3">AP</label>
+    <input pInput type="number" class="ui-g-9" formControlName="ap">
+  </div>
+
+  <div class="ui-g">
+    <p-dropdown class=ui-g-3 [options]="helden" (onChange)="onGruppeChange($event)"></p-dropdown>
+  </div>
+  <div class="ui-g">
+    <button pButton type="submit" label="Erstellen"></button>
+  </div>
+</form>
