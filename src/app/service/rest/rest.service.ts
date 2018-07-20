@@ -23,6 +23,11 @@ export class RestService {
       .pipe(catchError((e) => this.handleError(e)));
   }
 
+  public delete(adress: string, asResponse?: boolean) {
+    return this.http.delete(environment.rest + adress, this.buildOptions(asResponse))
+      .pipe(catchError((e) => this.handleError(e)));
+  }
+
   public post(adress: string, body: any, asResponse?: boolean) {
     return this.http.post(environment.rest + adress, body, this.buildOptions(asResponse))
       .pipe(catchError((event) => this.handleError(event)));

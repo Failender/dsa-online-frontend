@@ -9,14 +9,38 @@
     <p-dropdown class=ui-g-9 formControlName="gruppe" [options]="gruppen" placeholder="..." (onChange)="onGruppeChange($event)"></p-dropdown>
   </div>
 
-  <div class="ui-g">
+  <div class="ui-g" [formGroup]="getBonusAllControl()">
     <label class="ui-g-3">AP</label>
     <input pInput type="number" class="ui-g-9" formControlName="ap">
   </div>
+  <div class="ui-g">
+    <label class="ui-g-3">SE</label>
+    <input pInput type="text" class="ui-g-9" (keydown.enter)="addSeForAll($event)">
+  </div>
+  <div class="ui-g" *ngFor="let se of getSesForAll(); let i= index">
+    <span class="ui-g-9">{{se}}</span>
+    <button class="ui-g-3 " pButton icon="pi pi-trash" (click)="removeSeForAll(i)"></button>
+  </div>
 
   <div class="ui-g">
-    <p-dropdown class=ui-g-3 [options]="helden" (onChange)="onGruppeChange($event)"></p-dropdown>
+    <p-dropdown class=ui-g-9 [options]="helden" (onChange)="onGruppeChange($event)"></p-dropdown>
+    <button pButton label="Bonus eintragen" class="dropdown-button" (click)="addBonusforHeld()"></button>
   </div>
+  <p-panel *ngFor="let bonusHeld of bonusHelden" [header]="bonusHeld" [toggleable]="true" [formGroup]="getBonus(bonusHeld)">
+    <div class="ui-g">
+      <label class="ui-g-3">AP</label>
+      <input pInput type="number" class="ui-g-9" formControlName="ap">
+    </div>
+    <div class="ui-g">
+      <label class="ui-g-3">SE</label>
+      <input pInput type="text" class="ui-g-9" (keydown.enter)="addSeForHeld($event, bonusHeld)">
+    </div>
+    <div class="ui-g" *ngFor="let se of getSesForHeld(bonusHeld); let i= index">
+      <span class="ui-g-9">{{se}}</span>
+      <button class="ui-g-3" pButton icon="pi pi-trash" (click)="removeSeForHeld(bonusHeld, i)"></button>
+    </div>
+
+  </p-panel>
   <div class="ui-g">
     <button pButton type="submit" label="Erstellen"></button>
   </div>

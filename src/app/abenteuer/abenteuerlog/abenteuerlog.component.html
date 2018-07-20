@@ -1,3 +1,28 @@
-<p>
-  abenteuerlog works!
-</p>
+<div class="ui-g">
+  <p-dropdown [options]="gruppen" placeholder="Bitte eine Gruppe auswählen" (onChange)="onGruppeSelect($event)"></p-dropdown>
+</div>
+
+
+<p-panel *ngFor="let ab of abenteuer" [header]="ab.name" [toggleable]="true">
+  <p-header>
+    <span class="pi pi-trash delete-icon" (click)="deleteAb(ab)"></span>
+  </p-header>
+  <div class="ui-g">
+    <label class="ui-g-3">AP</label>
+    <span class="ui-g-9"> {{ab.bonusAll.ap}}</span>
+  </div>
+  <div class="ui-g">
+    <span class="ui-g-3">SE's</span>
+    <span class="ui-g-9">{{joined(ab.bonusAll.ses)}}</span>
+  </div>
+  <p-panel *ngFor="let held of keys(ab.bonus)" [header]="held" [toggleable]="true" styleClass="subpanel">
+    <div class="ui-g">
+      <span class="ui-g-3">AP</span>
+      <span class="ui-g-9">{{ab.bonus[held].ap}}</span>
+    </div>
+    <div class="ui-g">
+      <span class="ui-g-3">SE's</span>
+      <span class="ui-g-9">{{joined(ab.bonus[held].ses)}}</span>
+    </div>
+  </p-panel>
+</p-panel>

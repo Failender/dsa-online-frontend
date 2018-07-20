@@ -64,6 +64,7 @@ import { AlteVersionHochladenComponent } from './shared/alte-version-hochladen/a
 import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
 import { AbenteuerlogComponent } from './abenteuer/abenteuerlog/abenteuerlog.component';
 import { AbenteuerErstellenComponent } from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
+import {AbenteuerService} from "./abenteuer/abenteuer.service";
 
 
 const appRoutes: Routes = [
@@ -130,7 +131,8 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, GruppenService, MenuService, RoutingService
+  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService,
+    GruppenService, MenuService, RoutingService, AbenteuerService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: CalendarUtils, useClass: CalendarUtilsExtendedService},
     {provide: CalendarDateFormatter, useClass: CalendarDateFormatterExtendedService},
