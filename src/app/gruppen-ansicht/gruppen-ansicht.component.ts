@@ -14,8 +14,8 @@ export class GruppenAnsichtComponent implements OnInit {
   constructor(private gruppenService: GruppenService) { }
 
   ngOnInit() {
-    this.gruppenService.getGruppenIncludingHeld()
-      .subscribe((data) => this.gruppen = data);
+    // this.gruppenService.getGruppenIncludingHeld()
+    //   .subscribe((data) => this.gruppen = data);
   }
 
 

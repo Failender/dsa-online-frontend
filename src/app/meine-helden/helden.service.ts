@@ -44,6 +44,10 @@ export class HeldenService {
     return this.restService.post(`helden/public/${id}/${value}`, {});
   }
 
+  public updateActive(id: number, value: boolean) {
+    return this.restService.post(`helden/active/${id}/${value}`, {});
+  }
+
   public compareHeldVersionen(id: number, from: number, to: number): Observable<any> {
     return this.restService.get(`helden/held/unterschied/${id}/${from}/${to}`);
   }

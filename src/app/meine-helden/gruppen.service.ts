@@ -14,13 +14,10 @@ export class GruppenService {
     return this.restService.get('gruppen');
   }
 
-  public getGruppenIncludingHeld(): Observable<GruppeIncludingHeld[]> {
-    return this.restService.get('gruppen/includeHelden');
+  public getGruppenIncludingHeld(publicOnly: boolean, showInactive: boolean): Observable<GruppeIncludingHeld[]> {
+    return this.restService.get(`gruppen/includeHelden?publicOnly=${publicOnly}&showInactive=${showInactive}`);
   }
 
-  public getGruppenIncludingHeldPublic(): Observable<GruppeIncludingHeld[]> {
-    return this.restService.get('gruppen/includeHelden/public');
-  }
 
   public updateGruppe(heldid: number, gruppeid: number): Observable<void> {
     return this.restService.post('gruppen/' + heldid + '/' + gruppeid, null);

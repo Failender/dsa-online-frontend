@@ -1,8 +1,11 @@
 <div class="ui-g" *ngIf="canViewAll">
-  <span class="public-span">Nur öffentliche zeigen</span><p-inputSwitch [ngModel]="true" onLabel="Ja" offLabel="Nein" (onChange)="onChange($event)"></p-inputSwitch>
+  <span class="public-span">Nur öffentliche zeigen</span><p-inputSwitch [ngModel]="true" onLabel="Ja" offLabel="Nein" (onChange)="onPublicChange($event)"></p-inputSwitch>
+</div>
+<div class="ui-g">
+  <span class="public-span">Nur aktive anzeigen</span><p-inputSwitch [ngModel]="true" onLabel="Ja" offLabel="Nein" (onChange)="onActiveChange($event)"></p-inputSwitch>
 </div>
 <p-accordion>
   <p-accordionTab *ngFor="let gruppe of gruppen" [header]="gruppe.name" lazy="true">
-    <app-helden-info-tabelle [editGruppe]="false" [editOeffentlich]="false" [data]="gruppe.helden"></app-helden-info-tabelle>
+    <app-helden-info-tabelle [editGruppe]="editHelden" [editOeffentlich]="editHelden" [data]="gruppe.helden"></app-helden-info-tabelle>
   </p-accordionTab>
 </p-accordion>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {SelectItem} from 'primeng/api';
 import {GruppenService} from '../../meine-helden/gruppen.service';
@@ -11,7 +11,8 @@ import {environment} from "../../../environments/environment";
   templateUrl: './helden-info-tabelle.component.html',
   styleUrls: ['./helden-info-tabelle.component.css']
 })
-export class HeldenInfoTabelleComponent implements OnInit {
+export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
+
 
   @Input()
   public data: HeldenInfo[];
@@ -29,8 +30,14 @@ export class HeldenInfoTabelleComponent implements OnInit {
               private routingService: RoutingService) { }
 
   ngOnInit() {
-    this.gruppenService.getGruppen()
-      .subscribe(data => this.gruppen = data);
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.gruppen && 'data' in changes && this.data && this.data.length !== 0) {
+      this.gruppenService.getGruppen()
+        .subscribe(data => this.gruppen = data);
+    }
   }
 
   heldLaden(held: HeldenInfo) {
@@ -96,12 +103,27 @@ export class HeldenInfoTabelleComponent implements OnInit {
       });
   }
 
+  updateActive(data, event) {
+    this.heldenService.updateActive(data.id, event)
+      .subscribe(() => {
+        if (event) {
+          this.messageService.info(`Held ${data.name} ist jetzt aktiv`);
+        } else {
+          this.messageService.info(`Held ${data.name} ist jetzt inaktiv`);
+        }
+      });
+  }
+
   alteVersionHochladen(data) {
     this.alteVersionHochladenHeld = data;
   }
 
   onForceReload() {
     this.forceReload.emit();
+  }
+
+  preventClick() {
+    return false;
   }
 
 }
