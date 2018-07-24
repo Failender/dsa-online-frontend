@@ -40,11 +40,11 @@ export class OeffentlicheHeldenComponent implements OnInit {
   }
 
   get canViewAll(): boolean {
-    return this.authenticationService.rights.includes('VIEW_ALL');
+    return this.authenticationService.rights.indexOf('VIEW_ALL') !== -1;
   }
 
   get editHelden() {
-    return this.authenticationService.rights.includes('EDIT_ALL');
+    return this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
   }
 
 

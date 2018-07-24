@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from '../rest/rest.service';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Message} from 'primeng/api';
 import {UserAuthentication} from './UserAuthentication';
 import {catchError, tap} from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {MessageService} from '../message/message.service';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
 import {ActivatedRoute} from "@angular/router";
-import {Observable, of} from 'rxjs';
+import {NEVER, never, Observable, of} from 'rxjs';
 import {flatMap} from 'tslint/lib/utils';
 import {mergeMap} from 'rxjs/internal/operators';
 
@@ -35,7 +35,8 @@ export class AuthenticationService {
   public authenticate(authentication: UserAuthentication): Observable<string[]> {
     this.restService.authentication = authentication;
     return this.restService.get('user/login')
-      .pipe(catchError((e) => this.handleAuthenticationError(e)),
+      .pipe(catchError((e) => this.handleAuthenticationError(e)))
+      .pipe(
         tap((data: string[]) => this.rights = data),
         tap( () => this.authenticated = true),
         tap( () => this.messageService.info('Einloggt als ' + authentication.username)),
@@ -56,7 +57,7 @@ export class AuthenticationService {
       summary: errorMsg
     }
     this.messageService.add(msg)
-    return of(errorMsg);
+    return NEVER;
   }
 
   public logout() {
@@ -121,4 +122,18 @@ export function getQueryVariable(variable) {
 
 export function getQueryVariableInt(variable) {
   return parseInt(getQueryVariable(variable), 10);
+}
+
+export class HttpInterceptor implements HttpInterceptor {
+
+  constructor(private messageService: MessageService) {
+
+  }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(catchError((error, caught) => {
+      this.messageService.error('HTTP Fehler aufgetreten ' + error.message)
+      return NEVER;
+    }));
+  }
+
 }

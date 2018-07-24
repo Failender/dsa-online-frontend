@@ -15,7 +15,7 @@ export class MenuService {
 
   public items: CustomMenuItem[] = [
     this.createItem('Home', 'home'),
-    this.createItem('Gruppen Ansicht', 'groups'),
+    this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuerlog', 'abenteuerlog'),
     this.createNoMobileItem('Kalender', 'kalender'),
     this.createNoMobileItem('Skripte', 'scripts'),
