@@ -19,7 +19,7 @@ import {
   PanelMenuModule,
   TabMenuModule, TooltipModule
 } from "primeng/primeng";
-import {AuthenticationService, HttpInterceptor, init} from './service/authentication/authentication.service';
+import {AuthenticationService, CustomHttpInterceptor, init} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -143,7 +143,7 @@ registerLocaleData(localeDe, 'de');
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptor,
+      useClass: CustomHttpInterceptor,
       multi: true,
       deps: [MessageService]
     }

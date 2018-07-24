@@ -124,7 +124,7 @@ export function getQueryVariableInt(variable) {
   return parseInt(getQueryVariable(variable), 10);
 }
 
-export class HttpInterceptor implements HttpInterceptor {
+export class CustomHttpInterceptor implements HttpInterceptor {
 
   constructor(private messageService: MessageService) {
 
