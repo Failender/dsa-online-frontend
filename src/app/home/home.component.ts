@@ -18,11 +18,7 @@ export class HomeComponent implements OnInit {
     },
     {
       label: 'XML-Download',
-      done: false
-    },
-    {
-      label: 'PDF Einzel-Seitenansicht',
-      done: false
+      done: true
     },
     {
       label: 'Öffentlich sichtbare Helden',
@@ -38,7 +34,7 @@ export class HomeComponent implements OnInit {
     },
     {
       label: 'PDF für alte Helden',
-      done: false
+      done: true
     },
     {
       label: 'Aventurischer Kalender',

@@ -132,7 +132,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError((error, caught) => {
       this.messageService.error('HTTP Fehler aufgetreten ' + error.message)
-      return NEVER;
+      return of(error);
     }));
   }
 

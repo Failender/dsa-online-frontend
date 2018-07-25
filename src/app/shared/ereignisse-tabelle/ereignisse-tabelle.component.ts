@@ -17,6 +17,9 @@ export class EreignisseTabelleComponent implements OnInit {
   }
 
   public getChange(data: any) {
+    if (data.lep !== 0) {
+      return 'LEP ' + data.lep;
+    }
     if (data.alterzustand === 0 && data. neuerzustand === 0 ) {
       return '';
     }
