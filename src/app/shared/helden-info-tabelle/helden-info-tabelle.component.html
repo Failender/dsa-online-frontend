@@ -34,5 +34,5 @@
   </ng-template>
 </p-table>
 
-<app-alte-version-laden-dialog [held]="alteVersionLadenHeld" (dialogClosed)="dialogClosed($event)"></app-alte-version-laden-dialog>
+<app-alte-version-laden-dialog [held]="alteVersionLadenHeld" (dialogClosed)="dialogClosed($event)" (forceReload)="onForceReload()"></app-alte-version-laden-dialog>
 <app-alte-version-hochladen [held]="alteVersionHochladenHeld" (dialogClosed)="hochladenDialogClosed()" (versionUploaded)="onForceReload()"></app-alte-version-hochladen>

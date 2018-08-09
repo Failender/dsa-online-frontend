@@ -13,6 +13,7 @@ import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.servi
 export class OeffentlicheHeldenComponent implements OnInit {
 
 
+  public activeIndex = null;
   public gruppen: GruppeIncludingHeld[];
 
   private publicOnly = true;
@@ -45,6 +46,14 @@ export class OeffentlicheHeldenComponent implements OnInit {
 
   get editHelden() {
     return this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
+  }
+
+  forceReload() {
+    this.loadGruppen();
+  }
+
+  onOpen(event) {
+    this.activeIndex = event.index;
   }
 
 

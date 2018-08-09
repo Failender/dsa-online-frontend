@@ -4,8 +4,8 @@
 <div class="ui-g">
   <span class="public-span">Nur aktive anzeigen</span><p-inputSwitch [ngModel]="true" onLabel="Ja" offLabel="Nein" (onChange)="onActiveChange($event)"></p-inputSwitch>
 </div>
-<p-accordion>
+<p-accordion [activeIndex]="activeIndex" (onOpen)="onOpen($event)">
   <p-accordionTab *ngFor="let gruppe of gruppen" [header]="gruppe.name" lazy="true">
-    <app-helden-info-tabelle [editGruppe]="editHelden" [editOeffentlich]="editHelden" [data]="gruppe.helden"></app-helden-info-tabelle>
+    <app-helden-info-tabelle [editGruppe]="editHelden" [editOeffentlich]="editHelden" [data]="gruppe.helden" (forceReload)="forceReload()"></app-helden-info-tabelle>
   </p-accordionTab>
 </p-accordion>

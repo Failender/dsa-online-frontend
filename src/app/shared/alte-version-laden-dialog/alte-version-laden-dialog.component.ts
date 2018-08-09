@@ -22,6 +22,9 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
 
   public versionsDropdown: SelectItem[];
 
+  @Output()
+  public forceReload = new EventEmitter<void>()
+
   public compareForm = new FormGroup({
     from: new FormControl('', Validators.required),
     to: new FormControl('', Validators.required)
@@ -42,15 +45,6 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   onHide() {
     this.dialogClosed.emit();
   }
-
-  // customValidation(group: AbstractControl): ValidationErrors {
-  //   console.debug(group.get('from').value);
-  //   console.debug(group.get('to').value);
-  //   const errors: ValidationErrors = {
-  //     areDifferent: false
-  //   };
-  //   return errors;
-  // }
 
   onSubmit() {
 
@@ -74,17 +68,30 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.versions = [];
     if (this.held) {
-      this.versionService.getVersionen(this.held.id).subscribe((data) => {
-        this.versions = data;
-        this.versionsDropdown = this.versions.map(version =>  {
-          return {'label': version.version, 'value': version.version}; });
-      });
+      this.reloadVersions();
     }
 
   }
 
+  private reloadVersions() {
+    this.versionService.getVersionen(this.held.id).subscribe((data) => {
+      this.versions = data;
+      this.versionsDropdown = this.versions.map(version =>  {
+        return {'label': version.version, 'value': version.version}; });
+    });
+  }
+
   loadVersion(version: number) {
     this.dialogClosed.emit(version);
+  }
+
+  deleteVersion(version: number) {
+    this.versionService.deleteVersion(this.held.id, version)
+      .subscribe(() => {
+        this.forceReload.emit();
+        this.reloadVersions();
+      });
+    // this.dialogClosed.emit(version);
   }
 
 }

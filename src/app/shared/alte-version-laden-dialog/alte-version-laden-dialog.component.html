@@ -22,7 +22,8 @@
         <td>{{data.datum | date}}</td>
         <td>{{data.letztesAbenteuer}}</td>
         <td>
-          <button pButton label="Laden"(click)="loadVersion(data.version)"></button>
+          <button pButton icon="pi pi-user"(click)="loadVersion(data.version)"></button>
+          <button pButton icon="pi pi-trash"(click)="deleteVersion(data.version)"></button>
 
         </td>
       </tr>

@@ -3,9 +3,14 @@
   display:flex;
 }
 
-.content {
-  padding-left:5px;
+.menu {
+  min-width:33%;
 }
+
+.content {
+  min-width:66%;
+}
+
 
 .invisible {
   display:none;

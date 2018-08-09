@@ -12,4 +12,8 @@ export class VersionService {
     return this.restService.get('helden/held/versionen/' + heldversion);
   }
 
+  public deleteVersion(heldid: number, version: number): Observable<void> {
+    return this.restService.delete(`helden/held/${heldid}/${version}`);
+  }
+
 }

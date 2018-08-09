@@ -13,11 +13,12 @@ export interface CustomMenuItem extends MenuItem {
 @Injectable()
 export class MenuService {
 
+
   public items: CustomMenuItem[] = [
     this.createItem('Home', 'home'),
     this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuerlog', 'abenteuerlog'),
-    this.createNoMobileItem('Kalender', 'kalender'),
+    // this.createNoMobileItem('Kalender', 'kalender'),
     this.createNoMobileItem('Skripte', 'scripts'),
   ];
 
@@ -34,6 +35,8 @@ export class MenuService {
     ]
   }
 
+
+
   private heldenItems: CustomMenuItem[] =
     [
       this.createItem('Übersicht', 'held/uebersicht'),
@@ -41,11 +44,14 @@ export class MenuService {
       this.createItem('Ereignisse', 'held/ereignisse')
     ];
 
-  private createItem(label: string, link: string): CustomMenuItem {
+  private heldItem: CustomMenuItem = this.createItem('Held', null, this.heldenItems);
+
+  private createItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
     return {
       label,
       command: () => this.routingService.navigateByUrl(link),
-      mobile: true
+      mobile: true,
+      items
     };
   }
 
@@ -64,6 +70,9 @@ export class MenuService {
     this.heldItems.forEach(item => {
       this.removeItem(item);
     })
+    if (this.heldItem.items.length === 3) {
+      this.heldItem.items.splice(2,0 );
+    }
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
@@ -76,9 +85,9 @@ export class MenuService {
         if (heldenService.held.zauberliste.zauber.length > 0) {
 
           const zauberItem = this.createItem('Zauber', 'held/zauber')
-          this.heldItems.push(zauberItem);
+          this.heldItem.items.push(zauberItem);
         }
-        this.heldItems.push(... this.heldenItems)
+        this.heldItems.push(this.heldItem)
         this.heldItems.forEach(item => this.addItem(item));
 
       }

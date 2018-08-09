@@ -3,7 +3,13 @@
   <i class="fa fa-bars" (click)="onClick()"></i>
   <span class="title">
     DSA-Online
+    <ng-container *ngIf="versions">
+      <ng-container *ngIf="versions.frontend == versions.backend; else diffVersions">({{versions.frontend}})</ng-container>
+      <ng-template #diffVersions>Frontend: {{versions.frontend}} | Backend:{{versions.backend}}</ng-template>
+
+  </ng-container>
   </span>
+
   <div class="btn-container">
     <button *ngIf="!auth.authenticated" pButton label="Login"  icon="fa fa-sign-out" (click)="login()"><i class="icon-repeat" ></i> </button>
     <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa fa-sign-out" (click)="logout()"><i class="icon-repeat" ></i> </button>

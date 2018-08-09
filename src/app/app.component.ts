@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Message} from 'primeng/api';
 import {MessageService} from './service/message/message.service';
+import {RoutingService} from './shared/routing.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,16 @@ import {MessageService} from './service/message/message.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
 
-
-  constructor(private messageService: MessageService) {
+  public menuVisible = false;
+  constructor(private messageService: MessageService, routingService: RoutingService) {
+    routingService.routing.asObservable()
+      .subscribe(() => {
+        this.menuVisible = false;
+      });
   }
 
-  public menuVisible = true;
+
   onIconClick() {
     this.menuVisible = !this.menuVisible;
 

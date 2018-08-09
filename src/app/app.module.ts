@@ -121,7 +121,7 @@ registerLocaleData(localeDe, 'de');
     AbenteuerErstellenComponent,
   ],
   imports: [
-    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule,
+    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(

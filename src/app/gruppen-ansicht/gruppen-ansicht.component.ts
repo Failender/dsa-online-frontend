@@ -19,4 +19,6 @@ export class GruppenAnsichtComponent implements OnInit {
   }
 
 
+
+
 }
