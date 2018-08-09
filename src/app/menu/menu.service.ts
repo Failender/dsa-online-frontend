@@ -85,7 +85,9 @@ export class MenuService {
         if (heldenService.held.zauberliste.zauber.length > 0) {
 
           const zauberItem = this.createItem('Zauber', 'held/zauber')
-          this.heldItem.items.push(zauberItem);
+          const menuItems: MenuItem[] = <MenuItem[]>this.heldItem.items;
+
+          menuItems.push(zauberItem);
         }
         this.heldItems.push(this.heldItem)
         this.heldItems.forEach(item => this.addItem(item));
