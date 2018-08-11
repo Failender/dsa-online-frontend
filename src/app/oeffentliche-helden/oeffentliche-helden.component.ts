@@ -4,6 +4,8 @@ import {RoutingService} from '../shared/routing.service';
 import {MessageService} from '../service/message/message.service';
 import {HeldenInfo, HeldenService} from '../meine-helden/helden.service';
 import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.service';
+import {isMobile} from "../util/Constants";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-oeffentliche-helden',
@@ -45,7 +47,7 @@ export class OeffentlicheHeldenComponent implements OnInit {
   }
 
   get editHelden() {
-    return this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
+    return !isMobile() && this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
   }
 
   forceReload() {

@@ -2,21 +2,20 @@
 <p-table [value]="data">
   <ng-template pTemplate="header">
     <tr>
-      <th>Name</th>
+      <th style="min-width:100px">Name</th>
       <th style="width:100px">Letzte Änderung</th>
-      <th *ngIf="editGruppe">Gruppe</th>
-      <th style="width:100px" >Öffentlich</th>
-      <th style="width:100px" >Aktiv</th>
-      <th style="width:100px">Version</th>
-      <th></th>
+      <th *ngIf="editGruppe" >Gruppe</th>
+      <th style="width:80px" >Öffentlich</th>
+      <th style="width:50px" >Aktiv</th>
+      <th style="width:50px">Version</th>
+      <th style="width:300px"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-data>
     <tr>
       <td>{{data.name}}</td>
       <td>{{data.lastChanged |date}}</td>
-      <!--<td>{{data.gruppe}}</td>-->
-      <td *ngIf="editGruppe"><p-dropdown [options]="gruppen" (onChange)="onDropdownSelected($event.value, data.id)" [placeholder]="data.gruppe"></p-dropdown></td>
+      <td>{{data.gruppe}}</td>
       <td *ngIf="editOeffentlich"><p-checkbox binary=true [ngModel]="data.oeffentlich" (onChange)="updatePublic(data, $event)"></p-checkbox></td>
       <td *ngIf="!editOeffentlich"><input class="readonly-checkbox" type="checkbox" ngModel="{{data.oeffentlich}}" (click)="preventClick()"></td>
       <td *ngIf="editOeffentlich"><p-checkbox binary=true [ngModel]="data.active" (onChange)="updateActive(data, $event)"></p-checkbox></td>

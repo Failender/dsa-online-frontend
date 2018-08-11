@@ -36,11 +36,13 @@ export class RestService {
   private handleError(error: HttpErrorResponse): Observable<any> {
 
     if (error.status === 0) {
-      this.messageService.add({severity: 'error', summary: 'Server nicht erreichbar'});
+      this.messageService.error('Server nicht erreichbar');
       return NEVER;
     }
     if(error.status === 401) {
       this.messageService.error('Sie haben nicht das Recht dies zu tun');
+    } else if(error.status === 500) {
+      this.messageService.error('Unerwarteter Fehler.')
     }
     return of(error);
   }

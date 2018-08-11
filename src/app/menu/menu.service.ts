@@ -4,6 +4,7 @@ import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
+import {isMobile} from "../util/Constants";
 
 export interface CustomMenuItem extends MenuItem {
   mobile: boolean;
@@ -76,7 +77,7 @@ export class MenuService {
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
-    if (this.isMobile()) {
+    if (isMobile()) {
       this.items = this.items.filter(item => item.mobile);
     }
     heldenService.heldLoaded.subscribe(
@@ -125,14 +126,10 @@ export class MenuService {
   }
 
   private addItem(item: CustomMenuItem) {
-    if (!item.mobile && this.isMobile()) {
+    if (!item.mobile && isMobile()) {
       return;
     }
     this.items.push(item);
-  }
-
-  private isMobile(): boolean {
-    return screen.width < 1000;
   }
 }
 
