@@ -6,3 +6,10 @@
   /*border: 3px solid green;*/
   padding: 10px;
 }
+
+
+@media only screen and (max-device-width: 480px) {
+  .ui-accordion .ui-accordion-content {
+    padding:0px !important;
+  }
+}

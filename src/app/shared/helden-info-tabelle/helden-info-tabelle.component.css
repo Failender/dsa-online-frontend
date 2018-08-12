@@ -2,3 +2,62 @@
   width: 1.125em;
   height: 1.125em;
 }
+
+
+.name {
+  width:300px;
+}
+
+.last-change {
+  width:100px
+}
+
+.public {
+  width:80px;
+}
+
+.aktiv {
+  width:50px;
+}
+
+.version {
+  width: 50px;
+}
+
+.actions {
+  width: 300px;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .edit-gruppe {
+    display:none;
+  }
+
+  .helden-info-tabelle {
+    font-size:0.5em;
+  }
+
+  .last-change {
+    width: 60px;
+  }
+
+  .name {
+    width:100px;
+  }
+
+  .public {
+    width:50px;
+  }
+
+  .aktiv {
+    width: 35px;
+  }
+
+  .version {
+    width:35px;
+  }
+
+  .actions {
+    width: 150px;
+  }
+}

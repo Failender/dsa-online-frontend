@@ -6,6 +6,7 @@ import {HeldenInfo, HeldenService} from '../meine-helden/helden.service';
 import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.service';
 import {isMobile} from "../util/Constants";
 import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-oeffentliche-helden',
@@ -21,10 +22,11 @@ export class OeffentlicheHeldenComponent implements OnInit {
   private publicOnly = true;
   private showInactive = false;
 
-  constructor(private gruppenService: GruppenService, private authenticationService: AuthenticationService) { }
+  constructor(private gruppenService: GruppenService, private authenticationService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadGruppen();
+    this.activatedRoute.queryParams.subscribe((data) => this.activeIndex = parseInt(data.gruppe, 10));
   }
 
   loadGruppen() {
@@ -47,7 +49,7 @@ export class OeffentlicheHeldenComponent implements OnInit {
   }
 
   get editHelden() {
-    return !isMobile() && this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
+    return this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
   }
 
   forceReload() {
@@ -56,6 +58,12 @@ export class OeffentlicheHeldenComponent implements OnInit {
 
   onOpen(event) {
     this.activeIndex = event.index;
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        gruppe: this.activeIndex
+      }
+    });
   }
 
 
