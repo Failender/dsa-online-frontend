@@ -20,7 +20,6 @@ export class MenuService {
     this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuerlog', 'abenteuerlog'),
     // this.createNoMobileItem('Kalender', 'kalender'),
-    this.createNoMobileItem('Skripte', 'scripts'),
   ];
 
   public authenticatedItems: CustomMenuItem[] = [
@@ -33,6 +32,9 @@ export class MenuService {
     ],
     'MEISTER': [
       this.createItem('Abenteuerlog erstellen', 'abenteuerlog/create')
+    ],
+    'EDIT_SCRIPTS': [
+      this.createNoMobileItem('Skripte', 'scripts')
     ]
   }
 

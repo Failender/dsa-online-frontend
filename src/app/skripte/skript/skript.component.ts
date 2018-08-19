@@ -44,7 +44,7 @@ export class SkriptComponent implements OnInit {
         const _data = JSON.parse(JSON.stringify(data));
         _data.forEach( val => {
           this.typesMap[val.name] = val.values;
-          });
+        });
       });
     this.skriptService.getHelper()
       .subscribe(data => this.helperSelect = data.map(v => ({label: v.name, value: v.name})));
@@ -77,8 +77,9 @@ export class SkriptComponent implements OnInit {
 
   save() {
     this.skriptService.save(this.current)
-      .subscribe(() => {
-       this.messageService.info('Gespeichert');
+      .subscribe((data) => {
+        this.current.id = data;
+        this.messageService.info('Gespeichert');
       });
   }
 
