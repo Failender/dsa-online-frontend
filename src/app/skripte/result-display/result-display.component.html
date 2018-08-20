@@ -1,0 +1,25 @@
+
+<p-panel header="Logs" [toggleable]="true" *ngIf="result.logs.length != 0">
+  <p-table [value]="result.logs">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Log-Level</th>
+        <th>Text</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.level}}</td>
+        <td>{{data.value }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>
+<p-panel header="Ergebnis">
+  <ng-container [ngSwitch]="result.resultType">
+    <app-table-result *ngSwitchCase="'Table'" [result]="result.result"></app-table-result>
+    <app-text-result *ngSwitchCase="'Text'" [result]="result.result"></app-text-result>
+  </ng-container>
+
+</p-panel>
+

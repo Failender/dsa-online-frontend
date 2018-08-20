@@ -67,6 +67,9 @@ import {UserService} from "./nutzer-verwaltung/user.service";
 import { CurrentHeldComponent } from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
 import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
+import { ResultDisplayComponent } from './skripte/result-display/result-display.component';
+import { TextResultComponent } from './skripte/result-display/text-result/text-result.component';
+import { TableResultComponent } from './skripte/result-display/table-result/table-result.component';
 import { KampagnenComponent } from './kampagnen/kampagnen.component';
 import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
 import { KampagneComponent } from './kampagne-component/kampagne.component';
@@ -146,6 +149,9 @@ registerLocaleData(localeDe, 'de');
     AbenteuerTabelleComponent,
     AddSeBonusDialogComponent,
     AddApBonusDialogComponent,
+    ResultDisplayComponent,
+    TextResultComponent,
+    TableResultComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

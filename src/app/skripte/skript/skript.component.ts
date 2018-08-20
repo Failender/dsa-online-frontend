@@ -13,6 +13,7 @@ export class SkriptComponent implements OnInit {
 
   public skriptSelect: SelectItem[];
   public types: any;
+  public resultTypes: any;
   public typesSelect: SelectItem[];
   public helperSelect: SelectItem[];
 
@@ -28,7 +29,8 @@ export class SkriptComponent implements OnInit {
     id: null,
     name: '',
     scriptVariables: [],
-    scriptHelper: []
+    scriptHelper: [],
+    resultType: null
   };
 
   constructor(private skriptService: SkriptService, private messageService: MessageService) { }
@@ -37,6 +39,8 @@ export class SkriptComponent implements OnInit {
     this.skriptService.getSkripte()
       .subscribe((data) => this.skriptSelect = data.map(val => ({value: val, label: val.name})));
 
+    this.skriptService.getResultTypes()
+      .subscribe(data => this.resultTypes = data);
     this.skriptService.getTypes()
       .subscribe((data) => {
         this.types = data;
@@ -68,7 +72,7 @@ export class SkriptComponent implements OnInit {
   }
 
   testrun() {
-    //TODO: Validate
+    // TODO: Validate
     this.skriptService.test(this.current)
       .subscribe((data) => {
         this.testResult = data;

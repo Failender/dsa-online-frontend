@@ -18,6 +18,10 @@ export class SkriptService {
     return this.restService.get('scripts/types');
   }
 
+  public getResultTypes(): Observable<any> {
+    return this.restService.get('scripts/result/types');
+  }
+
   public getHelper(): Observable<any> {
     return this.restService.get('scripts/helper');
   }
@@ -36,6 +40,7 @@ export interface Skript {
   id: number;
   body: string;
   scriptVariables: SkriptVariable[];
+  resultType: number;
   scriptHelper: string[];
 }
 
