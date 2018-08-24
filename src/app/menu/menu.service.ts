@@ -10,6 +10,12 @@ export interface CustomMenuItem extends MenuItem {
   mobile: boolean;
 }
 
+interface NestedCustomMenuItem extends MenuItem {
+  parent: string;
+  item: CustomMenuItem;
+  permission: string;
+}
+
 
 @Injectable()
 export class MenuService {
@@ -38,6 +44,11 @@ export class MenuService {
     ]
   }
 
+  private nestedItems: NestedCustomMenuItem[] = [
+    this.createNestedItem('Export', 'administration/export', 'Administration', 'FULL_EXPORT'),
+    this.createNestedItem('Import', 'administration/import', 'Administration', 'FULL_IMPORT')
+  ];
+
 
 
   private heldenItems: CustomMenuItem[] =
@@ -58,11 +69,20 @@ export class MenuService {
     };
   }
 
-  private createNoMobileItem(label: string, link: string): CustomMenuItem {
+  private createNestedItem(label: string, link: string, parent: string, permission: string): NestedCustomMenuItem {
+    return {
+      parent,
+      item: this.createItem(label, link),
+      permission
+    };
+  }
+
+  private createNoMobileItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
     return {
       label,
       command: () => this.routingService.navigateByUrl(link),
-      mobile: false
+      mobile: false,
+      items
     };
   }
 
@@ -74,7 +94,7 @@ export class MenuService {
       this.removeItem(item);
     })
     if (this.heldItem.items.length === 3) {
-      this.heldItem.items.splice(2,0 );
+      this.heldItem.items.splice(2, 0);
     }
     this.heldItems = [];
   }
@@ -108,6 +128,16 @@ export class MenuService {
             items.forEach(item => this.addItem(item));
             this.itemsToUnload.push(...items);
           }
+          const nestedItems = this.nestedItems.filter(item => item.permission === right);
+          nestedItems.forEach(nestedItem => {
+            let parent = this.items.find(item => item.label === nestedItem.parent);
+
+            if (!parent) {
+              parent = this.createNoMobileItem(nestedItem.parent, null, []);
+              this.items.push(parent);
+            }
+            parent.items.push(nestedItem.item);
+          });
 
         });
       });
@@ -116,6 +146,15 @@ export class MenuService {
         this.removeHeldItems();
         this.itemsToUnload.forEach(item => this.removeItem(item));
         this.itemsToUnload = [];
+        authenticationService.rights.forEach(permission => {
+          const nestedItems = this.nestedItems.filter(item => item.permission === permission);
+          nestedItems.forEach(nestedItem => {
+            const parentIndex = this.items.findIndex(item => item.label === nestedItem.parent);
+            if (parentIndex !== -1) {
+              this.items.splice(parentIndex, 1);
+            }
+          });
+        });
       }
     );
   }
