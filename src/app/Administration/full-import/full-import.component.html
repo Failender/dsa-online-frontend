@@ -1,3 +1,5 @@
-<p>
-  full-import works!
-</p>
+<div class="ui-g">
+  <p-fileUpload name="file" [url]="uploadUrl" multiple="true"
+                (onBeforeSend)="onBeforeSend($event)" (onUpload)="onUpload($event)">
+  </p-fileUpload>
+</div>

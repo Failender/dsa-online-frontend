@@ -12,6 +12,10 @@ import {NEVER, never, Observable, of} from 'rxjs';
 import {flatMap} from 'tslint/lib/utils';
 import {mergeMap} from 'rxjs/internal/operators';
 
+export const MEISTER = 'MEISTER';
+export const FULL_IMPORT = 'FULL_IMPORT';
+export const CREATE_USER = 'CREATE_USER';
+export const FULL_EXPORT = 'FULL_EXPORT';
 
 @Injectable()
 export class AuthenticationService {
