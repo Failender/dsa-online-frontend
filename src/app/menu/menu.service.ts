@@ -33,9 +33,6 @@ export class MenuService {
   ]
 
   public protectedItems = {
-    'CREATE_USER': [
-      this.createItem('Nutzer-Verwaltung', 'users/manage')
-    ],
     'MEISTER': [
       this.createItem('Abenteuerlog erstellen', 'abenteuerlog/create')
     ],
@@ -46,7 +43,8 @@ export class MenuService {
 
   private nestedItems: NestedCustomMenuItem[] = [
     this.createNestedItem('Export', 'administration/export', 'Administration', 'FULL_EXPORT'),
-    this.createNestedItem('Import', 'administration/import', 'Administration', 'FULL_IMPORT')
+    this.createNestedItem('Import', 'administration/import', 'Administration', 'FULL_IMPORT'),
+    this.createNestedItem('Nutzer-Verwaltung', 'administration/user', 'Administration', 'CREATE_USER')
   ];
 
 
@@ -136,7 +134,8 @@ export class MenuService {
               parent = this.createNoMobileItem(nestedItem.parent, null, []);
               this.items.push(parent);
             }
-            parent.items.push(nestedItem.item);
+            const parentItems: MenuItem[] = <MenuItem[]> parent.items;
+            parentItems.push(nestedItem.item);
           });
 
         });

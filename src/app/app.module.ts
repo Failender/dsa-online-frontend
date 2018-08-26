@@ -65,6 +65,9 @@ import {VersionService} from "./shared/alte-version-laden-dialog/version.service
 import { AbenteuerlogComponent } from './abenteuer/abenteuerlog/abenteuerlog.component';
 import { AbenteuerErstellenComponent } from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
 import {AbenteuerService} from "./abenteuer/abenteuer.service";
+import { FullExportComponent } from './Administration/full-export/full-export.component';
+import { FullImportComponent } from './Administration/full-import/full-import.component';
+import {AdministrationService} from './Administration/administration.service';
 
 
 const appRoutes: Routes = [
@@ -73,7 +76,9 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' }
   },
-  { path: 'users/manage', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
+  { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
+  { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
+  { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'gruppen', component: OeffentlicheHeldenComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
@@ -119,6 +124,8 @@ registerLocaleData(localeDe, 'de');
     AlteVersionHochladenComponent,
     AbenteuerlogComponent,
     AbenteuerErstellenComponent,
+    FullExportComponent,
+    FullImportComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,
@@ -131,7 +138,7 @@ registerLocaleData(localeDe, 'de');
 
   ],
   providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService,
-    GruppenService, MenuService, RoutingService, AbenteuerService
+    GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: CalendarUtils, useClass: CalendarUtilsExtendedService},
     {provide: CalendarDateFormatter, useClass: CalendarDateFormatterExtendedService},

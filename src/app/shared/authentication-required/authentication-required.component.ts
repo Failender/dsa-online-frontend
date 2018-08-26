@@ -5,7 +5,7 @@ import {isNullOrUndefined} from "util";
 
 export abstract class AuthenticationRequiredComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private router: RoutingService) {
+  constructor(protected authenticationService: AuthenticationService, private router: RoutingService) {
   }
 
   ngOnInit() {
