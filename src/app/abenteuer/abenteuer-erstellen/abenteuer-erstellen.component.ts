@@ -31,7 +31,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   protected init(): void {
     this.userinput.nativeElement.focus();
-    this.gruppenService.getGruppen()
+    this.gruppenService.getMeisterGruppen()
       .subscribe(data => this.gruppen = data);
   }
 

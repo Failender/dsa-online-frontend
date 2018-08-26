@@ -14,6 +14,10 @@ export class GruppenService {
     return this.restService.get('gruppen');
   }
 
+  public getMeisterGruppen(): Observable<SelectItem[]> {
+    return this.restService.get('gruppen/bymeister');
+  }
+
   public getGruppenIncludingHeld(publicOnly: boolean, showInactive: boolean): Observable<GruppeIncludingHeld[]> {
     return this.restService.get(`gruppen/includeHelden?publicOnly=${publicOnly}&showInactive=${showInactive}`);
   }

@@ -34,7 +34,7 @@ export class RestService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
-
+    console.debug(error);
     if (error.status === 0) {
       this.messageService.error('Server nicht erreichbar');
       return NEVER;
