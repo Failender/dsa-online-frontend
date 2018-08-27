@@ -10,7 +10,7 @@ import {of} from 'rxjs/index';
   selector: 'app-nutzer-verwaltung',
   templateUrl: './nutzer-verwaltung.component.html',
   styleUrls: ['./nutzer-verwaltung.component.css'],
-  providers: [UserService]
+  providers: []
 })
 export class NutzerVerwaltungComponent implements OnInit {
 

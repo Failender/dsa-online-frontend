@@ -68,6 +68,8 @@ import {AbenteuerService} from "./abenteuer/abenteuer.service";
 import { FullExportComponent } from './Administration/full-export/full-export.component';
 import { FullImportComponent } from './Administration/full-import/full-import.component';
 import {AdministrationService} from './Administration/administration.service';
+import { MeisterVerwaltungComponent } from './Administration/meister-verwaltung/meister-verwaltung.component';
+import {UserService} from "./nutzer-verwaltung/user.service";
 
 
 const appRoutes: Routes = [
@@ -79,6 +81,7 @@ const appRoutes: Routes = [
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
   { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},
+  { path: 'administration/meister', component: MeisterVerwaltungComponent, data: {title: 'Import'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'gruppen', component: OeffentlicheHeldenComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
@@ -126,6 +129,7 @@ registerLocaleData(localeDe, 'de');
     AbenteuerErstellenComponent,
     FullExportComponent,
     FullImportComponent,
+    MeisterVerwaltungComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,
@@ -137,7 +141,7 @@ registerLocaleData(localeDe, 'de');
     ),
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService,
+  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, UserService,
     GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: CalendarUtils, useClass: CalendarUtilsExtendedService},

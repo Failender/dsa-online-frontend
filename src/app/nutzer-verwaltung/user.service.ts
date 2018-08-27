@@ -15,4 +15,8 @@ export class UserService {
     return this.restService.post('user/create', data);
   }
 
+  public getAllUser(): Observable<any> {
+    return this.restService.get('user');
+  }
+
 }
