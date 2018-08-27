@@ -44,7 +44,8 @@ export class MenuService {
   private nestedItems: NestedCustomMenuItem[] = [
     this.createNestedItem('Export', 'administration/export', 'Administration', FULL_EXPORT),
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
-    this.createNestedItem('Nutzer-Verwaltung', 'administration/user', 'Administration', CREATE_USER)
+    this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
+    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER)
   ];
 
 
