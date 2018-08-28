@@ -76,6 +76,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
     const ctrl = <FormGroup>this.form.controls['bonus'];
     const group = this.bonusControl();
     ctrl.addControl(this.selectedHeld.name, group);
+    return false;
   }
 
   addSeForHeld(event, held: string) {

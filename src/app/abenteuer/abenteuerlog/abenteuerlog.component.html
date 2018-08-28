@@ -3,7 +3,7 @@
 </div>
 
 
-<p-panel *ngFor="let ab of abenteuer" [header]="ab.name" [toggleable]="true">
+<p-panel *ngFor="let ab of abenteuer" [header]="ab.name" [toggleable]="true" styleClass="fullsize">
   <p-header>
     <span class="pi pi-trash delete-icon" (click)="deleteAb(ab)"></span>
   </p-header>
