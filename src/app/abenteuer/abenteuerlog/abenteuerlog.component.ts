@@ -20,7 +20,7 @@ export class AbenteuerlogComponent implements OnInit {
   ngOnInit() {
     this.gruppenService.getGruppen()
       .subscribe( data => this.gruppen = data);
-    this.loadAbenteuerForGruppe(1);
+    // this.loadAbenteuerForGruppe(1);
   }
 
   onGruppeSelect(event) {
