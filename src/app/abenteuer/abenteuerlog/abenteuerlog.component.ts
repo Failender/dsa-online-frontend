@@ -30,7 +30,24 @@ export class AbenteuerlogComponent implements OnInit {
   loadAbenteuerForGruppe(gruppeid) {
     this.abenteuerService.getAbenteuerForGruppe(gruppeid)
       .subscribe(data => {
-        this.abenteuer = data;
+        this.abenteuer = data.map(entry => {
+          return {
+            data: {
+              name: entry.name,
+              ap: entry.bonusAll.ap,
+              ses: this.joined(entry.bonusAll.ses)
+            },
+            children: Object.keys(entry.bonus).map(key => {
+              return {
+                data: {
+                  name: key,
+                  ap: entry.bonus[key].ap,
+                  ses: this.joined(entry.bonus[key].ses)
+                }
+              };
+            })
+          };
+        });
         this.loadedGruppe = gruppeid;
       });
   }
@@ -48,6 +65,10 @@ export class AbenteuerlogComponent implements OnInit {
       .subscribe(() => {
         this.loadAbenteuerForGruppe(this.loadedGruppe);
       });
+  }
+
+  log(obj) {
+    console.debug(obj)
   }
 
 }

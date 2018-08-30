@@ -4,3 +4,8 @@
   cursor:pointer;
   margin-left:10px;
 }
+
+
+.inner-table {
+  display:table;
+}

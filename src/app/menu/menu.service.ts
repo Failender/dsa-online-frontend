@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {SessionService} from "../service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
-import {AuthenticationService, CREATE_USER, FULL_EXPORT, FULL_IMPORT} from "../service/authentication/authentication.service";
+import {AuthenticationService, CREATE_USER, FULL_EXPORT, FULL_IMPORT, MEISTER} from '../service/authentication/authentication.service';
 import {RoutingService} from '../shared/routing.service';
 import {isMobile} from "../util/Constants";
 
@@ -33,9 +33,6 @@ export class MenuService {
   ]
 
   public protectedItems = {
-    MEISTER: [
-      this.createItem('Abenteuerlog erstellen', 'abenteuerlog/create')
-    ],
     'EDIT_SCRIPTS': [
       this.createNoMobileItem('Skripte', 'scripts')
     ]
@@ -45,7 +42,8 @@ export class MenuService {
     this.createNestedItem('Export', 'administration/export', 'Administration', FULL_EXPORT),
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
-    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER)
+    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER),
+    this.createNestedItem('Abenteuerlog erstellen', 'abenteuerlog/create', 'Administration', MEISTER)
   ];
 
 

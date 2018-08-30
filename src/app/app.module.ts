@@ -17,8 +17,8 @@ import {
   InputTextModule,
   MultiSelectModule,
   PanelMenuModule,
-  TabMenuModule, TooltipModule
-} from "primeng/primeng";
+  TabMenuModule, TooltipModule, TreeTableModule
+} from 'primeng/primeng';
 import {AuthenticationService, CustomHttpInterceptor, init} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -132,7 +132,7 @@ registerLocaleData(localeDe, 'de');
     MeisterVerwaltungComponent,
   ],
   imports: [
-    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,
+    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
