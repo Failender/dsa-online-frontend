@@ -23,7 +23,7 @@
   </div>
 
   <div class="ui-g">
-    <p-dropdown class=ui-g-9 [options]="helden" (onChange)="onGruppeChange($event)"></p-dropdown>
+    <p-dropdown class=ui-g-9 [options]="helden" (onChange)="onHeldChange($event)"></p-dropdown>
     <button pButton label="Bonus eintragen" class="dropdown-button" (click)="addBonusforHeld()"></button>
   </div>
   <p-panel *ngFor="let bonusHeld of bonusHelden" [header]="bonusHeld" [toggleable]="true" [formGroup]="getBonus(bonusHeld)">
