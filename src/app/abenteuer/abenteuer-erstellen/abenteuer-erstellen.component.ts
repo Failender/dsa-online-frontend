@@ -125,7 +125,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   private bonusControl() {
     return new FormGroup({
-      ap: new FormControl(10),
+      ap: new FormControl(0),
       ses: new FormControl([])
     });
   }
