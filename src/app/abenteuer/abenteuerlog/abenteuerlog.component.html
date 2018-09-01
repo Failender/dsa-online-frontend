@@ -8,6 +8,7 @@
       <td>Name</td>
       <td>AP</td>
       <td>SE's</td>
+      <td *ngIf="canEdit"></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -18,6 +19,9 @@
       </td>
       <td>{{rowData.ap}}</td>
       <td>{{rowData.ses}}</td>
+      <td *ngIf="canEdit">
+        <button pButton icon="pi pi-trash" (click)="deleteEntry(rowNode)"></button>
+      </td>
     </tr>
   </ng-template>
 </p-treeTable>

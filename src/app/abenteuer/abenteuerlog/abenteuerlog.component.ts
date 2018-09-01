@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbenteuerService} from "../abenteuer.service";
 import {GruppenService} from "../../meine-helden/gruppen.service";
 import {SelectItem} from "primeng/api";
+import {AuthenticationService} from "../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-abenteuerlog',
@@ -12,29 +13,32 @@ export class AbenteuerlogComponent implements OnInit {
 
   public gruppen: SelectItem[];
 
+  public canDelete: boolean;
   public abenteuer = [];
-
-  private loadedGruppe = -1;
+  public canEdit = false;
+  private loadedGruppe = null;
   constructor(private abenteuerService: AbenteuerService, private gruppenService: GruppenService) { }
 
   ngOnInit() {
-    this.gruppenService.getGruppen()
+    this.gruppenService.getGruppen(true)
       .subscribe( data => this.gruppen = data);
-    // this.loadAbenteuerForGruppe(1);
+
   }
 
   onGruppeSelect(event) {
     this.loadAbenteuerForGruppe(event.value);
   }
 
-  loadAbenteuerForGruppe(gruppeid) {
-    this.abenteuerService.getAbenteuerForGruppe(gruppeid)
+  loadAbenteuerForGruppe(gruppeinfo) {
+    this.abenteuerService.getAbenteuerForGruppe(gruppeinfo.id)
       .subscribe(data => {
+        this.canEdit = gruppeinfo.meister;
         this.abenteuer = data.map(entry => {
           return {
             data: {
               name: entry.name,
               ap: entry.bonusAll.ap,
+              id: entry.id,
               ses: this.joined(entry.bonusAll.ses)
             },
             children: Object.keys(entry.bonus).map(key => {
@@ -48,7 +52,7 @@ export class AbenteuerlogComponent implements OnInit {
             })
           };
         });
-        this.loadedGruppe = gruppeid;
+        this.loadedGruppe = gruppeinfo;
       });
   }
 
@@ -60,15 +64,13 @@ export class AbenteuerlogComponent implements OnInit {
     return Object.keys(data);
   }
 
-  deleteAb(ab) {
-    this.abenteuerService.deleteAbenteuer(ab.id)
-      .subscribe(() => {
-        this.loadAbenteuerForGruppe(this.loadedGruppe);
-      });
-  }
+  deleteEntry(node) {
+    if (node.level === 0) {
+      const id = node.node.data.id;
+      this.abenteuerService.deleteAbenteuer(id)
+        .subscribe(() => this.loadAbenteuerForGruppe(this.loadedGruppe));
+    }
 
-  log(obj) {
-    console.debug(obj)
   }
 
 }

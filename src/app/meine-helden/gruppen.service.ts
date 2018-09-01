@@ -10,8 +10,12 @@ export class GruppenService {
   constructor(private restService: RestService) { }
 
 
-  public getGruppen(): Observable<SelectItem[]> {
-    return this.restService.get('gruppen');
+  public getGruppen(appendMeisterInfo?: boolean): Observable<SelectItem[]> {
+    var url = 'gruppen';
+    if (appendMeisterInfo) {
+      url += '?meisterinfo=' + appendMeisterInfo;
+    }
+    return this.restService.get(url);
   }
 
   public getMeisterGruppen(): Observable<SelectItem[]> {

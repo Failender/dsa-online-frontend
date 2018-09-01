@@ -75,7 +75,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
   addBonusforHeld() {
     const ctrl = <FormGroup>this.form.controls['bonus'];
     const group = this.bonusControl();
-    ctrl.addControl(this.selectedHeld.name, group);
+    ctrl.addControl(this.selectedHeld.id, group);
     return false;
   }
 
@@ -102,6 +102,10 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   get bonusHelden() {
     return Object.keys(this.form.controls['bonus']['controls']);
+  }
+
+  heldname(id) {
+    return this.helden.find(value => value.value.id == id).label;
   }
 
   getBonus(name) {
