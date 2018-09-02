@@ -1,4 +1,11 @@
-<p-dialog [visible]="held" (onHide)="onHide()" [header]="held?.name">
+<p-dialog [visible]="held" (onHide)="onHide()">
+  <p-header>
+    <div *ngIf="held" style="float:left" class="dialog-title">{{held.name}}</div>
+    <div style="float:right">
+        <button pButton icon="pi pi-times" class="dialog-close" (click)="onHide()"></button>
+      </div>
+
+  </p-header>
   <div class="ui-g">
     <form [formGroup]="compareForm" (submit)="onSubmit()">
       <p-dropdown [options]="versionsDropdown" placeholder="von" formControlName="from"></p-dropdown>

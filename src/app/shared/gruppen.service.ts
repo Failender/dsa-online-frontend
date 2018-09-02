@@ -4,12 +4,22 @@ import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
 
+
+export interface GruppeInfo {
+  id: number;
+  meister: boolean;
+  userGroup: boolean;
+}
+export interface GruppeSelectItem extends SelectItem {
+  value: GruppeInfo;
+}
+
 @Injectable()
 export class GruppenService {
 
-  private currentGroup = new ReplaySubject<any>();
-  private groups = new ReplaySubject<any>();
-  private meisterGroups = new ReplaySubject<any>();
+  private currentGroup = new ReplaySubject<GruppeInfo>();
+  private groups = new ReplaySubject<GruppeSelectItem[]>();
+  private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
   constructor(private restService: RestService) {
     this.getGruppen(true)
       .subscribe(data => this.groups.next(data));
@@ -63,7 +73,7 @@ export class GruppenService {
     return this.currentGroup.asObservable();
   }
 
-  public setCurrentGroup(group) {
+  public setCurrentGroup(group: GruppeInfo) {
     this.currentGroup.next(group);
   }
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
-import {SelectItem} from 'primeng/api';
+import {MenuItem, SelectItem} from "primeng/api";
 import {GruppenService} from '../gruppen.service';
 import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../routing.service";
@@ -13,6 +13,27 @@ import {environment} from "../../../environments/environment";
 })
 export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
+
+  public possibleOptions: MenuItem[] = [
+    {
+      label: 'Held laden',
+      command: () => this.heldLaden(this.context)
+    },
+    {
+      label: 'Alte Version hochladen',
+      command: () => this.alteVersionHochladen(this._context)
+    },
+    {
+      label: 'Alle Versionen anzeigen',
+      command: () => this.alteVersionLaden(this._context)
+    }
+  ];
+
+  private _context: HeldenInfo;
+  public heldenOptions: MenuItem[] = [
+
+
+  ];
 
   @Input()
   public data: HeldenInfo[];
@@ -31,6 +52,11 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
+  }
+
+  set context(value) {
+    this.heldenOptions = this.possibleOptions;
+    this._context = value;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -81,7 +107,7 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   }
 
   dialogClosed(version) {
-
+    console.debug('trigger')
     if (version) {
       this._heldLaden(this.alteVersionLadenHeld.id, version);
     }
@@ -93,9 +119,9 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   }
 
   updatePublic(data, event) {
-    this.heldenService.updatePublic(data.id, event)
+    this.heldenService.updatePublic(data.id, event.checked)
       .subscribe(() => {
-        if (event) {
+        if (event.checked) {
           this.messageService.info(`Held ${data.name} ist jetzt öffentlich`);
         } else {
           this.messageService.info(`Held ${data.name} ist jetzt privat`);
@@ -104,9 +130,9 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   }
 
   updateActive(data, event) {
-    this.heldenService.updateActive(data.id, event)
+    this.heldenService.updateActive(data.id, event.checked)
       .subscribe(() => {
-        if (event) {
+        if (event.checked) {
           this.messageService.info(`Held ${data.name} ist jetzt aktiv`);
         } else {
           this.messageService.info(`Held ${data.name} ist jetzt inaktiv`);

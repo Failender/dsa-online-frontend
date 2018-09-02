@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AuthenticationService} from '../service/authentication/authentication.service';
 import {RoutingService} from '../shared/routing.service';
 import {MessageService} from '../service/message/message.service';
@@ -8,13 +8,14 @@ import {isMobile} from "../util/Constants";
 import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 import {ActivatedRoute, Router} from '@angular/router';
 import {combineLatest, mergeMap, tap, withLatestFrom} from "rxjs/internal/operators";
-import {BehaviorSubject, Subject} from "rxjs/index";
+import {BehaviorSubject, Subject, Subscription} from "rxjs/index";
 @Component({
   selector: 'app-oeffentliche-helden',
   templateUrl: './oeffentliche-helden.component.html',
   styleUrls: ['./oeffentliche-helden.component.css']
 })
-export class OeffentlicheHeldenComponent implements OnInit {
+export class OeffentlicheHeldenComponent implements OnInit, OnDestroy {
+
 
 
   public activeIndex = null;
@@ -24,7 +25,9 @@ export class OeffentlicheHeldenComponent implements OnInit {
   private publicOnly = true;
   private showInactive = false;
 
-  public loading = true;
+  private subs: Subscription[] = [];
+
+  public loading = false;
   private publicOnlySubject = new BehaviorSubject<boolean>(this.publicOnly);
   private showInactiveSubject = new BehaviorSubject<boolean>(this.showInactive);
 
@@ -33,10 +36,10 @@ export class OeffentlicheHeldenComponent implements OnInit {
   ngOnInit() {
     this.loadGruppen();
 
-    this.gruppenService.getCurrentGroup()
+    this.subs.push(this.gruppenService.getCurrentGroup()
       .pipe(combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable()), tap(() => this.loading = true))
         .pipe(mergeMap(data => this.gruppenService.getGruppeIncludingHeld(data[0].id, data[1], data[2])), tap(() => this.loading = false))
-      .subscribe(data => this.gruppe = data);
+      .subscribe(data => this.gruppe = data));
     this.activatedRoute.queryParams.subscribe((data) => this.activeIndex = parseInt(data.gruppe, 10));
 
   }
@@ -76,6 +79,10 @@ export class OeffentlicheHeldenComponent implements OnInit {
         gruppe: this.activeIndex
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
 

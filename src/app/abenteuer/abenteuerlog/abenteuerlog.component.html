@@ -1,30 +1,31 @@
-<div class="ui-g">
-  <p-dropdown [options]="gruppen" placeholder="Bitte eine Gruppe auswählen" (onChange)="onGruppeSelect($event)"></p-dropdown>
-</div>
 
-<p-treeTable [value]="abenteuer">
-  <ng-template pTemplate="header">
-    <tr>
-      <td>Name</td>
-      <td>AP</td>
-      <td>SE's</td>
-      <td *ngIf="canEdit"></td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-    <tr>
-      <td>
-        <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-        {{rowData.name}}
-      </td>
-      <td>{{rowData.ap}}</td>
-      <td>{{rowData.ses}}</td>
-      <td *ngIf="canEdit">
-        <button pButton icon="pi pi-trash" (click)="deleteEntry(rowNode)"></button>
-      </td>
-    </tr>
-  </ng-template>
-</p-treeTable>
+<div class="loader" *ngIf="loading; else table"></div>
+<ng-template #table>
+  <p-treeTable [value]="abenteuer" >
+    <ng-template pTemplate="header">
+      <tr>
+        <td>Name</td>
+        <td>AP</td>
+        <td>SE's</td>
+        <td *ngIf="canEdit"></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr>
+        <td>
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{rowData.name}}
+        </td>
+        <td>{{rowData.ap}}</td>
+        <td>{{rowData.ses}}</td>
+        <td *ngIf="canEdit">
+          <button pButton icon="pi pi-trash" (click)="deleteEntry(rowNode)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+
+</ng-template>
 <!--<p-table [value]="abenteuer" dataKey="id">-->
   <!--<ng-template pTemplate="header">-->
     <!--<tr>-->

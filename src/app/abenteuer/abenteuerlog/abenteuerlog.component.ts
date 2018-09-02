@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbenteuerService} from "../abenteuer.service";
-import {GruppenService} from "../../shared/gruppen.service";
+import {GruppeInfo, GruppenService, GruppeSelectItem} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 
@@ -13,6 +13,8 @@ export class AbenteuerlogComponent implements OnInit {
 
   public gruppen: SelectItem[];
 
+
+  public loading= true;
   public canDelete: boolean;
   public abenteuer = [];
   public canEdit = false;
@@ -20,16 +22,13 @@ export class AbenteuerlogComponent implements OnInit {
   constructor(private abenteuerService: AbenteuerService, private gruppenService: GruppenService) { }
 
   ngOnInit() {
-    this.gruppenService.getGruppen(true)
-      .subscribe( data => this.gruppen = data);
+    this.gruppenService.getCurrentGroup()
+      .subscribe(gruppe => this.loadAbenteuerForGruppe(gruppe));
 
   }
 
-  onGruppeSelect(event) {
-    this.loadAbenteuerForGruppe(event.value);
-  }
-
-  loadAbenteuerForGruppe(gruppeinfo) {
+  loadAbenteuerForGruppe(gruppeinfo: GruppeInfo) {
+    this.loading = true;
     this.abenteuerService.getAbenteuerForGruppe(gruppeinfo.id)
       .subscribe(data => {
         this.canEdit = gruppeinfo.meister;
@@ -53,6 +52,7 @@ export class AbenteuerlogComponent implements OnInit {
           };
         });
         this.loadedGruppe = gruppeinfo;
+        this.loading = false;
       });
   }
 

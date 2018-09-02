@@ -7,6 +7,6 @@
 
 <div class="loader" *ngIf="loading; else infoTable"></div>
 <ng-template #infoTable>
-  <app-helden-info-tabelle [editGruppe]="editHelden" [editOeffentlich]="editHelden" [data]="gruppe.helden" (forceReload)="forceReload()"></app-helden-info-tabelle>
+  <app-helden-info-tabelle *ngIf="gruppe" [editGruppe]="editHelden" [editOeffentlich]="editHelden" [data]="gruppe.helden" (forceReload)="forceReload()"></app-helden-info-tabelle>
 
 </ng-template>
