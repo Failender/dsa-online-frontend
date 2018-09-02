@@ -6,6 +6,11 @@ import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../routing.service";
 import {environment} from "../../../environments/environment";
 
+
+interface ConditionalMenuItem extends MenuItem{
+  condition?: any;
+}
+
 @Component({
   selector: 'app-helden-info-tabelle',
   templateUrl: './helden-info-tabelle.component.html',
@@ -14,18 +19,28 @@ import {environment} from "../../../environments/environment";
 export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
 
-  public possibleOptions: MenuItem[] = [
+  public possibleOptions: ConditionalMenuItem[] = [
     {
       label: 'Held laden',
       command: () => this.heldLaden(this.context)
     },
     {
       label: 'Alte Version hochladen',
-      command: () => this.alteVersionHochladen(this._context)
+      command: () => this.alteVersionHochladen(this._context),
+      condition: () => this.edit
     },
     {
       label: 'Alle Versionen anzeigen',
       command: () => this.alteVersionLaden(this._context)
+    },
+    {
+      label: 'Mit voriger Version vergleichen',
+      command: () => this.vorigeVersionVergleich(this._context),
+      condition: () => this._context.version !== 1
+    },
+    {
+      label: 'Alle Versionen herunterladen',
+      command: () => this.versionenHerunterladen(this._context)
     }
   ];
 
@@ -42,8 +57,7 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   public alteVersionLadenHeld: HeldenInfo;
   public alteVersionHochladenHeld: HeldenInfo;
 
-  @Input() public editOeffentlich = true;
-  @Input() public editGruppe = true;
+  @Input() public edit = true;
 
   @Output() public forceReload = new EventEmitter<void>();
 
@@ -55,8 +69,14 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   }
 
   set context(value) {
-    this.heldenOptions = this.possibleOptions;
     this._context = value;
+    this.heldenOptions = this.possibleOptions.filter(entry => {
+      if (entry.condition) {
+        return entry.condition();
+      } else {
+        return true;
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
