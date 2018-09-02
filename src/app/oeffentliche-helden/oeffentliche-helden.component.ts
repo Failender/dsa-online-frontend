@@ -3,11 +3,12 @@ import {AuthenticationService} from '../service/authentication/authentication.se
 import {RoutingService} from '../shared/routing.service';
 import {MessageService} from '../service/message/message.service';
 import {HeldenInfo, HeldenService} from '../meine-helden/helden.service';
-import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.service';
+import {GruppeIncludingHeld, GruppenService} from '../shared/gruppen.service';
 import {isMobile} from "../util/Constants";
 import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {combineLatest, mergeMap, tap, withLatestFrom} from "rxjs/internal/operators";
+import {BehaviorSubject, Subject} from "rxjs/index";
 @Component({
   selector: 'app-oeffentliche-helden',
   templateUrl: './oeffentliche-helden.component.html',
@@ -18,15 +19,26 @@ export class OeffentlicheHeldenComponent implements OnInit {
 
   public activeIndex = null;
   public gruppen: GruppeIncludingHeld[];
+  public gruppe: GruppeIncludingHeld;
 
   private publicOnly = true;
   private showInactive = false;
+
+  public loading = true;
+  private publicOnlySubject = new BehaviorSubject<boolean>(this.publicOnly);
+  private showInactiveSubject = new BehaviorSubject<boolean>(this.showInactive);
 
   constructor(private gruppenService: GruppenService, private authenticationService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadGruppen();
+
+    this.gruppenService.getCurrentGroup()
+      .pipe(combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable()), tap(() => this.loading = true))
+        .pipe(mergeMap(data => this.gruppenService.getGruppeIncludingHeld(data[0].id, data[1], data[2])), tap(() => this.loading = false))
+      .subscribe(data => this.gruppe = data);
     this.activatedRoute.queryParams.subscribe((data) => this.activeIndex = parseInt(data.gruppe, 10));
+
   }
 
   loadGruppen() {
@@ -36,12 +48,12 @@ export class OeffentlicheHeldenComponent implements OnInit {
 
   onPublicChange(event) {
     this.publicOnly = event.checked;
-    this.loadGruppen();
+    this.publicOnlySubject.next(event.checked);
   }
 
   onActiveChange(event) {
     this.showInactive = !event.checked;
-    this.loadGruppen();
+    this.showInactiveSubject.next(event.checked);
   }
 
   get canViewAll(): boolean {

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {SelectItem} from 'primeng/api';
-import {GruppenService} from '../../meine-helden/gruppen.service';
+import {GruppenService} from '../gruppen.service';
 import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../routing.service";
 import {environment} from "../../../environments/environment";

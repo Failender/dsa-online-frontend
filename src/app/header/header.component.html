@@ -1,6 +1,12 @@
 
 <div class="header ui-g">
-  <i class="fa fa-bars" (click)="onClick()"></i>
+
+  <div class="btn-container-left">
+    <button pButton icon="fa fa-bars"(click)="onClick()" class="toggle-menu"> </button>
+  </div>
+  <div class="group-container">
+    <p-dropdown [options]="groups" (onChange)="onGroupSelect($event)" class="dropdown"  [style]="{'width':'250px', 'height': '20px'}" ></p-dropdown>
+  </div>
   <span class="title">
     DSA-Online
     <ng-container *ngIf="versions">
@@ -11,8 +17,8 @@
   </span>
 
   <div class="btn-container">
-    <button *ngIf="!auth.authenticated" pButton label="Login"  icon="fa fa-sign-out" (click)="login()"><i class="icon-repeat" ></i> </button>
-    <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa fa-sign-out" (click)="logout()"><i class="icon-repeat" ></i> </button>
+    <button *ngIf="!auth.authenticated" pButton label="Login"  icon="fa fa-sign-out" (click)="login()" class="logout"><i class="icon-repeat" ></i> </button>
+    <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa fa-sign-out" (click)="logout()" class="logout"><i class="icon-repeat" ></i> </button>
 
   </div>
 

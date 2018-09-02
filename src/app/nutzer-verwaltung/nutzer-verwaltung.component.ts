@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {GruppenService} from '../meine-helden/gruppen.service';
+import {GruppenService} from '../shared/gruppen.service';
 import {UserService} from './user.service';
 import {MessageService} from '../service/message/message.service';
 import {catchError} from 'rxjs/operators';

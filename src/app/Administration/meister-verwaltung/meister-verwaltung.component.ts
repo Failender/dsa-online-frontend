@@ -5,7 +5,7 @@ import {Title} from "@angular/platform-browser";
 import {RoutingService} from "../../shared/routing.service";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {AdministrationService} from "../administration.service";
-import {GruppenService} from "../../meine-helden/gruppen.service";
+import {GruppenService} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {MessageService} from "../../service/message/message.service";
 import {UserService} from "../../nutzer-verwaltung/user.service";

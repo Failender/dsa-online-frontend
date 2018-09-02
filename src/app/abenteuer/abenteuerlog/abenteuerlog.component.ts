@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbenteuerService} from "../abenteuer.service";
-import {GruppenService} from "../../meine-helden/gruppen.service";
+import {GruppenService} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 

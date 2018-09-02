@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GruppeIncludingHeld, GruppenService} from '../meine-helden/gruppen.service';
+import {GruppeIncludingHeld, GruppenService} from '../shared/gruppen.service';
 import {SelectItem} from 'primeng/api';
 
 @Component({

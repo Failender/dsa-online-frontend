@@ -17,9 +17,11 @@
 
 .title {
   text-align: center;
-  width: calc(100% - 170px);
+  width: calc(100% - 500px);
   height:50%;
   line-height:50px;
+  color:#DCDCDC;
+  margin-right:70px;
 }
 
 
@@ -35,6 +37,17 @@
 
 }
 
-button {
+.btn-container-left {
+  width: 50px;
+  height:20px;
+  line-height:50px;
+  margin-left:10px;
+}
+
+.group-container {
+  height:30px;
+}
+
+.logout{
   width: 100%;
 }

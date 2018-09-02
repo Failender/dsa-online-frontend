@@ -5,10 +5,12 @@
 
 .menu {
   min-width:33%;
+  z-index: 100;
 }
 
 .content {
-  min-width:66%;
+  width: 100%;
+  position:absolute;
 }
 
 

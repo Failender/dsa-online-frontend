@@ -16,9 +16,9 @@ import {
   AccordionModule, CheckboxModule, DataTableModule, DropdownModule, FileUploadModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
   MultiSelectModule,
-  PanelMenuModule,
+  PanelMenuModule, ProgressSpinnerModule,
   TabMenuModule, TooltipModule, TreeTableModule
-} from 'primeng/primeng';
+} from "primeng/primeng";
 import {AuthenticationService, CustomHttpInterceptor, init} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -42,7 +42,7 @@ import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.
 import { HeldenComponent } from './held/helden-component/helden-component.component';
 import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
 import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
-import {GruppenService} from './meine-helden/gruppen.service';
+import {GruppenService} from './shared/gruppen.service';
 import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";

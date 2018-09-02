@@ -4,7 +4,7 @@ import {AuthenticationService} from "../../service/authentication/authentication
 import {RoutingService} from "../../shared/routing.service";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectItem} from "primeng/api";
-import {GruppenService} from "../../meine-helden/gruppen.service";
+import {GruppenService} from "../../shared/gruppen.service";
 import {MessageService} from "../../service/message/message.service";
 import {AbenteuerService} from "../abenteuer.service";
 

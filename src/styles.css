@@ -24,3 +24,8 @@
   max-width: 100%;
   width:10000px;
 }
+
+.ui-dropdown .ui-dropdown-label{
+  height:20px;
+  line-height:14px;
+}
