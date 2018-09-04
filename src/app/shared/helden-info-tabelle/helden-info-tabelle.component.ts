@@ -22,7 +22,7 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   public possibleOptions: ConditionalMenuItem[] = [
     {
       label: 'Held laden',
-      command: () => this.heldLaden(this.context)
+      command: () => this.heldLaden(this._context)
     },
     {
       label: 'Alte Version hochladen',

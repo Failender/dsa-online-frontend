@@ -2,6 +2,13 @@
 <div class="loader" *ngIf="loading; else table"></div>
 <ng-template #table>
   <p-treeTable [value]="abenteuer" >
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td colspan="3">
+          Kein Abenteuer gefunden
+        </td>
+      </tr>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <td>Name</td>

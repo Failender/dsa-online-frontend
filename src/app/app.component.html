@@ -1,10 +1,16 @@
 <app-header (iconClicked)="onIconClick()"></app-header>
+<p-sidebar [(visible)]="menuVisible" [showCloseIcon]="false">
+  <app-menu></app-menu>
+</p-sidebar>
 <div class="flex-container">
-  <div class="menu" [class.invisible]="!menuVisible">
-    <app-menu></app-menu>
-  </div>
   <div class="content">
-    <router-outlet></router-outlet>
+    <div class="ui-g">
+      <app-current-held></app-current-held>
+    </div>
+    <div class="ui-g">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 </div>
 

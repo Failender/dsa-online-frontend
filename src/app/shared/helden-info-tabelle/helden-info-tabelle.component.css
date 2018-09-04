@@ -5,7 +5,7 @@
 
 
 .name {
-  width:300px;
+  width:400px;
 }
 
 .last-change {
@@ -21,11 +21,16 @@
 }
 
 .version {
-  width: 50px;
+  width: 80px;
 }
 
 .actions {
-  width: 300px;
+  width: 50px;
+
+}
+
+.actions-body {
+  line-height:0px;
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -42,7 +47,7 @@
   }
 
   .name {
-    width:100px;
+    width:180px;
   }
 
   .public {
@@ -58,6 +63,6 @@
   }
 
   .actions {
-    width: 150px;
+    width: 35px;
   }
 }

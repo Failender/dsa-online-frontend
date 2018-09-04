@@ -61,3 +61,7 @@
 .dialog-title {
   line-height:20px;
 }
+
+.ui-sidebar {
+  padding: 0px !important;
+}

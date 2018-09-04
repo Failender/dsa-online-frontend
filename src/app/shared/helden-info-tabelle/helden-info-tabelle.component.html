@@ -1,5 +1,12 @@
 
 <p-table [value]="data" class="helden-info-tabelle">
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td colspan="7">
+        Kein Held gefunden
+      </td>
+    </tr>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th class="name">Name</th>
@@ -8,7 +15,7 @@
       <th class="public">Öffentlich</th>
       <th class="aktiv" >Aktiv</th>
       <th class="version" >Version</th>
-      <th class="actions" ></th>
+      <th class="actions"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-data>
@@ -22,10 +29,10 @@
       <td *ngIf="edit"><p-inputSwitch binary=true [ngModel]="data.active" (onChange)="updateActive(data, $event)"></p-inputSwitch></td>
       <td *ngIf="!edit"><input class="readonly-checkbox" type="checkbox" ngModel="{{data.active}}" (click)="preventClick()"></td>
       <td>{{data.version}}</td>
-      <td>
+      <td class="actions-body">
         <!--<button pButton icon="pi pi-cloud-download" pTooltip="Versionen herunterladen" (click)="versionenHerunterladen(data)"></button>-->
-        <p-menu [popup]="true" #menu [model]="heldenOptions"></p-menu>
-        <button type="button" pButton icon="fa fa-fw fa-list" label="Show" (click)="context = data; menu.toggle($event) "></button>
+        <p-menu [popup]="true" #menu [model]="heldenOptions" appendTo="body"></p-menu>
+        <button type="button" pButton icon="fa fa-fw fa-list" (click)="context = data; menu.toggle($event) "></button>
       </td>
     </tr>
   </ng-template>

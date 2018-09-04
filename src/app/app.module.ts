@@ -16,7 +16,7 @@ import {
   AccordionModule, CheckboxModule, DataTableModule, DropdownModule, FileUploadModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
   MultiSelectModule,
-  PanelMenuModule, ProgressSpinnerModule,
+  PanelMenuModule, ProgressSpinnerModule, SidebarModule,
   TabMenuModule, TooltipModule, TreeTableModule
 } from "primeng/primeng";
 import {AuthenticationService, CustomHttpInterceptor, init} from './service/authentication/authentication.service';
@@ -70,6 +70,8 @@ import { FullImportComponent } from './Administration/full-import/full-import.co
 import {AdministrationService} from './Administration/administration.service';
 import { MeisterVerwaltungComponent } from './Administration/meister-verwaltung/meister-verwaltung.component';
 import {UserService} from "./nutzer-verwaltung/user.service";
+import { CurrentHeldComponent } from './current-held/current-held.component';
+import {CardModule} from "primeng/card";
 
 
 const appRoutes: Routes = [
@@ -130,6 +132,7 @@ registerLocaleData(localeDe, 'de');
     FullExportComponent,
     FullImportComponent,
     MeisterVerwaltungComponent,
+    CurrentHeldComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
@@ -138,7 +141,7 @@ registerLocaleData(localeDe, 'de');
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
-    ),
+    ), CardModule, SidebarModule,
 
   ],
   providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, UserService,
