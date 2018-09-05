@@ -1,10 +1,22 @@
+<p-card *ngIf="differenceInfo">
+  <div class="ui-g">
+    <div class="ui-g-3"><b>Verglichener Held</b></div>
+    <div class="ui-g-9">{{differenceInfo.heldname}}</div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-3"><b>Vergleiche Versionen</b></div>
+    <div class="ui-g-9">{{differenceInfo.from}} -  {{differenceInfo.to}}</div>
+  </div>
+
+</p-card>
+
 <p-accordion *ngIf="data">
-  <p-accordionTab header="Ereignisse" *ngIf="!data.ereignis.empty">
-    <app-ereignisse-tabelle [data]="data.ereignis.neu" ></app-ereignisse-tabelle>
-  </p-accordionTab>
-  <p-accordionTab header="Talente">
+  <!--<p-accordionTab header="Ereignisse" *ngIf="!data.ereignis.empty">-->
+    <!--<app-ereignisse-tabelle [data]="data.ereignis.neu" ></app-ereignisse-tabelle>-->
+  <!--</p-accordionTab>-->
+  <p-accordionTab header="Talente" *ngIf="data.talente.length !=0">
     <div>Änderungen</div>
-    <p-table [value]="data.talente.aenderungen" *ngIf="!data.talente.empty">
+    <p-table [value]="data.talente" >
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
@@ -15,20 +27,14 @@
       <ng-template pTemplate="body" let-data>
         <tr>
           <td>{{data.name}}</td>
-          <td>{{data.alt}}</td>
-          <td>{{data.neu}}</td>
+          <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
+          <td>{{data.newValue == null? '-' : data.newValue}}</td>
         </tr>
       </ng-template>
     </p-table>
-    <div>Neu</div>
-    <app-talente-tabelle [data]="data.talente.neu"></app-talente-tabelle>
-    <div>Entfernt</div>
-    <app-talente-tabelle [data]="data.talente.entfernt"></app-talente-tabelle>
   </p-accordionTab>
-
-  <p-accordionTab header="Zauber" *ngIf="!data.zauber.empty">
-    <div>Änderungen</div>
-    <p-table [value]="data.zauber.aenderungen" >
+  <p-accordionTab header="Zauber" *ngIf="data.zauber.length !=0">
+    <p-table [value]="data.zauber">
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
@@ -39,19 +45,28 @@
       <ng-template pTemplate="body" let-data>
         <tr>
           <td>{{data.name}}</td>
-          <td>{{data.alt}}</td>
-          <td>{{data.neu}}</td>
+          <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
+          <td>{{data.newValue == null? '-' : data.newValue}}</td>
         </tr>
       </ng-template>
     </p-table>
-    <div>Neu</div>
-    <app-zauber-tabelle [data]="data.zauber.neu"></app-zauber-tabelle>
-    <div>Entfernt</div>
-    <app-zauber-tabelle [data]="data.zauber.entfernt"></app-zauber-tabelle>
   </p-accordionTab>
-  <p-accordionTab header="Ausrüstung" *ngIf="!data.gegenstaende.empty">
-    <p-table [value]="data.gegenstaende.neu">
-
+  <p-accordionTab header="Vorteile" *ngIf="data.vorteile.length !=0">
+    <p-table [value]="data.vorteile" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Alt</th>
+          <th>Neu</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
+          <td>{{data.newValue == null? '-' : data.newValue}}</td>
+        </tr>
+      </ng-template>
     </p-table>
   </p-accordionTab>
 

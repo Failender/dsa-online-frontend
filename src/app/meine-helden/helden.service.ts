@@ -52,6 +52,10 @@ export class HeldenService {
     return this.restService.get(`helden/held/unterschied/${id}/${from}/${to}`);
   }
 
+  public getHeldDifferences(id: number, from: number, to: number): Observable<any> {
+    return this.restService.get(`helden/held/differences/${id}/${from}/${to}`);
+  }
+
 }
 
 export interface HeldenInfo {
