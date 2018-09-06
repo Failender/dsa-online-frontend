@@ -22,6 +22,7 @@
           <th>Name</th>
           <th>Alt</th>
           <th>Neu</th>
+          <th>Steigerung</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-data>
@@ -29,6 +30,7 @@
           <td>{{data.name}}</td>
           <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
           <td>{{data.newValue == null? '-' : data.newValue}}</td>
+          <td>{{data.tooltip}}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -40,6 +42,7 @@
           <th>Name</th>
           <th>Alt</th>
           <th>Neu</th>
+          <th>Steigerung</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-data>
@@ -47,6 +50,7 @@
           <td>{{data.name}}</td>
           <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
           <td>{{data.newValue == null? '-' : data.newValue}}</td>
+          <td>{{data.tooltip}}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -58,6 +62,7 @@
           <th>Name</th>
           <th>Alt</th>
           <th>Neu</th>
+          <th>Steigerung</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-data>
@@ -65,6 +70,7 @@
           <td>{{data.name}}</td>
           <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
           <td>{{data.newValue == null? '-' : data.newValue}}</td>
+          <td>{{data.tooltip}}</td>
         </tr>
       </ng-template>
     </p-table>
