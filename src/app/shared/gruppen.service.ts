@@ -3,6 +3,7 @@ import {Observable, ReplaySubject} from "rxjs";
 import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
+import {AuthenticationService} from "../service/authentication/authentication.service";
 
 
 export interface GruppeInfo {
@@ -20,11 +21,17 @@ export class GruppenService {
   private currentGroup = new ReplaySubject<GruppeInfo>();
   private groups = new ReplaySubject<GruppeSelectItem[]>();
   private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService, authService: AuthenticationService) {
     this.getGruppen(true)
       .subscribe(data => this.groups.next(data));
-    this.getMeisterGruppen()
-      .subscribe(data => this.meisterGroups.next(data));
+    authService.onLogin.subscribe(() => {
+      this.getMeisterGruppen()
+        .subscribe(data => this.meisterGroups.next(data));
+      })
+    authService.onLogout.subscribe(() => {
+      this.meisterGroups.next([]);
+    });
+
   }
 
 
