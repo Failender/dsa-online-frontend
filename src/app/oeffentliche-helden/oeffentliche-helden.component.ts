@@ -27,6 +27,7 @@ export class OeffentlicheHeldenComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
+  public isMeisterGruppe = false;
   public loading = false;
   private publicOnlySubject = new BehaviorSubject<boolean>(this.publicOnly);
   private showInactiveSubject = new BehaviorSubject<boolean>(this.showInactive);
@@ -37,9 +38,12 @@ export class OeffentlicheHeldenComponent implements OnInit, OnDestroy {
     this.loadGruppen();
 
     this.subs.push(this.gruppenService.getCurrentGroup()
-      .pipe(combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable()), tap(() => this.loading = true))
+      .pipe(tap((data) => this.isMeisterGruppe = data.meister), combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable()), tap(() => this.loading = true))
         .pipe(mergeMap(data => this.gruppenService.getGruppeIncludingHeld(data[0].id, data[1], data[2])), tap(() => this.loading = false))
-      .subscribe(data => this.gruppe = data));
+      .subscribe(data => {
+        this.gruppe = data;
+
+      }));
     this.activatedRoute.queryParams.subscribe((data) => this.activeIndex = parseInt(data.gruppe, 10));
 
   }
@@ -64,7 +68,7 @@ export class OeffentlicheHeldenComponent implements OnInit, OnDestroy {
   }
 
   get editHelden() {
-    return this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
+    return this.isMeisterGruppe || this.authenticationService.rights.indexOf('EDIT_ALL') !== -1;
   }
 
   forceReload() {
