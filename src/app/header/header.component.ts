@@ -25,10 +25,11 @@ export class HeaderComponent implements OnInit {
     this.gruppenService.getGroups().subscribe(data => {
       this.groups = data;
       const currentGroup = data.find(group => group.value.userGroup);
-      if(currentGroup) {
-        this.gruppenService.setCurrentGroup(currentGroup.value);                                     
-      }    
-      this.placeholder = currentGroup.label;
+      if (currentGroup) {
+        this.gruppenService.setCurrentGroup(currentGroup.value);
+        this.placeholder = currentGroup.label;
+      }
+
     })
     this.config.getVersions().subscribe(data => this.versions = data);
   }
