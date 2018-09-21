@@ -4,6 +4,7 @@ import {ConfigService} from '../shared/config/config.service';
 import {GruppenService} from "../shared/gruppen.service";
 import {Observable, ReplaySubject} from "rxjs/index";
 import {map} from "rxjs/internal/operators";
+import {isMobile} from '../util/Constants';
 
 @Component({
   selector: 'app-header',
@@ -50,6 +51,10 @@ export class HeaderComponent implements OnInit {
 
   onGroupSelect(event) {
     this.gruppenService.setCurrentGroup(event.value);
+  }
+
+  get mobile() {
+    return isMobile();
   }
 
 }

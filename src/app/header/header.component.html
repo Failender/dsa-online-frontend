@@ -1,4 +1,5 @@
-<div class="header ui-g">
+<div class="header ui-g" *ngIf="!mobile; else noMobile">
+
 
   <div class="btn-container-left">
     <button pButton icon="fa fa-bars"(click)="onClick()" class="toggle-menu"> </button>
@@ -22,7 +23,37 @@
   </div>
 
 
-
+  <app-login [visible]="showLogin" (hideDialog)="showLogin=false"></app-login>
 </div>
+<ng-template #noMobile>
+  <div class="header mobile">
+    <div class="ui-g">
+      <div class="btn-container-left">
+        <button pButton icon="fa fa-bars"(click)="onClick()" class="toggle-menu"> </button>
+      </div>
 
-<app-login [visible]="showLogin" (hideDialog)="showLogin=false"></app-login>
+      <div class="title">
+        DSA-Online
+        <ng-container *ngIf="versions">
+          <ng-container *ngIf="versions.frontend == versions.backend; else diffVersions">({{versions.frontend}})</ng-container>
+          <ng-template #diffVersions>Frontend: {{versions.frontend}} | Backend:{{versions.backend}}</ng-template>
+
+        </ng-container>
+      </div>
+        <div class="btn-container">
+          <button *ngIf="!auth.authenticated" pButton label="Login"  icon="fa fa-sign-out" (click)="login()" class="logout"><i class="icon-repeat" ></i> </button>
+          <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa fa-sign-out" (click)="logout()" class="logout"><i class="icon-repeat" ></i> </button>
+        </div>
+
+
+    </div>
+    <div class="ui-g">
+      <div class="group-container" style="align:middle">
+        <p-dropdown [options]="groups" (onChange)="onGroupSelect($event)" class="dropdown"  [style]="{'width':'250px', 'height': '20px'}" ></p-dropdown>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+

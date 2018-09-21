@@ -8,6 +8,11 @@
   border-radius:4px;
 }
 
+.header.mobile {
+  height:100px;
+}
+
+
 .fa-bars {
   width:40px;
   line-height:50px;
@@ -24,13 +29,18 @@
   margin-right:70px;
 }
 
+.mobile .title{
+  width: calc(100% - 170px);
+  margin-right:0px;
+}
+
 
 .new {
   font-size: 32px;
 }
 
 .btn-container {
-  width: 110px;
+  width: 100px;
   height:20px;
   line-height:50px;
   margin-right:10px;
@@ -46,6 +56,10 @@
 
 .group-container {
   height:30px;
+}
+
+.mobile .group-container{
+  margin: auto;
 }
 
 .logout{
