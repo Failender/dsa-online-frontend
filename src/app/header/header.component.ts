@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
       if (currentGroup) {
         this.gruppenService.setCurrentGroup(currentGroup.value);
         this.placeholder = currentGroup.label;
+      } else {
+        this.gruppenService.setCurrentGroup(data[0].value);
       }
 
     })
