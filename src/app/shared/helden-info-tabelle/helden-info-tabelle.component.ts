@@ -127,7 +127,6 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   }
 
   dialogClosed(version) {
-    console.debug('trigger')
     if (version) {
       this._heldLaden(this.alteVersionLadenHeld.id, version);
     }

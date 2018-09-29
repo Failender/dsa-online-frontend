@@ -43,7 +43,6 @@ export class AlteVersionLadenDialogComponent implements OnInit, OnChanges {
   }
 
   onHide() {
-    console.debug("hide")
     this.dialogClosed.emit();
   }
 

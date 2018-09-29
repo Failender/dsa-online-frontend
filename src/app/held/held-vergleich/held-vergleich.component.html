@@ -1,4 +1,4 @@
-<p-card *ngIf="differenceInfo">
+<p-card *ngIf="differenceInfo; else spinner">
   <div class="ui-g">
     <div class="ui-g-3 ui-sm-6"><b>Verglichener Held</b></div>
     <div class="ui-g-9 ui-sm-6">{{differenceInfo.heldname}}</div>
@@ -77,3 +77,6 @@
   </p-accordionTab>
 
 </p-accordion>
+<ng-template #spinner>
+  <div class="loader"></div>
+</ng-template>
