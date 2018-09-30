@@ -18,7 +18,7 @@ interface ConditionalMenuItem extends MenuItem{
 })
 export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
-
+  public selectGruppeHeld: HeldenInfo;
   public possibleOptions: ConditionalMenuItem[] = [
     {
       label: 'Held laden',
@@ -41,6 +41,10 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
     {
       label: 'Alle Versionen herunterladen',
       command: () => this.versionenHerunterladen(this._context)
+    },
+    {
+      label: 'Gruppe setzen',
+      command: () => this.setGruppe(this._context)
     }
   ];
 
@@ -89,17 +93,6 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   heldLaden(held: HeldenInfo) {
     this._heldLaden(held.id, held.version);
   }
-
-  onDropdownSelected(gruppeId, heldenId) {
-    this.messageService.info('Gruppe wird geändert..')
-    this.gruppenService.updateGruppe(heldenId, gruppeId)
-      .subscribe(
-        () => {
-          this.messageService.info('Gruppe erfolgreich geändert');
-        }
-      );
-  }
-
   vorigeVersionVergleich(data) {
     const url = `/held/vergleichen/${data.id}/${data.version - 1}/${data.version}`;
     this.routingService.navigateByUrl(url);
@@ -159,6 +152,10 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
       });
   }
 
+  setGruppe(data) {
+    this.selectGruppeHeld = data;
+  }
+
   alteVersionHochladen(data) {
     this.alteVersionHochladenHeld = data;
   }
@@ -169,6 +166,13 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
   preventClick() {
     return false;
+  }
+
+  groupSelected(reload: boolean) {
+    this.selectGruppeHeld = null;
+    if (reload) {
+      this.forceReload.emit();
+    }
   }
 
 }

@@ -11,7 +11,6 @@
     <tr>
       <th class="name">Name</th>
       <th class="last-change">Letzte Änderung</th>
-      <th class="edit-gruppe" *ngIf="edit" >Gruppe</th>
       <th class="public">Öffentlich</th>
       <th class="aktiv" >Aktiv</th>
       <th class="version" >Version</th>
@@ -22,7 +21,6 @@
     <tr>
       <td>{{data.name}}</td>
       <td>{{data.lastChanged |date}}</td>
-      <td class="edit-gruppe" *ngIf="edit"><p-dropdown [options]="gruppen" (onChange)="onDropdownSelected($event.value, data.id)" [placeholder]="data.gruppe"></p-dropdown></td>
       <td *ngIf="edit">
         <p-inputSwitch binary=true [ngModel]="data.oeffentlich" (onChange)="updatePublic(data, $event)"></p-inputSwitch></td>
       <td *ngIf="!edit"><input class="readonly-checkbox" type="checkbox" ngModel="{{data.oeffentlich}}" (click)="preventClick()"></td>
@@ -40,3 +38,4 @@
 
 <app-alte-version-laden-dialog [held]="alteVersionLadenHeld" (dialogClosed)="dialogClosed($event)" (forceReload)="onForceReload()"></app-alte-version-laden-dialog>
 <app-alte-version-hochladen [held]="alteVersionHochladenHeld" (dialogClosed)="hochladenDialogClosed()" (versionUploaded)="onForceReload()"></app-alte-version-hochladen>
+<app-select-gruppe-dialog [held]="selectGruppeHeld" (dialogClosed)="groupSelected($event)"></app-select-gruppe-dialog>
