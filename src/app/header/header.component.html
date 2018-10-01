@@ -21,9 +21,6 @@
     <button *ngIf="auth.authenticated" pButton label="Logout" icon="fa fa-sign-out" (click)="logout()" class="logout"><i class="icon-repeat" ></i> </button>
 
   </div>
-
-
-  <app-login [visible]="showLogin" (hideDialog)="showLogin=false"></app-login>
 </div>
 <ng-template #noMobile>
   <div class="header mobile">
@@ -56,4 +53,4 @@
 
 </ng-template>
 
-
+<app-login [visible]="showLogin" (hideDialog)="showLogin=false"></app-login>
