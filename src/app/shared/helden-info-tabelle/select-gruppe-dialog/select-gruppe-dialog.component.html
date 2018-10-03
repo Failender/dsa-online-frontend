@@ -1,0 +1,7 @@
+<p-dialog *ngIf="held" [visible]="true" header="Gruppe auswählen" (onclose)="this.dialogClosed.next(false)">
+  <div class="ui-g">
+    <p-dropdown [placeholder]="held.gruppe" [options]="groups" (onChange)="onGroupSelect($event)" class="dropdown"  [style]="{'width':'250px', 'height': '20px'}" appendTo="body"></p-dropdown>
+    <button pButton label="Speichern" (click)="onSave()"></button>
+  </div>
+
+</p-dialog>

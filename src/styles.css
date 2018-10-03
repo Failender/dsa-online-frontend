@@ -65,3 +65,8 @@
 .ui-sidebar {
   padding: 0px !important;
 }
+
+.ui-g-3, .ui-g-9 {
+  padding-left:10px !important;
+  padding: 0em !important;
+}

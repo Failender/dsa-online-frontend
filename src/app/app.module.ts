@@ -72,6 +72,7 @@ import { MeisterVerwaltungComponent } from './Administration/meister-verwaltung/
 import {UserService} from "./nutzer-verwaltung/user.service";
 import { CurrentHeldComponent } from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
+import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -133,6 +134,7 @@ registerLocaleData(localeDe, 'de');
     FullImportComponent,
     MeisterVerwaltungComponent,
     CurrentHeldComponent,
+    SelectGruppeDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

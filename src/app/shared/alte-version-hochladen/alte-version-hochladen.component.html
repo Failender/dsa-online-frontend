@@ -1,4 +1,4 @@
-<p-dialog [visible]="held" (onHide)="onHide()">
+<p-dialog [visible]="held" (onHide)="onHide()" [positionTop]="20">
   <p-header>
     <div *ngIf="held" style="float:left" class="dialog-title">{{held.name}}</div>
     <div style="float:right">
