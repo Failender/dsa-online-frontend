@@ -109,6 +109,8 @@ export interface KalendarTag {
   events: Event[];
   jetzt: boolean;
   inMonat: boolean;
+  relativerMonat: number;
+  disabled: boolean;
 
 }
 

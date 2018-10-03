@@ -34,8 +34,6 @@ export class KalenderService {
 
   private mapEventResponse(data: EventResponse, datum: DsaDatum, gruppe: number): KalenderDaten {
 
-
-
     const dayOffset = (datum.jahr - START_YEAR + datum.monatValue * 2) % 7;
     let tage: KalendarTag[];
     let wochen;
@@ -52,18 +50,16 @@ export class KalenderService {
     } else {
       if (dayOffset === 6) {
         wochen = [0, 7, 14 , 21, 28, 35];
-        tage = this.buildDays(dayOffset, datum.tag, 42);
+        tage = this.buildDays(dayOffset, datum.tag, 42, 30, datum.monatValue);
       } else {
         wochen = [0, 7, 14 , 21, 28];
-        tage = this.buildDays(dayOffset, datum.tag , 35);
+        tage = this.buildDays(dayOffset, datum.tag , 35, 30, datum.monatValue);
       }
     }
     const mappedData = new Map();
     Object.keys(data).forEach(key => {
       const events: Event[] = data[key];
-      console.debug(tage)
       events.forEach(event => {
-        console.debug(event)
         const relativeDay = (event.date % YEAR_LENGTH) % 30 + dayOffset;
         tage[relativeDay].events.push({color: 'red', name: event.name});
 
@@ -76,18 +72,28 @@ export class KalenderService {
   }
 
 
-  public buildDays(offset: number, day: number, total: number = 35, monthlength: number = 30) {
+  public buildDays(offset: number, day: number, total: number = 35, monthlength: number = 30, monat: number = 1) {
     const days = [];
+    const preMonthLength = monat === 0 ? 5 : 30;
     for (let i = offset - 1 ; i >= 0; i--) {
+      const tag = preMonthLength - i
+      const dis = preMonthLength === 30 ?  false : (tag <= 0);
       days.push({
-        tag:  30 - i,
+        tag: tag,
         heute: false,
         inMonat: false,
-        events: []
+        relativerMonat: -1,
+        events: [],
+        disabled: dis
       });
     }
+    let disabled = false;
     for (let i = 0; i < total - offset ; i++) {
       let _day = i + 1;
+      // Sonderfall Namenlose Tage (fk Namenlose Tage)
+      if (monat === 11 && _day >= 36) {
+        disabled = true;
+      }
       if (_day > monthlength) {
         _day = _day % monthlength;
       }
@@ -97,7 +103,9 @@ export class KalenderService {
         events: [],
         inMonat: i < monthlength,
         isWeekend: false,
-        heute: _day === day && i < monthlength
+        relativerMonat: i < monthlength ? 0 : 1,
+        heute: _day === day && i < monthlength,
+        disabled: disabled
       });
     }
     return days;

@@ -4,22 +4,27 @@
   <div class="ui-g centered" >
     <button pButton icon="fa fa-angle-left" (click)="letzterMonat()"></button>
 
-    <span>{{monat.jetzt.tag}}. {{monat.jetzt.monat}} <input type="number" [(ngModel)]="monat.jetzt.jahr"> BF</span>
+    <span class="datum-anzeige">{{monat.jetzt.tag}}. {{monat.jetzt.monat}} <input class="yearinput" type="number" [(ngModel)]="monat.jetzt.jahr" (ngModelChange)="onJahrChange()"> BF</span>
     <button pButton icon="fa fa-angle-right" (click)="naechsterMonat()"></button>
   </div>
 
   <table *ngIf="monat">
     <tr *ngFor="let woche of monat.wochen">
-      <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat" [class.heute]="tag.heute">
+      <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat" [class.heute]="tag.heute" (click)="onDayClick(tag)">
+        <ng-container *ngIf="tag.disabled; else enabled">
 
-        <div class="ui-g date-row">
-          <div class="date-display">{{tag.tag}}</div>
-        </div>
-        <div class="ui-g event-row">
-          <div class="" *ngFor="let event of tag.events" [style.background-color]="event.color">
-            {{event.name}}
+        </ng-container>
+        <ng-template #enabled>
+          <div class="ui-g date-row">
+            <div class="date-display">{{tag.tag}}</div>
           </div>
-        </div>
+          <div class="ui-g event-row">
+            <div class="" *ngFor="let event of tag.events" [style.background-color]="event.color">
+              {{event.name}}
+            </div>
+          </div>
+        </ng-template>
+
 
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DsaDatum, KalenderDaten} from './data';
+import {DsaDatum, KalendarTag, KalenderDaten} from "./data";
 import {KalenderService} from "./kalender.service";
 
 @Component({
@@ -11,7 +11,7 @@ import {KalenderService} from "./kalender.service";
 export class DsaKalenderComponent implements OnInit {
 
 
-  public heute: DsaDatum = new DsaDatum(1015, 3, 30);
+  public heute: DsaDatum = new DsaDatum(1019, 0, 4);
 
   private gruppe: number = 1;
   public monat: KalenderDaten;
@@ -19,14 +19,12 @@ export class DsaKalenderComponent implements OnInit {
   constructor(private kalenderService: KalenderService) { }
 
   ngOnInit() {
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
+    this.buildMonth();
   }
 
   naechsterMonat() {
     this.heute.naechsterMonat()
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
+    this.buildMonth();
 
   }
 
@@ -45,6 +43,35 @@ export class DsaKalenderComponent implements OnInit {
 
   letzterMonat() {
     this.heute.letzterMonat();
+    this.buildMonth();
+  }
+
+  onDayClick(tag: KalendarTag) {
+    if(tag.disabled) {
+      return;
+    }
+    if (tag.inMonat) {
+      this.heute = new DsaDatum(this.heute.jahr, this.heute.monatValue, tag.tag);
+    } else {
+
+      if (tag.relativerMonat === 1 ) {
+        this.heute.naechsterMonat();
+
+      } else {
+        this.heute.letzterMonat();
+      }
+      this.heute.tag = tag.tag;
+    }
+
+    this.kalenderService.buildMonth(this.heute, this.gruppe)
+      .subscribe(data => this.monat = data);
+  }
+
+  onJahrChange() {
+    this.buildMonth();
+  }
+
+  private buildMonth() {
     this.kalenderService.buildMonth(this.heute, this.gruppe)
       .subscribe(data => this.monat = data);
   }

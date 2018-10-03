@@ -62,3 +62,13 @@ td {
 .align-right {
   flex-direction: column-reverse;
 }
+
+
+.yearinput {
+  width:100px;
+}
+
+.datum-anzeige {
+  width: 300px;
+  text-align: center;
+}
