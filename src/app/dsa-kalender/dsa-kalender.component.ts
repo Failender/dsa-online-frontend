@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {DsaDatum, KalendarTag, KalenderDaten} from "./data";
 import {KalenderService} from "./kalender.service";
+import {SubjectSubscription} from "rxjs/internal/SubjectSubscription";
+import {combineLatest, Subject, Subscription} from "rxjs/index";
+import {GruppenService} from "../shared/gruppen.service";
 
 @Component({
   selector: 'app-dsa-kalender',
@@ -8,7 +11,7 @@ import {KalenderService} from "./kalender.service";
   styleUrls: ['./dsa-kalender.component.css'],
   providers: [KalenderService]
 })
-export class DsaKalenderComponent implements OnInit {
+export class DsaKalenderComponent implements OnInit, OnDestroy {
 
 
   public heute: DsaDatum = new DsaDatum(1019, 0, 4);
@@ -16,10 +19,20 @@ export class DsaKalenderComponent implements OnInit {
   private gruppe: number = 1;
   public monat: KalenderDaten;
 
-  constructor(private kalenderService: KalenderService) { }
+  private heuteChanged = new Subject<DsaDatum>();
+  private sub: Subscription;
+
+  constructor(private kalenderService: KalenderService, private gruppenService: GruppenService) { }
 
   ngOnInit() {
+    this.sub = combineLatest(this.gruppenService.getCurrentGroup(), this.heuteChanged.asObservable())
+      .subscribe(([gruppe, heute]) => {
+        this.kalenderService.buildMonth(heute, gruppe.id)
+          .subscribe(data => this.monat = data);
+      });
     this.buildMonth();
+
+
   }
 
   naechsterMonat() {
@@ -63,8 +76,7 @@ export class DsaKalenderComponent implements OnInit {
       this.heute.tag = tag.tag;
     }
 
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
+    this.buildMonth();
   }
 
   onJahrChange() {
@@ -72,7 +84,11 @@ export class DsaKalenderComponent implements OnInit {
   }
 
   private buildMonth() {
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
+    this.heuteChanged.next(this.heute);
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
