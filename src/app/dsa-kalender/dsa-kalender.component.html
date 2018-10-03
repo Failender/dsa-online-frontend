@@ -2,11 +2,10 @@
 <ng-container *ngIf="monat">
 
   <div class="ui-g centered" >
-    <button pButton icon="fa fa-angle-double-left" (click)="letzterMonat()"></button>
-    <button pButton icon="fa fa-angle-left" (click)="letzterTag()"></button>
-    <span>{{monat.jetzt.tag}}. {{monat.jetzt.monat}} {{monat.jetzt.jahr}} BF</span>
-    <button pButton icon="fa fa-angle-right" (click)="naechsterTag()"></button>
-    <button pButton icon="fa fa-angle-double-right"(click)="naechsterMonat()"></button>
+    <button pButton icon="fa fa-angle-left" (click)="letzterMonat()"></button>
+
+    <span>{{monat.jetzt.tag}}. {{monat.jetzt.monat}} <input type="number" [(ngModel)]="monat.jetzt.jahr"> BF</span>
+    <button pButton icon="fa fa-angle-right" (click)="naechsterMonat()"></button>
   </div>
 
   <table *ngIf="monat">
