@@ -1,3 +1,5 @@
+import {SelectItem} from "primeng/api";
+
 export interface KalenderDaten {
   jetzt: DsaDatum;
   wochen: number[];
@@ -134,5 +136,13 @@ export const WOCHENTAGE = [
 export const MONATE = [
   'Praios', 'Rondra', 'Efferd', 'Travia', 'Boron', 'Hesinde', 'Firun', 'Tsa', 'Phex', 'Peraine', 'Ingerimm', 'Rahja', 'Namenlose Tage'
 ];
+
+export const MONATE_DROPDOWN: SelectItem[] = MONATE.map((value, idx) => {
+  return {
+    label: value,
+    value: idx
+  };
+});
+
 
 

@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {DsaDatum, KalendarTag, KalenderDaten} from "./data";
+import {DsaDatum, KalendarTag, KalenderDaten, MONATE_DROPDOWN} from "./data";
 import {KalenderService} from "./kalender.service";
 import {SubjectSubscription} from "rxjs/internal/SubjectSubscription";
 import {combineLatest, Subject, Subscription} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
+import {SelectItem} from "primeng/api";
 
 @Component({
   selector: 'app-dsa-kalender',
@@ -14,9 +15,8 @@ import {GruppenService} from "../shared/gruppen.service";
 export class DsaKalenderComponent implements OnInit, OnDestroy {
 
 
-  public heute: DsaDatum = new DsaDatum(1019, 0, 4);
+  public heute: DsaDatum = new DsaDatum(1015, 3, 4);
 
-  private gruppe: number = 1;
   public monat: KalenderDaten;
 
   private heuteChanged = new Subject<DsaDatum>();
@@ -39,19 +39,6 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
     this.heute.naechsterMonat()
     this.buildMonth();
 
-  }
-
-  naechsterTag() {
-    this.heute.addTage(1)
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
-
-  }
-
-  letzterTag() {
-    this.heute.removeTage(1)
-    this.kalenderService.buildMonth(this.heute, this.gruppe)
-      .subscribe(data => this.monat = data);
   }
 
   letzterMonat() {
@@ -90,5 +77,9 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  get monate(): SelectItem[] {
+    return MONATE_DROPDOWN;
   }
 }

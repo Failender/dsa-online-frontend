@@ -3,7 +3,7 @@
 
   <div class="ui-g centered" >
     <button pButton icon="fa fa-angle-left" (click)="letzterMonat()"></button>
-
+    <p-dropdown [options]="monate"></p-dropdown>
     <span class="datum-anzeige">{{monat.jetzt.tag}}. {{monat.jetzt.monat}} <input class="yearinput" type="number" [(ngModel)]="monat.jetzt.jahr" (ngModelChange)="onJahrChange()"> BF</span>
     <button pButton icon="fa fa-angle-right" (click)="naechsterMonat()"></button>
   </div>
