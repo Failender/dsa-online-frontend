@@ -19,9 +19,20 @@ export interface LegendeItem {
 export class DsaDatum {
 
 
+  private _monatValue;
   public monat: string;
-  constructor(public jahr: number, public monatValue: number, public tag: number) {
+  constructor(public jahr: number, monatValue: number, public tag: number) {
     this.calcMonat();
+    this.monatValue = monatValue;
+  }
+
+  set monatValue(value: number) {
+    this._monatValue = value;
+    this.calcMonat();
+  }
+
+  get monatValue() {
+    return this._monatValue;
   }
 
   public addTage(tage: number): boolean {
@@ -36,9 +47,8 @@ export class DsaDatum {
      }
     } else {
       if(this.tag > 30) {
-        this.monatValue ++;
         this.tag -= 30;
-        this.calcMonat();
+        this.monatValue ++;
         return true;
       }
     }
@@ -48,19 +58,17 @@ export class DsaDatum {
   public removeTage(tage: number): boolean {
     this.tag -= tage;
 
-    if(this.monatValue == 0) {
-      if(this.tag <= 0) {
-        this.monatValue = 12;
+    if (this.monatValue === 0) {
+      if (this.tag <= 0) {
         this.jahr -= 1;
-        this.tag +=5;
-        this.calcMonat();
+        this.tag += 5;
+        this.monatValue = 12;
         return true;
       }
     } else {
-      if(this.tag <= 0) {
+      if (this.tag <= 0) {
+        this.tag += 30;
         this.monatValue -= 1;
-        this.tag +=30;
-        this.calcMonat();
         return true;
       }
     }
@@ -71,14 +79,12 @@ export class DsaDatum {
   public naechsterMonat(): boolean {
     this.monatValue ++;
     if (this.monatValue === 13) {
-      this.monatValue = 0;
       this.jahr ++;
-      this.calcMonat();
+      this.monatValue = 0;
       return true;
     } else if (this.monatValue === 12 && this.tag > 4) {
       this.tag = 4;
     }
-    this.calcMonat();
     return false;
   }
 
@@ -88,16 +94,14 @@ export class DsaDatum {
 
   public letzterMonat(): boolean {
     this.monatValue --;
-    if(this.monatValue === -1) {
+    if (this.monatValue === -1) {
       this.monatValue = 12;
       this.jahr --;
-      if(this.tag > 4) {
+      if (this.tag > 4) {
         this.tag = 4;
       }
-      this.calcMonat();
       return true;
     }
-    this.calcMonat();
     return false;
   }
 }
