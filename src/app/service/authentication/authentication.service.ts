@@ -127,18 +127,3 @@ export function getQueryVariable(variable) {
 export function getQueryVariableInt(variable) {
   return parseInt(getQueryVariable(variable), 10);
 }
-
-export class CustomHttpInterceptor implements HttpInterceptor {
-
-  constructor(private messageService: MessageService) {
-
-  }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(catchError((error, caught) => {
-      console.error(error);
-      this.messageService.error('HTTP Fehler aufgetreten ' + error.message)
-      return of(error);
-    }));
-  }
-
-}

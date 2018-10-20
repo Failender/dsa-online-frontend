@@ -151,12 +151,6 @@ registerLocaleData(localeDe, 'de');
       useFactory: init,
       multi: true,
       deps: [AuthenticationService, MenuService]
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomHttpInterceptor,
-      multi: true,
-      deps: [MessageService]
     }
     ],
   bootstrap: [AppComponent]
