@@ -19,7 +19,7 @@ import {
   PanelMenuModule, ProgressSpinnerModule, SidebarModule,
   TabMenuModule, TooltipModule, TreeTableModule
 } from "primeng/primeng";
-import {AuthenticationService, CustomHttpInterceptor, init} from './service/authentication/authentication.service';
+import {AuthenticationService, init} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -35,11 +35,9 @@ import {TableModule} from 'primeng/table';
 import {registerLocaleData} from '@angular/common';
 
 import localeDe from '@angular/common/locales/de';
-import { AuthenticationRequiredComponent } from './shared/authentication-required/authentication-required.component';
 import {HeldenService} from './meine-helden/helden.service';
 import { HeldUebersichtComponent } from './held/held-uebersicht/held-uebersicht.component';
 import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.component';
-import { HeldenComponent } from './held/helden-component/helden-component.component';
 import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
 import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './shared/gruppen.service';
@@ -71,6 +69,9 @@ import {UserService} from "./nutzer-verwaltung/user.service";
 import { CurrentHeldComponent } from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
 import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
+import { KampagnenComponent } from './kampagnen/kampagnen.component';
+import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
+import { KampagneComponent } from './kampagne-component/kampagne.component';
 
 
 const appRoutes: Routes = [
@@ -79,6 +80,9 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' }
   },
+  {path: 'kampagnen', component: KampagnenComponent},
+  {path: 'kampagne/:id', component: KampagneComponent},
+  {path: 'administration/kampagnen', component: AdminKampagneComponent},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
   { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},
@@ -132,6 +136,9 @@ registerLocaleData(localeDe, 'de');
     MeisterVerwaltungComponent,
     CurrentHeldComponent,
     SelectGruppeDialogComponent,
+    KampagnenComponent,
+    AdminKampagneComponent,
+    KampagneComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

@@ -16,6 +16,7 @@ export const MEISTER = 'MEISTER';
 export const FULL_IMPORT = 'FULL_IMPORT';
 export const CREATE_USER = 'CREATE_USER';
 export const FULL_EXPORT = 'FULL_EXPORT';
+export const EDIT_KAMPAGNE = 'EDIT_KAMPAGNE';
 
 @Injectable()
 export class AuthenticationService {

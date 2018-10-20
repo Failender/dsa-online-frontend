@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import {SessionService} from "../service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
-import {AuthenticationService, CREATE_USER, FULL_EXPORT, FULL_IMPORT, MEISTER} from '../service/authentication/authentication.service';
+import {
+  AuthenticationService,
+  EDIT_KAMPAGNE,
+  CREATE_USER,
+  FULL_EXPORT,
+  FULL_IMPORT,
+  MEISTER
+} from "../service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
 import {isMobile} from "../util/Constants";
 
@@ -25,6 +32,7 @@ export class MenuService {
     this.createItem('Home', 'home'),
     this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuerlog', 'abenteuerlog'),
+    this.createItem('Kampagnen', 'kampagnen'),
     // this.createNoMobileItem('Kalender', 'kalender'),
   ];
 
@@ -39,6 +47,7 @@ export class MenuService {
   }
 
   private nestedItems: NestedCustomMenuItem[] = [
+    this.createNestedItem('Kampagnen Verwaltung', 'administration/kampagnen', 'Administration', EDIT_KAMPAGNE),
     this.createNestedItem('Export', 'administration/export', 'Administration', FULL_EXPORT),
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable, ReplaySubject} from "rxjs";
+import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
 import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
 import {AuthenticationService} from "../service/authentication/authentication.service";
+import {filter} from "rxjs/internal/operators";
 
 
 export interface GruppeInfo {
@@ -18,7 +19,7 @@ export interface GruppeSelectItem extends SelectItem {
 @Injectable()
 export class GruppenService {
 
-  private currentGroup = new ReplaySubject<GruppeInfo>();
+  private currentGroup = new BehaviorSubject<GruppeInfo>(null);
   private groups = new ReplaySubject<GruppeSelectItem[]>();
   private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
   constructor(private restService: RestService, authService: AuthenticationService) {
@@ -34,7 +35,9 @@ export class GruppenService {
 
   }
 
-
+  public forceRefresh() {
+    this.currentGroup.next(this.currentGroup.value);
+  }
   public getGruppen(appendMeisterInfo?: boolean): Observable<SelectItem[]> {
     let url = 'gruppen';
     if (appendMeisterInfo) {
@@ -76,8 +79,16 @@ export class GruppenService {
     return this.meisterGroups.asObservable();
   }
 
-  public getCurrentGroup() {
-    return this.currentGroup.asObservable();
+  public getCurrentGroup(): Observable<GruppeInfo> {
+    return this.currentGroup.asObservable().pipe(filter(value => value !== null));
+  }
+
+  public getCurrentGroupValue(): GruppeInfo {
+    const val = this.currentGroup.getValue();
+    if (!val) {
+      throw new Error('Keine Gruppe gewählt');
+    }
+    return val;
   }
 
   public setCurrentGroup(group: GruppeInfo) {

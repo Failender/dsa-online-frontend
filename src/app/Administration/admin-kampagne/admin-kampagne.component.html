@@ -1,0 +1,9 @@
+<app-kampagnen [delete]="true"></app-kampagnen>
+
+<p-panel header="Kampagne erstellen">
+  <div class="ui-g">
+    <input type="text" pInputText [(ngModel)]="name">
+    <button pButton (click)="createKampagne()" icon="pi pi-save"></button>
+  </div>
+
+</p-panel>
