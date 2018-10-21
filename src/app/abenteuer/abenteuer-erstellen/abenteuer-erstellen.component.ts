@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {RoutingService} from "../../shared/routing.service";
@@ -19,6 +19,9 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   @ViewChild('userinput')public userinput: ElementRef;
 
+  @Input() public kampagne;
+
+  public kampagneName = undefined;
   public gruppenName = '';
   public isMeister = false;
   public kampagnen: SelectItem[];
@@ -34,10 +37,22 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
   });
 
   protected init(): void {
-    this.sub = this.gruppenService.getCurrentGroup()
-      .subscribe(group => {
-        this.onGruppeChange(group);
-      })
+    if (this.kampagne) {
+      this.kampagneName = this.kampagne.name;
+      const gruppe = this.gruppenService.getGruppe(this.kampagne.gruppeId)
+      this.gruppenName = gruppe.name;
+      this.isMeister = gruppe.meister;
+      this.form.controls['gruppe'].patchValue(gruppe.id);
+      this.form.controls['kampagne'].patchValue(this.kampagne.id);
+
+    } else {
+      this.sub = this.gruppenService.getCurrentGroup()
+        .subscribe(group => {
+          this.onGruppeChange(group);
+        });
+    }
+
+
     this.userinput.nativeElement.focus();
   }
 
@@ -64,7 +79,6 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
   }
 
   onGruppeChange(group) {
-    console.debug(group)
     this.gruppenName = group.name;
     this.form.controls['gruppe'].patchValue(group.id);
     this.isMeister = group.meister;
@@ -151,7 +165,10 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+
   }
 
 

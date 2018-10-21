@@ -73,6 +73,9 @@ import { KampagnenComponent } from './kampagnen/kampagnen.component';
 import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
 import { KampagneComponent } from './kampagne-component/kampagne.component';
 import { AbenteuerAnzeigenComponent } from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
+import { AbenteuerTabelleComponent } from './shared/abenteuer-tabelle/abenteuer-tabelle.component';
+import { AddSeBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
+import { AddApBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -142,6 +145,9 @@ registerLocaleData(localeDe, 'de');
     AdminKampagneComponent,
     KampagneComponent,
     AbenteuerAnzeigenComponent,
+    AbenteuerTabelleComponent,
+    AddSeBonusDialogComponent,
+    AddApBonusDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
@@ -160,7 +166,7 @@ registerLocaleData(localeDe, 'de');
       provide: APP_INITIALIZER,
       useFactory: init,
       multi: true,
-      deps: [AuthenticationService, MenuService]
+      deps: [AuthenticationService, GruppenService]
     }
     ],
   bootstrap: [AppComponent]

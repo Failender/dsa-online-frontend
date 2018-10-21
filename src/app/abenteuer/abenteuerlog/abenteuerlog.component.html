@@ -1,31 +1,6 @@
 
 <div class="loader" *ngIf="loading; else table"></div>
 <ng-template #table>
-  <p-table [value]="abenteuer" >
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="3">
-          Kein Abenteuer gefunden
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="header">
-      <tr>
-        <td>Name</td>
-        <td>AP</td>
-        <td></td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-data>
-      <tr>
-        <td>{{data.name}}</td>
-        <td>{{data.ap}}</td>
-        <td>
-          <button pButton icon="pi pi-search" (click)="openAbenteuer(data)"></button>
-          <button *ngIf="canEdit" pButton icon="pi pi-trash" (click)="deleteEntry(data)"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <app-abenteuer-tabelle [abenteuer]="abenteuer"></app-abenteuer-tabelle>
 
 </ng-template>

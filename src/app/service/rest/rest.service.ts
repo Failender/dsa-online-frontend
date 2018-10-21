@@ -3,7 +3,7 @@ import {UserAuthentication} from '../authentication/UserAuthentication';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable, NEVER as never, of, NEVER} from 'rxjs';
+import {Observable, NEVER as never, of, NEVER, } from "rxjs";
 import {catchError} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
 
@@ -45,6 +45,7 @@ export class RestService {
     }
     else if (error.status === 404) {
       this.messageService.error("Die angefragte Entität konnte nicht gefunden werden");
+      return NEVER;
     }
     return of(error);
   }

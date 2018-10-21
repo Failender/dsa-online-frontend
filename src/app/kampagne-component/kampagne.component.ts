@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {KampagnenService} from "../kampagnen/kampagnen.service";
 import {flatMap} from "rxjs/operators";
+import {GruppenService} from "../shared/gruppen.service";
+import {AbenteuerService} from "../abenteuer/abenteuer.service";
 
 @Component({
   selector: 'app-kampagne',
@@ -11,12 +13,25 @@ import {flatMap} from "rxjs/operators";
 export class KampagneComponent implements OnInit {
 
   public kampagne;
+  public canEdit = false;
+  public abenteuer = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private kampagnenService: KampagnenService) { }
+  constructor(private activatedRoute: ActivatedRoute, private kampagnenService: KampagnenService, private gruppenService: GruppenService,
+              private abenteuerService: AbenteuerService) { }
 
   ngOnInit() {
     this.activatedRoute.params.pipe(flatMap(data => this.kampagnenService.getKampagne(data.id)))
-      .subscribe(data => this.kampagne = data);
+      .subscribe(data => {
+        this.kampagne = data;
+        this.onKampagneLoaded();
+      });
+  }
+
+  private onKampagneLoaded() {
+    console.debug(this.kampagne)
+    this.canEdit = this.gruppenService.hasEditRight(this.kampagne.gruppeId);
+    this.abenteuerService.getAbenteuerForKampagne(this.kampagne.id)
+      .subscribe(data => this.abenteuer = data);
   }
 
 }

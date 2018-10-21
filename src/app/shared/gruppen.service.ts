@@ -4,13 +4,14 @@ import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
 import {AuthenticationService} from "../service/authentication/authentication.service";
-import {filter} from "rxjs/internal/operators";
+import {filter, tap} from "rxjs/internal/operators";
 
 
 export interface GruppeInfo {
   id: number;
   meister: boolean;
   userGroup: boolean;
+  name: string;
 }
 export interface GruppeSelectItem extends SelectItem {
   value: GruppeInfo;
@@ -23,8 +24,6 @@ export class GruppenService {
   private groups = new BehaviorSubject<GruppeSelectItem[]>(null);
   private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
   constructor(private restService: RestService, authService: AuthenticationService) {
-    this.getGruppen(true)
-      .subscribe(data => this.groups.next(data));
     authService.onLogin.subscribe(() => {
       this.getMeisterGruppen()
         .subscribe(data => this.meisterGroups.next(data));
@@ -33,6 +32,11 @@ export class GruppenService {
       this.meisterGroups.next([]);
     });
 
+  }
+
+  public initGruppen(): Observable<any> {
+    return this.getGruppen(true)
+      .pipe(tap(data => this.groups.next(data)))
   }
 
   public forceRefresh() {
@@ -54,6 +58,15 @@ export class GruppenService {
     return this.restService.get('gruppen/editable/meister');
   }
 
+  public getGruppe(id: number) {
+    const val = this.groups.value.find(value => value.value.id === id);
+    if (!val) {
+      console.trace('Cant find gruppe with id ' + id);
+      return null;
+    }
+    return val.value;
+}
+
   public getGruppenIncludingHeld(publicOnly: boolean, showInactive: boolean): Observable<GruppeIncludingHeld[]> {
     return this.restService.get(`gruppen/includeHelden?publicOnly=${publicOnly}&showInactive=${showInactive}`);
   }
@@ -67,8 +80,8 @@ export class GruppenService {
     return this.restService.post('gruppen/' + heldid + '/' + gruppeid, null);
   }
 
-  public getHeldenForGruppe(gruppeid: number ): Observable<any> {
-    return this.restService.get('gruppen/helden/' + gruppeid);
+  public getHeldenForGruppe(gruppeid: number, dropdown = false ): Observable<any> {
+    return this.restService.get('gruppen/helden/' + gruppeid + "?dropdown=" + dropdown);
   }
 
   public getGroups() {
@@ -82,9 +95,9 @@ export class GruppenService {
     }
   }
 
-  public getMeisterGroups() {
-    return this.meisterGroups.asObservable();
-  }
+  // public getMeisterGroups() {
+  //   return this.meisterGroups.asObservable();
+  // }
 
   public getCurrentGroup(): Observable<GruppeInfo> {
     return this.currentGroup.asObservable().pipe(filter(value => value !== null));
@@ -100,6 +113,10 @@ export class GruppenService {
 
   public setCurrentGroup(group: GruppeInfo) {
     this.currentGroup.next(group);
+  }
+
+  public hasEditRight(gruppeid) {
+    return this.getGruppe(gruppeid).meister;
   }
 }
 

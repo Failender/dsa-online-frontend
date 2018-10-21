@@ -1,14 +1,24 @@
 <ng-container *ngIf="abenteuer; else loading">
   <div class="ui-g">
     <button pButton label="Abenteuerlog" (click)="back()"></button>
+    <button pButton label="Kampagnen-Ansicht" (click)="backToKampagne()"></button>
     <button pButton label="Abenteuer erstellen" (click)="backToCreate()" *ngIf="  abenteuer.meister"></button>
   </div>
   <div class="ui-g">
     <div class="ui-g-6">Name: {{abenteuer.name}}</div>
     <div class="ui-g-6">AP: {{abenteuer.ap}}</div>
   </div>
+  <div class="ui-g" *ngIf="abenteuer.meister">
+    <button pButton label="SE hinzufügen" (click)="addSeGruppeid = abenteuer.gruppeId"></button>
+    <button pButton label="AP hinzufügen" (click)="addApGruppeid = abenteuer.gruppeId"></button>
+  </div>
+
 
 </ng-container>
 <ng-template #loading>
   <div class="loader"></div>
 </ng-template>
+
+
+<app-add-se-bonus-dialog [gruppeid]="addSeGruppeid" (onClose)="onAddSeDialogClose($event)"></app-add-se-bonus-dialog>
+<app-add-ap-bonus-dialog [gruppeid]="addApGruppeid" (onClose)="onAddApDialogClose($event)"></app-add-ap-bonus-dialog>

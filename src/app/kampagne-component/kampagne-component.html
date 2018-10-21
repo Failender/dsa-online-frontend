@@ -1,3 +1,16 @@
-<p>
-  kampagne-component works!
-</p>
+
+
+
+<p-card *ngIf="kampagne">
+  <div class="ui-g">
+    <div class="ui-g-3"><b>Kampagne: </b></div>
+    <div class="ui-g-9">
+      {{kampagne.name}}
+    </div>
+  </div>
+
+</p-card>
+<app-abenteuer-erstellen [kampagne]="kampagne" *ngIf="canEdit; else tabelle"></app-abenteuer-erstellen>
+<ng-template #tabelle>
+  <app-abenteuer-tabelle [abenteuer]="abenteuer"></app-abenteuer-tabelle>
+</ng-template>

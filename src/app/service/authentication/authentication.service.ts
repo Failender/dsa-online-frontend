@@ -3,14 +3,13 @@ import {RestService} from '../rest/rest.service';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Message} from 'primeng/api';
 import {UserAuthentication} from './UserAuthentication';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, flatMap, tap} from "rxjs/operators";
 import {MessageService} from '../message/message.service';
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../meine-helden/helden.service';
-import {ActivatedRoute} from "@angular/router";
-import {NEVER, never, Observable, of} from 'rxjs';
-import {flatMap} from 'tslint/lib/utils';
+import {NEVER, never, Observable, of, ReplaySubject} from "rxjs";
 import {mergeMap} from 'rxjs/internal/operators';
+import {GruppenService} from "../../shared/gruppen.service";
 
 export const MEISTER = 'MEISTER';
 export const FULL_IMPORT = 'FULL_IMPORT';
@@ -21,7 +20,7 @@ export const EDIT_KAMPAGNE = 'EDIT_KAMPAGNE';
 @Injectable()
 export class AuthenticationService {
 
-  public onLogin = new EventEmitter<void>();
+  public onLogin = new ReplaySubject<void>();
   public onLogout = new EventEmitter<void>();
 
   public rights: string[] = [];
@@ -45,7 +44,7 @@ export class AuthenticationService {
         tap((data: string[]) => this.rights = data),
         tap( () => this.authenticated = true),
         tap( () => this.messageService.info('Einloggt als ' + authentication.username)),
-        tap( () => this.onLogin.emit()));
+        tap( () => this.onLogin.next()));
   }
 
   private handleAuthenticationError(error: HttpErrorResponse) {
@@ -74,7 +73,7 @@ export class AuthenticationService {
     this.rights = [];
   }
 
-  public initialize(): Promise<any> {
+  public initialize(): Observable<any> {
     const url = window.location.toString();
     const heldid = getQueryVariableInt('held');
     const version = getQueryVariableInt('version');
@@ -86,19 +85,16 @@ export class AuthenticationService {
       if (heldid && version) {
         return this.authenticate(this.sessionService.userAuthentication.value)
           .pipe(mergeMap(() => this.heldenService.loadHeld(heldid, version)),
-            catchError(this.handleError))
-          .toPromise();
+            catchError(this.handleError));
       }
       return this.authenticate(this.sessionService.userAuthentication.value)
-        .pipe(catchError(this.handleError))
-        .toPromise();
+        .pipe(catchError(this.handleError));
     } else {
       if (heldid && version) {
         return this.heldenService.loadHeld(heldid, version)
-          .pipe(catchError(this.handleError))
-          .toPromise();
+          .pipe(catchError(this.handleError));
       }
-      return Promise.resolve([]);
+      return of([]);
     }
   }
 
@@ -109,9 +105,9 @@ export class AuthenticationService {
 }
 
 
-export function init(authenticationService: AuthenticationService) {
+export function init(authenticationService: AuthenticationService, gruppenService: GruppenService) {
 
-  return () => authenticationService.initialize();
+  return () => authenticationService.initialize().pipe(flatMap(() => gruppenService.initGruppen())).toPromise();
 }
 
 export function getQueryVariable(variable) {

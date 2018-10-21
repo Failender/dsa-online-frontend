@@ -1,4 +1,12 @@
-<p-dialog [visible]="visible" header="Einloggen" (onHide)="hideDialog.emit()" width="500">
+<p-dialog [visible]="visible" (onHide)="hideDialog.emit()" width="500">
+
+  <p-header>
+    <div style="float:left" class="dialog-title">Einloggen</div>
+    <div style="float:right">
+      <button pButton icon="pi pi-times" class="dialog-close" (click)="hideDialog.emit()"></button>
+    </div>
+
+  </p-header>
 
   <form [formGroup]="form" (submit)="onSubmit()">
     <div class="ui-g">

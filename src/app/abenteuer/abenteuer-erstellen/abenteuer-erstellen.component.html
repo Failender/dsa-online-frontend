@@ -18,7 +18,11 @@
 
   <div class="ui-g">
     <label class="ui-g-3">Kampagne</label>
-    <p-dropdown class=ui-g-9 formControlName="kampagne" [options]="kampagnen" [style]="{width: '100%'}" placeholder="..."></p-dropdown>
+    <div class="ui-g-9" *ngIf="kampagneName; else kampagneDropdown">{{kampagneName}}</div>
+    <ng-template #kampagneDropdown>
+      <p-dropdown class=ui-g-9 formControlName="kampagne" [options]="kampagnen" [style]="{width: '100%'}" placeholder="..."></p-dropdown>
+    </ng-template>
+
   </div>
   <div class="ui-g">
     <button pButton type="submit" label="Erstellen" [disabled]="!isMeister"></button>

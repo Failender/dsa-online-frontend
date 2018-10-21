@@ -48,14 +48,6 @@ export class AbenteuerlogComponent implements OnInit {
   }
 
 
-  openAbenteuer(data) {
-    this.routingService.navigateByUrl(`abenteuer/${data.id}`)
-  }
-  deleteEntry(data) {
-    this.abenteuerService.deleteAbenteuer(data.id)
-      .subscribe(() => this.gruppenService.forceRefresh());
 
-
-  }
 
 }
