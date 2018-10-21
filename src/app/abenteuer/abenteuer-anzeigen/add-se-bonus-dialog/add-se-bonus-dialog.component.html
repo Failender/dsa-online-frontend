@@ -1,4 +1,4 @@
-<p-dialog (onHide)="onClose.emit(false)" [visible]="gruppeid" >
+<p-dialog (onHide)="onClose.emit(false)" [visible]="gruppeid" [positionTop]="50" width="800">
 
   <p-header>
     <div style="float:left" class="dialog-title">Se-Bonus eintragen</div>
@@ -8,19 +8,18 @@
 
 
   </p-header>
-
-  <div [formGroup]="form">
+  <form [formGroup]="form" (submit)="submit()">
     <div class="ui-g">
       <label class="ui-g-3">Held</label>
-      <p-dropdown class="ui-g-9" placeholder="..." formControlName="held" [options]="helden"></p-dropdown>
+      <p-dropdown class="ui-g-9" placeholder="..." formControlName="held" [options]="helden" appendTo="body"></p-dropdown>
     </div>
     <div class="ui-g">
       <label class="ui-g-3">SE</label>
-      <input type="number" pInputText class="ui-g-9" formControlName="ap">
+      <input type="text" pInputText class="ui-g-9" formControlName="se">
     </div>
     <div class="ui-g">
       <button type="submit" pButton label="Speichern"></button>
     </div>
-  </div>
+  </form>
 
 </p-dialog>

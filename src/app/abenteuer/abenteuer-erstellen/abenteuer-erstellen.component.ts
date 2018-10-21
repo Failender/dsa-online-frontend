@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {RoutingService} from "../../shared/routing.service";
@@ -132,10 +132,6 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   get bonusHelden() {
     return Object.keys(this.form.controls['bonus']['controls']);
-  }
-
-  heldname(id) {
-    return this.helden.find(value => value.value.id == id).label;
   }
 
   getBonus(name) {
