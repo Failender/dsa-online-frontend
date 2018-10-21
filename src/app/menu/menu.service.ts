@@ -31,7 +31,7 @@ export class MenuService {
   public items: CustomMenuItem[] = [
     this.createItem('Home', 'home'),
     this.createItem('Gruppen Ansicht', 'gruppen'),
-    this.createItem('Abenteuerlog', 'abenteuerlog'),
+    this.createItem('Abenteuer', 'abenteuer'),
     this.createItem('Kampagnen', 'kampagnen'),
     // this.createNoMobileItem('Kalender', 'kalender'),
   ];
@@ -52,7 +52,7 @@ export class MenuService {
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
     this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER),
-    this.createNestedItem('Abenteuerlog erstellen', 'abenteuerlog/create', 'Administration', MEISTER)
+    this.createNestedItem('Abenteuer erstellen', 'administration/abenteuer', 'Administration', MEISTER)
   ];
 
 

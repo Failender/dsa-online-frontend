@@ -1,16 +1,17 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from "@angular/core";
 import {KampagnenService} from "./kampagnen.service";
 import {GruppenService} from "../shared/gruppen.service";
 import {flatMap} from "rxjs/operators";
 import {tap} from "rxjs/internal/operators";
 import {Router} from "@angular/router";
+import {RoutingService} from "../shared/routing.service";
 
 @Component({
   selector: 'app-kampagnen',
   templateUrl: './kampagnen.component.html',
   styleUrls: ['./kampagnen.component.css']
 })
-export class KampagnenComponent implements OnInit {
+export class KampagnenComponent implements OnInit, OnDestroy {
 
 
   @Input() public delete = false;
@@ -19,7 +20,7 @@ export class KampagnenComponent implements OnInit {
   public loading = false;
   public sub;
 
-  constructor(private kampagneService: KampagnenService, private gruppenService: GruppenService, private router: Router) { }
+  constructor(private kampagneService: KampagnenService, private gruppenService: GruppenService, private router: RoutingService) { }
 
   ngOnInit() {
     this.sub = this.gruppenService.getCurrentGroup().pipe(tap(() => this.loading = true),
@@ -29,11 +30,16 @@ export class KampagnenComponent implements OnInit {
   }
 
   deleteKampagne(id) {
-    this.kampagneService.deleteKampagne(id);
+    this.kampagneService.deleteKampagne(id)
+      .subscribe(() => this.gruppenService.forceRefresh())
   }
 
   openKampagne(id) {
     this.router.navigateByUrl(`kampagne/${id}`);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

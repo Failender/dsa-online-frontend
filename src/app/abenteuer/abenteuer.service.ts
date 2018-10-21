@@ -10,7 +10,7 @@ export class AbenteuerService {
   constructor(private restService: RestService) { }
 
   public createAbenteuer(data): Observable<any> {
-    return this.restService.post('abenteuer', data);
+    return this.restService.post(`abenteuer/${data.gruppe}/${data.kampagne}/${data.name}/${data.ap}`, data);
   }
 
   public getAbenteuerForGruppe(gruppeid: number): Observable<any[]> {
@@ -19,5 +19,9 @@ export class AbenteuerService {
 
   public deleteAbenteuer(id): Observable<void> {
     return this.restService.delete('abenteuer/' + id);
+  }
+
+  public getAbenteuer(id): Observable<any> {
+    return this.restService.get('abenteuer/' + id);
   }
 }

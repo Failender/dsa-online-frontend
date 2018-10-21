@@ -1,8 +1,8 @@
 
 <div class="loader" *ngIf="loading; else table"></div>
 <ng-template #table>
-  <p-treeTable [value]="abenteuer" >
-    <ng-template pTemplate="emptymessage" let-columns>
+  <p-table [value]="abenteuer" >
+    <ng-template pTemplate="emptymessage">
       <tr>
         <td colspan="3">
           Kein Abenteuer gefunden
@@ -13,89 +13,19 @@
       <tr>
         <td>Name</td>
         <td>AP</td>
-        <td>SE's</td>
-        <td *ngIf="canEdit"></td>
+        <td></td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+    <ng-template pTemplate="body" let-data>
       <tr>
+        <td>{{data.name}}</td>
+        <td>{{data.ap}}</td>
         <td>
-          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-          {{rowData.name}}
-        </td>
-        <td>{{rowData.ap}}</td>
-        <td>{{rowData.ses}}</td>
-        <td *ngIf="canEdit">
-          <button pButton icon="pi pi-trash" (click)="deleteEntry(rowNode)"></button>
+          <button pButton icon="pi pi-search" (click)="openAbenteuer(data)"></button>
+          <button *ngIf="canEdit" pButton icon="pi pi-trash" (click)="deleteEntry(data)"></button>
         </td>
       </tr>
     </ng-template>
-  </p-treeTable>
+  </p-table>
 
 </ng-template>
-<!--<p-table [value]="abenteuer" dataKey="id">-->
-  <!--<ng-template pTemplate="header">-->
-    <!--<tr>-->
-      <!--<th style="width: 3em"></th>-->
-      <!--<th>Name</th>-->
-      <!--<th>AP</th>-->
-      <!--<th>SE's</th>-->
-
-    <!--</tr>-->
-  <!--</ng-template>-->
-  <!--<ng-template pTemplate="body" let-data let-expanded="expanded">-->
-    <!--<tr>-->
-      <!--<td>-->
-        <!--<a href="#" [pRowToggler]="data">-->
-          <!--<i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>-->
-        <!--</a>-->
-      <!--</td>-->
-      <!--<td>{{data.name}}</td>-->
-      <!--<td>{{data.bonusAll.ap}}</td>-->
-      <!--<td>{{joined(data.bonusAll.ses)}}</td>-->
-
-    <!--</tr>-->
-  <!--</ng-template>-->
-  <!--<ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">-->
-    <!--<p-table [value]="keys(rowData.bonus)" class="inner-table">-->
-      <!--<ng-template pTemplate="header" let-data>-->
-        <!--<tr>-->
-          <!--<td>Name {{data}}</td>-->
-          <!--<td>Bonus-AP</td>-->
-          <!--<td>SE's</td>-->
-        <!--</tr>-->
-      <!--</ng-template>-->
-      <!--<ng-template pTemplate="body" let-data>-->
-        <!--<tr>-->
-          <!--<td>{{data}}</td>-->
-          <!--<td>{{rowData.bonus[data].ap}}}</td>-->
-          <!--<td>{{rowData.bonus[data].ses}}}</td>-->
-        <!--</tr>-->
-      <!--</ng-template>-->
-    <!--</p-table>-->
-
-  <!--</ng-template>-->
-<!--</p-table>-->
-<!--<p-panel *ngFor="let ab of abenteuer" [header]="ab.name" [toggleable]="true" styleClass="fullsize">-->
-  <!--<p-header>-->
-    <!--<span class="pi pi-trash delete-icon" (click)="deleteAb(ab)"></span>-->
-  <!--</p-header>-->
-  <!--<div class="ui-g">-->
-    <!--<label class="ui-g-3">AP</label>-->
-    <!--<span class="ui-g-9"> {{ab.bonusAll.ap}}</span>-->
-  <!--</div>-->
-  <!--<div class="ui-g">-->
-    <!--<span class="ui-g-3">SE's</span>-->
-    <!--<span class="ui-g-9">{{joined(ab.bonusAll.ses)}}</span>-->
-  <!--</div>-->
-  <!--<p-panel *ngFor="let held of keys(ab.bonus)" [header]="held" [toggleable]="true" styleClass="subpanel">-->
-    <!--<div class="ui-g">-->
-      <!--<span class="ui-g-3">AP</span>-->
-      <!--<span class="ui-g-9">{{ab.bonus[held].ap}}</span>-->
-    <!--</div>-->
-    <!--<div class="ui-g">-->
-      <!--<span class="ui-g-3">SE's</span>-->
-      <!--<span class="ui-g-9">{{joined(ab.bonus[held].ses)}}</span>-->
-    <!--</div>-->
-  <!--</p-panel>-->
-<!--</p-panel>-->

@@ -12,7 +12,7 @@ export class RoutingService {
   }
 
   public navigateByUrl(url: string) {
-    if(!url) {
+    if (!url) {
       return;
     }
     if (this.heldenService.held) {

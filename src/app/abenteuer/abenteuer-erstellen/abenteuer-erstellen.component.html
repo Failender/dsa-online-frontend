@@ -1,47 +1,26 @@
+<app-abenteuerlog></app-abenteuerlog>
+<div class="ui-g" *ngIf="!isMeister">
+  Abenteuer-Erstellung ist nur für Gruppen deren Meister sie sind verfügbar
+</div>
 <form [formGroup]="form" (submit)="onSubmit()">
   <div class="ui-g">
     <label class="ui-g-3">Name</label>
     <input pInput type="text" class="ui-g-9" formControlName="name" #userinput>
   </div>
-
   <div class="ui-g">
-    <label class="ui-g-3">Gruppe</label>
-    <p-dropdown class=ui-g-9 formControlName="gruppe" [options]="gruppen" placeholder="..." (onChange)="onGruppeChange($event)"></p-dropdown>
-  </div>
-
-  <div class="ui-g" [formGroup]="getBonusAllControl()">
     <label class="ui-g-3">AP</label>
     <input pInput type="number" class="ui-g-9" formControlName="ap">
   </div>
   <div class="ui-g">
-    <label class="ui-g-3">SE</label>
-    <input pInput type="text" class="ui-g-9" (keydown.enter)="addSeForAll($event)">
-  </div>
-  <div class="ui-g" *ngFor="let se of getSesForAll(); let i= index">
-    <span class="ui-g-9">{{se}}</span>
-    <button class="ui-g-3 " pButton icon="pi pi-trash" (click)="removeSeForAll(i)"></button>
+    <div class="ui-g-3">Gruppe</div>
+    <div type="text" class=ui-g-9 >{{gruppenName}}</div>
   </div>
 
   <div class="ui-g">
-    <p-dropdown class=ui-g-9 [options]="helden" (onChange)="onHeldChange($event)"></p-dropdown>
-    <button pButton label="Bonus eintragen" class="dropdown-button" (click)="addBonusforHeld()"></button>
+    <label class="ui-g-3">Kampagne</label>
+    <p-dropdown class=ui-g-9 formControlName="kampagne" [options]="kampagnen" [style]="{width: '100%'}" placeholder="..."></p-dropdown>
   </div>
-  <p-panel *ngFor="let bonusHeld of bonusHelden" [header]="heldname(bonusHeld)" [toggleable]="true" [formGroup]="getBonus(bonusHeld)">
-    <div class="ui-g">
-      <label class="ui-g-3">AP</label>
-      <input pInput type="number" class="ui-g-9" formControlName="ap">
-    </div>
-    <div class="ui-g">
-      <label class="ui-g-3">SE</label>
-      <input pInput type="text" class="ui-g-9" (keydown.enter)="addSeForHeld($event, bonusHeld)">
-    </div>
-    <div class="ui-g" *ngFor="let se of getSesForHeld(bonusHeld); let i= index">
-      <span class="ui-g-9">{{se}}</span>
-      <button class="ui-g-3" pButton icon="pi pi-trash" (click)="removeSeForHeld(bonusHeld, i)"></button>
-    </div>
-
-  </p-panel>
   <div class="ui-g">
-    <button pButton type="submit" label="Erstellen"></button>
+    <button pButton type="submit" label="Erstellen" [disabled]="!isMeister"></button>
   </div>
 </form>

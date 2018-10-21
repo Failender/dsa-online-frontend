@@ -72,6 +72,7 @@ import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select
 import { KampagnenComponent } from './kampagnen/kampagnen.component';
 import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
 import { KampagneComponent } from './kampagne-component/kampagne.component';
+import { AbenteuerAnzeigenComponent } from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
 
 
 const appRoutes: Routes = [
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
   { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},
   { path: 'administration/meister', component: MeisterVerwaltungComponent, data: {title: 'Import'}},
+  { path: 'administration/abenteuer', component: AbenteuerErstellenComponent, data: {title: 'Abenteuer erstellen'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'gruppen', component: OeffentlicheHeldenComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
@@ -95,8 +97,8 @@ const appRoutes: Routes = [
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
   { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
-  { path: 'abenteuerlog', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
-  { path: 'abenteuerlog/create', component: AbenteuerErstellenComponent, data: {title: 'Abenteuerlog erstellen'}},
+  { path: 'abenteuer', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
+  { path: 'abenteuer/:id', component: AbenteuerAnzeigenComponent, data: {title: 'Abenteuerlog'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
 
   { path: '**', redirectTo : '/home' }
@@ -139,6 +141,7 @@ registerLocaleData(localeDe, 'de');
     KampagnenComponent,
     AdminKampagneComponent,
     KampagneComponent,
+    AbenteuerAnzeigenComponent,
   ],
   imports: [
     BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

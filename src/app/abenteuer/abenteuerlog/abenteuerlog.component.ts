@@ -3,6 +3,7 @@ import {AbenteuerService} from "../abenteuer.service";
 import {GruppeInfo, GruppenService, GruppeSelectItem} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
+import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-abenteuerlog',
@@ -14,12 +15,12 @@ export class AbenteuerlogComponent implements OnInit {
   public gruppen: SelectItem[];
 
 
-  public loading= true;
+  public loading = true;
   public canDelete: boolean;
   public abenteuer = [];
   public canEdit = false;
   private loadedGruppe = null;
-  constructor(private abenteuerService: AbenteuerService, private gruppenService: GruppenService) { }
+  constructor(private abenteuerService: AbenteuerService, private gruppenService: GruppenService, private routingService: RoutingService) { }
 
   ngOnInit() {
     this.gruppenService.getCurrentGroup()
@@ -32,25 +33,7 @@ export class AbenteuerlogComponent implements OnInit {
     this.abenteuerService.getAbenteuerForGruppe(gruppeinfo.id)
       .subscribe(data => {
         this.canEdit = gruppeinfo.meister;
-        this.abenteuer = data.map(entry => {
-          return {
-            data: {
-              name: entry.name,
-              ap: entry.bonusAll.ap,
-              id: entry.id,
-              ses: this.joined(entry.bonusAll.ses)
-            },
-            children: Object.keys(entry.bonus).map(key => {
-              return {
-                data: {
-                  name: key,
-                  ap: entry.bonus[key].ap,
-                  ses: this.joined(entry.bonus[key].ses)
-                }
-              };
-            })
-          };
-        });
+        this.abenteuer = data;
         this.loadedGruppe = gruppeinfo;
         this.loading = false;
       });
@@ -64,12 +47,14 @@ export class AbenteuerlogComponent implements OnInit {
     return Object.keys(data);
   }
 
-  deleteEntry(node) {
-    if (node.level === 0) {
-      const id = node.node.data.id;
-      this.abenteuerService.deleteAbenteuer(id)
-        .subscribe(() => this.loadAbenteuerForGruppe(this.loadedGruppe));
-    }
+
+  openAbenteuer(data) {
+    this.routingService.navigateByUrl(`abenteuer/${data.id}`)
+  }
+  deleteEntry(data) {
+    this.abenteuerService.deleteAbenteuer(data.id)
+      .subscribe(() => this.gruppenService.forceRefresh());
+
 
   }
 

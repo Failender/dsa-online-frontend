@@ -1,0 +1,14 @@
+<ng-container *ngIf="abenteuer; else loading">
+  <div class="ui-g">
+    <button pButton label="Abenteuerlog" (click)="back()"></button>
+    <button pButton label="Abenteuer erstellen" (click)="backToCreate()" *ngIf="  abenteuer.meister"></button>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-6">Name: {{abenteuer.name}}</div>
+    <div class="ui-g-6">AP: {{abenteuer.ap}}</div>
+  </div>
+
+</ng-container>
+<ng-template #loading>
+  <div class="loader"></div>
+</ng-template>

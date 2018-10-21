@@ -20,7 +20,7 @@ export interface GruppeSelectItem extends SelectItem {
 export class GruppenService {
 
   private currentGroup = new BehaviorSubject<GruppeInfo>(null);
-  private groups = new ReplaySubject<GruppeSelectItem[]>();
+  private groups = new BehaviorSubject<GruppeSelectItem[]>(null);
   private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
   constructor(private restService: RestService, authService: AuthenticationService) {
     this.getGruppen(true)
@@ -72,7 +72,14 @@ export class GruppenService {
   }
 
   public getGroups() {
-    return this.groups.asObservable();
+    return this.groups.asObservable().pipe(filter(val => val !== null));
+  }
+
+  public setGroupById(id: number) {
+    const group = this.groups.value.find(val => val.value.id === id).value;
+    if (group) {
+      this.setCurrentGroup(group);
+    }
   }
 
   public getMeisterGroups() {

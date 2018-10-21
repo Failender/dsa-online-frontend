@@ -2,19 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import {GruppenService} from "../../shared/gruppen.service";
 import {KampagnenService} from "../../kampagnen/kampagnen.service";
 import {MessageService} from "../../service/message/message.service";
+import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
+import {AuthenticationService, EDIT_KAMPAGNE} from "../../service/authentication/authentication.service";
+import {Router} from "@angular/router";
+import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-admin-kampagne',
   templateUrl: './admin-kampagne.component.html',
   styleUrls: ['./admin-kampagne.component.css']
 })
-export class AdminKampagneComponent implements OnInit {
-
+export class AdminKampagneComponent  extends AuthenticationRequiredComponent  {
 
   public name = "";
-  constructor(private gruppenService: GruppenService, private kampagneService: KampagnenService, private messageService: MessageService) { }
+  constructor(private gruppenService: GruppenService, private kampagneService: KampagnenService, private messageService: MessageService,
+              authenticationService: AuthenticationService, router: RoutingService) {
+    super(authenticationService, router);
+  }
 
-  ngOnInit() {
+  neededRight() {
+    return EDIT_KAMPAGNE;
+  }
+
+  init() {
   }
 
   createKampagne() {

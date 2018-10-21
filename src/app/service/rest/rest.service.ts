@@ -38,10 +38,13 @@ export class RestService {
       this.messageService.error('Server nicht erreichbar');
       return NEVER;
     }
-    if (error.status === 401) {
+    else if (error.status === 401) {
       this.messageService.error('Sie haben nicht das Recht dies zu tun');
     } else if (error.status === 500) {
-      this.messageService.error('Unerwarteter Fehler.')
+      this.messageService.error('Unerwarteter Fehler.');
+    }
+    else if (error.status === 404) {
+      this.messageService.error("Die angefragte Entität konnte nicht gefunden werden");
     }
     return of(error);
   }
