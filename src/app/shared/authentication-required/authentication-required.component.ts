@@ -12,12 +12,14 @@ export abstract class AuthenticationRequiredComponent implements OnInit {
     if  (this.authenticationService.authenticated) {
       if (this.neededRight()) {
         if (!this.authenticationService.rights.includes(this.neededRight())) {
+          console.debug('User does not got the permission ' + this.neededRight() + ' routing')
           this.router.navigateByUrl('/home');
         }
       }
       this.init();
     } else {
       this.router.navigateByUrl('/home');
+      console.debug('User is not logged in - routing')
     }
   }
 

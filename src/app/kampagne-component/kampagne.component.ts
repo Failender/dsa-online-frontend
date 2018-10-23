@@ -28,8 +28,8 @@ export class KampagneComponent implements OnInit {
   }
 
   private onKampagneLoaded() {
-    console.debug(this.kampagne)
     this.canEdit = this.gruppenService.hasEditRight(this.kampagne.gruppeId);
+
     this.abenteuerService.getAbenteuerForKampagne(this.kampagne.id)
       .subscribe(data => this.abenteuer = data);
   }

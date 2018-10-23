@@ -30,6 +30,7 @@ export class GruppenService {
       })
     authService.onLogout.subscribe(() => {
       this.meisterGroups.next([]);
+      this.initGruppen().subscribe();
     });
 
   }
@@ -116,6 +117,7 @@ export class GruppenService {
   }
 
   public hasEditRight(gruppeid) {
+    console.debug(this.getGruppe(gruppeid))
     return this.getGruppe(gruppeid).meister;
   }
 }
