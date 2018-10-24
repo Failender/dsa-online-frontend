@@ -69,3 +69,7 @@
   padding-left:10px !important;
   padding: 0em !important;
 }
+
+.abenteuer-held-card-header .ui-card-body {
+  padding:5px;
+}

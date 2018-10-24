@@ -33,7 +33,7 @@ export class AddSeBonusDialogComponent implements OnChanges {
   constructor(private gruppenService: GruppenService, private messageService: MessageService, private abenteuerService: AbenteuerService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.gruppeid) {
+    if (this.gruppeid) {
       this.gruppenService.getHeldenForGruppe(this.gruppeid, true)
         .pipe(map(data => {
           data.unshift({label: 'Gruppe', value: {id: -1}});

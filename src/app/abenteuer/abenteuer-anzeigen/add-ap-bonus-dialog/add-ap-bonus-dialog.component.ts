@@ -34,6 +34,10 @@ export class AddApBonusDialogComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.gruppeid) {
       this.gruppenService.getHeldenForGruppe(this.gruppeid, true)
+        .pipe(map(data => {
+          data.unshift({label: 'Gruppe', value: {id: -1}});
+          return data;
+        }))
         .subscribe(data => this.helden = data);
     }
   }

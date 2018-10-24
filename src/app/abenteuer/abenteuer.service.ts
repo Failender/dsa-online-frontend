@@ -48,15 +48,15 @@ export class AbenteuerService {
     return this.gruppenService.hasEditRight(id);
   }
 
-  public createSe(held: number, abenteuer: number, se: string) {
-    return this.restService.post(`abenteuer/se/${abenteuer}/${held}/${se}`, null);
-  }
-
   public createSeBonus(held: number, abenteuer: number, se: string) {
     return this.restService.post(`abenteuer/se/${abenteuer}/${held}/${se}`, null);
   }
 
   public createApBonus(held: number, abenteuer: number, ap: number) {
     return this.restService.post(`abenteuer/ap/${abenteuer}/${held}/${ap}`, null);
+  }
+
+  public deleteBonus(name: string, abenteuerid: number) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/` + name);
   }
 }

@@ -4,6 +4,7 @@ import {KampagnenService} from "../../kampagnen/kampagnen.service";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
 import {flatMap} from "rxjs/operators";
 import {RoutingService} from "../../shared/routing.service";
+import {MessageService} from "../../service/message/message.service";
 
 @Component({
   selector: 'app-abenteuer-anzeigen',
@@ -17,7 +18,8 @@ export class AbenteuerAnzeigenComponent implements OnInit {
   public addSeGruppeid: number = null;
   public addApGruppeid: number = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService, private router: RoutingService) { }
+  constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService,
+              private router: RoutingService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => this.loadAbenteuer(data.id))
@@ -52,6 +54,23 @@ export class AbenteuerAnzeigenComponent implements OnInit {
       this.loadAbenteuer(this.abenteuer.id)
     }
     this.addApGruppeid = null;
+  }
+
+  removeHeld(bonus: any) {
+    console.debug(bonus)
+    this.abenteuerService.deleteBonus(bonus.name, this.abenteuer.id)
+      .subscribe(() => {
+        this.messageService.info('Boni für Held ' + bonus.name + ' entfernt');
+        this.loadAbenteuer(this.abenteuer.id);
+      });
+  }
+
+  removeGruppe() {
+    this.abenteuerService.deleteBonus("gruppe", this.abenteuer.id)
+      .subscribe(() => {
+        this.messageService.info('Boni für Gruppe entfernt');
+        this.loadAbenteuer(this.abenteuer.id);
+      });
   }
 
 }

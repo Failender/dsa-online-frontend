@@ -12,11 +12,17 @@
     <button pButton label="AP hinzufügen" (click)="addApGruppeid = abenteuer.gruppeId"></button>
   </div>
 
-  <p-card class="ui-sm-6 ui-md-6 ui-g-4" title="Gruppe">
+  <p-card class="ui-sm-6 ui-md-6 ui-g-4" title="Gruppe" styleClass="abenteuer-held-card-header" *ngIf="abenteuer.bonusAll.ap !== 0 || abenteuer.bonusAll.ses.length !== 0">
+    <p-header><div class="card-header">
+      <i class="pi pi-times" (click)="removeGruppe()"></i>
+    </div></p-header>
     <div class="ui-g" *ngIf="abenteuer.bonusAll.ap !== 0">Abenteuerpunkte: {{abenteuer.bonusAll.ap}}</div>
     <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}}</div>
   </p-card>
-  <p-card *ngFor="let bonus of abenteuer.bonus" [title]="bonus.name" class=" ui-sm-6 ui-md-6 ui-g-4">
+  <p-card *ngFor="let bonus of abenteuer.bonus" [title]="bonus.name" class=" ui-sm-6 ui-md-6 ui-g-4" styleClass="abenteuer-held-card-header">
+    <p-header><div class="card-header">
+      <i class="pi pi-times" (click)="removeHeld(bonus)"></i>
+    </div></p-header>
     <div class="ui-g" *ngIf="bonus.bonus.ap !== 0">Bonus-AP: {{bonus.bonus.ap}}</div>
     <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}</div>
   </p-card>
