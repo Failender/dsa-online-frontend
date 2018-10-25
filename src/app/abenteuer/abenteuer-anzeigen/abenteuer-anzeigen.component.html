@@ -14,17 +14,20 @@
 
   <p-card class="ui-sm-6 ui-md-6 ui-g-4" title="Gruppe" styleClass="abenteuer-held-card-header" *ngIf="abenteuer.bonusAll.ap !== 0 || abenteuer.bonusAll.ses.length !== 0">
     <p-header><div class="card-header">
-      <i class="pi pi-times" (click)="removeGruppe()"></i>
+      <i class="pi pi-times" (click)="removeGruppe()" *ngIf="abenteuer.meister"></i>
     </div></p-header>
-    <div class="ui-g" *ngIf="abenteuer.bonusAll.ap !== 0">Abenteuerpunkte: {{abenteuer.bonusAll.ap}}</div>
-    <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}}</div>
+    <div class="ui-g" *ngIf="abenteuer.bonusAll.ap !== 0">
+      Abenteuerpunkte: {{abenteuer.bonusAll.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp('gruppe')" *ngIf="abenteuer.meister"></i>
+    </div>
+    <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}} <i class="pi pi-times delete-icon" (click)="deleteSe('gruppe', se)" *ngIf="abenteuer.meister"></i></div>
   </p-card>
+
   <p-card *ngFor="let bonus of abenteuer.bonus" [title]="bonus.name" class=" ui-sm-6 ui-md-6 ui-g-4" styleClass="abenteuer-held-card-header">
     <p-header><div class="card-header">
-      <i class="pi pi-times" (click)="removeHeld(bonus)"></i>
+      <i class="pi pi-times" (click)="removeHeld(bonus)" *ngIf="abenteuer.meister"></i>
     </div></p-header>
-    <div class="ui-g" *ngIf="bonus.bonus.ap !== 0">Bonus-AP: {{bonus.bonus.ap}}</div>
-    <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}</div>
+    <div class="ui-g" *ngIf="bonus.bonus.ap !== 0">Bonus-AP: {{bonus.bonus.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp(bonus.name)" *ngIf="abenteuer.meister"></i></div>
+    <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}<i class="pi pi-times delete-icon" (click)="deleteSe(bonus.name, se)" *ngIf="abenteuer.meister"></i></div>
   </p-card>
 
 

@@ -59,4 +59,14 @@ export class AbenteuerService {
   public deleteBonus(name: string, abenteuerid: number) {
     return this.restService.delete(`abenteuer/${abenteuerid}/bonus/` + name);
   }
+
+  public deleteSingleAp(name: string, abenteuerid: number) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/ap/` + name);
+  }
+
+  public deleteSingleSe(heldname: string, abenteuerid: number, name: string) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/ap/${heldname}/${name}`);
+  }
+
+
 }

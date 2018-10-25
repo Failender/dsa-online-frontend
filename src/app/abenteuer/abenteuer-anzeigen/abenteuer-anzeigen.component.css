@@ -4,3 +4,7 @@
   margin-right:5px;
   cursor: pointer;
 }
+
+.delete-icon {
+  line-height: 20px;
+}
