@@ -65,7 +65,7 @@ export class AbenteuerService {
   }
 
   public deleteSingleSe(heldname: string, abenteuerid: number, name: string) {
-    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/ap/${heldname}/${name}`);
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/se/${heldname}/${name}`);
   }
 
 
