@@ -4,11 +4,7 @@ export interface KalenderDaten {
   jetzt: DsaDatum;
   wochen: number[];
   tage: KalendarTag[];
-  legende: Legende;
-}
-
-export interface Legende {
-  items: LegendeItem[];
+  legende: LegendeItem[];
 }
 
 export interface LegendeItem {
@@ -86,6 +82,7 @@ export interface KalendarTag {
 export interface Event {
   name: string;
   color: string;
+  type: string;
 
 }
 export const START_YEAR = 1000;

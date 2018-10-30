@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DsaDatum, KalendarTag, KalenderDaten, START_YEAR, YEAR_LENGTH} from "./data";
+import {DsaDatum, KalendarTag, KalenderDaten, LegendeItem, START_YEAR, YEAR_LENGTH} from "./data";
 import {RestService} from "../service/rest/rest.service";
 import {Observable, of} from "rxjs/index";
 import {map} from "rxjs/internal/operators";
@@ -8,6 +8,7 @@ interface Event {
   name: string;
   date: number;
   id: number;
+  type: string;
 }
 
 interface EventResponse {
@@ -19,7 +20,18 @@ interface EventResponse {
 })
 export class KalenderService {
 
+  private constantLegende = {};
+
   constructor(private restService: RestService) {
+    this.constantLegende['GRUPPE'] = {
+      name: 'Gruppe',
+      farbe: 'red'
+    };
+    this.constantLegende['ABENTEUER'] = {
+      name: 'Abenteuer',
+      farbe: 'blue'
+    };
+
   }
 
   public toDsaDatum(value: number): DsaDatum {
@@ -50,6 +62,7 @@ export class KalenderService {
 
   private mapEventResponse(data: EventResponse, datum: DsaDatum, gruppe: number): KalenderDaten {
 
+    const legende = new Set();
     const dayOffset = (datum.jahr - START_YEAR + datum.monatValue * 2) % 7;
     let tage: KalendarTag[];
     let wochen;
@@ -72,19 +85,20 @@ export class KalenderService {
         tage = this.buildDays(dayOffset, datum.tag , 35, 30, datum.monatValue);
       }
     }
-    const mappedData = new Map();
     Object.keys(data).forEach(key => {
       const events: Event[] = data[key];
       events.forEach(event => {
+        const legendeItem = this.constantLegende[event.type];
+        legende.add(legendeItem);
         const relativeDay = (event.date % YEAR_LENGTH) % 30 + dayOffset;
-        tage[relativeDay].events.push({color: 'red', name: event.name});
+        tage[relativeDay].events.push({color: legendeItem.farbe, name: event.name, type: event.type});
 
       });
     });
     return {
       jetzt: datum,
-      tage, wochen, legende: null
-    }
+      tage, wochen, legende: Array.from(legende)
+    };
   }
 
 
