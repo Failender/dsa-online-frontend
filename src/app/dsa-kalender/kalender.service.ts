@@ -14,16 +14,30 @@ interface EventResponse {
   events: {[key: string]: Event[]};
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class KalenderService {
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService) {
+  }
 
   public toDsaDatum(value: number): DsaDatum {
     const jahr = START_YEAR + Math.floor(value / YEAR_LENGTH);
-    const tag = value % YEAR_LENGTH;
+    const tag = (value % YEAR_LENGTH) % 30;
     const monatValue = Math.floor(tag / 30);
     return new DsaDatum(jahr, monatValue, tag);
+  }
+
+  public toNumber(value: string) {
+    if (value.charAt(2) !== '.' || value.charAt(5) !== '.') {
+      throw new Error('Invalid format');
+    }
+    const tag = parseInt(value.substr(0, 2), 10);
+    const monat = parseInt(value.substr(3, 2), 10);
+    const jahr = parseInt(value.substr(6), 10) - 1000;
+
+    return jahr * YEAR_LENGTH + monat * 30 + tag;
   }
 
   public buildMonth(datum: DsaDatum, gruppe: number): Observable<KalenderDaten> {

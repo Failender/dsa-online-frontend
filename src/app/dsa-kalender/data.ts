@@ -35,47 +35,6 @@ export class DsaDatum {
     return this._monatValue;
   }
 
-  public addTage(tage: number): boolean {
-    this.tag += tage;
-    if(this.monatValue === 12) {
-     if(this.tag > 4) {
-       this.monatValue = 0;
-       this.tag = this.tag - 5;
-       this.jahr ++;
-       this.monat = MONATE[0];
-       return true;
-     }
-    } else {
-      if(this.tag > 30) {
-        this.tag -= 30;
-        this.monatValue ++;
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public removeTage(tage: number): boolean {
-    this.tag -= tage;
-
-    if (this.monatValue === 0) {
-      if (this.tag <= 0) {
-        this.jahr -= 1;
-        this.tag += 5;
-        this.monatValue = 12;
-        return true;
-      }
-    } else {
-      if (this.tag <= 0) {
-        this.tag += 30;
-        this.monatValue -= 1;
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   public naechsterMonat(): boolean {
     this.monatValue ++;
     if (this.monatValue === 13) {
@@ -103,6 +62,10 @@ export class DsaDatum {
       return true;
     }
     return false;
+  }
+
+  public toString() {
+    return this.tag + ". " + this.monat +  " " + this.jahr;
   }
 }
 

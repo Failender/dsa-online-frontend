@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {RestService} from "../service/rest/rest.service";
 import {Observable} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
+import {KalenderService} from '../dsa-kalender/kalender.service';
+import {DsaDatum} from '../dsa-kalender/data';
+import {map} from 'rxjs/operators';
 
 
 export interface AbenteuerDto {
@@ -12,6 +15,8 @@ export interface AbenteuerDto {
   kampagneId: number;
   kampagne: string;
   meister: boolean;
+  datumValue: number;
+  datum: DsaDatum;
   ap: number;
   bonus: any[];
   bonusAll: any;
@@ -21,18 +26,28 @@ export interface AbenteuerDto {
 })
 export class AbenteuerService {
 
-  constructor(private restService: RestService, private gruppenService: GruppenService) { }
+  constructor(private restService: RestService, private gruppenService: GruppenService, private kalenderService: KalenderService) { }
 
   public createAbenteuer(data): Observable<any> {
-    return this.restService.post(`abenteuer/${data.gruppe}/${data.kampagne}/${data.name}/${data.ap}`, data);
+    const datum = this.kalenderService.toNumber(data.datum);
+    return this.restService.post(`abenteuer/${data.gruppe}/${data.kampagne}/${data.name}/${data.ap}/${datum}`, data);
   }
 
   public getAbenteuerForGruppe(gruppeid: number): Observable<AbenteuerDto[]> {
-    return this.restService.get('abenteuer/gruppe/' + gruppeid);
+    return this.restService.get('abenteuer/gruppe/' + gruppeid)
+      .pipe(map(data => {
+        console.debug(data)
+        data.forEach(entry => this.mapAbenteuer(entry));
+        return data;
+      }));
   }
 
   public getAbenteuerForKampagne(kampagneid: number): Observable<AbenteuerDto[]> {
-    return this.restService.get('abenteuer/kampagne/' + kampagneid);
+    return this.restService.get('abenteuer/kampagne/' + kampagneid)
+      .pipe(map(data => {
+        data.forEach(entry => this.mapAbenteuer(entry));
+        return data;
+      }));
   }
 
   public deleteAbenteuer(id): Observable<void> {
@@ -40,12 +55,21 @@ export class AbenteuerService {
   }
 
   public getAbenteuer(id): Observable<AbenteuerDto> {
-    return this.restService.get('abenteuer/' + id);
+    return this.restService.get('abenteuer/' + id)
+      .pipe(map(data => this.mapAbenteuer(data)));
   }
 
   public canEdit(abenteuer: AbenteuerDto): boolean {
     const id = abenteuer.gruppeId;
     return this.gruppenService.hasEditRight(id);
+  }
+
+  private mapAbenteuer(abenteuer: AbenteuerDto): AbenteuerDto {
+    if (!abenteuer.datumValue) {
+      return abenteuer;
+    }
+    abenteuer.datum = this.kalenderService.toDsaDatum(abenteuer.datumValue);
+    return abenteuer;
   }
 
   public createSeBonus(held: number, abenteuer: number, se: string) {

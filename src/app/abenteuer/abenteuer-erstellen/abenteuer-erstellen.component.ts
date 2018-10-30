@@ -34,6 +34,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
     ap: new FormControl('', Validators.required),
     gruppe: new FormControl('', Validators.required),
     kampagne: new FormControl('', Validators.required),
+    datum: new FormControl('', Validators.required),
   });
 
   protected init(): void {

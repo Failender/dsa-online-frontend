@@ -10,7 +10,7 @@ import {SelectItem} from "primeng/api";
   selector: 'app-dsa-kalender',
   templateUrl: './dsa-kalender.component.html',
   styleUrls: ['./dsa-kalender.component.css'],
-  providers: [KalenderService]
+  providers: []
 })
 export class DsaKalenderComponent implements OnInit, OnDestroy {
 

@@ -11,6 +11,7 @@
       <td>Name</td>
       <td>Kampagne</td>
       <td>AP</td>
+      <td>Datum</td>
       <td></td>
     </tr>
   </ng-template>
@@ -19,6 +20,7 @@
       <td>{{data.name}}</td>
       <td>{{data.kampagne}}</td>
       <td>{{data.ap}}</td>
+      <td>{{data.datum.toString()}}</td>
       <td>
         <button pButton icon="pi pi-search" (click)="openAbenteuer(data)"></button>
         <button *ngIf="canEdit" pButton icon="pi pi-trash" (click)="deleteEntry(data)"></button>
