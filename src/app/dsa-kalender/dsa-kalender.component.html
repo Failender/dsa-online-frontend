@@ -20,7 +20,7 @@
             <div class="date-display">{{tag.tag}}</div>
           </div>
           <div class="ui-g event-row">
-            <div class="" *ngFor="let event of tag.events" [style.background-color]="event.color">
+            <div class="" *ngFor="let event of tag.events" [style.background-color]="event.color" (click)="onEventClick($event, event);">
               {{event.name}}
             </div>
           </div>

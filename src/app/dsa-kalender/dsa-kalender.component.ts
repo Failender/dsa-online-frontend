@@ -82,4 +82,10 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
   get monate(): SelectItem[] {
     return MONATE_DROPDOWN;
   }
+
+  onEventClick($event, event) {
+    $event.stopPropagation();
+    console.debug(event)
+    return false;
+  }
 }

@@ -24,8 +24,9 @@ export class KalenderService {
 
   public toDsaDatum(value: number): DsaDatum {
     const jahr = START_YEAR + Math.floor(value / YEAR_LENGTH);
-    const tag = (value % YEAR_LENGTH) % 30;
+    let tag = (value % YEAR_LENGTH);
     const monatValue = Math.floor(tag / 30);
+    tag %= 30;
     return new DsaDatum(jahr, monatValue, tag);
   }
 
@@ -34,7 +35,8 @@ export class KalenderService {
       throw new Error('Invalid format');
     }
     const tag = parseInt(value.substr(0, 2), 10);
-    const monat = parseInt(value.substr(3, 2), 10);
+    // The user expects to enter 01.01.1000 and make it the first day of the year, but we start with 01.00.1000
+    const monat = parseInt(value.substr(3, 2), 10) - 1;
     const jahr = parseInt(value.substr(6), 10) - 1000;
 
     return jahr * YEAR_LENGTH + monat * 30 + tag;

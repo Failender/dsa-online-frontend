@@ -117,7 +117,6 @@ export class GruppenService {
   }
 
   public hasEditRight(gruppeid) {
-    console.debug(this.getGruppe(gruppeid))
     return this.getGruppe(gruppeid).meister;
   }
 }

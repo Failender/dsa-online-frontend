@@ -33,7 +33,7 @@ export class MenuService {
     this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuer', 'abenteuer'),
     this.createItem('Kampagnen', 'kampagnen'),
-    // this.createNoMobileItem('Kalender', 'kalender'),
+    this.createNoMobileItem('Kalender', 'kalender'),
   ];
 
   public authenticatedItems: CustomMenuItem[] = [

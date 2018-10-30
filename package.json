@@ -21,7 +21,6 @@
     "@angular/platform-browser": "6.0.3",
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
-    "angular-calendar": "^0.25.2",
     "core-js": "^2.4.1",
     "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
