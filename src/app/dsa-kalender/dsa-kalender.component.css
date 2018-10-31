@@ -72,3 +72,7 @@ td {
   width: 350px;
   text-align: center;
 }
+
+.event{
+  cursor:pointer;
+}

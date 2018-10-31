@@ -36,7 +36,6 @@ export class AbenteuerService {
   public getAbenteuerForGruppe(gruppeid: number): Observable<AbenteuerDto[]> {
     return this.restService.get('abenteuer/gruppe/' + gruppeid)
       .pipe(map(data => {
-        console.debug(data)
         data.forEach(entry => this.mapAbenteuer(entry));
         return data;
       }));

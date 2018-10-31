@@ -91,7 +91,7 @@ export class KalenderService {
         const legendeItem = this.constantLegende[event.type];
         legende.add(legendeItem);
         const relativeDay = (event.date % YEAR_LENGTH) % 30 + dayOffset;
-        tage[relativeDay].events.push({color: legendeItem.farbe, name: event.name, type: event.type});
+        tage[relativeDay].events.push({color: legendeItem.farbe, name: event.name, type: event.type, id: event.id});
 
       });
     });

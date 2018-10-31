@@ -83,6 +83,7 @@ export interface Event {
   name: string;
   color: string;
   type: string;
+  id: number;
 
 }
 export const START_YEAR = 1000;
