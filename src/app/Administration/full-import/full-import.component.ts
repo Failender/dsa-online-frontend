@@ -29,7 +29,6 @@ export class FullImportComponent extends AuthenticationRequiredComponent {
   }
 
   onUpload(event) {
-    console.debug(event.xhr);
   }
 
 

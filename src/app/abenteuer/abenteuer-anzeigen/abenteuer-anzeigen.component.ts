@@ -22,11 +22,17 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
   public addApGruppeid: number = null;
 
   constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService,
-              private router: RoutingService, private messageService: MessageService, private authenticationService: AuthenticationService) { }
+              private router: RoutingService, private messageService: MessageService,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => this.loadAbenteuer(data.id));
-    this.sub = this.authenticationService.onLogin.subscribe(() => this.loadAbenteuer(this.abenteuer.id));
+
+    this.sub = this.authenticationService.onLogin.subscribe(() => {
+      if (this.abenteuer) {
+        this.loadAbenteuer(this.abenteuer.id);
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -65,7 +71,6 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
   }
 
   removeHeld(bonus: any) {
-    console.debug(bonus)
     this.abenteuerService.deleteBonus(bonus.name, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info('Boni für Held ' + bonus.name + ' entfernt');
@@ -96,6 +101,12 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
         this.messageService.info(`SE für ${name} entfernt`);
         this.loadAbenteuer(this.abenteuer.id);
       });
+  }
+
+  viewInCalendar() {
+    if (this.abenteuer) {
+      this.router.navigateByUrl('/kalender?date=' + this.abenteuer.datumValue);
+    }
   }
 
 }

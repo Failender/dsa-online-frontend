@@ -22,7 +22,6 @@ export class AbenteuerTabelleComponent implements OnInit, OnChanges {
     this.routingService.navigateByUrl(`abenteuer/${data.id}`)
   }
   deleteEntry(data) {
-    console.debug(data)
     this.abenteuerService.deleteAbenteuer(data.id)
       .subscribe(() => this.gruppenService.forceRefresh());
 

@@ -5,6 +5,8 @@ import {SubjectSubscription} from "rxjs/internal/SubjectSubscription";
 import {combineLatest, Subject, Subscription} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
+import {ActivatedRoute} from "@angular/router";
+import {RoutingService} from "../shared/routing.service";
 
 @Component({
   selector: 'app-dsa-kalender',
@@ -22,7 +24,8 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
   private heuteChanged = new Subject<DsaDatum>();
   private sub: Subscription;
 
-  constructor(private kalenderService: KalenderService, private gruppenService: GruppenService) { }
+  constructor(private kalenderService: KalenderService, private gruppenService: GruppenService, private route: ActivatedRoute,
+              private router: RoutingService) { }
 
   ngOnInit() {
     this.sub = combineLatest(this.gruppenService.getCurrentGroup(), this.heuteChanged.asObservable())
@@ -30,8 +33,12 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
         this.kalenderService.buildMonth(heute, gruppe.id)
           .subscribe(data => this.monat = data);
       });
-    this.buildMonth();
-
+    this.route.queryParams.subscribe(params => {
+      if (params.date) {
+        this.heute = this.kalenderService.toDsaDatum(params.date);
+      }
+      this.buildMonth();
+    });
 
   }
 
@@ -85,7 +92,9 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
 
   onEventClick($event, event) {
     $event.stopPropagation();
-    console.debug(event)
+    if(event.type === 'ABENTEUER') {
+      this.router.navigateByUrl(`/abenteuer/${event.id}`);
+    }
     return false;
   }
 }

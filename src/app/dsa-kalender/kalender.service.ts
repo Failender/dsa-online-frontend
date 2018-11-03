@@ -39,6 +39,7 @@ export class KalenderService {
     let tag = (value % YEAR_LENGTH);
     const monatValue = Math.floor(tag / 30);
     tag %= 30;
+    tag += 1;
     return new DsaDatum(jahr, monatValue, tag);
   }
 
