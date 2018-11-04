@@ -51,8 +51,6 @@ import { HeldVergleichComponent } from './held/held-vergleich/held-vergleich.com
 import { EreignisseTabelleComponent } from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
 import { TalenteTabelleComponent } from './shared/talente-tabelle/talente-tabelle.component';
 import { ZauberTabelleComponent } from './shared/zauber-tabelle/zauber-tabelle.component';
-
-import {CalendarDateFormatter, CalendarModule, CalendarUtils} from 'angular-calendar';
 import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
 import { SkriptComponent } from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
@@ -150,7 +148,7 @@ registerLocaleData(localeDe, 'de');
     AddApBonusDialogComponent,
   ],
   imports: [
-    BrowserAnimationsModule, CalendarModule.forRoot(), MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
+    BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
