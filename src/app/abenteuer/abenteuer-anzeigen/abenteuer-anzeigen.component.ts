@@ -32,7 +32,7 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
       if (this.abenteuer) {
         this.loadAbenteuer(this.abenteuer.id);
       }
-    }
+    });
   }
 
   ngOnDestroy() {
