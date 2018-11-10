@@ -12,25 +12,27 @@ import {RoutingService} from "../../shared/routing.service";
   templateUrl: './held-uebersicht.component.html',
   styleUrls: ['./held-uebersicht.component.css']
 })
-export class HeldUebersichtComponent extends HeldenComponent{
+export class HeldUebersichtComponent extends HeldenComponent {
 
 
 
   public pdfOptions;
 
+  public zauberButton = false;
+
   constructor(heldenService: HeldenService, private authenticationService: AuthenticationService, router: RoutingService) {
     super(heldenService, router);
-
   }
 
   protected init(): void {
+    this.zauberButton = this.held.zauberliste.zauber.length !== 0;
     const url = environment.rest + `download/pdf/${this.versioninfo.id}/${this.versioninfo.version}`
     if(this.authenticationService.authenticated) {
       this.pdfOptions = {
         url,
         httpHeaders: {
-          'X-USER': this.authenticationService.authentication.username,
-          'X-PASSWORD' : this.authenticationService.authentication.password
+          'username': this.authenticationService.authentication.username,
+          'password' : this.authenticationService.authentication.password
         }
       };
     } else {
@@ -39,6 +41,14 @@ export class HeldUebersichtComponent extends HeldenComponent{
       };
     }
 
+  }
+
+  ereignisse() {
+    this.routingService.navigateByUrl('held/ereignisse')
+  }
+
+  zauber(){
+    this.routingService.navigateByUrl('held/zauber')
   }
 
 }

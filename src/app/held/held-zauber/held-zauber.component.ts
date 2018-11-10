@@ -10,8 +10,18 @@ import {RoutingService} from "../../shared/routing.service";
 })
 export class HeldZauberComponent extends HeldenComponent {
 
+
+
   constructor(heldenService: HeldenService, router: RoutingService) {
     super(heldenService, router);
+  }
+
+  ereignisse() {
+    this.routingService.navigateByUrl('held/ereignisse')
+  }
+
+  uebersicht(){
+    this.routingService.navigateByUrl('held/uebersicht')
   }
 
 }

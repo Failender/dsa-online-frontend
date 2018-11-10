@@ -5,7 +5,7 @@ import {RoutingService} from "../../shared/routing.service";
 
 export abstract class HeldenComponent implements OnInit {
 
-  constructor(private heldenService: HeldenService, private routingService: RoutingService) { }
+  constructor(private heldenService: HeldenService, protected routingService: RoutingService) { }
 
   ngOnInit() {
     if (!this.heldenService.held) {

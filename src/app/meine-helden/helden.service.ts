@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from '../service/rest/rest.service';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject, Subject} from "rxjs";
 import {AuthenticationService} from '../service/authentication/authentication.service';
 import {tap} from 'rxjs/operators';
 
@@ -14,7 +14,9 @@ export class HeldenService {
   public held: any;
   public versionInfo;
 
-  public heldLoaded = new EventEmitter();
+  private _heldLoaded = new ReplaySubject<any>();
+
+  public heldLoaded = this._heldLoaded.asObservable();
 
   public getMeineHelden(): Observable<HeldenInfo[]> {
     return this.restService.get('helden');
@@ -32,7 +34,7 @@ export class HeldenService {
           id, version
         }
         this.held = data;
-        this.heldLoaded.emit();
+        this._heldLoaded.next();
       }));
   }
 

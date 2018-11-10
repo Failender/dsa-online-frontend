@@ -16,9 +16,9 @@
   </p-table>
 </p-panel>
 <p-panel header="Ergebnis">
-  <ng-container [ngSwitch]="result.resultType">
+  <ng-container [ngSwitch]="result.result?.resultType">
     <app-table-result *ngSwitchCase="'Table'" [result]="result.result"></app-table-result>
-    <app-text-result *ngSwitchCase="'Text'" [result]="result.result"></app-text-result>
+    <app-text-result *ngSwitchDefault [result]="result.result"></app-text-result>
   </ng-container>
 
 </p-panel>

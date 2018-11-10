@@ -7,6 +7,6 @@
   width: 100px;
 }
 
-/*th,td {*/
-  /*font-size: 14px;*/
-/*}*/
+.button-row {
+  margin-bottom: 5px;
+}

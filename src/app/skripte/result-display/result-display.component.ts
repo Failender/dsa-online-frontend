@@ -7,7 +7,6 @@ import {Component, Input, OnInit} from "@angular/core";
 })
 export class ResultDisplayComponent implements OnInit {
 
-
   @Input()
   public result: any;
 

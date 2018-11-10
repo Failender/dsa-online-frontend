@@ -11,12 +11,14 @@ import {SortEvent} from "primeng/api";
 })
 export class HeldEreignisseComponent extends HeldenComponent {
 
+  public zauberButton = false;
+
   constructor(heldenService: HeldenService, router: RoutingService) {
     super(heldenService, router);
   }
 
   init() {
-
+    this.zauberButton = this.held.zauberliste.zauber.length !== 0;
   }
 
   public getChange(data: any) {
@@ -33,6 +35,14 @@ export class HeldEreignisseComponent extends HeldenComponent {
       });
     }
 
+  }
+
+  uebersicht() {
+    this.routingService.navigateByUrl('held/uebersicht');
+  }
+
+  zauber(){
+    this.routingService.navigateByUrl('held/zauber');
   }
 
 

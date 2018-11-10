@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Skript, SkriptService, SkriptVariable} from '../skript.service';
 import {SelectItem} from "primeng/api";
 import {MessageService} from '../../service/message/message.service';
+import {tap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-skript',
@@ -11,6 +12,7 @@ import {MessageService} from '../../service/message/message.service';
 export class SkriptComponent implements OnInit {
 
 
+  public loading = false;
   public skriptSelect: SelectItem[];
   public types: any;
   public resultTypes: any;
@@ -72,10 +74,16 @@ export class SkriptComponent implements OnInit {
   }
 
   testrun() {
+    if(!this.current.body) {
+      this.messageService.info('Bitte ein Skript erstellen')
+      return;
+    }
     // TODO: Validate
+    this.loading = true;
     this.skriptService.test(this.current)
       .subscribe((data) => {
         this.testResult = data;
+        this.loading = false;
       });
   }
 

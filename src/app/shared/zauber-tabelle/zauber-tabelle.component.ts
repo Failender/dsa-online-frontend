@@ -16,4 +16,6 @@ export class ZauberTabelleComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
 }

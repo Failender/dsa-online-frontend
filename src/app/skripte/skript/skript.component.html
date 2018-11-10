@@ -59,4 +59,10 @@
   <button pButton label="Save" (click)="save()"></button>
 </div>
 
-<app-result-display [result]="testResult" *ngIf="testResult"></app-result-display>
+
+{{loading}}
+<div class="loader" *ngIf="loading; else result"></div>
+<ng-template #result>
+  <app-result-display [result]="testResult" *ngIf="testResult"></app-result-display>
+
+</ng-template>
