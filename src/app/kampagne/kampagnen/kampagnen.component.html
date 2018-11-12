@@ -3,22 +3,28 @@
 </div>
 
 <ng-template #data>
-  <p-table [value]="kampagnen" >
+  <p-table [value]="kampagnen" dataKey="id">
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="2">
+        <td colspan="3">
           Es konnte keine Kampagne für diese Gruppe gefunden werden
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
+        <th style="width:50px"></th>
         <th>Name</th>
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-data>
+    <ng-template pTemplate="body" let-data let-expanded="expanded">
       <tr>
+        <td>
+          <a href="#" [pRowToggler]="data">
+            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+          </a>
+        </td>
         <td>{{data.name}}</td>
 
         <td>
@@ -27,7 +33,13 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+      <td colspan="3">
+        <app-kampagne [kampagne]="rowData.id"></app-kampagne>
+      </td>
+
+    </ng-template>
   </p-table>
 </ng-template>
 
-<app-kampagne-dialog [kampagne]="kampagne" (dialogClosed)="kampagne = null"></app-kampagne-dialog>
+<!--<app-kampagne-dialog [kampagne]="kampagne" (dialogClosed)="kampagne = null"></app-kampagne-dialog>-->

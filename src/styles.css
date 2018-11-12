@@ -71,3 +71,8 @@
 .abenteuer-held-card-header .ui-card-body {
   padding:5px;
 }
+
+
+app-abenteuer-dialog .ui-dialog {
+  width: 80%;
+}

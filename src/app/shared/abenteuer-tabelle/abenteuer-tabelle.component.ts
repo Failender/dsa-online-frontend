@@ -13,6 +13,8 @@ export class AbenteuerTabelleComponent implements OnInit, OnChanges {
   @Input() public abenteuer: AbenteuerDto[] = [];
   public canEdit = false;
 
+  public abenteuerId;
+
   constructor(private routingService: RoutingService, private gruppenService: GruppenService, private abenteuerService: AbenteuerService) { }
 
   ngOnInit() {
@@ -21,6 +23,12 @@ export class AbenteuerTabelleComponent implements OnInit, OnChanges {
   openAbenteuer(data) {
     this.routingService.navigateByUrl(`abenteuer/${data.id}`)
   }
+
+  dialogAbenteuer(data) {
+    this.abenteuerId = data.id;
+  }
+
+
   deleteEntry(data) {
     this.abenteuerService.deleteAbenteuer(data.id)
       .subscribe(() => this.gruppenService.forceRefresh());

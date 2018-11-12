@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {KampagnenService} from "../../kampagne/kampagnen.service";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
@@ -12,69 +12,24 @@ import {AuthenticationService} from "../../service/authentication/authentication
   templateUrl: './abenteuer-anzeigen.component.html',
   styleUrls: ['./abenteuer-anzeigen.component.css']
 })
-export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
+export class AbenteuerAnzeigenComponent{
 
+  @Input()
   public abenteuer: AbenteuerDto;
 
-  private sub;
+  @Output()
+  public reload = new EventEmitter();
 
-  public addSeGruppeid: number = null;
-  public addApGruppeid: number = null;
+  constructor(private abenteuerService: AbenteuerService, private messageService: MessageService, private router: RoutingService) {
 
-  constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService,
-              private router: RoutingService, private messageService: MessageService,
-              private authenticationService: AuthenticationService) { }
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(data => this.loadAbenteuer(data.id));
-
-    this.sub = this.authenticationService.onLogin.subscribe(() => {
-      if (this.abenteuer) {
-        this.loadAbenteuer(this.abenteuer.id);
-      }
-    });
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
-  back() {
-    this.router.navigateByUrl("abenteuer")
-  }
-
-  private loadAbenteuer(id) {
-    this.abenteuerService.getAbenteuer(id)
-      .subscribe(data => this.abenteuer = data);
-  }
-
-  backToKampagne() {
-    this.router.navigateByUrl("kampagne/" + this.abenteuer.kampagneId);
-  }
-
-  backToCreate() {
-    this.router.navigateByUrl("administration/abenteuer")
-  }
-
-  onAddSeDialogClose(reload: boolean) {
-    if (reload) {
-      this.loadAbenteuer(this.abenteuer.id)
-    }
-    this.addSeGruppeid = null;
-  }
-
-  onAddApDialogClose(reload: boolean) {
-    if (reload) {
-      this.loadAbenteuer(this.abenteuer.id)
-    }
-    this.addApGruppeid = null;
-  }
 
   removeHeld(bonus: any) {
     this.abenteuerService.deleteBonus(bonus.name, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info('Boni für Held ' + bonus.name + ' entfernt');
-        this.loadAbenteuer(this.abenteuer.id);
+        this.reload.emit();
       });
   }
 
@@ -82,7 +37,7 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
     this.abenteuerService.deleteBonus("gruppe", this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info('Boni für Gruppe entfernt');
-        this.loadAbenteuer(this.abenteuer.id);
+        this.reload.emit();
       });
   }
 
@@ -90,7 +45,7 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
     this.abenteuerService.deleteSingleAp(name, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info(`AP-Bonus für ${name} entfernt`);
-        this.loadAbenteuer(this.abenteuer.id);
+        this.reload.emit();
       });
 
   }
@@ -99,7 +54,7 @@ export class AbenteuerAnzeigenComponent implements OnInit, OnDestroy {
     this.abenteuerService.deleteSingleSe(heldname, this.abenteuer.id, name)
       .subscribe(() => {
         this.messageService.info(`SE für ${name} entfernt`);
-        this.loadAbenteuer(this.abenteuer.id);
+        this.reload.emit();
       });
   }
 

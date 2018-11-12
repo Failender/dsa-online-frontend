@@ -1,0 +1,13 @@
+<p-dialog [visible]="true" (onHide)="dialogClosed.emit()" *ngIf="abenteuerData">
+
+  <p-header>
+    <div style="float:left" class="dialog-title">{{abenteuerData?.name}}</div>
+    <div style="float:right">
+      <button pButton icon="pi pi-times" class="dialog-close" (click)="dialogClosed.emit()"></button>
+    </div>
+
+  </p-header>
+
+  <app-abenteuer-anzeigen [abenteuer]="abenteuerData"></app-abenteuer-anzeigen>
+
+</p-dialog>

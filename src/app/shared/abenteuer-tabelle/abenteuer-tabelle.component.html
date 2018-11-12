@@ -22,9 +22,12 @@
       <td>{{data.ap}}</td>
       <td>{{data.datum.toString()}}</td>
       <td>
+        <button pButton icon="pi pi-window-maximize" (click)="dialogAbenteuer(data)"></button>
         <button pButton icon="pi pi-search" (click)="openAbenteuer(data)"></button>
         <button *ngIf="canEdit" pButton icon="pi pi-trash" (click)="deleteEntry(data)"></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+
+<app-abenteuer-dialog [abenteuer]="abenteuerId" (dialogClosed)="abenteuerId = null"></app-abenteuer-dialog>

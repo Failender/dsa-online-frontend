@@ -79,6 +79,8 @@ import { AddApBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-ap
 import {KampagneComponent} from "./kampagne/kampagne/kampagne.component";
 import { KampageRoutingComponent } from './kampagne/kampage-routing/kampage-routing.component';
 import { KampagneDialogComponent } from './kampagne/kampagne-dialog/kampagne-dialog.component';
+import { AbenteuerRoutingComponent } from './abenteuer/abenteuer-routing/abenteuer-routing.component';
+import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -104,7 +106,7 @@ const appRoutes: Routes = [
   { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'abenteuer', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
-  { path: 'abenteuer/:id', component: AbenteuerAnzeigenComponent, data: {title: 'Abenteuerlog'}},
+  { path: 'abenteuer/:id', component: AbenteuerRoutingComponent, data: {title: 'Abenteuerlog'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
 
   { path: '**', redirectTo : '/home' }
@@ -156,6 +158,8 @@ registerLocaleData(localeDe, 'de');
     TableResultComponent,
     KampageRoutingComponent,
     KampagneDialogComponent,
+    AbenteuerRoutingComponent,
+    AbenteuerDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
