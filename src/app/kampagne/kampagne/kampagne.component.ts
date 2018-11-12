@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {KampagnenService} from "../kampagnen/kampagnen.service";
+import {KampagnenService} from "../kampagnen.service";
 import {flatMap} from "rxjs/operators";
-import {GruppenService} from "../shared/gruppen.service";
-import {AbenteuerService} from "../abenteuer/abenteuer.service";
+import {GruppenService} from "../../shared/gruppen.service";
+import {AbenteuerService} from "../../abenteuer/abenteuer.service";
 
 @Component({
   selector: 'app-kampagne',

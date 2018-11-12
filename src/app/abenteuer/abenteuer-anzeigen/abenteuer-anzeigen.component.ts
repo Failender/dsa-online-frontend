@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {KampagnenService} from "../../kampagnen/kampagnen.service";
+import {KampagnenService} from "../../kampagne/kampagnen.service";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
 import {flatMap} from "rxjs/operators";
 import {RoutingService} from "../../shared/routing.service";

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GruppenService} from "../../shared/gruppen.service";
-import {KampagnenService} from "../../kampagnen/kampagnen.service";
+import {KampagnenService} from "../../kampagne/kampagnen.service";
 import {MessageService} from "../../service/message/message.service";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService, EDIT_KAMPAGNE} from "../../service/authentication/authentication.service";

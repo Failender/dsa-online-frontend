@@ -1,10 +1,9 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from "@angular/core";
-import {KampagnenService} from "./kampagnen.service";
-import {GruppenService} from "../shared/gruppen.service";
+import {KampagnenService} from "../kampagnen.service";
+import {GruppenService} from "../../shared/gruppen.service";
 import {flatMap} from "rxjs/operators";
 import {tap} from "rxjs/internal/operators";
-import {Router} from "@angular/router";
-import {RoutingService} from "../shared/routing.service";
+import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-kampagnen',

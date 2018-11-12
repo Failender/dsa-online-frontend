@@ -7,7 +7,7 @@ import {SelectItem} from "primeng/api";
 import {GruppenService} from "../../shared/gruppen.service";
 import {MessageService} from "../../service/message/message.service";
 import {AbenteuerService} from "../abenteuer.service";
-import {KampagnenService} from "../../kampagnen/kampagnen.service";
+import {KampagnenService} from "../../kampagne/kampagnen.service";
 import {map, tap} from "rxjs/internal/operators";
 
 @Component({

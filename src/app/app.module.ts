@@ -70,13 +70,13 @@ import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select
 import { ResultDisplayComponent } from './skripte/result-display/result-display.component';
 import { TextResultComponent } from './skripte/result-display/text-result/text-result.component';
 import { TableResultComponent } from './skripte/result-display/table-result/table-result.component';
-import { KampagnenComponent } from './kampagnen/kampagnen.component';
+import { KampagnenComponent } from './kampagne/kampagnen/kampagnen.component';
 import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
-import { KampagneComponent } from './kampagne-component/kampagne.component';
 import { AbenteuerAnzeigenComponent } from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
 import { AbenteuerTabelleComponent } from './shared/abenteuer-tabelle/abenteuer-tabelle.component';
 import { AddSeBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
 import { AddApBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
+import {KampagneComponent} from "./kampagne/kampagne/kampagne.component";
 
 
 const appRoutes: Routes = [

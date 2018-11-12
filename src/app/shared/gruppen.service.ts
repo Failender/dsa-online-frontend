@@ -37,7 +37,7 @@ export class GruppenService {
 
   public initGruppen(): Observable<any> {
     return this.getGruppen(true)
-      .pipe(tap(data => this.groups.next(data)))
+      .pipe(tap(data => this.groups.next(data)));
   }
 
   public forceRefresh() {
