@@ -3,7 +3,7 @@ import {UserAuthentication} from '../authentication/UserAuthentication';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable, NEVER as never, of, NEVER, } from "rxjs";
+import {Observable, NEVER as never, of, NEVER, throwError,} from "rxjs";
 import {catchError} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
 
@@ -18,9 +18,9 @@ export class RestService {
   }
 
 
-  public get(adress: string, asResponse?: boolean) {
+  public get(adress: string, asResponse?: boolean, handler?: any) {
     return this.http.get(environment.rest + adress, this.buildOptions(asResponse))
-      .pipe(catchError((e) => this.handleError(e)));
+      .pipe(catchError((e) => this.handleError(e, handler)));
   }
 
   public delete(adress: string, asResponse?: boolean) {
@@ -33,7 +33,10 @@ export class RestService {
       .pipe(catchError((event) => this.handleError(event)));
   }
 
-  private handleError(error: HttpErrorResponse): Observable<any> {
+  private handleError(error: HttpErrorResponse, handler?: any): Observable<any> {
+    if (handler) {
+      return handler(error);
+    }
     if (error.status === 0 || error.status === 502) {
       this.messageService.error('Server nicht erreichbar');
       return NEVER;
@@ -47,7 +50,7 @@ export class RestService {
       this.messageService.error("Die angefragte Entität konnte nicht gefunden werden");
       return NEVER;
     }
-    return of(error);
+    return throwError(error);
   }
 
   private buildOptions(asResponse?: boolean): any {

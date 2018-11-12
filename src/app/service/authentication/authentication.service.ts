@@ -38,8 +38,9 @@ export class AuthenticationService {
 
   public authenticate(authentication: UserAuthentication): Observable<string[]> {
     this.restService.authentication = authentication;
-    return this.restService.get('user/login')
-      .pipe(catchError((e) => this.handleAuthenticationError(e)))
+    return this.restService.get('user/login', false, e => {
+      return this.handleAuthenticationError(e);
+    })
       .pipe(
         tap((data: string[]) => this.rights = data),
         tap( () => this.authenticated = true),
@@ -49,6 +50,7 @@ export class AuthenticationService {
 
   private handleAuthenticationError(error: HttpErrorResponse) {
     let errorMsg = '';
+    console.debug(error)
     if (error.status === 401) {
       errorMsg = 'Falsche Logindaten';
     } else {

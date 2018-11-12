@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication/authentication.service';
 import {MessageService} from '../../service/message/message.service';
 import {SessionService} from '../../service/session/session.service';
+import {catchError} from "rxjs/internal/operators";
+import {NEVER, never} from "rxjs/index";
 
 @Component({
   selector: 'app-login',
