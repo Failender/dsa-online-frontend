@@ -15,6 +15,8 @@ export class KampagnenComponent implements OnInit, OnDestroy {
 
   @Input() public delete = false;
 
+  public kampagne;
+
   public kampagnen: any[];
   public loading = false;
   public sub;
@@ -30,11 +32,12 @@ export class KampagnenComponent implements OnInit, OnDestroy {
 
   deleteKampagne(id) {
     this.kampagneService.deleteKampagne(id)
-      .subscribe(() => this.gruppenService.forceRefresh())
+      .subscribe(() => this.gruppenService.forceRefresh());
   }
 
   openKampagne(id) {
-    this.router.navigateByUrl(`kampagne/${id}`);
+    this.kampagne = id;
+    // this.router.navigateByUrl(`kampagne/${id}`);
   }
 
   ngOnDestroy(): void {

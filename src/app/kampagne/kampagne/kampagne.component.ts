@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {KampagnenService} from "../kampagnen.service";
 import {flatMap} from "rxjs/operators";
@@ -12,7 +12,23 @@ import {AbenteuerService} from "../../abenteuer/abenteuer.service";
 })
 export class KampagneComponent implements OnInit {
 
-  public kampagne;
+
+  @Input()
+  public set kampagne(kampagne: number) {
+    if (!kampagne) {
+      return;
+    }
+    this.kampagnenService.getKampagne(kampagne)
+      .subscribe(data => {
+        this.kampagneData = data;
+        this.onKampagneLoaded();
+      });
+  }
+
+  @Output()
+  public kampagneLoaded = new EventEmitter();
+
+  public kampagneData;
   public canEdit = false;
   public abenteuer = [];
 
@@ -20,17 +36,14 @@ export class KampagneComponent implements OnInit {
               private abenteuerService: AbenteuerService) { }
 
   ngOnInit() {
-    this.activatedRoute.params.pipe(flatMap(data => this.kampagnenService.getKampagne(data.id)))
-      .subscribe(data => {
-        this.kampagne = data;
-        this.onKampagneLoaded();
-      });
+
   }
 
   private onKampagneLoaded() {
-    this.canEdit = this.gruppenService.hasEditRight(this.kampagne.gruppeId);
+    this.kampagneLoaded.next(this.kampagneData);
+    this.canEdit = this.gruppenService.hasEditRight(this.kampagneData.gruppeId);
 
-    this.abenteuerService.getAbenteuerForKampagne(this.kampagne.id)
+    this.abenteuerService.getAbenteuerForKampagne(this.kampagneData.id)
       .subscribe(data => this.abenteuer = data);
   }
 

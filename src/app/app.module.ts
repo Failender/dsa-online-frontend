@@ -77,6 +77,8 @@ import { AbenteuerTabelleComponent } from './shared/abenteuer-tabelle/abenteuer-
 import { AddSeBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
 import { AddApBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
 import {KampagneComponent} from "./kampagne/kampagne/kampagne.component";
+import { KampageRoutingComponent } from './kampagne/kampage-routing/kampage-routing.component';
+import { KampagneDialogComponent } from './kampagne/kampagne-dialog/kampagne-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -86,7 +88,7 @@ const appRoutes: Routes = [
     data: { title: 'Home' }
   },
   {path: 'kampagnen', component: KampagnenComponent},
-  {path: 'kampagne/:id', component: KampagneComponent},
+  {path: 'kampagne/:id', component: KampageRoutingComponent},
   {path: 'administration/kampagnen', component: AdminKampagneComponent},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
@@ -152,6 +154,8 @@ registerLocaleData(localeDe, 'de');
     ResultDisplayComponent,
     TextResultComponent,
     TableResultComponent,
+    KampageRoutingComponent,
+    KampagneDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

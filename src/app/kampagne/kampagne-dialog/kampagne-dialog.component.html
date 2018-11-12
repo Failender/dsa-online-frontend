@@ -1,0 +1,13 @@
+<p-dialog [visible]="kampagne" (onHide)="dialogClosed.emit()">
+
+  <p-header>
+    <div style="float:left" class="dialog-title">{{kampagneName}}</div>
+    <div style="float:right">
+      <button pButton icon="pi pi-times" class="dialog-close" (click)="dialogClosed.emit()"></button>
+    </div>
+
+  </p-header>
+
+  <app-kampagne [kampagne]="kampagne" (kampagneLoaded)="kampagneName = $event.name"></app-kampagne>
+
+</p-dialog>

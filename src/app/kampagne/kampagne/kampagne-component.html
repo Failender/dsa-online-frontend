@@ -5,12 +5,12 @@
   <div class="ui-g">
     <div class="ui-g-3"><b>Kampagne: </b></div>
     <div class="ui-g-9">
-      {{kampagne.name}}
+      {{kampagneData.name}}
     </div>
   </div>
 
 </p-card>
-<app-abenteuer-erstellen [kampagne]="kampagne" *ngIf="canEdit; else tabelle"></app-abenteuer-erstellen>
-<ng-template #tabelle>
+<!--<app-abenteuer-erstellen [kampagne]="kampagneData" *ngIf="canEdit; else tabelle"></app-abenteuer-erstellen>-->
+<!--<ng-template #tabelle>-->
   <app-abenteuer-tabelle [abenteuer]="abenteuer"></app-abenteuer-tabelle>
-</ng-template>
+<!--</ng-template>-->
