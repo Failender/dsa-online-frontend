@@ -31,7 +31,7 @@ export class FullExportComponent extends AuthenticationRequiredComponent {
     // 'X-USER': this.authenticationService.authentication.username,
     //   'X-PASSWORD' : this.authenticationService.authentication.password
     const a = document.createElement('a');
-    a.href = environment.rest + `administration/export/full?XPassword=${this.authenticationService.authentication.password}&XUser=${this.authenticationService.authentication.username}`;
+    a.href = environment.rest + `administration/export/full?password=${this.authenticationService.authentication.password}&username=${this.authenticationService.authentication.username}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
