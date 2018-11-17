@@ -22,16 +22,11 @@ export class GruppenService {
 
   private currentGroup = new BehaviorSubject<GruppeInfo>(null);
   private groups = new BehaviorSubject<GruppeSelectItem[]>(null);
-  private meisterGroups = new ReplaySubject<GruppeSelectItem[]>();
   constructor(private restService: RestService, authService: AuthenticationService) {
-    authService.onLogin.subscribe(() => {
-      this.getMeisterGruppen()
-        .subscribe(data => this.meisterGroups.next(data));
-      })
     authService.onLogout.subscribe(() => {
-      this.meisterGroups.next([]);
       this.initGruppen().subscribe();
     });
+    authService.onLogin.asObservable().subscribe(() => this.initGruppen().subscribe());
 
   }
 
