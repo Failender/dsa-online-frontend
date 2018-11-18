@@ -69,8 +69,6 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     this.addLmGruppeid = null;
   }
 
-
-
   onAddApDialogClose(reload: boolean) {
     if (reload) {
       this.loadAbenteuer(this.abenteuer.id);
@@ -90,6 +88,59 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     if (this.abenteuer) {
       this.router.navigateByUrl('/kalender?date=' + this.abenteuer.datumValue);
     }
+  }
+
+  copyToClipboard() {
+    const val = this.abToString();
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  abToString() {
+
+    let s = "";
+    s += this.abenteuer.name;
+    s += "\n";
+    s +=  "Abententeuerpunkte: "
+    s += this.abenteuer.bonusAll.ap;
+    s += "\n";
+    s = this.appendToAbString("Spezielle Erfahrungen", this.abenteuer.bonusAll.ses, s);
+    s += "\n";
+
+    this.abenteuer.bonus.forEach(bonus => {
+      s += bonus.name;
+      s += "\n";
+      if (bonus.bonus.ap !== 0) {
+        s += "Bonus-AP: " + bonus.bonus.ap;
+        s += "\n";
+      }
+      s = this.appendToAbString("SE's", bonus.bonus.ses, s);
+      s = this.appendToAbString("LM's", bonus.bonus.lms, s);
+      s += "\n";
+    })
+    return s;
+  }
+
+  appendToAbString(title: string, entries: string[], s: string) {
+    if (entries.length !== 0) {
+      s += title;
+      s += "\n";
+      entries.forEach(entry =>  {
+        s += entry;
+        s += "\n";
+      });
+    }
+
+    return s;
   }
 
 }
