@@ -5,7 +5,7 @@
     <i class="pi pi-times" (click)="removeGruppe()" *ngIf="abenteuer.meister"></i>
   </div></p-header>
   <div class="ui-g" *ngIf="abenteuer.bonusAll.ap !== 0">
-    Abenteuerpunkte: {{abenteuer.bonusAll.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp('gruppe')" *ngIf="abenteuer.meister"></i>
+    AP: {{abenteuer.bonusAll.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp('gruppe')" *ngIf="abenteuer.meister"></i>
   </div>
   <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}} <i class="pi pi-times delete-icon" (click)="deleteSe('gruppe', se)" *ngIf="abenteuer.meister"></i></div>
 </p-card>
