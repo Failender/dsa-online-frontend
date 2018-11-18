@@ -110,7 +110,7 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     let s = "";
     s += this.abenteuer.name;
     s += "\n";
-    s +=  "Abententeuerpunkte: "
+    s +=  "Abenteuerpunkte: "
     s += this.abenteuer.bonusAll.ap;
     s += "\n";
     s = this.appendToAbString("Spezielle Erfahrungen", this.abenteuer.bonusAll.ses, s);
