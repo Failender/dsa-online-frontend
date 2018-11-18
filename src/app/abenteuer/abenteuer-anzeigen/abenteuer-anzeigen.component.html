@@ -15,7 +15,10 @@
     <i class="pi pi-times" (click)="removeHeld(bonus)" *ngIf="abenteuer.meister"></i>
   </div></p-header>
   <div class="ui-g" *ngIf="bonus.bonus.ap !== 0">Bonus-AP: {{bonus.bonus.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp(bonus.name)" *ngIf="abenteuer.meister"></i></div>
+  <div class="ui-g" *ngIf="bonus.bonus.ses.length !== 0"><b>SE's</b></div>
   <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}<i class="pi pi-times delete-icon" (click)="deleteSe(bonus.name, se)" *ngIf="abenteuer.meister"></i></div>
+  <div class="ui-g" *ngIf="bonus.bonus.lms.length !== 0"><b>Lehrmeister</b></div>
+  <div class="ui-g" *ngFor="let lm of bonus.bonus.lms">{{lm}}<i class="pi pi-times delete-icon" (click)="deleteLm(bonus.name, lm)" *ngIf="abenteuer.meister"></i></div>
 </p-card>
 
 

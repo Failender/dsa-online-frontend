@@ -58,6 +58,14 @@ export class AbenteuerAnzeigenComponent{
       });
   }
 
+  deleteLm(heldname: string, name: string) {
+    this.abenteuerService.deleteSingleLm(heldname, this.abenteuer.id, name)
+      .subscribe(() => {
+        this.messageService.info(`LM für ${name} entfernt`);
+        this.reload.emit();
+      });
+  }
+
   viewInCalendar() {
     if (this.abenteuer) {
       this.router.navigateByUrl('/kalender?date=' + this.abenteuer.datumValue);

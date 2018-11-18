@@ -79,6 +79,14 @@ export class AbenteuerService {
     return this.restService.post(`abenteuer/ap/${abenteuer}/${held}/${ap}`, null);
   }
 
+  public createLmBonus(held: number, abenteuer: number, lm: string) {
+    return this.restService.post(`abenteuer/lm/${abenteuer}/${held}/${lm}`, null);
+  }
+
+  public createNote(held: number, abenteuer: number, note: string) {
+    return this.restService.post(`abenteuer/note/${abenteuer}/${held}/${note}`, null);
+  }
+
   public deleteBonus(name: string, abenteuerid: number) {
     return this.restService.delete(`abenteuer/${abenteuerid}/bonus/` + name);
   }
@@ -89,6 +97,10 @@ export class AbenteuerService {
 
   public deleteSingleSe(heldname: string, abenteuerid: number, name: string) {
     return this.restService.delete(`abenteuer/${abenteuerid}/bonus/se/${heldname}/${name}`);
+  }
+
+  public deleteSingleLm(heldname: string, abenteuerid: number, name: string) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/lm/${heldname}/${name}`);
   }
 
 

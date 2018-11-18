@@ -81,6 +81,7 @@ import { KampageRoutingComponent } from './kampagne/kampage-routing/kampage-rout
 import { KampagneDialogComponent } from './kampagne/kampagne-dialog/kampagne-dialog.component';
 import { AbenteuerRoutingComponent } from './abenteuer/abenteuer-routing/abenteuer-routing.component';
 import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
+import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
 
 
 const appRoutes: Routes = [
@@ -110,7 +111,7 @@ const appRoutes: Routes = [
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
 
   { path: '**', redirectTo : '/home' }
-]
+];
 
 registerLocaleData(localeDe, 'de');
 
@@ -153,6 +154,7 @@ registerLocaleData(localeDe, 'de');
     AbenteuerTabelleComponent,
     AddSeBonusDialogComponent,
     AddApBonusDialogComponent,
+    AddLmBonusDialogComponent,
     ResultDisplayComponent,
     TextResultComponent,
     TableResultComponent,
@@ -164,7 +166,8 @@ registerLocaleData(localeDe, 'de');
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
-    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
+    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule,
+    AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

@@ -12,6 +12,7 @@
   <div class="ui-g" *ngIf="abenteuer.meister">
     <button pButton label="SE hinzufügen" (click)="addSeGruppeid = abenteuer.gruppeId"></button>
     <button pButton label="AP hinzufügen" (click)="addApGruppeid = abenteuer.gruppeId"></button>
+    <button pButton label="LM hinzufügen" (click)="addLmGruppeid = abenteuer.gruppeId"></button>
   </div>
 
   <app-abenteuer-anzeigen [abenteuer]="abenteuer" (reload)="reload()"></app-abenteuer-anzeigen>
@@ -23,3 +24,4 @@
 
 <app-add-se-bonus-dialog *ngIf="abenteuer" [abenteuer]="abenteuer.id" [gruppeid]="addSeGruppeid" (onClose)="onAddSeDialogClose($event)"></app-add-se-bonus-dialog>
 <app-add-ap-bonus-dialog *ngIf="abenteuer" [abenteuer]="abenteuer.id" [gruppeid]="addApGruppeid" (onClose)="onAddApDialogClose($event)"></app-add-ap-bonus-dialog>
+<app-add-lm-bonus-dialog *ngIf="abenteuer" [abenteuer]="abenteuer.id" [gruppeid]="addLmGruppeid" (onClose)="onAddLmDialogClose($event)"></app-add-lm-bonus-dialog>

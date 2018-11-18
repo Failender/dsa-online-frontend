@@ -19,6 +19,7 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
 
   public addSeGruppeid: number = null;
   public addApGruppeid: number = null;
+  public addLmGruppeid: number = null;
 
 
   constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService,
@@ -60,6 +61,15 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     }
     this.addSeGruppeid = null;
   }
+
+  onAddLmDialogClose(reload: boolean) {
+    if (reload) {
+      this.loadAbenteuer(this.abenteuer.id);
+    }
+    this.addLmGruppeid = null;
+  }
+
+
 
   onAddApDialogClose(reload: boolean) {
     if (reload) {
