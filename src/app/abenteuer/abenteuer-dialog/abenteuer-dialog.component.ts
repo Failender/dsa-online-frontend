@@ -13,7 +13,6 @@ export class AbenteuerDialogComponent implements OnInit {
 
   @Input()
   public set abenteuer(value) {
-    console.debug(value)
     if (value) {
       this.abenteuerService.getAbenteuer(value)
         .subscribe(data => this.abenteuerData = data);
