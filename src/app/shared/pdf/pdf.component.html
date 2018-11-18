@@ -2,4 +2,7 @@
 <div class="ui-g">
   <button pButton label="Download" (click)="download()"></button>
 </div>
-<pdf-viewer [src]="pdfOptions" ></pdf-viewer>
+<div class="ui-g">
+
+  <pdf-viewer [fit-to-page]="true" [src]="pdfOptions" style="width: 100%"></pdf-viewer>
+</div>

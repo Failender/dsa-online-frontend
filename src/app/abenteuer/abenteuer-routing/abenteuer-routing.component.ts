@@ -86,4 +86,10 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  viewInCalendar() {
+    if (this.abenteuer) {
+      this.router.navigateByUrl('/kalender?date=' + this.abenteuer.datumValue);
+    }
+  }
+
 }

@@ -66,10 +66,4 @@ export class AbenteuerAnzeigenComponent{
       });
   }
 
-  viewInCalendar() {
-    if (this.abenteuer) {
-      this.router.navigateByUrl('/kalender?date=' + this.abenteuer.datumValue);
-    }
-  }
-
 }
