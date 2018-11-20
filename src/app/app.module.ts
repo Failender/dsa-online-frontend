@@ -82,6 +82,7 @@ import { KampagneDialogComponent } from './kampagne/kampagne-dialog/kampagne-dia
 import { AbenteuerRoutingComponent } from './abenteuer/abenteuer-routing/abenteuer-routing.component';
 import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
 import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
+import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-note-bonus-dialog/add-note-bonus-dialog.component";
 
 
 const appRoutes: Routes = [
@@ -154,6 +155,7 @@ registerLocaleData(localeDe, 'de');
     AbenteuerTabelleComponent,
     AddSeBonusDialogComponent,
     AddApBonusDialogComponent,
+    AddNoteBonusDialogComponent,
     AddLmBonusDialogComponent,
     ResultDisplayComponent,
     TextResultComponent,

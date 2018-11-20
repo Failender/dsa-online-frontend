@@ -12,7 +12,7 @@ import {AuthenticationService} from "../../service/authentication/authentication
   templateUrl: './abenteuer-anzeigen.component.html',
   styleUrls: ['./abenteuer-anzeigen.component.css']
 })
-export class AbenteuerAnzeigenComponent{
+export class AbenteuerAnzeigenComponent {
 
   @Input()
   public abenteuer: AbenteuerDto;
@@ -62,6 +62,14 @@ export class AbenteuerAnzeigenComponent{
     this.abenteuerService.deleteSingleLm(heldname, this.abenteuer.id, name)
       .subscribe(() => {
         this.messageService.info(`LM für ${name} entfernt`);
+        this.reload.emit();
+      });
+  }
+
+  deleteNote(id) {
+    this.abenteuerService.deleteNote(this.abenteuer.id, id)
+      .subscribe(() => {
+        this.messageService.info(`Notiz entfernt`);
         this.reload.emit();
       });
   }

@@ -1,0 +1,19 @@
+<p-dialog (onHide)="onClose.emit(false)" [visible]="gruppeid" [positionTop]="50" [positionLeft]="20">
+
+  <p-header>
+    <div style="float:left" class="dialog-title">Se-Bonus eintragen</div>
+    <div style="float:right">
+      <button pButton icon="pi pi-times" class="dialog-close" (click)="onClose.emit(false)"></button>
+    </div>
+
+  </p-header>
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="ui-g">
+      <textarea pInputTextarea formControlName="note"></textarea>
+    </div>
+    <div class="ui-g">
+      <button type="submit" pButton label="Speichern"></button>
+    </div>
+  </form>
+
+</p-dialog>

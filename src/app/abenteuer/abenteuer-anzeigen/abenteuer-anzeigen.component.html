@@ -21,7 +21,8 @@
   <div class="ui-g" *ngFor="let lm of bonus.bonus.lms">{{lm}}<i class="pi pi-times delete-icon" (click)="deleteLm(bonus.name, lm)" *ngIf="abenteuer.meister"></i></div>
 </p-card>
 
-
-
-
-
+<p-card title="Notizen" *ngIf="abenteuer.notes.length !== 0" class="ui-sm-12 ui-md-12 ui-g-12">
+  <div class="ui-g" *ngFor="let note of abenteuer.notes">
+    <i class="pi pi-times delete-icon" (click)="deleteNote(note.id)" *ngIf="abenteuer.meister"></i>{{note.note}}
+  </div>
+</p-card>

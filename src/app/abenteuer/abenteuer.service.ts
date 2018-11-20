@@ -19,6 +19,7 @@ export interface AbenteuerDto {
   datum: DsaDatum;
   ap: number;
   bonus: any[];
+  notes: {id: number, note: string}[];
   bonusAll: any;
 }
 @Injectable({
@@ -83,8 +84,8 @@ export class AbenteuerService {
     return this.restService.post(`abenteuer/lm/${abenteuer}/${held}/${lm}`, null);
   }
 
-  public createNote(held: number, abenteuer: number, note: string) {
-    return this.restService.post(`abenteuer/note/${abenteuer}/${held}/${note}`, null);
+  public createNote(abenteuer: number, note: string) {
+    return this.restService.post(`abenteuer/note/${abenteuer}`, note);
   }
 
   public deleteBonus(name: string, abenteuerid: number) {
@@ -101,6 +102,10 @@ export class AbenteuerService {
 
   public deleteSingleLm(heldname: string, abenteuerid: number, name: string) {
     return this.restService.delete(`abenteuer/${abenteuerid}/bonus/lm/${heldname}/${name}`);
+  }
+
+  public deleteNote(abenteuerid: number, noteid: number) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/note/${noteid}`);
   }
 
 
