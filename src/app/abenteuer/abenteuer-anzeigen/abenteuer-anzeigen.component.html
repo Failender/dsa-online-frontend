@@ -1,6 +1,6 @@
 
 
-<ngx-masonry>
+<ngx-masonry [options]="{'transitionDuration': '0'}">
   <ngxMasonryItem *ngIf="abenteuer.bonusAll.ap !== 0 || abenteuer.bonusAll.ses.length !== 0" class="ui-sm-6 ui-md-6 ui-g-4">
     <p-card  title="Gruppe" styleClass="abenteuer-held-card-header">
       <p-header><div class="card-header">
