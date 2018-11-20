@@ -83,6 +83,7 @@ import { AbenteuerRoutingComponent } from './abenteuer/abenteuer-routing/abenteu
 import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
 import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
 import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-note-bonus-dialog/add-note-bonus-dialog.component";
+import {NgxMasonryModule} from "ngx-masonry";
 
 
 const appRoutes: Routes = [
@@ -168,7 +169,7 @@ registerLocaleData(localeDe, 'de');
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
-    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule,
+    HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, NgxMasonryModule,
     AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
     RouterModule.forRoot(
       appRoutes,
