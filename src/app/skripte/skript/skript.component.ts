@@ -3,6 +3,7 @@ import {Skript, SkriptService, SkriptVariable} from '../skript.service';
 import {SelectItem} from "primeng/api";
 import {MessageService} from '../../service/message/message.service';
 import {tap} from "rxjs/internal/operators";
+import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-skript',
@@ -35,7 +36,7 @@ export class SkriptComponent implements OnInit {
     resultType: null
   };
 
-  constructor(private skriptService: SkriptService, private messageService: MessageService) { }
+  constructor(private skriptService: SkriptService, private messageService: MessageService, private router: RoutingService) { }
 
   ngOnInit() {
     this.skriptService.getSkripte()
@@ -101,6 +102,10 @@ export class SkriptComponent implements OnInit {
 
   deleteVariable(i) {
     this.current.scriptVariables.splice(i,1);
+  }
+
+  open() {
+    this.router.navigateByUrl('scripts/' + this.current.id);
   }
 
 }

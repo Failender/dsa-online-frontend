@@ -56,11 +56,10 @@
 
 <div class="ui-g">
   <button pButton label="Testlauf" (click)="testrun()"></button>
-  <button pButton label="Save" (click)="save()"></button>
+  <button pButton label="Speichern" (click)="save()"></button>
+  <button pButton label="Öffnen" (click)="open()" *ngIf="current.id"></button>
 </div>
 
-
-{{loading}}
 <div class="loader" *ngIf="loading; else result"></div>
 <ng-template #result>
   <app-result-display [result]="testResult" *ngIf="testResult"></app-result-display>

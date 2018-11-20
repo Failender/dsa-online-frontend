@@ -1,0 +1,6 @@
+
+<div class="loader" *ngIf="loading; else display"></div>
+<ng-template #display>
+  <app-result-display [result]="result"></app-result-display>
+
+</ng-template>

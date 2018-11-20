@@ -32,6 +32,10 @@ export class SkriptService {
   public save(script: Skript) {
     return this.restService.post('scripts/save', script);
   }
+
+  public execute(id) {
+    return this.restService.get('scripts/execute/' + id);
+  }
 }
 
 

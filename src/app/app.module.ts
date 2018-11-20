@@ -84,6 +84,7 @@ import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer
 import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
 import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-note-bonus-dialog/add-note-bonus-dialog.component";
 import {NgxMasonryModule} from "ngx-masonry";
+import { SkriptRoutingComponent } from './skripte/skript-routing/skript-routing.component';
 
 
 const appRoutes: Routes = [
@@ -108,6 +109,7 @@ const appRoutes: Routes = [
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
   { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
+  { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
   { path: 'abenteuer', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
   { path: 'abenteuer/:id', component: AbenteuerRoutingComponent, data: {title: 'Abenteuerlog'}},
   { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
@@ -165,6 +167,7 @@ registerLocaleData(localeDe, 'de');
     KampagneDialogComponent,
     AbenteuerRoutingComponent,
     AbenteuerDialogComponent,
+    SkriptRoutingComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,
