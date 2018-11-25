@@ -80,5 +80,10 @@
 
 
 .ui-dialog-content .ui-widget-content {
-  width: calc(100% - 38px);
+  /*width: calc(100% - 0px);*/
+}
+
+table {
+  min-width:100%;
+  width: initial !important;
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
 import {RoutingService} from "../../shared/routing.service";
 import {ActivatedRoute} from "@angular/router";
@@ -12,7 +12,6 @@ import {MessageService} from "../../service/message/message.service";
 })
 export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
 
-  @Input()
   public abenteuer: AbenteuerDto;
 
   private sub;
@@ -21,6 +20,9 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
   public addNoteGruppeid : number = null;
   public addApGruppeid: number = null;
   public addLmGruppeid: number = null;
+
+  public editName = false;
+  public editDatum = false;
 
 
   constructor(private activatedRoute: ActivatedRoute, private abenteuerService: AbenteuerService,
@@ -149,6 +151,18 @@ export class AbenteuerRoutingComponent implements OnInit, OnDestroy {
     }
 
     return s;
+  }
+
+  finishEditName() {
+    this.editName = false;
+    this.abenteuerService.editName(this.abenteuer.id, this.abenteuer.name)
+      .subscribe(() => this.reload());
+  }
+
+  finishEditDatum() {
+    this.editDatum = false
+    this.abenteuerService.editDatum(this.abenteuer.id, this.abenteuer.datum)
+      .subscribe(() => this.reload());
   }
 
 }

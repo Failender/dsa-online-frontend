@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UserAuthentication} from '../authentication/UserAuthentication';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable, NEVER as never, of, NEVER, throwError,} from "rxjs";
+import {NEVER, Observable, throwError,} from "rxjs";
 import {catchError} from 'rxjs/operators';
 import {MessageService} from '../message/message.service';
 
@@ -28,7 +28,7 @@ export class RestService {
       .pipe(catchError((e) => this.handleError(e)));
   }
 
-  public post(adress: string, body: any, asResponse?: boolean) {
+  public post(adress: string, body?: any, asResponse?: boolean) {
     return this.http.post(environment.rest + adress, body, this.buildOptions(asResponse))
       .pipe(catchError((event) => this.handleError(event)));
   }

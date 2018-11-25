@@ -8,9 +8,26 @@
 
   </div>
   <div class="ui-g">
-    <div class="ui-g-12" style="text-align: center; font-size: 2em"><b>Name: {{abenteuer.name}}</b></div>
+    <div class="ui-g-12" style="text-align: center"><b><span style="font-size: 2em" *ngIf="!editName; else nameEditor">Name: {{abenteuer.name}}</span></b>
+      <button pButton icon="pi pi-pencil" (click)="editName = true" *ngIf="abenteuer.meister"></button>
+      <ng-template #nameEditor>
+        <input type="text" [(ngModel)]="abenteuer.name" (keydown.enter)="finishEditName()">
+      </ng-template>
+    </div>
+
+    <div class="ui-g-12" style="text-align:center">
+      Datum:
+      <app-edit-dsa-date *ngIf="editDatum; else displayDate" (enter)="finishEditDatum()" [date]="abenteuer.datum"></app-edit-dsa-date>
+      <ng-template #displayDate>
+        <span>{{abenteuer.datum.toString()}}</span>
+        <button pButton icon="pi pi-pencil" (click)="editDatum = true" *ngIf="abenteuer.meister"></button>
+      </ng-template>
+
+
+    </div>
   </div>
   <div class="ui-g" *ngIf="abenteuer.meister">
+
     <button pButton label="SE hinzufügen" (click)="addSeGruppeid = abenteuer.gruppeId"></button>
     <button pButton label="AP hinzufügen" (click)="addApGruppeid = abenteuer.gruppeId"></button>
     <button pButton label="LM hinzufügen" (click)="addLmGruppeid = abenteuer.gruppeId"></button>

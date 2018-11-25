@@ -1,0 +1,12 @@
+<div class="ui-g centered" >
+  <button pButton icon="fa fa-angle-left" (click)="letzterMonat()"></button>
+
+  <span class="datum-anzeige">
+    <input type="number" [(ngModel)]="date.tag" (blur)="onDateChange()" (keydown.enter)="onEnter()" *ngIf="!editDay; else displayDate">
+    <ng-template #displayDate>{{date.tag}}</ng-template>
+    .
+    <p-dropdown [options]="monate" [(ngModel)]="date.monatValue" (ngModelChange)="onDateChange()"></p-dropdown>
+    <input class="yearinput" type="number" [(ngModel)]="date.jahr" (ngModelChange)="onJahrChange()" (keydown.enter)="onEnter()"> BF
+  </span>
+  <button pButton icon="fa fa-angle-right" (click)="naechsterMonat()"></button>
+</div>

@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {DsaDatum, KalendarTag, KalenderDaten, MONATE_DROPDOWN} from "./data";
 import {KalenderService} from "./kalender.service";
-import {SubjectSubscription} from "rxjs/internal/SubjectSubscription";
 import {combineLatest, Subject, Subscription} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
@@ -21,7 +20,7 @@ export class DsaKalenderComponent implements OnInit, OnDestroy {
 
   public monat: KalenderDaten;
 
-  private heuteChanged = new Subject<DsaDatum>();
+  public heuteChanged = new Subject<DsaDatum>();
   private sub: Subscription;
 
   constructor(private kalenderService: KalenderService, private gruppenService: GruppenService, private route: ActivatedRoute,

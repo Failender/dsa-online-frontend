@@ -5,14 +5,7 @@
     <!--<span [style.background-color]="item.farbe">{{item.name}}</span>-->
   <!--</div>-->
 
-  <div class="ui-g centered" >
-    <button pButton icon="fa fa-angle-left" (click)="letzterMonat()"></button>
-
-
-    <span class="datum-anzeige">{{monat.jetzt.tag}}. <p-dropdown [options]="monate" [(ngModel)]="monat.jetzt.monatValue" (ngModelChange)="buildMonth()"></p-dropdown> <input class="yearinput" type="number" [(ngModel)]="monat.jetzt.jahr" (ngModelChange)="onJahrChange()"> BF</span>
-    <button pButton icon="fa fa-angle-right" (click)="naechsterMonat()"></button>
-  </div>
-
+  <app-edit-dsa-date [date]="heute" (dateChanged)="heuteChanged.next($event)"></app-edit-dsa-date>
   <table *ngIf="monat">
     <tr *ngFor="let woche of monat.wochen">
       <td *ngFor="let tag of monat.tage | slice:woche:woche+7" [class.past]="!tag.inMonat" [class.heute]="tag.heute" (click)="onDayClick(tag)">

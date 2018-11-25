@@ -1,14 +1,14 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, OnDestroy, ViewChild} from "@angular/core";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {RoutingService} from "../../shared/routing.service";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectItem} from "primeng/api";
 import {GruppenService} from "../../shared/gruppen.service";
 import {MessageService} from "../../service/message/message.service";
 import {AbenteuerService} from "../abenteuer.service";
 import {KampagnenService} from "../../kampagne/kampagnen.service";
-import {map, tap} from "rxjs/internal/operators";
+import {map} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-abenteuer-erstellen',
@@ -68,11 +68,16 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
 
   onSubmit() {
     if (this.form.valid) {
-      this.abenteuerService.createAbenteuer(this.form.value)
-        .subscribe(() => {
-          this.messageService.info('Abenteuer erstellt');
-          this.gruppenService.forceRefresh();
-        });
+      try {
+        this.abenteuerService.createAbenteuer(this.form.value)
+          .subscribe(() => {
+            this.messageService.info('Abenteuer erstellt');
+            this.gruppenService.forceRefresh();
+          });
+      } catch (e) {
+        this.messageService.info("Ungültiges Datumsformat");
+      }
+
     } else {
       this.messageService.error('Formular nicht korrekt ausgefüllt');
     }

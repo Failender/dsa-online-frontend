@@ -63,6 +63,10 @@ export class DsaDatum {
   public toString() {
     return this.tag + ". " + this.monat +  " " + this.jahr;
   }
+
+  public toNumericalString() {
+    return this.tag - 1 + "." + (this.monatValue + 1) + "." + this.jahr;
+  }
 }
 
 export interface DsaWoche {

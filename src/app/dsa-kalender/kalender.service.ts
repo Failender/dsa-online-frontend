@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import {DsaDatum, KalendarTag, KalenderDaten, LegendeItem, START_YEAR, YEAR_LENGTH} from "./data";
+import {Injectable} from '@angular/core';
+import {DsaDatum, KalendarTag, KalenderDaten, START_YEAR, YEAR_LENGTH} from "./data";
 import {RestService} from "../service/rest/rest.service";
-import {Observable, of} from "rxjs/index";
+import {Observable} from "rxjs/index";
 import {map} from "rxjs/internal/operators";
 
 interface Event {
@@ -44,13 +44,17 @@ export class KalenderService {
   }
 
   public toNumber(value: string) {
-    if (value.charAt(2) !== '.' || value.charAt(5) !== '.') {
-      throw new Error('Invalid format');
+
+    if (this.occurrences(value, "." ) !== 2) {
+      throw new Error(`Invalid format got only ${this.occurrences(value, ".")} dots: ${value}`);
+
     }
-    const tag = parseInt(value.substr(0, 2), 10);
+    const firstDot = value.indexOf(".");
+    const secondDot = value.lastIndexOf(".");
+    const tag = parseInt(value.substr(0, firstDot), 10);
     // The user expects to enter 01.01.1000 and make it the first day of the year, but we start with 01.00.1000
-    const monat = parseInt(value.substr(3, 2), 10) - 1;
-    const jahr = parseInt(value.substr(6), 10) - 1000;
+    const monat = parseInt(value.substr(firstDot + 1 , secondDot - (firstDot+1)), 10) - 1;
+    const jahr = parseInt(value.substr(secondDot +1), 10) - 1000;
 
     return jahr * YEAR_LENGTH + monat * 30 + tag;
   }
@@ -140,5 +144,28 @@ export class KalenderService {
       });
     }
     return days;
+  }
+
+  occurrences(string, subString, allowOverlapping = false) {
+
+    string += "";
+    subString += "";
+    if (subString.length <= 0) {
+      return (string.length + 1);
+    }
+    const step = allowOverlapping ? 1 : subString.length
+    let n = 0,
+      pos = 0;
+
+    while (true) {
+      pos = string.indexOf(subString, pos);
+      if (pos >= 0) {
+        ++n;
+        pos += step;
+      } else {
+        break;
+      }
+    }
+    return n;
   }
 }

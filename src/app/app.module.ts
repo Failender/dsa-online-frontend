@@ -1,90 +1,99 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
 
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './header/login/login.component';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {LoginComponent} from './header/login/login.component';
 import {MessageModule} from 'primeng/message';
-import { MenuComponent } from './menu/menu.component';
+import {MenuComponent} from './menu/menu.component';
 import {PanelModule} from 'primeng/panel';
-import {ActivatedRoute, Router, RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {GrowlModule} from 'primeng/growl';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuModule} from 'primeng/menu';
 import {
-  AccordionModule, CheckboxModule, DataTableModule, DropdownModule, FileUploadModule, InputSwitchModule, InputTextareaModule,
+  AccordionModule,
+  CheckboxModule,
+  DropdownModule,
+  FileUploadModule,
+  InputSwitchModule,
+  InputTextareaModule,
   InputTextModule,
   MultiSelectModule,
-  PanelMenuModule, ProgressSpinnerModule, SidebarModule,
-  TabMenuModule, TooltipModule, TreeTableModule
+  PanelMenuModule,
+  SidebarModule,
+  TabMenuModule,
+  TooltipModule,
+  TreeTableModule
 } from "primeng/primeng";
 import {AuthenticationService, init} from './service/authentication/authentication.service';
 import {RestService} from './service/rest/rest.service';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import {MessageService} from './service/message/message.service';
-import { MeineHeldenComponent } from './meine-helden/meine-helden.component';
-import { NutzerVerwaltungComponent } from './nutzer-verwaltung/nutzer-verwaltung.component';
-import { GruppenAnsichtComponent } from './gruppen-ansicht/gruppen-ansicht.component';
+import {MeineHeldenComponent} from './meine-helden/meine-helden.component';
+import {NutzerVerwaltungComponent} from './nutzer-verwaltung/nutzer-verwaltung.component';
+import {GruppenAnsichtComponent} from './gruppen-ansicht/gruppen-ansicht.component';
 import {SessionService} from './service/session/session.service';
-import { HeldenInfoTabelleComponent } from './shared/helden-info-tabelle/helden-info-tabelle.component';
+import {HeldenInfoTabelleComponent} from './shared/helden-info-tabelle/helden-info-tabelle.component';
 import {TableModule} from 'primeng/table';
 import {registerLocaleData} from '@angular/common';
 
 import localeDe from '@angular/common/locales/de';
 import {HeldenService} from './meine-helden/helden.service';
-import { HeldUebersichtComponent } from './held/held-uebersicht/held-uebersicht.component';
-import { HeldEreignisseComponent } from './held/held-ereignisse/held-ereignisse.component';
-import { HeldTalenteComponent } from './held/held-talente/held-talente.component';
-import { HeldZauberComponent } from './held/held-zauber/held-zauber.component';
+import {HeldUebersichtComponent} from './held/held-uebersicht/held-uebersicht.component';
+import {HeldEreignisseComponent} from './held/held-ereignisse/held-ereignisse.component';
+import {HeldTalenteComponent} from './held/held-talente/held-talente.component';
+import {HeldZauberComponent} from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './shared/gruppen.service';
-import { AlteVersionLadenDialogComponent } from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {AlteVersionLadenDialogComponent} from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
-import { PdfComponent } from './shared/pdf/pdf.component';
-import { OeffentlicheHeldenComponent } from './oeffentliche-helden/oeffentliche-helden.component';
-import { HeldVergleichComponent } from './held/held-vergleich/held-vergleich.component';
-import { EreignisseTabelleComponent } from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
-import { TalenteTabelleComponent } from './shared/talente-tabelle/talente-tabelle.component';
-import { ZauberTabelleComponent } from './shared/zauber-tabelle/zauber-tabelle.component';
-import { DsaKalenderComponent } from './dsa-kalender/dsa-kalender.component';
-import { SkriptComponent } from './skripte/skript/skript.component';
+import {PdfComponent} from './shared/pdf/pdf.component';
+import {OeffentlicheHeldenComponent} from './oeffentliche-helden/oeffentliche-helden.component';
+import {HeldVergleichComponent} from './held/held-vergleich/held-vergleich.component';
+import {EreignisseTabelleComponent} from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
+import {TalenteTabelleComponent} from './shared/talente-tabelle/talente-tabelle.component';
+import {ZauberTabelleComponent} from './shared/zauber-tabelle/zauber-tabelle.component';
+import {DsaKalenderComponent} from './dsa-kalender/dsa-kalender.component';
+import {SkriptComponent} from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
-import { AlteVersionHochladenComponent } from './shared/alte-version-hochladen/alte-version-hochladen.component';
+import {AlteVersionHochladenComponent} from './shared/alte-version-hochladen/alte-version-hochladen.component';
 import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
-import { AbenteuerlogComponent } from './abenteuer/abenteuerlog/abenteuerlog.component';
-import { AbenteuerErstellenComponent } from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
+import {AbenteuerlogComponent} from './abenteuer/abenteuerlog/abenteuerlog.component';
+import {AbenteuerErstellenComponent} from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
 import {AbenteuerService} from "./abenteuer/abenteuer.service";
-import { FullExportComponent } from './Administration/full-export/full-export.component';
-import { FullImportComponent } from './Administration/full-import/full-import.component';
+import {FullExportComponent} from './Administration/full-export/full-export.component';
+import {FullImportComponent} from './Administration/full-import/full-import.component';
 import {AdministrationService} from './Administration/administration.service';
-import { MeisterVerwaltungComponent } from './Administration/meister-verwaltung/meister-verwaltung.component';
+import {MeisterVerwaltungComponent} from './Administration/meister-verwaltung/meister-verwaltung.component';
 import {UserService} from "./nutzer-verwaltung/user.service";
-import { CurrentHeldComponent } from './current-held/current-held.component';
+import {CurrentHeldComponent} from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
-import { SelectGruppeDialogComponent } from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
-import { ResultDisplayComponent } from './skripte/result-display/result-display.component';
-import { TextResultComponent } from './skripte/result-display/text-result/text-result.component';
-import { TableResultComponent } from './skripte/result-display/table-result/table-result.component';
-import { KampagnenComponent } from './kampagne/kampagnen/kampagnen.component';
-import { AdminKampagneComponent } from './Administration/admin-kampagne/admin-kampagne.component';
-import { AbenteuerAnzeigenComponent } from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
-import { AbenteuerTabelleComponent } from './shared/abenteuer-tabelle/abenteuer-tabelle.component';
-import { AddSeBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
-import { AddApBonusDialogComponent } from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
+import {SelectGruppeDialogComponent} from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
+import {ResultDisplayComponent} from './skripte/result-display/result-display.component';
+import {TextResultComponent} from './skripte/result-display/text-result/text-result.component';
+import {TableResultComponent} from './skripte/result-display/table-result/table-result.component';
+import {KampagnenComponent} from './kampagne/kampagnen/kampagnen.component';
+import {AdminKampagneComponent} from './Administration/admin-kampagne/admin-kampagne.component';
+import {AbenteuerAnzeigenComponent} from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
+import {AbenteuerTabelleComponent} from './shared/abenteuer-tabelle/abenteuer-tabelle.component';
+import {AddSeBonusDialogComponent} from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
+import {AddApBonusDialogComponent} from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
 import {KampagneComponent} from "./kampagne/kampagne/kampagne.component";
-import { KampageRoutingComponent } from './kampagne/kampage-routing/kampage-routing.component';
-import { KampagneDialogComponent } from './kampagne/kampagne-dialog/kampagne-dialog.component';
-import { AbenteuerRoutingComponent } from './abenteuer/abenteuer-routing/abenteuer-routing.component';
-import { AbenteuerDialogComponent } from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
+import {KampageRoutingComponent} from './kampagne/kampage-routing/kampage-routing.component';
+import {KampagneDialogComponent} from './kampagne/kampagne-dialog/kampagne-dialog.component';
+import {AbenteuerRoutingComponent} from './abenteuer/abenteuer-routing/abenteuer-routing.component';
+import {AbenteuerDialogComponent} from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
 import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
 import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-note-bonus-dialog/add-note-bonus-dialog.component";
 import {NgxMasonryModule} from "ngx-masonry";
-import { SkriptRoutingComponent } from './skripte/skript-routing/skript-routing.component';
+import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.component';
+import {EditDsaDateComponent} from './dsa-kalender/edit-dsa-date/edit-dsa-date.component';
 
 
 const appRoutes: Routes = [
@@ -168,6 +177,7 @@ registerLocaleData(localeDe, 'de');
     AbenteuerRoutingComponent,
     AbenteuerDialogComponent,
     SkriptRoutingComponent,
+    EditDsaDateComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, TreeTableModule,

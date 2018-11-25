@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RestService} from "../service/rest/rest.service";
 import {Observable} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
@@ -106,6 +106,15 @@ export class AbenteuerService {
 
   public deleteNote(abenteuerid: number, noteid: number) {
     return this.restService.delete(`abenteuer/${abenteuerid}/bonus/note/${noteid}`);
+  }
+
+  public editName(abenteuerid: number, name: string) {
+    return this.restService.post(`abenteuer/${abenteuerid}/name/${name}`);
+  }
+
+  public editDatum(abenteuerid: number, datum: DsaDatum) {
+    const dateNr = this.kalenderService.toNumber(datum.toNumericalString());
+    return this.restService.post(`abenteuer/${abenteuerid}/date/${dateNr}`);
   }
 
 
