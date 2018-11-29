@@ -75,6 +75,26 @@
       </ng-template>
     </p-table>
   </p-accordionTab>
+  <p-accordionTab header="Eigenschaften" *ngIf="data.eigenschaften.length !=0">
+    <p-table [value]="data.eigenschaften" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Alt</th>
+          <th>Neu</th>
+          <th>Steigerung</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.oldValue == null? '-' : data.oldValue}}</td>
+          <td>{{data.newValue == null? '-' : data.newValue}}</td>
+          <td>{{data.tooltip}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-accordionTab>
 
 </p-accordion>
 <ng-template #spinner>
