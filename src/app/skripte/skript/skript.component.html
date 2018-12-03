@@ -51,7 +51,7 @@
   </ng-template>
 </div>
 <span >function calculate(params) {{'{'}}</span>
-<textarea rows="10" autoResize="true" cols="50" style="width:100%" pInputTextarea [(ngModel)]="current.body"></textarea>
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current.body" style="height:500px" (onInit)="onInit($event)"></ngx-monaco-editor>
 <span>{{'}'}}</span>
 
 <div class="ui-g">

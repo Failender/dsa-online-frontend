@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Skript, SkriptService, SkriptVariable} from '../skript.service';
+import {Component, OnInit} from '@angular/core';
+import {ScriptHelperInformation, Skript, SkriptService, SkriptVariable} from '../skript.service';
 import {SelectItem} from "primeng/api";
 import {MessageService} from '../../service/message/message.service';
-import {tap} from "rxjs/internal/operators";
 import {RoutingService} from "../../shared/routing.service";
 
 @Component({
@@ -20,8 +19,11 @@ export class SkriptComponent implements OnInit {
   public typesSelect: SelectItem[];
   public helperSelect: SelectItem[];
 
+  private helperInformation: ScriptHelperInformation[];
+
   public typesMap: { [key: string]: any; } = {};
 
+  public editorOptions = {theme: 'vs-light', language: 'javascript'};
 
   public testResult = null;
 
@@ -55,12 +57,17 @@ export class SkriptComponent implements OnInit {
       });
     this.skriptService.getHelper()
       .subscribe(data => this.helperSelect = data.map(v => ({label: v.name, value: v.name})));
+
+    this.skriptService.getScriptHelperInformations()
+      .subscribe(data => this.helperInformation = data);
   }
 
   valuesFor(variable: SkriptVariable) {
 
     return this.typesMap[variable.type];
   }
+
+
 
   addVariable() {
     if (this.selectedType) {
@@ -107,5 +114,16 @@ export class SkriptComponent implements OnInit {
   open() {
     this.router.navigateByUrl('scripts/' + this.current.id);
   }
+
+  onInit(event) {
+    const monaco = window['monaco'];
+    //monaco.languages.registerCompletionItemProvider('javascript', this.getCompletionProvider(monaco));
+  }
+
+  getCompletionProvider(monaco) {
+
+  }
+
+
 
 }

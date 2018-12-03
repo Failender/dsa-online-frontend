@@ -94,6 +94,7 @@ import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-no
 import {NgxMasonryModule} from "ngx-masonry";
 import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.component';
 import {EditDsaDateComponent} from './dsa-kalender/edit-dsa-date/edit-dsa-date.component';
+import {MonacoEditorModule} from "ngx-monaco-editor";
 
 
 const appRoutes: Routes = [
@@ -184,6 +185,7 @@ registerLocaleData(localeDe, 'de');
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TableModule, DropdownModule, NgxMasonryModule,
     AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule,
+    MonacoEditorModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
