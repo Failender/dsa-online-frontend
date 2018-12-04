@@ -86,7 +86,10 @@ export class SkriptComponent implements OnInit {
     let script = `declare class ${helper.helperName} {\n`
 
     helper.methodInformation.forEach(method => {
-      script += `static ${method.name}(): ${method.returnType} \n`
+      script += " /**\n";
+      script += ` * ${method.description} \n`;
+      script += " */\n";
+      script += `static ${method.name}(): ${method.returnType} \n`;
     })
     script += "}";
     console.debug(script)
