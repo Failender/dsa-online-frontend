@@ -3,6 +3,7 @@ import {ScriptHelperInformation, Skript, SkriptService, SkriptVariable} from '..
 import {SelectItem} from "primeng/api";
 import {MessageService} from '../../service/message/message.service';
 import {RoutingService} from "../../shared/routing.service";
+import {combineLatest, Subject} from "rxjs";
 
 @Component({
   selector: 'app-skript',
@@ -20,6 +21,9 @@ export class SkriptComponent implements OnInit {
   public helperSelect: SelectItem[];
 
   private helperInformation: ScriptHelperInformation[];
+
+  private onMonacoInit = new Subject<any>();
+  private initSub;
 
   public typesMap: { [key: string]: any; } = {};
 
@@ -58,6 +62,17 @@ export class SkriptComponent implements OnInit {
     this.skriptService.getHelper()
       .subscribe(data => this.helperSelect = data.map(v => ({label: v.name, value: v.name})));
 
+    this.initSub = combineLatest(this.skriptService.getScriptHelperInformations(), this.onMonacoInit.asObservable())
+      .subscribe(([data, r]) => {
+        const monaco = window['monaco'];
+        data.forEach(helper => {
+          monaco.languages.typescript.javascriptDefaults.addExtraLib(this.createLibFor(helper), helper.helperName + ".d.ts");
+        })
+        monaco.languages.typescript.javascriptDefaults.addExtraLib([
+          "declare class datenHelper {};"
+        ].join('\n'), 'extensions.d.ts');
+        // monaco.languages.registerCompletionItemProvider('javascript', this.getCompletionProvider(data));
+    });
     this.skriptService.getScriptHelperInformations()
       .subscribe(data => this.helperInformation = data);
   }
@@ -65,6 +80,18 @@ export class SkriptComponent implements OnInit {
   valuesFor(variable: SkriptVariable) {
 
     return this.typesMap[variable.type];
+  }
+
+  createLibFor(helper: ScriptHelperInformation) {
+    let script = `declare class ${helper.helperName} {\n`
+
+    helper.methodInformation.forEach(method => {
+      script += `static ${method.name}(): ${method.returnType} \n`
+    })
+    script += "}";
+    console.debug(script)
+    return script;
+
   }
 
 
@@ -116,13 +143,55 @@ export class SkriptComponent implements OnInit {
   }
 
   onInit(event) {
-    const monaco = window['monaco'];
-    //monaco.languages.registerCompletionItemProvider('javascript', this.getCompletionProvider(monaco));
-  }
-
-  getCompletionProvider(monaco) {
+    this.onMonacoInit.next();
 
   }
+
+  getCompletionProvider(data: ScriptHelperInformation[]) {
+    return {
+      provideCompletionItems: (model, position) => {
+
+        console.debug(position, model)
+        const textUntilPosition = model.getValueInRange({startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column});
+        console.debug(textUntilPosition)
+        // find out if we are completing a property in the 'dependencies' object.
+        // const textUntilPosition = model.getValueInRange({startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column});
+        // const match = textUntilPosition.match(/"dependencies"\s*:\s*{\s*("[^"]*"\s*:\s*"[^"]*"\s*,\s*)*("[^"]*)?$/);
+        const suggestions = this.createDependencyProposals(data);
+        return suggestions;
+        // return {
+        //   suggestions: suggestions
+        // };
+      }
+    };
+  }
+
+  createDependencyProposals(data: ScriptHelperInformation[]) {
+
+    return [
+      {
+        label: '"lodash"',
+        kind: monaco.languages.CompletionItemKind.Function,
+        documentation: "The Lodash library exported as Node.js modules.",
+        insertText: '"lodash": "*"'
+      },
+      {
+        label: '"express"',
+        kind: monaco.languages.CompletionItemKind.Function,
+        documentation: "Fast, unopinionated, minimalist web framework",
+        insertText: '"express": "*"'
+      },
+      {
+        label: '"mkdirp"',
+        kind: monaco.languages.CompletionItemKind.Function,
+        documentation: "Recursively mkdir, like <code>mkdir -p</code>",
+        insertText: '"mkdirp": "*"'
+      }
+    ];
+  }
+
+
+
 
 
 
