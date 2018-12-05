@@ -27,7 +27,7 @@ export class SkriptComponent implements OnInit {
 
   public typesMap: { [key: string]: any; } = {};
 
-  public editorOptions = {theme: 'vs-light', language: 'javascript'};
+  public editorOptions = {theme: 'vs-light', language: 'javascript', baseUrl: './assets'};
 
   public testResult = null;
 
