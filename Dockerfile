@@ -9,4 +9,8 @@ RUN npm run build
 
 FROM nginx:1.13-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=0 /usr/src/app/dist/* /usr/share/nginx/html/
+WORKDIR /usr/src/app/dist
+RUN mv assets asset
+RUN mkdir assets
+RUN mv asset assets/assets
+COPY --from=0 -/* /usr/share/nginx/html/
