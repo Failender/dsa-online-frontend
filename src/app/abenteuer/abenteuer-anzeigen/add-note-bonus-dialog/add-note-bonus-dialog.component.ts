@@ -1,10 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
-import {HeldenService} from "../../../meine-helden/helden.service";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {GruppenService} from "../../../shared/gruppen.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "../../../service/message/message.service";
 import {AbenteuerService} from "../../abenteuer.service";
-import {map} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-add-note-dialog',
@@ -49,6 +47,7 @@ export class AddNoteBonusDialogComponent implements OnChanges {
         .subscribe(() => {
           this.messageService.info("Notiz hinzugefügt");
           this.onClose.next(true);
+          this.form.controls['note'].patchValue('');
         });
     } else {
       this.messageService.error("Formular nicht korrekt ausgefüllt");

@@ -1,10 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
-import {HeldenService} from "../../../meine-helden/helden.service";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {GruppenService} from "../../../shared/gruppen.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "../../../service/message/message.service";
 import {AbenteuerService} from "../../abenteuer.service";
-import {map} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-add-lm-bonus-dialog',
@@ -45,6 +43,7 @@ export class AddLmBonusDialogComponent implements OnChanges {
       this.abenteuerService.createLmBonus(this.form.value.held.id, this.abenteuer, this.form.value.lm)
         .subscribe(() => {
           this.messageService.info("Lehrmeister hinzugefügt");
+          this.form.controls['lm'].patchValue('');
           this.onClose.next(true);
         });
     } else {

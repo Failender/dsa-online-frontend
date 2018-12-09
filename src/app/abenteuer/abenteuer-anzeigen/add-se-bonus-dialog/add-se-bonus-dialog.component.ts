@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
-import {HeldenService} from "../../../meine-helden/helden.service";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {GruppenService} from "../../../shared/gruppen.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "../../../service/message/message.service";
@@ -48,6 +47,7 @@ export class AddSeBonusDialogComponent implements OnChanges {
       this.abenteuerService.createSeBonus(this.form.value.held.id, this.abenteuer, this.form.value.se)
         .subscribe(() => {
           this.messageService.info("SE hinzugefügt");
+          this.form.controls['se'].patchValue('');
           this.onClose.next(true);
         });
     } else {

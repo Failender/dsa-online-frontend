@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map} from 'rxjs/internal/operators';
 import {MessageService} from '../../../service/message/message.service';
@@ -47,6 +47,7 @@ export class AddApBonusDialogComponent implements OnChanges {
       this.abenteuerService.createApBonus(this.form.value.held.id, this.abenteuer, this.form.value.ap)
         .subscribe(() => {
           this.messageService.info("AP-Bonus hinzugefügt");
+          this.form.controls['ap'].patchValue('');
           this.onClose.next(true);
         });
     } else {
