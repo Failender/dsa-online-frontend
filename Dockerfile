@@ -9,7 +9,6 @@ RUN npm run build
 
 FROM nginx:1.13-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-WORKDIR /usr/src/app/dist
 RUN mkdir /usr/src/app/dist/assets 
 RUN mv /usr/src/app/dist/monaco /usr/src/app/dist/assets/monaco
 COPY --from=0 /usr/src/app/dist/* /usr/share/nginx/html/
