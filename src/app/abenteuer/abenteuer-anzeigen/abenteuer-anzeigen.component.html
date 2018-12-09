@@ -7,9 +7,9 @@
         <i class="pi pi-times" (click)="removeGruppe()" *ngIf="abenteuer.meister"></i>
       </div></p-header>
       <div class="ui-g" *ngIf="abenteuer.bonusAll.ap !== 0">
-        AP: {{abenteuer.bonusAll.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp('gruppe')" *ngIf="abenteuer.meister"></i>
+        AP: {{abenteuer.bonusAll.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp('gruppe', 'Gruppe')" *ngIf="abenteuer.meister"></i>
       </div>
-      <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}} <i class="pi pi-times delete-icon" (click)="deleteSe('gruppe', se)" *ngIf="abenteuer.meister"></i></div>
+      <div class="ui-g" *ngFor="let se of abenteuer.bonusAll.ses">{{se}} <i class="pi pi-times delete-icon" (click)="deleteSe(-1, se, 'Gruppe')" *ngIf="abenteuer.meister"></i></div>
     </p-card>
   </ngxMasonryItem>
   <ngxMasonryItem class=" ui-sm-6 ui-md-6 ui-g-4" *ngFor="let bonus of abenteuer.bonus">
@@ -17,11 +17,11 @@
       <p-header><div class="card-header">
         <i class="pi pi-times" (click)="removeHeld(bonus)" *ngIf="abenteuer.meister"></i>
       </div></p-header>
-      <div class="ui-g" *ngIf="bonus.bonus.ap !== 0"><b>Bonus-AP</b>: {{bonus.bonus.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp(bonus.name)" *ngIf="abenteuer.meister"></i></div>
+      <div class="ui-g" *ngIf="bonus.bonus.ap !== 0"><b>Bonus-AP</b>: {{bonus.bonus.ap}} <i class="pi pi-times delete-icon" (click)="deleteAp(bonus.name, bonus.heldid)" *ngIf="abenteuer.meister"></i></div>
       <div class="ui-g" *ngIf="bonus.bonus.ses.length !== 0"><b>SE's</b></div>
-      <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}<i class="pi pi-times delete-icon" (click)="deleteSe(bonus.name, se)" *ngIf="abenteuer.meister"></i></div>
+      <div class="ui-g" *ngFor="let se of bonus.bonus.ses">{{se}}<i class="pi pi-times delete-icon" (click)="deleteSe(bonus.heldid, se,bonus.name)" *ngIf="abenteuer.meister"></i></div>
       <div class="ui-g" *ngIf="bonus.bonus.lms.length !== 0"><b>Lehrmeister</b></div>
-      <div class="ui-g" *ngFor="let lm of bonus.bonus.lms">{{lm}}<i class="pi pi-times delete-icon" (click)="deleteLm(bonus.name, lm)" *ngIf="abenteuer.meister"></i></div>
+      <div class="ui-g" *ngFor="let lm of bonus.bonus.lms">{{lm}}<i class="pi pi-times delete-icon" (click)="deleteLm(bonus.name, lm, bonus.heldid)" *ngIf="abenteuer.meister"></i></div>
     </p-card>
   </ngxMasonryItem>
 </ngx-masonry>

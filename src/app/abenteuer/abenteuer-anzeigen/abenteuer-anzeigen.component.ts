@@ -1,11 +1,7 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {KampagnenService} from "../../kampagne/kampagnen.service";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
-import {flatMap} from "rxjs/operators";
 import {RoutingService} from "../../shared/routing.service";
 import {MessageService} from "../../service/message/message.service";
-import {AuthenticationService} from "../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-abenteuer-anzeigen',
@@ -26,7 +22,7 @@ export class AbenteuerAnzeigenComponent {
 
 
   removeHeld(bonus: any) {
-    this.abenteuerService.deleteBonus(bonus.name, this.abenteuer.id)
+    this.abenteuerService.deleteBonus(bonus.heldid, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info('Boni für Held ' + bonus.name + ' entfernt');
         this.reload.emit();
@@ -34,15 +30,15 @@ export class AbenteuerAnzeigenComponent {
   }
 
   removeGruppe() {
-    this.abenteuerService.deleteBonus("gruppe", this.abenteuer.id)
+    this.abenteuerService.deleteBonus(-1, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info('Boni für Gruppe entfernt');
         this.reload.emit();
       });
   }
 
-  deleteAp(name) {
-    this.abenteuerService.deleteSingleAp(name, this.abenteuer.id)
+  deleteAp(name, heldid) {
+    this.abenteuerService.deleteSingleAp(heldid, this.abenteuer.id)
       .subscribe(() => {
         this.messageService.info(`AP-Bonus für ${name} entfernt`);
         this.reload.emit();
@@ -50,16 +46,16 @@ export class AbenteuerAnzeigenComponent {
 
   }
 
-  deleteSe(heldname: string, name: string) {
-    this.abenteuerService.deleteSingleSe(heldname, this.abenteuer.id, name)
+  deleteSe(heldname: string, name: string, heldid: number) {
+    this.abenteuerService.deleteSingleSe(heldid, this.abenteuer.id, name)
       .subscribe(() => {
         this.messageService.info(`SE für ${name} entfernt`);
         this.reload.emit();
       });
   }
 
-  deleteLm(heldname: string, name: string) {
-    this.abenteuerService.deleteSingleLm(heldname, this.abenteuer.id, name)
+  deleteLm(heldname: string, name: string, heldid: number) {
+    this.abenteuerService.deleteSingleLm(heldid, this.abenteuer.id, name)
       .subscribe(() => {
         this.messageService.info(`LM für ${name} entfernt`);
         this.reload.emit();

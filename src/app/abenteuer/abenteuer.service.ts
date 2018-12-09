@@ -88,20 +88,20 @@ export class AbenteuerService {
     return this.restService.post(`abenteuer/note/${abenteuer}`, note);
   }
 
-  public deleteBonus(name: string, abenteuerid: number) {
-    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/` + name);
+  public deleteBonus(heldid: number, abenteuerid: number) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/` + heldid);
   }
 
-  public deleteSingleAp(name: string, abenteuerid: number) {
-    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/ap/` + name);
+  public deleteSingleAp(heldid: number, abenteuerid: number) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/ap/` + heldid);
   }
 
-  public deleteSingleSe(heldname: string, abenteuerid: number, name: string) {
-    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/se/${heldname}/${name}`);
+  public deleteSingleSe(heldid: number, abenteuerid: number, name: string) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/se/${heldid}/${name}`);
   }
 
-  public deleteSingleLm(heldname: string, abenteuerid: number, name: string) {
-    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/lm/${heldname}/${name}`);
+  public deleteSingleLm(heldid: number, abenteuerid: number, name: string) {
+    return this.restService.delete(`abenteuer/${abenteuerid}/bonus/lm/${heldid}/${name}`);
   }
 
   public deleteNote(abenteuerid: number, noteid: number) {
