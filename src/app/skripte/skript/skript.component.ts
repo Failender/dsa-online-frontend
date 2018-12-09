@@ -88,8 +88,16 @@ export class SkriptComponent implements OnInit {
     helper.methodInformation.forEach(method => {
       script += " /**\n";
       script += ` * ${method.description} \n`;
+      method.parameter.forEach(param => {
+        script += `* ${param.name}: ${param.description} \n`;
+      });
       script += " */\n";
-      script += `static ${method.name}(): ${method.returnType} \n`;
+      script += `static ${method.name}(`;
+      script += method.parameter
+        .map(param => param.name)
+        .join(',')
+
+      script += `):${method.returnType} \n`;
     })
     script += "}";
     console.debug(script)
@@ -149,53 +157,6 @@ export class SkriptComponent implements OnInit {
     this.onMonacoInit.next();
 
   }
-
-  getCompletionProvider(data: ScriptHelperInformation[]) {
-    return {
-      provideCompletionItems: (model, position) => {
-
-        console.debug(position, model)
-        const textUntilPosition = model.getValueInRange({startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column});
-        console.debug(textUntilPosition)
-        // find out if we are completing a property in the 'dependencies' object.
-        // const textUntilPosition = model.getValueInRange({startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column});
-        // const match = textUntilPosition.match(/"dependencies"\s*:\s*{\s*("[^"]*"\s*:\s*"[^"]*"\s*,\s*)*("[^"]*)?$/);
-        const suggestions = this.createDependencyProposals(data);
-        return suggestions;
-        // return {
-        //   suggestions: suggestions
-        // };
-      }
-    };
-  }
-
-  createDependencyProposals(data: ScriptHelperInformation[]) {
-
-    return [
-      {
-        label: '"lodash"',
-        kind: monaco.languages.CompletionItemKind.Function,
-        documentation: "The Lodash library exported as Node.js modules.",
-        insertText: '"lodash": "*"'
-      },
-      {
-        label: '"express"',
-        kind: monaco.languages.CompletionItemKind.Function,
-        documentation: "Fast, unopinionated, minimalist web framework",
-        insertText: '"express": "*"'
-      },
-      {
-        label: '"mkdirp"',
-        kind: monaco.languages.CompletionItemKind.Function,
-        documentation: "Recursively mkdir, like <code>mkdir -p</code>",
-        insertText: '"mkdirp": "*"'
-      }
-    ];
-  }
-
-
-
-
 
 
 }
