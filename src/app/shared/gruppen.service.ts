@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from "rxjs";
 import {RestService} from '../service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
@@ -46,10 +46,6 @@ export class GruppenService {
     return this.restService.get(url);
   }
 
-  public getMeisterGruppen(): Observable<SelectItem[]> {
-    return this.restService.get('gruppen/bymeister');
-  }
-
   public getAllGruppenWhereCurrentUserCanEditMeister(): Observable<SelectItem[]> {
     return this.restService.get('gruppen/editable/meister');
   }
@@ -76,8 +72,8 @@ export class GruppenService {
     return this.restService.post('gruppen/' + heldid + '/' + gruppeid, null);
   }
 
-  public getHeldenForGruppe(gruppeid: number, dropdown = false ): Observable<any> {
-    return this.restService.get('gruppen/helden/' + gruppeid + "?dropdown=" + dropdown);
+  public getHeldenForGruppe(gruppeid: number, dropdown = false, showInactive = false ): Observable<any> {
+    return this.restService.get('gruppen/helden/' + gruppeid + "?dropdown=" + dropdown + '&showInactive=' + showInactive);
   }
 
   public getGroups() {
