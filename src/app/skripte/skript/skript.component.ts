@@ -100,7 +100,7 @@ export class SkriptComponent implements OnInit {
       script += `):${method.returnType} \n`;
     })
     script += "}";
-    console.debug(script)
+
     return script;
 
   }
