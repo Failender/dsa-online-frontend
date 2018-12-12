@@ -32,10 +32,7 @@
               "node_modules/primeng/resources/themes/omega/theme.scss",
               "node_modules/primeng/resources/primeng.css"
             ],
-            "dependencies": {
-              "primeng": "^7.0.0",
-              "primeicons": "^1.0.0"
-            },
+         
 
             "scripts": []
           },
