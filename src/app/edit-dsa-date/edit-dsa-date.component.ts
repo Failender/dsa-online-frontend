@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DsaDatum, MONATE_DROPDOWN} from "../data";
+import {DsaDatum, MONATE_DROPDOWN} from "../dsa-calendar/data";
 import {SelectItem} from "primeng/api";
 
 @Component({

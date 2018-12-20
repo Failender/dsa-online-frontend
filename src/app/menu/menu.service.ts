@@ -32,7 +32,7 @@ export class MenuService {
     this.createItem('Home', 'home'),
     this.createItem('Gruppen Ansicht', 'gruppen'),
     this.createItem('Abenteuer', 'abenteuer'),
-    this.createItem('Kampagnen', 'kampagnen'),
+    this.createItem('Kampagnen', 'abenteuer/kampagnen'),
     this.createNoMobileItem('Kalender', 'kalender'),
   ];
 
@@ -52,7 +52,7 @@ export class MenuService {
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
     this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER),
-    this.createNestedItem('Abenteuer erstellen', 'administration/abenteuer', 'Administration', MEISTER)
+    this.createNestedItem('Abenteuer erstellen', 'abenteuer/erstellen', 'Administration', MEISTER)
   ];
 
 

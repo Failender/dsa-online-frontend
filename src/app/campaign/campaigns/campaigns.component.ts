@@ -37,7 +37,7 @@ export class CampaignsComponent implements OnInit, OnDestroy {
 
   openKampagne(id) {
     // this.kampagne = id;
-    this.router.navigateByUrl(`kampagne/${id}`);
+    this.router.navigateByUrl(`abenteuer/kampagnen/${id}`);
   }
 
   ngOnDestroy(): void {

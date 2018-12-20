@@ -8,10 +8,10 @@ import {RoutingService} from "../../shared/routing.service";
 
 @Component({
   selector: 'app-admin-kampagne',
-  templateUrl: './admin-kampagne.component.html',
-  styleUrls: ['./admin-kampagne.component.css']
+  templateUrl: './campaign-admin.component.html',
+  styleUrls: ['./campaign-admin.component.css']
 })
-export class AdminKampagneComponent  extends AuthenticationRequiredComponent  {
+export class CampaignAdminComponent  extends AuthenticationRequiredComponent  {
 
   public name = "";
   constructor(private gruppenService: GruppenService, private kampagneService: CampaignService, private messageService: MessageService,
