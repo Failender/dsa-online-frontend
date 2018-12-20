@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../../service/authentication/authentication.service';
+import {OnInit} from '@angular/core';
+import {AuthenticationService} from '../service/authentication/authentication.service';
 import {RoutingService} from "../routing.service";
-import {isNullOrUndefined} from "util";
 
 export abstract class AuthenticationRequiredComponent implements OnInit {
 

@@ -27,17 +27,16 @@ import {
   TooltipModule,
   TreeTableModule
 } from "primeng/primeng";
-import {AuthenticationService, init} from './service/authentication/authentication.service';
-import {RestService} from './service/rest/rest.service';
+import {AuthenticationService, init} from './shared/service/authentication/authentication.service';
+import {RestService} from './shared/service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {HomeComponent} from './home/home.component';
-import {MessageService} from './service/message/message.service';
+import {MessageService} from './shared/service/message/message.service';
 import {MeineHeldenComponent} from './meine-helden/meine-helden.component';
-import {NutzerVerwaltungComponent} from './nutzer-verwaltung/nutzer-verwaltung.component';
-import {GruppenAnsichtComponent} from './gruppen-ansicht/gruppen-ansicht.component';
-import {SessionService} from './service/session/session.service';
+import {NutzerVerwaltungComponent} from './administration/nutzer-verwaltung/nutzer-verwaltung.component';
+import {SessionService} from './shared/service/session/session.service';
 import {HeldenInfoTabelleComponent} from './shared/helden-info-tabelle/helden-info-tabelle.component';
 import {TableModule} from 'primeng/table';
 import {registerLocaleData} from '@angular/common';
@@ -54,12 +53,12 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
 import {PdfComponent} from './shared/pdf/pdf.component';
-import {OeffentlicheHeldenComponent} from './oeffentliche-helden/oeffentliche-helden.component';
+import {GroupviewComponent} from './group-view/groupview.component';
 import {HeldVergleichComponent} from './held/held-vergleich/held-vergleich.component';
-import {EreignisseTabelleComponent} from './shared/ereignisse-tabelle/ereignisse-tabelle.component';
-import {TalenteTabelleComponent} from './shared/talente-tabelle/talente-tabelle.component';
-import {ZauberTabelleComponent} from './shared/zauber-tabelle/zauber-tabelle.component';
-import {DsaKalenderComponent} from './dsa-kalender/dsa-kalender.component';
+import {EreignisseTabelleComponent} from './shared/tables/ereignisse-tabelle/ereignisse-tabelle.component';
+import {TalenteTabelleComponent} from './shared/tables/talente-tabelle/talente-tabelle.component';
+import {ZauberTabelleComponent} from './shared/tables/zauber-tabelle/zauber-tabelle.component';
+import {CalendarComponent} from './dsa-calendar/calendar.component';
 import {SkriptComponent} from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
 import {AlteVersionHochladenComponent} from './shared/alte-version-hochladen/alte-version-hochladen.component';
@@ -67,34 +66,34 @@ import {VersionService} from "./shared/alte-version-laden-dialog/version.service
 import {AbenteuerlogComponent} from './abenteuer/abenteuerlog/abenteuerlog.component';
 import {AbenteuerErstellenComponent} from './abenteuer/abenteuer-erstellen/abenteuer-erstellen.component';
 import {AbenteuerService} from "./abenteuer/abenteuer.service";
-import {FullExportComponent} from './Administration/full-export/full-export.component';
-import {FullImportComponent} from './Administration/full-import/full-import.component';
-import {AdministrationService} from './Administration/administration.service';
-import {MeisterVerwaltungComponent} from './Administration/meister-verwaltung/meister-verwaltung.component';
-import {UserService} from "./nutzer-verwaltung/user.service";
+import {FullExportComponent} from './administration/full-export/full-export.component';
+import {FullImportComponent} from './administration/full-import/full-import.component';
+import {AdministrationService} from './administration/administration.service';
+import {MeisterVerwaltungComponent} from './administration/meister-verwaltung/meister-verwaltung.component';
+import {UserService} from "./administration/nutzer-verwaltung/user.service";
 import {CurrentHeldComponent} from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
 import {SelectGruppeDialogComponent} from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
 import {ResultDisplayComponent} from './skripte/result-display/result-display.component';
 import {TextResultComponent} from './skripte/result-display/text-result/text-result.component';
 import {TableResultComponent} from './skripte/result-display/table-result/table-result.component';
-import {KampagnenComponent} from './kampagne/kampagnen/kampagnen.component';
-import {AdminKampagneComponent} from './Administration/admin-kampagne/admin-kampagne.component';
+import {AdminKampagneComponent} from './administration/admin-kampagne/admin-kampagne.component';
 import {AbenteuerAnzeigenComponent} from './abenteuer/abenteuer-anzeigen/abenteuer-anzeigen.component';
-import {AbenteuerTabelleComponent} from './shared/abenteuer-tabelle/abenteuer-tabelle.component';
+import {AbenteuerTabelleComponent} from './shared/tables/abenteuer-tabelle/abenteuer-tabelle.component';
 import {AddSeBonusDialogComponent} from './abenteuer/abenteuer-anzeigen/add-se-bonus-dialog/add-se-bonus-dialog.component';
 import {AddApBonusDialogComponent} from './abenteuer/abenteuer-anzeigen/add-ap-bonus-dialog/add-ap-bonus-dialog.component';
-import {KampagneComponent} from "./kampagne/kampagne/kampagne.component";
-import {KampageRoutingComponent} from './kampagne/kampage-routing/kampage-routing.component';
-import {KampagneDialogComponent} from './kampagne/kampagne-dialog/kampagne-dialog.component';
+import {CampaignComponent} from "./campaign/campaign/campaign.component";
+import {CampaignRoutingComponent} from './campaign/campaign-routing/campaign-routing.component';
+import {CampaignDialogComponent} from './campaign/campaign-dialog/campaign-dialog.component';
 import {AbenteuerRoutingComponent} from './abenteuer/abenteuer-routing/abenteuer-routing.component';
 import {AbenteuerDialogComponent} from './abenteuer/abenteuer-dialog/abenteuer-dialog.component';
 import {AddLmBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-lm-bonus-dialog/add-lm-bonus-dialog.component";
 import {AddNoteBonusDialogComponent} from "./abenteuer/abenteuer-anzeigen/add-note-bonus-dialog/add-note-bonus-dialog.component";
 import {NgxMasonryModule} from "ngx-masonry";
 import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.component';
-import {EditDsaDateComponent} from './dsa-kalender/edit-dsa-date/edit-dsa-date.component';
+import {EditDsaDateComponent} from './dsa-calendar/edit-dsa-date/edit-dsa-date.component';
 import {MonacoEditorModule, NgxMonacoEditorConfig} from "ngx-monaco-editor";
+import {CampaignsComponent} from "./campaign/campaigns/campaigns.component";
 
 
 const appRoutes: Routes = [
@@ -103,8 +102,8 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' }
   },
-  {path: 'kampagnen', component: KampagnenComponent},
-  {path: 'kampagne/:id', component: KampageRoutingComponent},
+  {path: 'kampagnen', component: CampaignComponent},
+  {path: 'kampagne/:id', component: CampaignRoutingComponent},
   {path: 'administration/kampagnen', component: AdminKampagneComponent},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
@@ -112,12 +111,12 @@ const appRoutes: Routes = [
   { path: 'administration/meister', component: MeisterVerwaltungComponent, data: {title: 'Import'}},
   { path: 'administration/abenteuer', component: AbenteuerErstellenComponent, data: {title: 'Abenteuer erstellen'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
-  { path: 'gruppen', component: OeffentlicheHeldenComponent, data: {title: 'Öffentliche Helden'}},
+  { path: 'gruppen', component: GroupviewComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
-  { path: 'kalender', component: DsaKalenderComponent, data: {title: 'Kalender'}},
+  { path: 'kalender', component: CalendarComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
   { path: 'abenteuer', component: AbenteuerlogComponent, data: {title: 'Abenteuerlog'}},
@@ -143,7 +142,6 @@ registerLocaleData(localeDe, 'de');
     HomeComponent,
     MeineHeldenComponent,
     NutzerVerwaltungComponent,
-    GruppenAnsichtComponent,
     HeldenInfoTabelleComponent,
     HeldUebersichtComponent,
     AlteVersionLadenDialogComponent,
@@ -151,12 +149,12 @@ registerLocaleData(localeDe, 'de');
     HeldTalenteComponent,
     HeldZauberComponent,
     PdfComponent,
-    OeffentlicheHeldenComponent,
+    GroupviewComponent,
     HeldVergleichComponent,
     EreignisseTabelleComponent,
     TalenteTabelleComponent,
     ZauberTabelleComponent,
-    DsaKalenderComponent,
+    CalendarComponent,
     SkriptComponent,
     AlteVersionHochladenComponent,
     AbenteuerlogComponent,
@@ -166,9 +164,9 @@ registerLocaleData(localeDe, 'de');
     MeisterVerwaltungComponent,
     CurrentHeldComponent,
     SelectGruppeDialogComponent,
-    KampagnenComponent,
     AdminKampagneComponent,
-    KampagneComponent,
+    CampaignComponent,
+    CampaignsComponent,
     AbenteuerAnzeigenComponent,
     AbenteuerTabelleComponent,
     AddSeBonusDialogComponent,
@@ -178,8 +176,8 @@ registerLocaleData(localeDe, 'de');
     ResultDisplayComponent,
     TextResultComponent,
     TableResultComponent,
-    KampageRoutingComponent,
-    KampagneDialogComponent,
+    CampaignRoutingComponent,
+    CampaignDialogComponent,
     AbenteuerRoutingComponent,
     AbenteuerDialogComponent,
     SkriptRoutingComponent,
@@ -199,13 +197,7 @@ registerLocaleData(localeDe, 'de');
   ],
   providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, UserService,
     GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService
-    , { provide: LOCALE_ID, useValue: 'de' },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: init,
-      multi: true,
-      deps: [AuthenticationService, GruppenService]
-    }
+    , { provide: LOCALE_ID, useValue: 'de' }
     ],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AuthenticationService} from '../service/authentication/authentication.service';
-import {ConfigService} from '../shared/config/config.service';
+import {AuthenticationService} from '../shared/service/authentication/authentication.service';
+import {ConfigService} from '../shared/service/config/config.service';
 import {GruppenService} from "../shared/gruppen.service";
-import {Observable, ReplaySubject} from "rxjs/index";
-import {map} from "rxjs/internal/operators";
-import {isMobile} from '../util/Constants';
+import {isMobile} from '../util/constants';
 
 @Component({
   selector: 'app-header',

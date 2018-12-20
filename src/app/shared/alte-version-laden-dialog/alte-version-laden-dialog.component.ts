@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {InputSwitch} from 'primeng/primeng';
 import {HeldenInfo} from '../../meine-helden/helden.service';
 import {VersionService} from './version.service';
 import {SelectItem} from 'primeng/api';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RoutingService} from '../routing.service';
-import {MessageService} from '../../service/message/message.service';
+import {MessageService} from '../service/message/message.service';
 
 @Component({
   selector: 'app-alte-version-laden-dialog',

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
 import {MenuItem, SelectItem} from "primeng/api";
 import {GruppenService} from '../gruppen.service';
-import {MessageService} from '../../service/message/message.service';
+import {MessageService} from '../service/message/message.service';
 import {RoutingService} from "../routing.service";
 import {environment} from "../../../environments/environment";
 

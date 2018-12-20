@@ -1,13 +1,13 @@
 import {Component, ElementRef, Input, OnDestroy, ViewChild} from "@angular/core";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
-import {AuthenticationService} from "../../service/authentication/authentication.service";
+import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {RoutingService} from "../../shared/routing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectItem} from "primeng/api";
 import {GruppenService} from "../../shared/gruppen.service";
-import {MessageService} from "../../service/message/message.service";
+import {MessageService} from "../../shared/service/message/message.service";
 import {AbenteuerService} from "../abenteuer.service";
-import {KampagnenService} from "../../kampagne/kampagnen.service";
+import {CampaignService} from "../../campaign/campaign.service";
 import {map} from "rxjs/internal/operators";
 
 @Component({
@@ -58,7 +58,7 @@ export class AbenteuerErstellenComponent extends AuthenticationRequiredComponent
   }
 
   constructor(authenticationService: AuthenticationService, router: RoutingService, private abenteuerService: AbenteuerService,
-              private gruppenService: GruppenService, private messageService: MessageService, private kampagnenService: KampagnenService) {
+              private gruppenService: GruppenService, private messageService: MessageService, private kampagnenService: CampaignService) {
     super(authenticationService, router);
   }
 

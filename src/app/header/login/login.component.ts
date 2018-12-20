@@ -1,10 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../service/authentication/authentication.service';
-import {MessageService} from '../../service/message/message.service';
-import {SessionService} from '../../service/session/session.service';
-import {catchError} from "rxjs/internal/operators";
-import {NEVER, never} from "rxjs/index";
+import {AuthenticationService} from '../../shared/service/authentication/authentication.service';
+import {MessageService} from '../../shared/service/message/message.service';
+import {SessionService} from '../../shared/service/session/session.service';
 
 @Component({
   selector: 'app-login',

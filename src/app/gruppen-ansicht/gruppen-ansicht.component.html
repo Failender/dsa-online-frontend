@@ -1,5 +1,0 @@
-<p-accordion>
-  <p-accordionTab *ngFor="let gruppe of gruppen" [header]="gruppe.name" lazy="true">
-    <app-helden-info-tabelle [data]="gruppe.helden" (forceReload)="forceReload()"></app-helden-info-tabelle>
-  </p-accordionTab>
-</p-accordion>

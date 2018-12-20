@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeldenInfo, HeldenService} from './helden.service';
 import {AuthenticationRequiredComponent} from '../shared/authentication-required/authentication-required.component';
-import {AuthenticationService} from '../service/authentication/authentication.service';
-import {SelectItem} from 'primeng/api';
-import {GruppenService} from '../shared/gruppen.service';
-import {MessageService} from '../service/message/message.service';
+import {AuthenticationService} from '../shared/service/authentication/authentication.service';
+import {MessageService} from '../shared/service/message/message.service';
 import {RoutingService} from "../shared/routing.service";
 
 @Component({

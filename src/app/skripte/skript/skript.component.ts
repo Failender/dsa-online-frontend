@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScriptHelperInformation, Skript, SkriptService, SkriptVariable} from '../skript.service';
 import {SelectItem} from "primeng/api";
-import {MessageService} from '../../service/message/message.service';
+import {MessageService} from '../../shared/service/message/message.service';
 import {RoutingService} from "../../shared/routing.service";
 import {combineLatest, Subject} from "rxjs";
 

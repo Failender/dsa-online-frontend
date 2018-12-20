@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {HeldenInfo} from "../../meine-helden/helden.service";
-import {RoutingService} from "../routing.service";
-import {MessageService} from "../../service/message/message.service";
 import {VersionService} from "../alte-version-laden-dialog/version.service";
 import {environment} from "../../../environments/environment";
-import {AuthenticationService} from "../../service/authentication/authentication.service";
+import {AuthenticationService} from "../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-alte-version-hochladen',

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {OnInit} from '@angular/core';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {RoutingService} from "../../shared/routing.service";
 
 
+// Base class for all components that display informations about a held
 export abstract class HeldenComponent implements OnInit {
 
   constructor(private heldenService: HeldenService, protected routingService: RoutingService) { }

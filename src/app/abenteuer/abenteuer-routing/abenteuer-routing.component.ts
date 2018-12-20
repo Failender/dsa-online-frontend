@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
 import {RoutingService} from "../../shared/routing.service";
 import {ActivatedRoute} from "@angular/router";
-import {AuthenticationService} from "../../service/authentication/authentication.service";
-import {MessageService} from "../../service/message/message.service";
+import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
+import {MessageService} from "../../shared/service/message/message.service";
 
 @Component({
   selector: 'app-abenteuer-routing',

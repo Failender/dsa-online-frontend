@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import {SessionService} from "../service/session/session.service";
+import {Injectable} from '@angular/core';
+import {SessionService} from "../shared/service/session/session.service";
 import {HeldenService} from "../meine-helden/helden.service";
 import {MenuItem} from "primeng/api";
 import {
   AuthenticationService,
-  EDIT_KAMPAGNE,
   CREATE_USER,
+  EDIT_KAMPAGNE,
   FULL_EXPORT,
   FULL_IMPORT,
   MEISTER
-} from "../service/authentication/authentication.service";
+} from "../shared/service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
-import {isMobile} from "../util/Constants";
+import {isMobile} from "../util/constants";
 
 export interface CustomMenuItem extends MenuItem {
   mobile: boolean;

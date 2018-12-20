@@ -8,6 +8,7 @@
     "build": "ng build --prod",
     "test": "echo test",
     "lint": "ng lint",
+    "live": "ng serve -c=live",
     "e2e": "ng e2e"
   },
   "private": true,

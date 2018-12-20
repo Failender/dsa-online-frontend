@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {RestService} from '../service/rest/rest.service';
+import {RestService} from './service/rest/rest.service';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
-import {AuthenticationService} from "../service/authentication/authentication.service";
-import {filter, tap} from "rxjs/internal/operators";
+import {AuthenticationService} from "./service/authentication/authentication.service";
+import {filter, first, tap} from "rxjs/internal/operators";
 
 
 export interface GruppeInfo {
@@ -21,8 +21,12 @@ export interface GruppeSelectItem extends SelectItem {
 export class GruppenService {
 
   private currentGroup = new BehaviorSubject<GruppeInfo>(null);
+  private _groupValues: GruppeSelectItem[];
   private groups = new BehaviorSubject<GruppeSelectItem[]>(null);
   constructor(private restService: RestService, authService: AuthenticationService) {
+    authService.initialized.asObservable()
+      .pipe(first())
+      .subscribe(() => this.initGruppen())
     authService.onLogout.subscribe(() => {
       this.initGruppen().subscribe();
     });
@@ -30,9 +34,18 @@ export class GruppenService {
 
   }
 
+  set groupValues(value) {
+    this._groupValues = value;
+    this.groups.next(value);
+  }
+
+  get groupValues() {
+    return this._groupValues;
+  }
+
   public initGruppen(): Observable<any> {
     return this.getGruppen(true)
-      .pipe(tap(data => this.groups.next(data)));
+      .pipe(tap(data => this.groupValues = data));
   }
 
   public forceRefresh() {
@@ -51,7 +64,7 @@ export class GruppenService {
   }
 
   public getGruppe(id: number) {
-    const val = this.groups.value.find(value => value.value.id === id);
+    const val = this.groupValues.find(value => value.value.id === id);
     if (!val) {
       console.trace('Cant find gruppe with id ' + id);
       return null;

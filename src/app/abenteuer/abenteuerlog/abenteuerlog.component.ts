@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbenteuerService} from "../abenteuer.service";
-import {GruppeInfo, GruppenService, GruppeSelectItem} from "../../shared/gruppen.service";
+import {GruppeInfo, GruppenService} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
-import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {RoutingService} from "../../shared/routing.service";
 
 @Component({

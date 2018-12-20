@@ -1,7 +1,6 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {RestService} from '../service/rest/rest.service';
-import {Observable, ReplaySubject, Subject} from "rxjs";
-import {AuthenticationService} from '../service/authentication/authentication.service';
+import {Injectable} from '@angular/core';
+import {RestService} from '../shared/service/rest/rest.service';
+import {Observable, ReplaySubject} from "rxjs";
 import {tap} from 'rxjs/operators';
 
 @Injectable()

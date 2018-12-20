@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {GruppenService} from "../../../shared/gruppen.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MessageService} from "../../../service/message/message.service";
+import {MessageService} from "../../../shared/service/message/message.service";
 import {AbenteuerService} from "../../abenteuer.service";
 
 @Component({

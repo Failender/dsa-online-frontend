@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {RestService} from "../service/rest/rest.service";
+import {RestService} from "../shared/service/rest/rest.service";
 import {Observable} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
-import {KalenderService} from '../dsa-kalender/kalender.service';
-import {DsaDatum} from '../dsa-kalender/data';
+import {KalenderService} from '../dsa-calendar/kalender.service';
+import {DsaDatum} from '../dsa-calendar/data';
 import {map} from 'rxjs/operators';
 
 

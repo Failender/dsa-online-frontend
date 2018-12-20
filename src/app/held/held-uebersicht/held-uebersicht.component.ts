@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeldenService} from '../../meine-helden/helden.service';
-import {AuthenticationRequiredComponent} from '../../shared/authentication-required/authentication-required.component';
-import {AuthenticationService} from '../../service/authentication/authentication.service';
-import {MeineHeldenComponent} from '../../meine-helden/meine-helden.component';
+import {AuthenticationService} from '../../shared/service/authentication/authentication.service';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {environment} from '../../../environments/environment';
 import {RoutingService} from "../../shared/routing.service";
