@@ -76,6 +76,7 @@ import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.co
 import {MonacoEditorModule, NgxMonacoEditorConfig} from "ngx-monaco-editor";
 import {TablesModule} from "./shared/tables/tables.module";
 import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
+import { HeldSteigernComponent } from './held/held-steigern/held-steigern.component';
 
 
 const appRoutes: Routes = [
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
   { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
   { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
   { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
+  { path: 'held/steigern', component: HeldSteigernComponent, data: {title: 'Steigern'}},
   { path: 'kalender', component: CalendarComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
@@ -139,7 +141,8 @@ registerLocaleData(localeDe, 'de');
     ResultDisplayComponent,
     TextResultComponent,
     TableResultComponent,
-    SkriptRoutingComponent
+    SkriptRoutingComponent,
+    HeldSteigernComponent
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,

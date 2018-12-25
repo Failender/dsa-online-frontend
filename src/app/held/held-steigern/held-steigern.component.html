@@ -1,0 +1,18 @@
+<p-table [value]="steigerungen">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Talent</th>
+      <th>Lernmethode</th>
+      <th>Talentwert</th>
+      <th>Kosten</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{data.talent}}</td>
+      <td>{{data.lernmethode}}</td>
+      <td>{{data.talentwert}}</td>
+      <td>{{data.kosten}}</td>
+    </tr>
+  </ng-template>
+</p-table>

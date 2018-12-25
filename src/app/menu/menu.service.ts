@@ -60,6 +60,7 @@ export class MenuService {
   private heldenItems: CustomMenuItem[] =
     [
       this.createItem('Übersicht', 'held/uebersicht'),
+      this.createItem('Steigern', 'held/steigern'),
       // this.createItem('Talente', 'held/talente'),
       this.createItem('Ereignisse', 'held/ereignisse')
     ];

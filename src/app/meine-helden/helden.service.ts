@@ -57,6 +57,11 @@ export class HeldenService {
     return this.restService.get(`helden/held/differences/${id}/${from}/${to}`);
   }
 
+  public getSteigerungen(heldid) {
+    return this.restService.get(`helden/held/${heldid}/steigerungen`);
+  }
+
+
 }
 
 export interface HeldenInfo {

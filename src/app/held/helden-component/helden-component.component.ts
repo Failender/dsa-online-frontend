@@ -6,7 +6,7 @@ import {RoutingService} from "../../shared/routing.service";
 // Base class for all components that display informations about a held
 export abstract class HeldenComponent implements OnInit {
 
-  constructor(private heldenService: HeldenService, protected routingService: RoutingService) { }
+  constructor(protected heldenService: HeldenService, protected routingService: RoutingService) { }
 
   ngOnInit() {
     if (!this.heldenService.held) {
