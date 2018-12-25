@@ -44,7 +44,6 @@ export class GruppenService {
   }
 
   public initGruppen(): Observable<any> {
-    console.debug('INIT')
     return this.getGruppen(true)
       .pipe(tap(data => this.groupValues = data));
   }
