@@ -61,6 +61,10 @@ export class HeldenService {
     return this.restService.get(`helden/held/${heldid}/steigerungen`);
   }
 
+  public getInventar(heldid) {
+    return this.restService.get(`helden/held/${heldid}/inventar`);
+  }
+
 
 }
 
