@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
+import {LOCALE_ID, NgModule} from "@angular/core";
 
 
 import {AppComponent} from './app.component';
@@ -24,8 +24,7 @@ import {
   PanelMenuModule,
   SidebarModule,
   TabMenuModule,
-  TooltipModule,
-  TreeTableModule
+  TooltipModule
 } from "primeng/primeng";
 import {AuthenticationService} from './shared/service/authentication/authentication.service';
 import {RestService} from './shared/service/rest/rest.service';

@@ -16,7 +16,7 @@ export class RoutingService {
       return;
     }
     if (this.heldenService.held) {
-      url += `?held= ${this.heldenService.versionInfo.id}&version=${this.heldenService.versionInfo.version}`;
+      url += `?held=${this.heldenService.versionInfo.id}&version=${this.heldenService.versionInfo.version}`;
 
     }
     this.routing.next();

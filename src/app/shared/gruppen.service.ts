@@ -24,9 +24,9 @@ export class GruppenService {
   private _groupValues: GruppeSelectItem[];
   private groups = new BehaviorSubject<GruppeSelectItem[]>(null);
   constructor(private restService: RestService, authService: AuthenticationService) {
-    authService.initialized.asObservable()
+    authService.initialized
       .pipe(first())
-      .subscribe(() => this.initGruppen())
+      .subscribe(() => this.initGruppen().subscribe())
     authService.onLogout.subscribe(() => {
       this.initGruppen().subscribe();
     });
@@ -44,6 +44,7 @@ export class GruppenService {
   }
 
   public initGruppen(): Observable<any> {
+    console.debug('INIT')
     return this.getGruppen(true)
       .pipe(tap(data => this.groupValues = data));
   }
