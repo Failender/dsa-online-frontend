@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {RoutingService} from "../../shared/routing.service";
+import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 
 @Component({
   selector: 'app-held-talente',
@@ -12,8 +13,8 @@ export class HeldTalenteComponent extends HeldenComponent {
 
 
 
-  constructor(heldenService: HeldenService, router: RoutingService) {
-    super(heldenService, router);
+  constructor(heldenService: HeldenService, router: RoutingService, authenticationService: AuthenticationService) {
+    super(heldenService, router, authenticationService);
   }
 
 

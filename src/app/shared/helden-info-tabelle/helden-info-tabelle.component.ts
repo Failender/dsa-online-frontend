@@ -5,6 +5,7 @@ import {GruppenService} from '../gruppen.service';
 import {MessageService} from '../service/message/message.service';
 import {RoutingService} from "../routing.service";
 import {environment} from "../../../environments/environment";
+import {AuthenticationService} from "../service/authentication/authentication.service";
 
 
 interface ConditionalMenuItem extends MenuItem{
@@ -66,7 +67,7 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
   @Output() public forceReload = new EventEmitter<void>();
 
   constructor(private router: RoutingService, private heldenService: HeldenService , private gruppenService: GruppenService, private messageService: MessageService,
-              private routingService: RoutingService) { }
+              private routingService: RoutingService, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
 
@@ -112,11 +113,16 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
 
   versionenHerunterladen(data) {
     const id = data.id;
-    const a = document.createElement('a');
-    a.href = environment.rest + 'helden/download/' + id + '/xml';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const iframe = document.createElement("iframe");
+    let url = environment.rest + 'helden/download/' + id + '/xml';
+
+    const username = this.authenticationService.authentication.username;
+    const password = this.authenticationService.authentication.password;
+    url += `?username=${username}&password=${password}`
+
+    iframe.setAttribute("src", url);
+    iframe.setAttribute("style", "display: none");
+    document.body.appendChild(iframe);
   }
 
   dialogClosed(version) {

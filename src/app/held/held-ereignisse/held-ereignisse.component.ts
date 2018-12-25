@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {RoutingService} from "../../shared/routing.service";
 import {SortEvent} from "primeng/api";
+import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 
 @Component({
   selector: 'app-held-ereignisse',
@@ -13,8 +14,8 @@ export class HeldEreignisseComponent extends HeldenComponent {
 
   public zauberButton = false;
 
-  constructor(heldenService: HeldenService, router: RoutingService) {
-    super(heldenService, router);
+  constructor(heldenService: HeldenService, router: RoutingService, authenticationService: AuthenticationService) {
+    super(heldenService, router, authenticationService);
   }
 
   init() {

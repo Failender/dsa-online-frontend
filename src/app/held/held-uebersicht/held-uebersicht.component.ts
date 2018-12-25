@@ -18,8 +18,8 @@ export class HeldUebersichtComponent extends HeldenComponent {
 
   public zauberButton = false;
 
-  constructor(heldenService: HeldenService, private authenticationService: AuthenticationService, router: RoutingService) {
-    super(heldenService, router);
+  constructor(heldenService: HeldenService, authenticationService: AuthenticationService, router: RoutingService, ) {
+    super(heldenService, router, authenticationService);
   }
 
   protected init(): void {

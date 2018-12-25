@@ -22,14 +22,10 @@ export class PdfComponent implements OnInit {
 
   openWindowWithGet(url, data) {
     url += `?username=${data.username}&password=${data.password}`
-    const form = document.createElement('form');
-    form.target = '_blank';
-    form.method = 'GET';
-    form.action = url;
-    form.style.display = 'none';
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("src", url);
+    iframe.setAttribute("style", "display: none");
+    document.body.appendChild(iframe);
   }
 
 }
