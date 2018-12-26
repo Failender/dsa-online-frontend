@@ -11,7 +11,6 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 })
 export class HeldSteigernComponent extends HeldenComponent{
 
-
   public steigerungen;
 
   constructor(heldenService: HeldenService, routingService: RoutingService, authenticationService: AuthenticationService) {
@@ -22,8 +21,7 @@ export class HeldSteigernComponent extends HeldenComponent{
     this.heldenService.getSteigerungen(this.heldenService.versionInfo.id)
       .subscribe(data => {
         this.steigerungen = data;
-        console.debug(data);
-      })
+      });
   }
 
 }

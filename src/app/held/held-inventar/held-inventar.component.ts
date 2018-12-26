@@ -11,15 +11,22 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 })
 export class HeldInventarComponent extends HeldenComponent {
 
+  public inventar: any[] = [];
+
   constructor(heldenService: HeldenService, routingService: RoutingService, authenticationService: AuthenticationService) {
     super(heldenService, routingService, authenticationService);
   }
   init() {
     this.heldenService.getInventar(this.heldenService.versionInfo.id)
       .subscribe(data => {
-        console.debug(data);
+        this.inventar = data;
       });
 
+  }
+
+  deleteItem(index) {
+    this.heldenService.removeItem(this.heldenService.versionInfo.id, index)
+      .subscribe(data => this.inventar = data);
   }
 
 }

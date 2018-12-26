@@ -65,6 +65,10 @@ export class HeldenService {
     return this.restService.get(`helden/held/${heldid}/inventar`);
   }
 
+  public removeItem(heldid, index) {
+    return this.restService.delete(`helden/held/${heldid}/inventar/${index}`);
+  }
+
 
 }
 

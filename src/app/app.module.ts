@@ -87,6 +87,7 @@ const appRoutes: Routes = [
     data: { title: 'Home' }
   },
   {path: 'abenteuer', loadChildren: './abenteuer/abenteuer.module#AbenteuerModule'},
+  {path: 'kampf', loadChildren: './combat/combat.module#CombatModule'},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
   { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},

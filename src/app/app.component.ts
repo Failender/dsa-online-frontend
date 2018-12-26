@@ -12,6 +12,7 @@ export class AppComponent {
 
   public menuVisible = false;
   constructor(private messageService: MessageService, routingService: RoutingService) {
+    (window as any).global = window;
     routingService.routing.asObservable()
       .subscribe(() => {
         this.menuVisible = false;
