@@ -26,7 +26,7 @@ export class HeldenInfoTabelleComponent implements OnInit, OnChanges {
       command: () => this.heldLaden(this._context)
     },
     {
-      label: 'Alte Version hochladen',
+      label: 'Version hochladen',
       command: () => this.alteVersionHochladen(this._context),
       condition: () => this.edit
     },
