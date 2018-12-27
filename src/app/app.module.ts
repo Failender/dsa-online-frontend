@@ -19,13 +19,13 @@ import {
   FileUploadModule,
   InputSwitchModule,
   InputTextareaModule,
-  InputTextModule,
+  InputTextModule, KeyFilterModule,
   MultiSelectModule,
   PanelMenuModule,
   SidebarModule,
   TabMenuModule,
   TooltipModule
-} from "primeng/primeng";
+} from 'primeng/primeng';
 import {AuthenticationService} from './shared/service/authentication/authentication.service';
 import {RestService} from './shared/service/rest/rest.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -148,7 +148,7 @@ registerLocaleData(localeDe, 'de');
     HeldInventarComponent
   ],
   imports: [
-    BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule,
+    BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, TablesModule, DropdownModule, EditDsaDateModule,
     AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,

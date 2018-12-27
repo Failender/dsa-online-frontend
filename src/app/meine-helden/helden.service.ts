@@ -69,6 +69,10 @@ export class HeldenService {
     return this.restService.delete(`helden/held/${heldid}/inventar/${index}`);
   }
 
+  public addItem(heldid, name: string, amount: number) {
+    return this.restService.post(`helden/held/${heldid}/inventar/add/${encodeURI(name)}/${amount}`);
+  }
+
 
 }
 

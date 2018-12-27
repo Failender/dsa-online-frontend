@@ -1,3 +1,22 @@
+<div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler</div>
+<div class="ui-g" style="margin-top:10px">
+  <div class="ui-sm-12 ui-md-6">
+    <span class="ui-float-label">
+      <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
+      <label for="name">Name</label>
+    </span>
+  </div>
+
+  <div class="ui-sm-12 ui-md-4" >
+    <span class="ui-float-label">
+      <input type="text" pInputText style="width:100%" (keydown.enter)="save()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
+      <label for="amount">Anzahl</label>
+    </span>
+  </div>
+  <div class="ui-sm-12 ui-md-1">
+    <button pButton icon="pi pi-save" (click)="save()"></button>
+  </div>
+</div>
 <p-table [value]="inventar" class="helden-info-tabelle">
   <ng-template pTemplate="emptymessage" let-columns>
     <tr>
