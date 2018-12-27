@@ -12,6 +12,7 @@ export interface GruppeInfo {
   meister: boolean;
   userGroup: boolean;
   name: string;
+  image: string;
 }
 export interface GruppeSelectItem extends SelectItem {
   value: GruppeInfo;
@@ -46,6 +47,7 @@ export class GruppenService {
   public initGruppen(): Observable<any> {
     return this.getGruppen(true)
       .pipe(tap(data => this.groupValues = data));
+
   }
 
   public forceRefresh() {
@@ -100,10 +102,6 @@ export class GruppenService {
     }
   }
 
-  // public getMeisterGroups() {
-  //   return this.meisterGroups.asObservable();
-  // }
-
   public getCurrentGroup(): Observable<GruppeInfo> {
     return this.currentGroup.asObservable().pipe(filter(value => value !== null));
   }
@@ -123,6 +121,12 @@ export class GruppenService {
   public hasEditRight(gruppeid) {
     return this.getGruppe(gruppeid).meister;
   }
+
+  public updateGruppeImage(gruppeid:  number, image: string) {
+    return this.restService.post(`gruppen/${gruppeid}/image/`, image);
+  }
+
+
 }
 
 export interface GruppeIncludingHeld {
