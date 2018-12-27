@@ -3,6 +3,7 @@ import {HeldenInfo} from "../../meine-helden/helden.service";
 import {VersionService} from "../alte-version-laden-dialog/version.service";
 import {environment} from "../../../environments/environment";
 import {AuthenticationService} from "../service/authentication/authentication.service";
+import {MessageService} from '../service/message/message.service';
 
 @Component({
   selector: 'app-alte-version-hochladen',
@@ -25,7 +26,7 @@ export class AlteVersionHochladenComponent implements OnInit, OnChanges {
   @Output()
   public versionUploaded = new EventEmitter<void>();
 
-  constructor(private versionService: VersionService, private authenticationService: AuthenticationService) { }
+  constructor(private versionService: VersionService, private authenticationService: AuthenticationService, private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -51,7 +52,9 @@ export class AlteVersionHochladenComponent implements OnInit, OnChanges {
 
   }
 
-  onUpload() {
+  onUpload(event) {
+    const response = JSON.parse(event.xhr.response);
+    this.messageService.info(response.join('\n'));
     this.versionUploaded.emit();
     this.dialogClosed.emit();
   }

@@ -24,7 +24,7 @@
   </p-table>
   <div class="ui-g">
     <p-fileUpload name="file" [url]="uploadUrl" multiple="true"
-                  (onBeforeSend)="onBeforeSend($event)" (onUpload)="onUpload()">
+                  (onBeforeSend)="onBeforeSend($event)" (onUpload)="onUpload($event)">
     </p-fileUpload>
   </div>
 </p-dialog>
