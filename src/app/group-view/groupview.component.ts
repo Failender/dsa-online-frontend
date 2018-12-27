@@ -25,6 +25,7 @@ export class GroupviewComponent implements OnInit, OnDestroy {
 
   public isMeisterGruppe = false;
   public loading = false;
+  private loadSubject = new BehaviorSubject<void>(null);
   private publicOnlySubject = new BehaviorSubject<boolean>(this.publicOnly);
   private showInactiveSubject = new BehaviorSubject<boolean>(this.showInactive);
 
@@ -34,7 +35,7 @@ export class GroupviewComponent implements OnInit, OnDestroy {
     this.loadGruppen();
 
     this.subs.push(this.gruppenService.getCurrentGroup()
-      .pipe(tap((data) => this.isMeisterGruppe = data.meister), combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable()), tap(() => this.loading = true))
+      .pipe(tap((data) => this.isMeisterGruppe = data.meister), combineLatest(this.publicOnlySubject.asObservable(), this.showInactiveSubject.asObservable(), this.loadSubject.asObservable()), tap(() => this.loading = true))
         .pipe(mergeMap(data => this.gruppenService.getGruppeIncludingHeld(data[0].id, data[1], data[2])), tap(() => this.loading = false))
       .subscribe(data => {
         this.gruppe = data;
@@ -45,8 +46,9 @@ export class GroupviewComponent implements OnInit, OnDestroy {
   }
 
   loadGruppen() {
-      this.gruppenService.getGruppenIncludingHeld(this.publicOnly, this.showInactive)
-        .subscribe((data) => this.gruppen = data);
+    this.loadSubject.next(null);
+      // this.gruppenService.getGruppenIncludingHeld(this.publicOnly, this.showInactive)
+      //   .subscribe((data) => this.gruppen = data);
   }
 
   onPublicChange(event) {
@@ -68,6 +70,7 @@ export class GroupviewComponent implements OnInit, OnDestroy {
   }
 
   forceReload() {
+    console.debug('rl')
     this.loadGruppen();
   }
 
