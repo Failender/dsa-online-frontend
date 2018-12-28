@@ -1,19 +1,29 @@
-<h2>Steigern existiert momentan nur als Demo da die API es nicht erlaubt SE's zu benutzen oder die Steigerungsart zu ändern</h2>
-<p-table [value]="steigerungen">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Talent</th>
-      <th>Lernmethode</th>
-      <th>Talentwert</th>
-      <th>Kosten</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-data>
-    <tr>
-      <td>{{data.talent}}</td>
-      <td>{{data.lernmethode}}</td>
-      <td>{{data.talentwert}}</td>
-      <td>{{data.kosten}}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<h2>Steigern existiert momentan nur als Demo da die API es nicht erlaubt SE's zu benutzen</h2>
+<div>Freie AP: {{freieap}} | Gesaamt: {{gesamtap}}</div>
+<div class="loader" *ngIf="loading; else result"></div>
+<ng-template #result>
+  <p-table [value]="steigerungen">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Talent</th>
+        <th>Lernmethode</th>
+        <th>Talentwert</th>
+        <th>Kosten</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.talent}}</td>
+        <td>
+          <p-dropdown [placeholder]="data.lernmethode" [options]="lernmethoden" (onChange)="lernmethodeChange(data.talent, $event)" class="dropdown"  [style]="{'width':'100%'}" appendTo="body"></p-dropdown>
+        </td>
+        <td>{{data.talentwert}}</td>
+        <td>{{data.kosten}}</td>
+        <td>
+          <button pButton label="Steigern" (click)="steigern(data)" [disabled]="freieap < data.kosten"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>

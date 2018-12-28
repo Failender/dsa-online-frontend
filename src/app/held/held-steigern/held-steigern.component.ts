@@ -12,6 +12,27 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 export class HeldSteigernComponent extends HeldenComponent{
 
   public steigerungen;
+  public loading = true;
+  public lernmethoden = [
+    {
+      label: 'Selbststudium',
+      value: 'Selbststudium'
+    },
+    {
+      label: 'Gegenseitiges Lehren',
+      value: 'Gegenseitiges Lehren'
+    },
+    {
+      label: 'Lehrmeister',
+      value: 'Lehrmeister'
+
+    },
+    {
+      label: 'Freie Steigerung',
+      value: 'Freie Steigerung'
+
+    }
+    ];
 
   constructor(heldenService: HeldenService, routingService: RoutingService, authenticationService: AuthenticationService) {
     super(heldenService, routingService, authenticationService);
@@ -21,7 +42,31 @@ export class HeldSteigernComponent extends HeldenComponent{
     this.heldenService.getSteigerungen(this.heldenService.versionInfo.id)
       .subscribe(data => {
         this.steigerungen = data;
+        this.loading = false;
       });
+  }
+
+  public lernmethodeChange(talent, event) {
+    this.loading = true;
+    this.heldenService.changeLernmethode(this.heldenService.versionInfo.id, talent, event.value)
+      .subscribe(data => {
+        this.loading = false;
+        this.steigerungen = data;
+      });
+  }
+
+  get gesamtap() {
+    if (this.held) {
+      return this.held.angaben.ap.gesamt;
+    }
+
+
+  }
+
+  get freieap() {
+    if (this.held) {
+      return this.held.angaben.ap.frei;
+    }
   }
 
 }

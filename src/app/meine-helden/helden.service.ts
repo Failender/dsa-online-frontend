@@ -73,6 +73,10 @@ export class HeldenService {
     return this.restService.post(`helden/held/${heldid}/inventar/add/${encodeURI(name)}/${amount}`);
   }
 
+  public changeLernmethode(heldid: number, talent: string, lernmethode: string) {
+    return this.restService.post(`helden/held/${heldid}/steigern/lernmethode`, {talent, lernmethode});
+  }
+
 
 }
 
