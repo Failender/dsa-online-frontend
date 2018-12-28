@@ -49,6 +49,9 @@ export class RestService {
     else if (error.status === 404) {
       this.messageService.error("Die angefragte Entität konnte nicht gefunden werden");
       return NEVER;
+    } else if (error.status === 409) {
+      this.messageService.error("Für diese Anfrage wird ein Token mit Schreibrecht benötigt");
+      return NEVER;
     }
     return throwError(error);
   }
