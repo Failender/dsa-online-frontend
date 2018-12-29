@@ -39,12 +39,13 @@
       <tr>
         <td>{{data.talent}}</td>
         <td>
-          <p-dropdown [placeholder]="data.lernmethode" [options]="lernmethoden" (onChange)="lernmethodeChange(data.talent, $event)" class="dropdown"  [style]="{'width':'100%'}" appendTo="body"></p-dropdown>
+          <p-dropdown [placeholder]="data.lernmethode" [options]="lernmethoden" (onChange)="lernmethodeChange(data, $event)" class="dropdown"  [style]="{'width':'100%'}" appendTo="body"></p-dropdown>
         </td>
         <td>{{data.talentwert}}</td>
         <td>{{data.kosten}}</td>
         <td *ngIf="write">
-          <button pButton label="Steigern" (click)="steigern(data)" [disabled]="freieap < data.kosten"></button>
+          <button pButton  [disabled]="data.loading" [label]="data.loading? '' :'Steigern'" [icon]="data.loading? 'pi pi-spinner pi-spin': ''"
+                  (click)="steigern(data)" [disabled]="freieap < data.kosten" style="width:91px; height:29px;"></button>
         </td>
       </tr>
     </ng-template>

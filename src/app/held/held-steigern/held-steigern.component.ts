@@ -57,11 +57,10 @@ export class HeldSteigernComponent extends HeldenComponent{
 
   }
 
-  public lernmethodeChange(talent, event) {
-    this.loading = true;
-    this.heldenService.changeLernmethode(this.heldenService.versionInfo.id, talent, event.value)
+  public lernmethodeChange(d, event) {
+    d.loading = true;
+    this.heldenService.changeLernmethode(this.heldenService.versionInfo.id, d.talent, event.value)
       .subscribe(data => {
-        this.loading = false;
         this.steigerungen = data;
       });
   }
