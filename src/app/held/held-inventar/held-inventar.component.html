@@ -1,28 +1,31 @@
 <app-held-quicknav></app-held-quicknav>
 <div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler.
   Das Editieren von Ausrüstung passiert immer auf Basis der aktuellsten Version</div>
-<div class="ui-g" style="margin-top:10px">
-  <div class="ui-sm-12 ui-md-6">
+<ng-container *ngIf="write">
+  <div class="ui-g" style="margin-top:10px">
+    <div class="ui-sm-12 ui-md-6">
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
       <label for="name">Name</label>
     </span>
-  </div>
+    </div>
 
-  <div class="ui-sm-12 ui-md-4" >
+    <div class="ui-sm-12 ui-md-4" >
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" (keydown.enter)="save()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
       <label for="amount">Anzahl</label>
     </span>
+    </div>
+    <div class="ui-sm-12 ui-md-1">
+      <button pButton icon="pi pi-save" (click)="save()"></button>
+    </div>
   </div>
-  <div class="ui-sm-12 ui-md-1">
-    <button pButton icon="pi pi-save" (click)="save()"></button>
-  </div>
-</div>
+</ng-container>
+
 <p-table [value]="inventar" class="helden-info-tabelle">
   <ng-template pTemplate="emptymessage" let-columns>
     <tr>
-      <td colspan="6">
+      <td [attr.colspan]="write? 3: 2">
         Kein Gegenstand gefunden
       </td>
     </tr>
@@ -31,15 +34,14 @@
     <tr>
       <th class>Name</th>
       <th class>Anzahl</th>
-      <th></th>
+      <th *ngIf="write"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
     <tr>
       <td>{{data.gegenstand}}</td>
       <td>{{data.anzahl}}</td>
-      <td>
-        <!-- Deleting items is currently not correctly supported by the helden api-->
+      <td *ngIf="write">
         <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
       </td>
     </tr>

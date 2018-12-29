@@ -33,4 +33,12 @@ export abstract class HeldenComponent implements OnInit {
     return this.heldenService.versionInfo;
   }
 
+  get write() {
+    if(this.heldenService.versionInfo) {
+      return this.heldenService.versionInfo.edit;
+    }
+    return false;
+
+  }
+
 }

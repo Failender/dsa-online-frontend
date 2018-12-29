@@ -1,3 +1,4 @@
+<app-held-quicknav></app-held-quicknav>
 <h2>Steigern existiert momentan nur als Demo da die API es nicht erlaubt SE's zu benutzen</h2>
 <div>Freie AP: {{freieap}} | Gesamt: {{gesamtap}}</div>
 <div class="ui-g" style="margin-top:10px">
@@ -27,7 +28,7 @@
         <th>Lernmethode</th>
         <th>Talentwert</th>
         <th>Kosten</th>
-        <th></th>
+        <th *ngIf="write"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
@@ -38,7 +39,7 @@
         </td>
         <td>{{data.talentwert}}</td>
         <td>{{data.kosten}}</td>
-        <td>
+        <td *ngIf="write">
           <button pButton label="Steigern" (click)="steigern(data)" [disabled]="freieap < data.kosten"></button>
         </td>
       </tr>
