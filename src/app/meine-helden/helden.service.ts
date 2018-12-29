@@ -85,6 +85,10 @@ export class HeldenService {
     return this.restService.get(`helden/held/${heldid}/steigern/ap`);
   }
 
+  public addEreignis(heldid: number, name: string, ap: number) {
+    return this.restService.post(`helden/held/${heldid}/steigern/ereignis/${encodeURI(name)}/${ap}`);
+  }
+
 
 }
 

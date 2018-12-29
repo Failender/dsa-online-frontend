@@ -11,6 +11,10 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 })
 export class HeldSteigernComponent extends HeldenComponent{
 
+
+  public name;
+  public amount;
+
   public ap;
   public steigerungen;
   public loading = true;
@@ -69,6 +73,11 @@ export class HeldSteigernComponent extends HeldenComponent{
         this.steigerungen = answer;
         this.ap.frei -= data.kosten;
       });
+  }
+
+  public saveEreignis() {
+    this.heldenService.addEreignis(this.heldenService.versionInfo.id, this.name, parseInt(this.amount, 10))
+      .subscribe(data => this.ap = data);
   }
 
   get gesamtap() {

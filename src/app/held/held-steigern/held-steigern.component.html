@@ -1,5 +1,23 @@
 <h2>Steigern existiert momentan nur als Demo da die API es nicht erlaubt SE's zu benutzen</h2>
-<div>Freie AP: {{freieap}} | Gesaamt: {{gesamtap}}</div>
+<div>Freie AP: {{freieap}} | Gesamt: {{gesamtap}}</div>
+<div class="ui-g" style="margin-top:10px">
+  <div class="ui-sm-12 ui-md-6">
+    <span class="ui-float-label">
+      <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
+      <label for="name">Name</label>
+    </span>
+  </div>
+
+  <div class="ui-sm-12 ui-md-4" >
+    <span class="ui-float-label">
+      <input type="text" pInputText style="width:100%" (keydown.enter)="saveEreignis()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
+      <label for="amount">AP</label>
+    </span>
+  </div>
+  <div class="ui-sm-12 ui-md-1">
+    <button pButton icon="pi pi-save" (click)="saveEreignis()"></button>
+  </div>
+</div>
 <div class="loader" *ngIf="loading; else result"></div>
 <ng-template #result>
   <p-table [value]="steigerungen">
