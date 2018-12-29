@@ -1,26 +1,29 @@
 <app-held-quicknav></app-held-quicknav>
 <h2>Steigern existiert momentan nur als Demo da die API es nicht erlaubt SE's zu benutzen</h2>
-<div *ngIf="loadingAp; else displayAp" class="loader" style="height:50px; width:50px;"></div>
+<div *ngIf="loadingAp; else displayAp" class="loader" style="height:80px; width:80px;"></div>
 <ng-template #displayAp>
-  <div>Freie AP: {{freieap}} | Gesamt: {{gesamtap}}</div>
-  <div class="ui-g" style="margin-top:10px">
-    <div class="ui-sm-12 ui-md-6">
+  <div style="height:120px;">
+    <div>Freie AP: {{freieap}} | Gesamt: {{gesamtap}}</div>
+    <div class="ui-g" style="margin-top:10px">
+      <div class="ui-sm-12 ui-md-6">
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
       <label for="name">Name</label>
     </span>
-    </div>
+      </div>
 
-    <div class="ui-sm-12 ui-md-4" >
+      <div class="ui-sm-12 ui-md-4" >
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" (keydown.enter)="saveEreignis()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
       <label for="amount">AP</label>
     </span>
-    </div>
-    <div class="ui-sm-12 ui-md-1">
-      <button pButton icon="pi pi-save" (click)="saveEreignis()"></button>
+      </div>
+      <div class="ui-sm-12 ui-md-1">
+        <button pButton icon="pi pi-save" (click)="saveEreignis()"></button>
+      </div>
     </div>
   </div>
+
 </ng-template>
 
 <div class="loader" *ngIf="loading; else result"></div>

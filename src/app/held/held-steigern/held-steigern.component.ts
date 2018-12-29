@@ -66,11 +66,10 @@ export class HeldSteigernComponent extends HeldenComponent{
   }
 
   public steigern(data) {
-    this.loading = true;
+    data.loading = true;
     this.loadingAp = true;
     this.heldenService.steigern(this.heldenService.versionInfo.id, data.talent, data.talentwert)
       .subscribe(answer => {
-        this.loading = false;
         this.loadingAp = false;
         this.steigerungen = answer;
         this.ap.frei -= data.kosten;
