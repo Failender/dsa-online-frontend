@@ -11,6 +11,7 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 })
 export class HeldSteigernComponent extends HeldenComponent{
 
+  public ap;
   public steigerungen;
   public loading = true;
   public lernmethoden = [
@@ -44,6 +45,11 @@ export class HeldSteigernComponent extends HeldenComponent{
         this.steigerungen = data;
         this.loading = false;
       });
+    this.heldenService.getApUncached(this.heldenService.versionInfo.id)
+      .subscribe(data => {
+        this.ap = data;
+      })
+
   }
 
   public lernmethodeChange(talent, event) {
@@ -61,20 +67,21 @@ export class HeldSteigernComponent extends HeldenComponent{
       .subscribe(answer => {
         this.loading = false;
         this.steigerungen = answer;
+        this.ap.frei -= data.kosten;
       });
   }
 
   get gesamtap() {
-    if (this.held) {
-      return this.held.angaben.ap.gesamt;
+    if (this.ap) {
+      return this.ap.gesamt;
     }
 
 
   }
 
   get freieap() {
-    if (this.held) {
-      return this.held.angaben.ap.frei;
+    if (this.ap) {
+      return this.ap.frei;
     }
   }
 

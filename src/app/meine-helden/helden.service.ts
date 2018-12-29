@@ -81,6 +81,10 @@ export class HeldenService {
     return this.restService.post(`helden/held/${heldid}/steigern/steigern/${encodeURI(talent)}/${aktwert}`);
   }
 
+  public getApUncached(heldid: number) {
+    return this.restService.get(`helden/held/${heldid}/steigern/ap`);
+  }
+
 
 }
 
