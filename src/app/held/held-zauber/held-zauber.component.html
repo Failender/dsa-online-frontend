@@ -1,7 +1,2 @@
-<div class="ui-g button-row">
-  <button pButton label="Übersicht" (click)="uebersicht()"></button>
-  <button pButton label="Ereignisse" (click)="ereignisse()"></button>
-
-</div>
-
+<app-held-quicknav></app-held-quicknav>
 <app-zauber-tabelle [data]="held.zauberliste.zauber" *ngIf="held"></app-zauber-tabelle>

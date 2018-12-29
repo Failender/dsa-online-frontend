@@ -17,12 +17,4 @@ export class HeldZauberComponent extends HeldenComponent {
     super(heldenService, router, authenticationService);
   }
 
-  ereignisse() {
-    this.routingService.navigateByUrl('held/ereignisse')
-  }
-
-  uebersicht(){
-    this.routingService.navigateByUrl('held/uebersicht')
-  }
-
 }

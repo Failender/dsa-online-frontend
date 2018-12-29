@@ -19,7 +19,8 @@ import {
   FileUploadModule,
   InputSwitchModule,
   InputTextareaModule,
-  InputTextModule, KeyFilterModule,
+  InputTextModule,
+  KeyFilterModule,
   MultiSelectModule,
   PanelMenuModule,
   SidebarModule,
@@ -78,6 +79,7 @@ import {TablesModule} from "./shared/tables/tables.module";
 import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
 import {HeldSteigernComponent} from './held/held-steigern/held-steigern.component';
 import {HeldInventarComponent} from './held/held-inventar/held-inventar.component';
+import {HeldQuicknavComponent} from './held/held-quicknav/held-quicknav.component';
 
 
 const appRoutes: Routes = [
@@ -145,7 +147,8 @@ registerLocaleData(localeDe, 'de');
     TableResultComponent,
     SkriptRoutingComponent,
     HeldSteigernComponent,
-    HeldInventarComponent
+    HeldInventarComponent,
+    HeldQuicknavComponent
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
