@@ -55,6 +55,15 @@ export class HeldSteigernComponent extends HeldenComponent{
       });
   }
 
+  public steigern(data) {
+    this.loading = true;
+    this.heldenService.steigern(this.heldenService.versionInfo.id, data.talent, data.talentwert)
+      .subscribe(answer => {
+        this.loading = false;
+        this.steigerungen = answer;
+      });
+  }
+
   get gesamtap() {
     if (this.held) {
       return this.held.angaben.ap.gesamt;
@@ -68,5 +77,6 @@ export class HeldSteigernComponent extends HeldenComponent{
       return this.held.angaben.ap.frei;
     }
   }
+
 
 }

@@ -77,6 +77,10 @@ export class HeldenService {
     return this.restService.post(`helden/held/${heldid}/steigern/lernmethode`, {talent, lernmethode});
   }
 
+  public steigern(heldid: number, talent: string, aktwert: number) {
+    return this.restService.post(`helden/held/${heldid}/steigern/steigern/${encodeURI(talent)}/${aktwert}`);
+  }
+
 
 }
 
