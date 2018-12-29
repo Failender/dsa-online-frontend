@@ -58,7 +58,7 @@ export class HeldenService {
   }
 
   public getSteigerungen(heldid) {
-    return this.restService.get(`helden/held/${heldid}/steigerungen`);
+    return this.restService.get(`steigern/${heldid}/steigerungen`);
   }
 
   public getInventar(heldid) {
@@ -74,19 +74,19 @@ export class HeldenService {
   }
 
   public changeLernmethode(heldid: number, talent: string, lernmethode: string) {
-    return this.restService.post(`helden/held/${heldid}/steigern/lernmethode`, {talent, lernmethode});
+    return this.restService.post(`steigern/${heldid}/steigern/lernmethode`, {talent, lernmethode});
   }
 
   public steigern(heldid: number, talent: string, aktwert: number) {
-    return this.restService.post(`helden/held/${heldid}/steigern/steigern/${encodeURI(talent)}/${aktwert}`);
+    return this.restService.post(`steigern/${heldid}/steigern/${encodeURI(talent)}/${aktwert}`);
   }
 
   public getApUncached(heldid: number) {
-    return this.restService.get(`helden/held/${heldid}/steigern/ap`);
+    return this.restService.get(`steigern/${heldid}/ap`);
   }
 
   public addEreignis(heldid: number, name: string, ap: number) {
-    return this.restService.post(`helden/held/${heldid}/steigern/ereignis/${encodeURI(name)}/${ap}`);
+    return this.restService.post(`steigern/${heldid}/ereignis/${encodeURI(name)}/${ap}`);
   }
 
 
