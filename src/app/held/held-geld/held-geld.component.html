@@ -1,0 +1,47 @@
+<app-held-quicknav></app-held-quicknav>
+<div class="loader" *ngIf="loading; else content"></div>
+
+
+<ng-template #content>
+
+  <form class="ui-g" [formGroup]="form" style="margin-top:10px">
+    <div class="ui-md-2">Geldbörse verändern</div>
+    <div class="ui-md-3">
+      <span class="ui-float-label">
+      <input type="text" pInputText  style="width:100%" id="name" formControlName="name">
+      <label for="name">Name</label>
+    </span>
+    </div>
+    <div class="ui-md-3">
+      <span class="ui-float-label">
+        <input type="text" pInputText pKeyFilter="int" style="width:100%" id="amount" formControlName="amount">
+        <label for="amount">Menge</label>
+        </span>
+    </div>
+    <div class="ui-md-2">
+      <p-dropdown placeholder="Währung" formControlName="waehrung" [options]="waehrungen" appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+    </div>
+    <div class="ui-md-1">
+      <button type="button" pButton icon="pi pi-plus" (click)="add()" [disabled]="!form.valid"></button>
+      <button type="button" pButton icon="pi pi-minus" (click)="substract()" [disabled]="!form.valid"></button>
+    </div>
+  </form>
+
+  <p-table [value]="muenzen">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Anzahl</th>
+        <!--<th></th>-->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.name}}</td>
+        <td>{{data.anzahl}}</td>
+        <!--<td></td>-->
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>

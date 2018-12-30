@@ -48,6 +48,11 @@ export class HeldQuicknavComponent extends HeldenComponent {
 
   steigern() {
     this.routingService.navigateByUrl('held/steigern');
+
+  }
+
+  geld() {
+    this.routingService.navigateByUrl('held/geld');
   }
 
 

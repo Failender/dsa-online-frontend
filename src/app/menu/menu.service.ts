@@ -62,6 +62,7 @@ export class MenuService {
       this.createItem('Übersicht', 'held/uebersicht'),
       this.createItem('Steigern', 'held/steigern'),
       this.createItem('Inventar', 'held/inventar'),
+      this.createItem('Geld', 'held/geld'),
       // this.createItem('Talente', 'held/talente'),
       this.createItem('Ereignisse', 'held/ereignisse')
     ];
