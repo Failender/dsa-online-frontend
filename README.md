@@ -1,27 +1,12 @@
-# DsaOnlineFrontend
+# DSA Gruppen Online
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+1. [Über Dsa Gruppen Online](#Über-Dsa-Gruppen-Online)
+2. [Gruppen](#Gruppen)
 
-## Development server
+## Über Dsa Gruppen Online
+Die Idee von Dsa Gruppen Online ist es die Verwaltung von DSA 4.1 Helden zu erleichtern.
+Dies wird erreicht indem über die API auf die über die Helden-Software hochgeladenen Helden zugegriffen wird (https://www.helden-software.de/index.php/category/helden-software-online/). Der Zugriff wird DSA Gruppen Online über das Austauschen von Zugriffstoken erlaubt.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Gruppen
+Fast alle Daten sind mit einer Gruppe assoziert. Daher ist das Auswählen der momentanen Gruppe eine Sache welche auf jeder Seite verfügbar ist.
+Einer der Navigationspunkte ist die Gruppen-Ansicht. Bei dieser werden für die momentan selektierte Gruppe alle Helden angezeigt die mit dieser Gruppe assoziert wurden.
