@@ -13,7 +13,7 @@ Die Idee von Dsa Gruppen Online ist es die Verwaltung von DSA 4.1 Helden zu erle
 Dies wird erreicht indem über die API auf die über die Helden-Software hochgeladenen Helden zugegriffen wird (https://www.helden-software.de/index.php/category/helden-software-online/). Der Zugriff wird DSA Gruppen Online über das Austauschen von Zugriffstoken ermöglicht.
 
 ## Helden
-Helden werde immer in regelmäßigen Abschnitten zwischen DSA Gruppen Online und Helden Online synchronisiert. Jedes Mal wenn eine Änderung bei Helden Online gefunden wird, wird eine neue Version des Helden erstellt und alle notwendigen Dateien synchronisiert. So ist es jederzeit möglich alte Versionen nachträglich zu betrachten und mit anderen zu vergleichen.
+Helden werden immer in regelmäßigen Abschnitten zwischen DSA Gruppen Online und Helden Online synchronisiert. Jedes Mal wenn eine Änderung bei Helden Online gefunden wird, wird eine neue Version des Helden erstellt und alle notwendigen Dateien synchronisiert. So ist es jederzeit möglich alte Versionen nachträglich zu betrachten und mit anderen zu vergleichen.
 Die eigenen Helden können über den "Meine Helden" Reiter angesehen werden.
 Eigene Helden haben zwei Stati die gesetzt werden können. Aktiv und öffentlich.
 Nicht öffentliche Helden können nur von dem Eigentümer des Helden, einem Meister der Gruppe oder einem System-Administrator eingesehen werden.
