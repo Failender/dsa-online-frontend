@@ -89,6 +89,16 @@ export class HeldenService {
     return this.restService.post(`steigern/${heldid}/ereignis/${encodeURI(name)}/${ap}`);
   }
 
+  public getLagerorte(heldid: number) {
+    return this.restService.get(`helden/held/${heldid}/lagerorte`);
+  }
+
+  public addLagerort(heldid: number, lagerort) {
+    return this.restService.post(`helden/held/${heldid}/lagerort`, lagerort);
+  }
+
+
+
 
 }
 

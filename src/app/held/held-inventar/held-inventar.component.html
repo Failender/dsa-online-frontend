@@ -1,49 +1,87 @@
 <app-held-quicknav></app-held-quicknav>
-<div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler.
-  Das Editieren von Ausrüstung passiert immer auf Basis der aktuellsten Version</div>
-<ng-container *ngIf="write">
-  <div class="ui-g" style="margin-top:10px">
-    <div class="ui-sm-12 ui-md-6">
+
+<div class="loader" *ngIf="loading; else view">
+
+</div>
+<ng-template #view>
+  <p-card title="Lagerorte">
+    <ng-container *ngIf="write">
+      add lagerort
+    </ng-container>
+
+    <p-table [value]="lagerorte">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3em"></th>
+          <th>Name</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-expanded="expanded" let-columns="columns">
+        <tr>
+          <td>
+            <a href="#" [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+            </a>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-card>
+  <p-card title="Inventar">
+    <div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler.
+      Das Editieren von Ausrüstung passiert immer auf Basis der aktuellsten Version</div>
+    <ng-container *ngIf="write">
+      <div class="ui-g" style="margin-top:10px">
+        <div class="ui-sm-12 ui-md-6">
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
       <label for="name">Name</label>
     </span>
-    </div>
+        </div>
 
-    <div class="ui-sm-12 ui-md-4" >
+        <div class="ui-sm-12 ui-md-4" >
     <span class="ui-float-label">
       <input type="text" pInputText style="width:100%" (keydown.enter)="save()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
       <label for="amount">Anzahl</label>
     </span>
-    </div>
-    <div class="ui-sm-12 ui-md-1">
-      <button pButton icon="pi pi-save" (click)="save()"></button>
-    </div>
-  </div>
-</ng-container>
+        </div>
+        <div class="ui-sm-12 ui-md-1">
+          <button pButton icon="pi pi-save" (click)="save()"></button>
+        </div>
+      </div>
+    </ng-container>
 
-<p-table [value]="inventar" class="helden-info-tabelle">
-  <ng-template pTemplate="emptymessage" let-columns>
-    <tr>
-      <td [attr.colspan]="write? 3: 2">
-        Kein Gegenstand gefunden
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th class>Name</th>
-      <th class>Anzahl</th>
-      <th *ngIf="write"></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
-    <tr>
-      <td>{{data.gegenstand}}</td>
-      <td>{{data.anzahl}}</td>
-      <td *ngIf="write">
-        <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+    <p-table [value]="inventar" class="helden-info-tabelle">
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="write? 3: 2">
+            Kein Gegenstand gefunden
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class>Name</th>
+          <th class>Anzahl</th>
+          <th *ngIf="write"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+        <tr>
+          <td>{{data.gegenstand}}</td>
+          <td>{{data.anzahl}}</td>
+          <td *ngIf="write">
+            <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-card>
+
+</ng-template>

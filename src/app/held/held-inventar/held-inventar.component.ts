@@ -15,6 +15,10 @@ export class HeldInventarComponent extends HeldenComponent {
   public name: string;
   public amount: string;
   public inventar: any[] = [];
+  public lagerorte = [];
+
+  public loadingInventar = true;
+  public loadingLagerorte = true;
 
   constructor(heldenService: HeldenService, routingService: RoutingService, authenticationService: AuthenticationService, private messageService: MessageService) {
     super(heldenService, routingService, authenticationService);
@@ -22,7 +26,14 @@ export class HeldInventarComponent extends HeldenComponent {
   init() {
     this.heldenService.getInventar(this.heldenService.versionInfo.id)
       .subscribe(data => {
+        this.loadingInventar = false;
         this.inventar = data;
+      });
+
+    this.heldenService.getLagerorte(this.heldenService.versionInfo.id)
+      .subscribe(data => {
+        this.lagerorte = data;
+        this.loadingLagerorte = false;
       });
 
   }
@@ -41,7 +52,11 @@ export class HeldInventarComponent extends HeldenComponent {
     this.heldenService.addItem(this.heldenService.versionInfo.id, this.name, parseInt(this.amount, 10) )
       .subscribe((data) => {
         this.inventar = data;
-      })
+      });
+  }
+
+  get loading() {
+    return this.loadingInventar || this.loadingLagerorte;
   }
 
 }
