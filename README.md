@@ -2,7 +2,9 @@
 
 
 DSA-Online-REST: ![](https://travis-ci.org/Failender/dsa-online-rest.svg?branch=master "DSA-Online-REST")
+
 DSA-Online-Frontend: ![](https://travis-ci.org/Failender/dsa-online-frontend.svg?branch=master "DSA-Online-Frontend")
+
 DSA-Online-Stack: ![](https://travis-ci.org/Failender/dsa-online-stack.svg?branch=master "DSA-Online-stack")
 
 
