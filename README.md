@@ -1,19 +1,12 @@
 # DSA Gruppen Online
 
-
-DSA-Online-REST: ![](https://travis-ci.org/Failender/dsa-online-rest.svg?branch=master "DSA-Online-REST")
-
-DSA-Online-Frontend: ![](https://travis-ci.org/Failender/dsa-online-frontend.svg?branch=master "DSA-Online-Frontend")
-
-DSA-Online-Stack: ![](https://travis-ci.org/Failender/dsa-online-stack.svg?branch=master "DSA-Online-stack")
-
-
 1. [Über Dsa Gruppen Online](#Über-Dsa-Gruppen-Online)
 2. [Helden](#Helden)
 3. [Gruppen](#Gruppen)
 4. [Abenteuer und Kampagnen](#Abenteuer-und-Kampagnen)
 5. [Rechte und Sichtbarkeit von Helden](#Rechte-und-Sichtbarkeit-von-Helden)
 6. [Kalender](#Kalender)
+7. [Technisches](#Technisches)
 
 ## Über Dsa Gruppen Online
 Die Idee von Dsa Gruppen Online ist es die Verwaltung von DSA 4.1 Helden zu erleichtern.
@@ -75,14 +68,14 @@ Die Arbeiten an dem Kalender sind noch nicht endgültig abgeschlossen, daher ist
 DSA Gruppen Online besteht aus drei Projekten welche in der Gesamtheit die Webseite ergibt welche unter https://failender.de zu sehen ist. Für das Deployment wird Docker eingesetzt. 
 Jegliche Bauprozesse werden durch Travis unterstützt (https://travis-ci.org/).
 
-### Das Frontend
+### Das Frontend ![](https://travis-ci.org/Failender/dsa-online-frontend.svg?branch=master "DSA-Online-Frontend")
 Das Frontend besteht aus einer Angular7 Anwendung welche über eine REST-API kommuniziert. Für die Auslieferung des Frontends wird nginx verwendet.
 Der Gesamte Code ist unter https://github.com/Failender/dsa-online-frontend zu sehen.
 
-### Das Backend
+### Das Backend ![](https://travis-ci.org/Failender/dsa-online-rest.svg?branch=master "DSA-Online-REST")
 Für das Backend wurde eine Spring-Boot Anwendung gewählt, welche ihre Daten in einer Maria-DB abspeichert. Als Build-Tool wird gradle eingesetzt.
 Der Gesamte Code ist unter https://github.com/Failender/dsa-online-rest zu sehen.
 
-### Ein Nginx-Proxy
+### Ein Nginx-Proxy ![](https://travis-ci.org/Failender/dsa-online-stack.svg?branch=master "DSA-Online-stack")
 Um die gesamte Anwendung unter einem Port auszuliefern wird ein nginx als reverse-Proxy eingestzt.
 Die Konfiguration für diesen ist unter https://github.com/failender/dsa-online-stack 
