@@ -49,3 +49,8 @@ Prinzipiell gibt es bei DSA Gruppen Online drei Arten von Nutzern.
 2. Meister, welche in der Lage sind ihre eigenen, sowie alle Helden der Gruppe für die sie als Meister eingetragen sind sehen und bearbeiten können
 3. System-Administratoren, welche Nutzer anlegen, Daten ex und importieren sowie alle Helden sehen und editieren dürfen
 
+Zusätzlich kann jede Person, welche ein Editier-Recht für den Helden besitzt festlegen ob es sich bei dem Helden um einen öffentliche Helden handelt, welches die Sichtbarkeit für normale Nutzer einschränkt.
+
+Prinzipiell gilt immer, dass ein Nutzer Rechte für alle Operationen hat welche seinen Helden betroffen, ein Meister Rechte für alle Operationen hat die seine Gruppe betreffen und ein Administrator Rechte für alle existierenden operationen besitzt.
+
+Meister können nur von System Administratoren angelegt und entfernt werden, dafür existiert unter dem Navigationspunkt "Administration" der Reiter "Meister".
