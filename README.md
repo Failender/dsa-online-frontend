@@ -1,18 +1,25 @@
 # DSA Gruppen Online
 
+
+DSA-Online-REST: ![](https://travis-ci.org/Failender/dsa-online-rest.svg?branch=master "DSA-Online-REST")
+DSA-Online-Frontend: ![](https://travis-ci.org/Failender/dsa-online-frontend.svg?branch=master "DSA-Online-Frontend")
+DSA-Online-Stack: ![](https://travis-ci.org/Failender/dsa-online-stack.svg?branch=master "DSA-Online-stack")
+
+
 1. [Über Dsa Gruppen Online](#Über-Dsa-Gruppen-Online)
 2. [Helden](#Helden)
 3. [Gruppen](#Gruppen)
 4. [Abenteuer und Kampagnen](#Abenteuer-und-Kampagnen)
 5. [Rechte und Sichtbarkeit von Helden](#Rechte-und-Sichtbarkeit-von-Helden)
+6. [Kalender](#Kalender)
 
 ## Über Dsa Gruppen Online
 Die Idee von Dsa Gruppen Online ist es die Verwaltung von DSA 4.1 Helden zu erleichtern.
-Dies wird erreicht indem über die API auf die über die Helden-Software hochgeladenen Helden zugegriffen wird (https://www.helden-software.de/index.php/category/helden-software-online/). Der Zugriff wird DSA Gruppen Online über das Austauschen von Zugriffstoken 
+Dies wird erreicht indem über die API auf die über die Helden-Software hochgeladenen Helden zugegriffen wird (https://www.helden-software.de/index.php/category/helden-software-online/). Der Zugriff wird DSA Gruppen Online über das Austauschen von Zugriffstoken ermöglicht.
 
 ## Helden
-Helden werde immer in regelmäßigen Abschnitten zwischen DSA Gruppen Online und Helden Online synchronisiert. Jedes Mal wenn eine Änderung bei Helden Online gefunden wird, wird eine neue Version des Helden hochgeladen und alle notwendigen Dateien synchronisiert. So ist es jederzeit möglich alte Versionen nachträglich zu betrachten und mit anderen zu vergleichen.
-Die eigenen Helden können über den "meine Helden" Reiter angesehen werden.
+Helden werde immer in regelmäßigen Abschnitten zwischen DSA Gruppen Online und Helden Online synchronisiert. Jedes Mal wenn eine Änderung bei Helden Online gefunden wird, wird eine neue Version des Helden erstellt und alle notwendigen Dateien synchronisiert. So ist es jederzeit möglich alte Versionen nachträglich zu betrachten und mit anderen zu vergleichen.
+Die eigenen Helden können über den "Meine Helden" Reiter angesehen werden.
 Eigene Helden haben zwei Stati die gesetzt werden können. Aktiv und öffentlich.
 Nicht öffentliche Helden können nur von dem Eigentümer des Helden, einem Meister der Gruppe oder einem System-Administrator eingesehen werden.
 Der aktiv Status wird an mehreren Stellen in DSA Gruppen Online genutzt um die Auswahl einzuschränken und nur aktive Helden anzuzeigen. Grundsätzlich gilt, dass immer alle Helden mit denen momentan gespielt wird auf aktiv gestellt werden sollte und alle anderen inaktiv.
@@ -47,10 +54,33 @@ Abenteuer können nur von Meistern der jeweiligen Gruppe angelegt werden. Dies i
 Prinzipiell gibt es bei DSA Gruppen Online drei Arten von Nutzern.
 1. Ganz normale Nutzer welche lediglich ihre eigenen Helden synchronisieren und verwalten können
 2. Meister, welche in der Lage sind ihre eigenen, sowie alle Helden der Gruppe für die sie als Meister eingetragen sind sehen und bearbeiten können
-3. System-Administratoren, welche Nutzer anlegen, Daten ex und importieren sowie alle Helden sehen und editieren dürfen
-
-Zusätzlich kann jede Person, welche ein Editier-Recht für den Helden besitzt festlegen ob es sich bei dem Helden um einen öffentliche Helden handelt, welches die Sichtbarkeit für normale Nutzer einschränkt.
+3. System-Administratoren, welche Nutzer anlegen, Daten ex und importieren sowie alle Helden sehen und editieren dürfen.
+    
+Zusätzlich kann jede Person, welche ein Editier-Recht für den Helden besitzt, festlegen ob es sich bei dem Helden um einen öffentliche Helden handelt, welches die Sichtbarkeit für normale Nutzer einschränkt.
 
 Prinzipiell gilt immer, dass ein Nutzer Rechte für alle Operationen hat welche seinen Helden betroffen, ein Meister Rechte für alle Operationen hat die seine Gruppe betreffen und ein Administrator Rechte für alle existierenden operationen besitzt.
 
 Meister können nur von System Administratoren angelegt und entfernt werden, dafür existiert unter dem Navigationspunkt "Administration" der Reiter "Meister".
+
+## Kalender
+Bei dem Kalender handelt es sich um die Möglichkeit die chronologische Entwicklung von Ereignisse besser zu überblicken.
+
+Jedes Abenteuer welches erstellt wird hat ein Datum, zu welchem es endet. Es ist nun möglich dieses Abenteuer im Kalender anzusehen und im Monats / Jahres-Rhtymus durch den Kalender zu schalten.
+
+Die Arbeiten an dem Kalender sind noch nicht endgültig abgeschlossen, daher ist hier noch Verbesserungsbedarf
+
+## Technisches
+DSA Gruppen Online besteht aus drei Projekten welche in der Gesamtheit die Webseite ergibt welche unter https://failender.de zu sehen ist. Für das Deployment wird Docker eingesetzt. 
+Jegliche Bauprozesse werden durch Travis unterstützt (https://travis-ci.org/).
+
+### Das Frontend
+Das Frontend besteht aus einer Angular7 Anwendung welche über eine REST-API kommuniziert. Für die Auslieferung des Frontends wird nginx verwendet.
+Der Gesamte Code ist unter https://github.com/Failender/dsa-online-frontend zu sehen.
+
+### Das Backend
+Für das Backend wurde eine Spring-Boot Anwendung gewählt, welche ihre Daten in einer Maria-DB abspeichert. Als Build-Tool wird gradle eingesetzt.
+Der Gesamte Code ist unter https://github.com/Failender/dsa-online-rest zu sehen.
+
+### Ein Nginx-Proxy
+Um die gesamte Anwendung unter einem Port auszuliefern wird ein nginx als reverse-Proxy eingestzt.
+Die Konfiguration für diesen ist unter https://github.com/failender/dsa-online-stack 
