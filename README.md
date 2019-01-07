@@ -19,7 +19,7 @@ Eigene Helden haben zwei Stati die gesetzt werden können. Aktiv und öffentlich
 Nicht öffentliche Helden können nur von dem Eigentümer des Helden, einem Meister der Gruppe oder einem System-Administrator eingesehen werden.
 Der aktiv Status wird an mehreren Stellen in DSA Gruppen Online genutzt um die Auswahl einzuschränken und nur aktive Helden anzuzeigen. Grundsätzlich gilt, dass immer alle Helden mit denen momentan gespielt wird auf aktiv gestellt werden sollte und alle anderen inaktiv.
 
-Für Helden für die man das Bearbeitungsrecht hat gibt es fünf weitere Optionen, welche über das Kontext Menü ausgewählt werden können
+Für Helden für die man das Bearbeitungsrecht hat gibt es fünf weitere Optionen, welche über das Aktions-Menü ausgewählt werden können
 
 1. Held laden - Lädt den Held in der neusten Version und erlaubt das Sichten der Daten in dieser Version
 2. Alle Versionen anzeigen - Öffnet einen Dialog, welcher alle Versionen anzeigt damit diese gezielt geladen oder gelöscht werden können. Erlaubt außerdem den Vergleich von zwei beliebigen Versionen
