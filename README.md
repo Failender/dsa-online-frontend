@@ -72,6 +72,7 @@ Die Arbeiten an dem Kalender sind noch nicht endgültig abgeschlossen, daher ist
 
 # Das Projekt unterstützen
 Eine der größten Hilfen für das Projekt sind aktive Nutzer. Wenn du Interesse daran hast das Projekt für deine Gruppe einzusetzen melde dich gerne bei mir (pahilgenstock@hotmail.de) für die Einrichtung der Accounts.
+
 Finanzielle Unterstützung immer gerne an das Team der Heldensoftware (https://www.helden-software.de/index.php/spenden/), nur die lange und intensive Arbeit an diesem Projekt macht dieses erst möglich!
 
 # Technisches
@@ -92,4 +93,5 @@ Die Konfiguration für diesen ist unter https://github.com/failender/dsa-online-
 
 # Danksagung
 Vielen Dank an Sven (little.yoda) vom Team von der Helden-Software, welcher durch mehrere Anpassungen an der Heldensoftware dieses Projekt erst möglich gemacht hat.
+
 Spezieller Dank geht auch an https://github.com/frozen-byte für viele wertvolle Tipps wenn es um die Verbesserung des Frontends geht.
