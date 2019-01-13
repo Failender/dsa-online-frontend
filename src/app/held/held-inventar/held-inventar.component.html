@@ -4,12 +4,38 @@
 
 </div>
 <ng-template #view>
+
   <p-card title="Lagerorte">
     <ng-container *ngIf="write">
-      add lagerort
+      <form class="ui-g" style="margin-top:10px" [formGroup]="addLagerortForm">
+        <div class="ui-sm-12 ui-md-6">
+          <span class="ui-float-label">
+            <input type="text" pInputText style="width:100%" id="lname" formControlName="name">
+            <label for="lname">Name</label>
+          </span>
+        </div>
+
+        <div class="ui-sm-12 ui-md-1">
+          <button pButton icon="pi pi-save"  [disabled]="!this.addLagerortForm.valid" (click)="saveLagerort()"></button>
+        </div>
+      </form>
     </ng-container>
 
-    <p-table [value]="lagerorte">
+    <p-table [value]="lagerorte" dataKey="name">
+      <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <td colspan="2">
+          <textarea rows="5" style="width:100%" pInputTextarea autoResize="autoResize" [(ngModel)]="rowData.notizen"></textarea>
+          <button pButton icon="pi pi-save" (click)="saveNotiz(rowData)"></button>
+        </td>
+
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td colspan="2">
+            Kein Lagerort gefunden
+          </td>
+        </tr>
+      </ng-template>
 
       <ng-template pTemplate="header">
         <tr>
@@ -17,7 +43,7 @@
           <th>Name</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-expanded="expanded" let-columns="columns">
+      <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
         <tr>
           <td>
             <a href="#" [pRowToggler]="rowData">
@@ -25,7 +51,7 @@
             </a>
           </td>
           <td>
-
+            {{rowData.name}}
           </td>
         </tr>
       </ng-template>
@@ -36,27 +62,27 @@
     <div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler.
       Das Editieren von Ausrüstung passiert immer auf Basis der aktuellsten Version</div>
     <ng-container *ngIf="write">
-      <div class="ui-g" style="margin-top:10px">
+      <form class="ui-g" style="margin-top:10px" [formGroup]="addGegenstandForm">
         <div class="ui-sm-12 ui-md-6">
-    <span class="ui-float-label">
-      <input type="text" pInputText style="width:100%" id="name" [(ngModel)]="name">
-      <label for="name">Name</label>
-    </span>
+          <span class="ui-float-label">
+            <input type="text" pInputText style="width:100%" id="name" formControlName="name">
+            <label for="name">Name</label>
+          </span>
         </div>
 
         <div class="ui-sm-12 ui-md-4" >
     <span class="ui-float-label">
-      <input type="text" pInputText style="width:100%" (keydown.enter)="save()" id="amount" [(ngModel)]="amount" pKeyFilter="int">
+      <input type="text" pInputText style="width:100%" (keydown.enter)="save()" id="amount" formControlName="amount" pKeyFilter="int">
       <label for="amount">Anzahl</label>
     </span>
         </div>
         <div class="ui-sm-12 ui-md-1">
-          <button pButton icon="pi pi-save" (click)="save()"></button>
+          <button pButton icon="pi pi-save"  [disabled]="!this.addGegenstandForm.valid" (click)="save()"></button>
         </div>
-      </div>
+      </form>
     </ng-container>
 
-    <p-table [value]="inventar" class="helden-info-tabelle">
+    <p-table [value]="inventar" class="helden-info-tabelle" (onEditComplete)="onAnzahlEdit($event)">
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
           <td [attr.colspan]="write? 3: 2">
@@ -66,15 +92,26 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th class>Name</th>
-          <th class>Anzahl</th>
+          <th >Name</th>
+          <th style="min-width:150px;">Anzahl</th>
+          <th>Lagerort</th>
           <th *ngIf="write"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
         <tr>
           <td>{{data.gegenstand}}</td>
-          <td>{{data.anzahl}}</td>
+          <td pEditableColumn><p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="data.anzahl" style="width:100px;">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{data.anzahl}}
+            </ng-template>
+          </p-cellEditor></td>
+          <td>
+            <p-dropdown [options]="lagerorteDropDown" [placeholder]="(data.lagerort || '...' )" (onChange)="onLagerortSelect($event, data)" class="dropdown"  [style]="{'width':'250px', 'height': '20px'}" ></p-dropdown>
+          </td>
           <td *ngIf="write">
             <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
           </td>

@@ -94,7 +94,23 @@ export class HeldenService {
   }
 
   public addLagerort(heldid: number, lagerort) {
-    return this.restService.post(`helden/held/${heldid}/lagerort`, lagerort);
+    return this.restService.post(`helden/held/${heldid}/lagerort`, {"name": lagerort});
+  }
+
+  public setLagerort(heldid, from, to, gegenstand, amount) {
+    let url = `helden/held/${heldid}/lagerort/${to}/${gegenstand}/${amount}/}`;
+    if(from) {
+      url += '?from=' + from;
+    }
+    return this.restService.post(url);
+  }
+
+  public updateLagerortNotiz(lagerort: number, notiz: string) {
+    return this.restService.post(`helden/held/lagerort/${lagerort}/notiz`, notiz);
+  }
+
+  public onAnzahlEdit(event) {
+
   }
 
 
