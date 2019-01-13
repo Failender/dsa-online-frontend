@@ -98,9 +98,9 @@ export class HeldenService {
   }
 
   public setLagerort(heldid, from, to, gegenstand, amount) {
-    let url = `helden/held/${heldid}/lagerort/${to}/${gegenstand}/${amount}/}`;
+    let url = `helden/held/${heldid}/lagerort/${encodeURI(to)}/${encodeURI(gegenstand)}/${amount}`;
     if(from) {
-      url += '?from=' + from;
+      url += '?from=' + encodeURI(from);
     }
     return this.restService.post(url);
   }
