@@ -6,7 +6,9 @@
 4. [Abenteuer und Kampagnen](#Abenteuer-und-Kampagnen)
 5. [Rechte und Sichtbarkeit von Helden](#Rechte-und-Sichtbarkeit-von-Helden)
 6. [Kalender](#Kalender)
-7. [Technisches](#Technisches)
+7. [Das Projekt unterstützen](#Das-Projekt-unterstützen)
+8. [Technisches](#Technisches)
+9. [Danksagung](#Danksagung)
 
 ## Über Dsa Gruppen Online
 Die Idee von Dsa Gruppen Online ist es die Verwaltung von DSA 4.1 Helden zu erleichtern.
@@ -68,6 +70,10 @@ Jedes Abenteuer welches erstellt wird hat ein Datum, zu welchem es endet. Es ist
 
 Die Arbeiten an dem Kalender sind noch nicht endgültig abgeschlossen, daher ist hier noch Verbesserungsbedarf
 
+# Das Projekt unterstützen
+Eine der größten Hilfen für das Projekt sind aktive Nutzer. Wenn du Interesse daran hast das Projekt für deine Gruppe einzusetzen melde dich gerne bei mir (pahilgenstock@hotmail.de) für die Einrichtung der Accounts.
+Finanzielle Unterstützung immer gerne an das Team der Heldensoftware (https://www.helden-software.de/index.php/spenden/), nur die lange und intensive Arbeit an diesem Projekt macht dieses erst möglich!
+
 # Technisches
 DSA Gruppen Online besteht aus drei Projekten welche in der Gesamtheit die Webseite ergibt welche unter https://failender.de zu sehen ist. Für das Deployment wird Docker eingesetzt. 
 Jegliche Bauprozesse werden durch Travis unterstützt (https://travis-ci.org/).
@@ -83,3 +89,7 @@ Der Gesamte Code ist unter https://github.com/Failender/dsa-online-rest zu sehen
 ## Ein Nginx-Proxy ![](https://travis-ci.org/Failender/dsa-online-stack.svg?branch=master "DSA-Online-stack")
 Um die gesamte Anwendung unter einem Port auszuliefern wird ein nginx als reverse-Proxy eingestzt.
 Die Konfiguration für diesen ist unter https://github.com/failender/dsa-online-stack 
+
+# Danksagung
+Vielen Dank an Sven (little.yoda) vom Team von der Helden-Software, welcher durch mehrere Anpassungen an der Heldensoftware dieses Projekt erst möglich gemacht hat.
+Spezieller Dank geht auch an https://github.com/frozen-byte für viele wertvolle Tipps wenn es um die Verbesserung des Frontends geht.
