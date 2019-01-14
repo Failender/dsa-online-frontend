@@ -20,7 +20,6 @@ export abstract class HeldenComponent implements OnInit {
           this.init();
         }
       });
-
   }
 
   protected init(): void {}
@@ -34,11 +33,18 @@ export abstract class HeldenComponent implements OnInit {
   }
 
   get write() {
-    if(this.heldenService.versionInfo) {
-      return this.heldenService.versionInfo.edit;
+    if (this.heldenService.versionInfo) {
+      return this.heldenService.versionInfo.editable;
     }
     return false;
 
+  }
+
+  get xmlWrite() {
+    if (this.heldenService.versionInfo) {
+      return this.heldenService.versionInfo.xmlEditable;
+    }
+    return false;
   }
 
 }

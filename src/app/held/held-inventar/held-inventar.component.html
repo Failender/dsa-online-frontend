@@ -4,7 +4,6 @@
 
 </div>
 <ng-template #view>
-
   <p-card title="Lagerorte">
     <ng-container *ngIf="write">
       <form class="ui-g" style="margin-top:10px" [formGroup]="addLagerortForm">
@@ -61,7 +60,7 @@
   <p-card title="Inventar">
     <div style="margin-top:5px">Es ist NICHT möglich Ausrüstung zu entfernen! Dies resultiert vorerst in einem unerwarteten Fehler.
       Das Editieren von Ausrüstung passiert immer auf Basis der aktuellsten Version</div>
-    <ng-container *ngIf="write">
+    <ng-container *ngIf="xmlWrite">
       <form class="ui-g" style="margin-top:10px" [formGroup]="addGegenstandForm">
         <div class="ui-sm-12 ui-md-6">
           <span class="ui-float-label">
@@ -84,7 +83,7 @@
       <p-table [value]="inventar" class="helden-info-tabelle" (onEditComplete)="onAnzahlEdit($event)">
         <ng-template pTemplate="emptymessage" let-columns>
           <tr>
-            <td [attr.colspan]="write? 3: 2">
+            <td [attr.colspan]="xmlWrite? 3: 2">
               Kein Gegenstand gefunden
             </td>
           </tr>
@@ -94,7 +93,7 @@
             <th >Name</th>
             <th >Anzahl</th>
             <th>Lagerort</th>
-            <th *ngIf="write"></th>
+            <th *ngIf="xmlWrite"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
@@ -108,10 +107,13 @@
                 {{data.anzahl}}
               </ng-template>
             </p-cellEditor></td>
-            <td>
+            <td *ngIf="write">
               <p-dropdown [options]="lagerorteDropDown" [placeholder]="(data.lagerort || '...' )" (onChange)="onLagerortSelect($event, data)" class="dropdown"  [style]="{'width':'100px', 'height': '20px'}" ></p-dropdown>
             </td>
-            <td *ngIf="write">
+            <td *ngIf="!write">
+              <label>{{data.lagerort}}</label>
+            </td>
+            <td *ngIf="xmlWrite">
               <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
             </td>
           </tr>

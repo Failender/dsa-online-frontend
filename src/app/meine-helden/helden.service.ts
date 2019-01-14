@@ -30,7 +30,7 @@ export class HeldenService {
     return this.restService.get('helden/held/' + id + '/' + version)
       .pipe(tap((data) => {
         this.versionInfo = {
-          id, version, edit: data.editable
+          id, version, editable: data.editable, xmlEditable: data.xmlEditable
         }
         this.held = data.daten;
         this._heldLoaded.next();
