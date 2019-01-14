@@ -81,43 +81,43 @@
         </div>
       </form>
     </ng-container>
+      <p-table [value]="inventar" class="helden-info-tabelle" (onEditComplete)="onAnzahlEdit($event)">
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="write? 3: 2">
+              Kein Gegenstand gefunden
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th >Name</th>
+            <th >Anzahl</th>
+            <th>Lagerort</th>
+            <th *ngIf="write"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+          <tr>
+            <td>{{data.gegenstand}}</td>
+            <td pEditableColumn><p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="data.anzahl" style="width:100px;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{data.anzahl}}
+              </ng-template>
+            </p-cellEditor></td>
+            <td>
+              <p-dropdown [options]="lagerorteDropDown" [placeholder]="(data.lagerort || '...' )" (onChange)="onLagerortSelect($event, data)" class="dropdown"  [style]="{'width':'100px', 'height': '20px'}" ></p-dropdown>
+            </td>
+            <td *ngIf="write">
+              <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
 
-    <p-table [value]="inventar" class="helden-info-tabelle" (onEditComplete)="onAnzahlEdit($event)">
-      <ng-template pTemplate="emptymessage" let-columns>
-        <tr>
-          <td [attr.colspan]="write? 3: 2">
-            Kein Gegenstand gefunden
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th >Name</th>
-          <th style="min-width:150px;">Anzahl</th>
-          <th>Lagerort</th>
-          <th *ngIf="write"></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
-        <tr>
-          <td>{{data.gegenstand}}</td>
-          <td pEditableColumn><p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="data.anzahl" style="width:100px;">
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{data.anzahl}}
-            </ng-template>
-          </p-cellEditor></td>
-          <td>
-            <p-dropdown [options]="lagerorteDropDown" [placeholder]="(data.lagerort || '...' )" (onChange)="onLagerortSelect($event, data)" class="dropdown"  [style]="{'width':'250px', 'height': '20px'}" ></p-dropdown>
-          </td>
-          <td *ngIf="write">
-            <button pButton icon="pi pi-trash" (click)="deleteItem(rowIndex)"></button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
 
   </p-card>
 
