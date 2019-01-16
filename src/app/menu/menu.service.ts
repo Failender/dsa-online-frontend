@@ -15,6 +15,7 @@ import {isMobile} from "../util/constants";
 
 export interface CustomMenuItem extends MenuItem {
   mobile: boolean;
+  condition?: any;
 }
 
 interface NestedCustomMenuItem extends MenuItem {
@@ -56,13 +57,16 @@ export class MenuService {
   ];
 
 
+  private zauberItem = this.createItem('Zauber', 'held/zauber');
 
   private heldenItems: CustomMenuItem[] =
     [
       this.createItem('Übersicht', 'held/uebersicht'),
+      this.createItem('Mobil', 'held/mobil'),
       this.createItem('Steigern', 'held/steigern'),
       this.createItem('Inventar', 'held/inventar'),
       this.createItem('Geld', 'held/geld'),
+      this.zauberItem,
       // this.createItem('Talente', 'held/talente'),
       this.createItem('Ereignisse', 'held/ereignisse')
     ];
@@ -102,9 +106,6 @@ export class MenuService {
     this.heldItems.forEach(item => {
       this.removeItem(item);
     })
-    if (this.heldItem.items.length === 3) {
-      this.heldItem.items.splice(2, 0);
-    }
     this.heldItems = [];
   }
   constructor(sessionService: SessionService, heldenService: HeldenService, authenticationService: AuthenticationService, private routingService: RoutingService) {
@@ -114,18 +115,13 @@ export class MenuService {
     heldenService.heldLoaded.subscribe(
       () => {
         this.removeHeldItems();
-        if (heldenService.held.zauberliste.zauber.length > 0) {
-
-          const zauberItem = this.createItem('Zauber', 'held/zauber')
-          const menuItems: MenuItem[] = <MenuItem[]>this.heldItem.items;
-
-          menuItems.push(zauberItem);
-        }
+        this.zauberItem.visible = heldenService.held.zauberliste.zauber.length !== 0;
         this.heldItems.push(this.heldItem)
         this.heldItems.forEach(item => this.addItem(item));
 
       }
     )
+
     authenticationService.onLogin.subscribe(
       () => {
         this.itemsToUnload = [];
