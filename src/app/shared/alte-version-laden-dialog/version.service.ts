@@ -13,7 +13,7 @@ export class VersionService {
   }
 
   public deleteVersion(heldid: number, version: number): Observable<void> {
-    return this.restService.delete(`helden/held/${heldid}/${version}`);
+    return this.restService.delete(`helden/held/${heldid}/version/${version}`);
   }
 
 }

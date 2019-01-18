@@ -28,7 +28,7 @@ export class HeldenService {
 
   public loadHeld(id: number, version: number): Observable<any> {
 
-    return this.restService.get('helden/held/' + id + '/' + version)
+    return this.restService.get('helden/held/' + id + '/version/' + version)
       .pipe(tap((data) => {
         this.versionInfo = {
           id, version, editable: data.editable, xmlEditable: data.xmlEditable, ownHeld: data.ownHeld
@@ -130,6 +130,10 @@ export class HeldenService {
 
   public getFavorisierteTalent(heldid) {
     return this.restService.get(`helden/held/${heldid}/favoriten`);
+  }
+
+  public getFavoriten(heldid) {
+    return this.restService.get(`helden/held/${heldid}/favoriten/list`);
   }
 
 }

@@ -1,21 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {InputSwitch} from 'primeng/primeng';
+import {Component} from '@angular/core';
+import {FavorisierbarTabelleComponent} from "../favorisierbar-tabelle/favorisierbar.tabelle.component";
 
 @Component({
   selector: 'app-zauber-tabelle',
   templateUrl: './zauber-tabelle.component.html',
   styleUrls: ['./zauber-tabelle.component.css']
 })
-export class ZauberTabelleComponent implements OnInit {
-
-  @Input()
-  public data: any[];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-
-
+export class ZauberTabelleComponent extends FavorisierbarTabelleComponent {
 }

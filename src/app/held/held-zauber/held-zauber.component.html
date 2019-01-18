@@ -1,2 +1,3 @@
 <app-held-quicknav></app-held-quicknav>
-<app-zauber-tabelle [data]="held.zauberliste.zauber" *ngIf="held"></app-zauber-tabelle>
+<app-zauber-tabelle [data]="held.zauberliste.zauber" *ngIf="held" [allowAddFavorites]="allowAddFavorites"
+                    [favoriten]="favoriten" (favoriteAdded)="favoriteAdded($event)" (favoriteRemoved)="favoriteRemoved($event)"></app-zauber-tabelle>

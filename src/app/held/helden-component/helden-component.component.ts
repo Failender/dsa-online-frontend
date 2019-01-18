@@ -1,5 +1,5 @@
 import {OnInit} from '@angular/core';
-import {HeldenService} from '../../meine-helden/helden.service';
+import {HeldenService, VersionInfo} from '../../meine-helden/helden.service';
 import {RoutingService} from "../../shared/routing.service";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {first} from "rxjs/operators";
@@ -28,7 +28,7 @@ export abstract class HeldenComponent implements OnInit {
     return this.heldenService.held;
   }
 
-  get versioninfo() {
+  get versioninfo(): VersionInfo {
     return this.heldenService.versionInfo;
   }
 

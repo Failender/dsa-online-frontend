@@ -1,6 +1,7 @@
 <p-table [value]="data">
   <ng-template pTemplate="header">
     <tr>
+      <th *ngIf="allowAddFavorites" style="width:20px"></th>
       <th>Name</th>
       <th>Probe</th>
       <th>REP</th>
@@ -9,10 +10,12 @@
   </ng-template>
   <ng-template pTemplate="body" let-data>
     <tr>
+      <td *ngIf="allowAddFavorites">
+        <i [ngClass]="isFavorisiert(data.name)? 'pi pi-star': 'pi pi-star-o'" (click)="changeFavorite(data)"></i>
+      </td>
       <td>{{data.name}}</td>
       <td>{{data.probe}}</td>
       <td>{{data.repraesentation}}</td>
-
       <td>{{data.wert}}</td>
     </tr>
   </ng-template>

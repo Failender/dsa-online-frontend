@@ -1,0 +1,41 @@
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngIf="allowAddFavorites" style="width:20px"></th>
+      <th>Name</th>
+      <th>Probe / AT|PA / Representation</th>
+      <th>BE</th>
+      <th>TAW</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <ng-container *ngIf="data.header; else rowtemplate">
+      <td [attr.colspan]="allowAddFavorites? 5: 4">{{data.header}}</td>
+    </ng-container>
+    <ng-template #rowtemplate>
+      <tr>
+        <td *ngIf="allowAddFavorites">
+          <i [ngClass]="isFavorisiert(data.name)? 'pi pi-star': 'pi pi-star-o'" (click)="changeFavorite(data)"></i>
+        </td>
+        <td>{{data.name}}</td>
+        <!-- Wenn representation vorhanden ist => als zauber darstellen-->
+        <ng-container *ngIf="data.repraesentation; else talentRender">
+          <td>{{data.probe}}</td>
+          <td>{{data.repraesentation}}</td>
+        </ng-container>
+        <ng-template #talentRender>
+
+          <ng-container [ngSwitch]="data.pa">
+            <td *ngSwitchCase="null">{{data.probe}}</td>
+            <td *ngSwitchCase="''">{{data.at}}</td>
+            <td *ngSwitchDefault>{{data.at}} | {{data.pa}}</td>
+          </ng-container>
+          <td>{{data.behinderung}}</td>
+        </ng-template>
+
+        <td>{{data.wert}}</td>
+      </tr>
+    </ng-template>
+
+  </ng-template>
+</p-table>
