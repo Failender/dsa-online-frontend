@@ -47,4 +47,22 @@ export abstract class HeldenComponent implements OnInit {
     return false;
   }
 
+  get allowAddFavorites() {
+    return this.heldenService.versionInfo.ownHeld;
+  }
+
+  get favoriten() {
+    return this.heldenService.favorisierteTalente;
+  }
+
+  public favoriteAdded(name: string) {
+      this.heldenService.addFavorit(this.heldenService.versionInfo.id, name)
+        .subscribe(() => this.heldenService.favorisierteTalente[name] = true);
+  }
+
+  public favoriteRemoved(name: string) {
+    this.heldenService.deleteFavorit(this.heldenService.versionInfo.id, name)
+      .subscribe(() => delete this.heldenService.favorisierteTalente[name]);
+  }
+
 }

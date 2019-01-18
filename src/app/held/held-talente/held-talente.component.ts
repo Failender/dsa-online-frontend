@@ -11,11 +11,8 @@ import {AuthenticationService} from "../../shared/service/authentication/authent
 })
 export class HeldTalenteComponent extends HeldenComponent {
 
-
-
   constructor(heldenService: HeldenService, router: RoutingService, authenticationService: AuthenticationService) {
     super(heldenService, router, authenticationService);
   }
-
 
 }

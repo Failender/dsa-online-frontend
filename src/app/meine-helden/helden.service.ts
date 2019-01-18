@@ -11,7 +11,8 @@ export class HeldenService {
   }
 
   public held: any;
-  public versionInfo;
+  public versionInfo: VersionInfo;
+  public favorisierteTalente: { [key: string]: boolean; } = {};
 
   private _heldLoaded = new ReplaySubject<any>();
 
@@ -30,11 +31,19 @@ export class HeldenService {
     return this.restService.get('helden/held/' + id + '/' + version)
       .pipe(tap((data) => {
         this.versionInfo = {
-          id, version, editable: data.editable, xmlEditable: data.xmlEditable
+          id, version, editable: data.editable, xmlEditable: data.xmlEditable, ownHeld: data.ownHeld
         }
         this.held = data.daten;
         this._heldLoaded.next();
-      }));
+      }),
+        tap((data) => {
+          if (data.ownHeld) {
+            this.getFavorisierteTalent(id)
+              .subscribe(d => {
+                d.forEach(name => this.favorisierteTalente[name] = true);
+              });
+          }
+        }));
   }
 
   public reloadHelden() {
@@ -99,7 +108,7 @@ export class HeldenService {
 
   public setLagerort(heldid, from, to, gegenstand, amount) {
     let url = `helden/held/${heldid}/lagerort/${encodeURI(to)}/${encodeURI(gegenstand)}/${amount}`;
-    if(from) {
+    if (from) {
       url += '?from=' + encodeURI(from);
     }
     return this.restService.post(url);
@@ -109,12 +118,19 @@ export class HeldenService {
     return this.restService.post(`helden/held/lagerort/${lagerort}/notiz`, notiz);
   }
 
-  public onAnzahlEdit(event) {
-
+  public addFavorit(heldid, name) {
+    name = encodeURIComponent(name);
+    return this.restService.post(`helden/held/${heldid}/favoriten?name=${name}`);
   }
 
+  public deleteFavorit(heldid, name) {
+    name = encodeURIComponent(name);
+    return this.restService.delete(`helden/held/${heldid}/favoriten?name=${name}`);
+  }
 
-
+  public getFavorisierteTalent(heldid) {
+    return this.restService.get(`helden/held/${heldid}/favoriten`);
+  }
 
 }
 
@@ -124,4 +140,12 @@ export interface HeldenInfo {
   lastChanged: number;
   id: number;
   version: number;
+}
+
+export interface VersionInfo {
+  id: number;
+  version: number;
+  editable: boolean;
+  xmlEditable: boolean;
+  ownHeld: boolean;
 }

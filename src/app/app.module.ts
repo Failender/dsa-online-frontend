@@ -80,8 +80,9 @@ import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
 import {HeldSteigernComponent} from './held/held-steigern/held-steigern.component';
 import {HeldInventarComponent} from './held/held-inventar/held-inventar.component';
 import {HeldQuicknavComponent} from './held/held-quicknav/held-quicknav.component';
-import { HeldGeldComponent } from './held/held-geld/held-geld.component';
+import {HeldGeldComponent} from './held/held-geld/held-geld.component';
 import {HeldGeldService} from './held/held-geld/held-geld.service';
+import {HeldMobilComponent} from './held/held-mobil/held-mobil.component';
 
 
 const appRoutes: Routes = [
@@ -104,6 +105,7 @@ const appRoutes: Routes = [
   { path: 'held/inventar', component: HeldInventarComponent, data: {title: 'Inventar'}},
   { path: 'held/steigern', component: HeldSteigernComponent, data: {title: 'Steigern'}},
   { path: 'held/geld', component: HeldGeldComponent, data: {title: 'Geld'}},
+  { path: 'held/mobil', component: HeldMobilComponent, data: {title: 'Mobil'}},
   { path: 'kalender', component: CalendarComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
@@ -152,7 +154,8 @@ registerLocaleData(localeDe, 'de');
     HeldSteigernComponent,
     HeldInventarComponent,
     HeldQuicknavComponent,
-    HeldGeldComponent
+    HeldGeldComponent,
+    HeldMobilComponent
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
