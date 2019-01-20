@@ -1,11 +1,11 @@
-<p-table [value]="data">
+<p-table [value]="data" [style]="{'width':'100%'}">
   <ng-template pTemplate="header">
     <tr>
       <th *ngIf="allowAddFavorites" style="width:20px"></th>
-      <th>Name</th>
-      <th>Probe / AT|PA / Representation</th>
-      <th>BE</th>
-      <th>TAW</th>
+      <th style="width:150px">Name</th>
+      <th>Probe / AT|PA</th>
+      <th style="font-size:11px">Behinderung / Representation</th>
+      <th style="width:50px">TAW</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-data>
@@ -20,13 +20,13 @@
         <td>{{data.name}}</td>
         <!-- Wenn representation vorhanden ist => als zauber darstellen-->
         <ng-container *ngIf="data.repraesentation; else talentRender">
-          <td>{{data.probe}}</td>
+          <td>{{displayProbeFull && data.probeFull? data.probeFull: data.probe}}</td>
           <td>{{data.repraesentation}}</td>
         </ng-container>
         <ng-template #talentRender>
 
           <ng-container [ngSwitch]="data.pa">
-            <td *ngSwitchCase="null">{{data.probe}}</td>
+            <td *ngSwitchCase="null">{{displayProbeFull && data.probeFull? data.probeFull: data.probe}}</td>
             <td *ngSwitchCase="''">{{data.at}}</td>
             <td *ngSwitchDefault>{{data.at}} | {{data.pa}}</td>
           </ng-container>

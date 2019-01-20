@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FavorisierbarTabelleComponent} from "../favorisierbar-tabelle/favorisierbar.tabelle.component";
 
 @Component({
@@ -8,4 +8,6 @@ import {FavorisierbarTabelleComponent} from "../favorisierbar-tabelle/favorisier
 })
 export class FavoritenTabelleComponent extends FavorisierbarTabelleComponent {
 
+
+  @Input() public displayProbeFull = false;
 }
