@@ -58,10 +58,10 @@ export class HeldMobilComponent extends HeldenComponent {
         return;
       }
       const eigenschaft = this.eigenschaften.find(val => val.short === split);
-      if(!eigenschaft) {
+      if (!eigenschaft) {
         console.error('Unrecognized split', split);
       }
-      values.push(this.held.eigenschaften[eigenschaft.name].akt):
+      values.push(this.held.eigenschaften[eigenschaft.name].akt);
     })
     return values.join("/");
   }
