@@ -84,7 +84,6 @@ import {HeldGeldComponent} from './held/held-geld/held-geld.component';
 import {HeldGeldService} from './held/held-geld/held-geld.service';
 import {HeldMobilComponent} from './held/held-mobil/held-mobil.component';
 
-
 const appRoutes: Routes = [
   {
     path: 'home',
