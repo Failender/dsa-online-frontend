@@ -1,0 +1,20 @@
+.menu-item {
+  border-bottom: 1px solid black;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 5px;
+  cursor: default;
+  overflow: hidden;
+}
+
+.menu-item.clickable {
+  cursor: pointer;
+}
+
+.child {
+  padding-left: 20px;
+}
+
+.selected {
+  background-color:blue;
+}

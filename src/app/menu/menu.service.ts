@@ -15,6 +15,9 @@ import {isMobile} from "../util/constants";
 export interface CustomMenuItem extends MenuItem {
   mobile: boolean;
   condition?: any;
+  expanded?: boolean;
+  height: number;
+  items: CustomMenuItem[];
 }
 
 interface NestedCustomMenuItem extends MenuItem {
@@ -29,54 +32,58 @@ export class MenuService {
 
 
   public items: CustomMenuItem[] = [
-    this.createItem('Home', 'home'),
-    this.createItem('Gruppen Ansicht', 'gruppen'),
-    this.createItem('Abenteuer', 'abenteuer'),
-    this.createItem('Kampagnen', 'abenteuer/kampagnen'),
-    this.createNoMobileItem('Kalender', 'kalender'),
+    this.createItem('Home', '/home'),
+    this.createItem('Gruppen Ansicht', '/gruppen'),
+    this.createItem('Abenteuer', '/abenteuer'),
+    this.createItem('Kampagnen', '/abenteuer/kampagnen'),
+    this.createNoMobileItem('Kalender', '/kalender'),
   ];
 
   public authenticatedItems: CustomMenuItem[] = [
-    this.createItem('Meine Helden', 'helden')
+    this.createItem('Meine Helden', '/helden')
   ]
 
   public protectedItems = {
     'EDIT_SCRIPTS': [
-      this.createNoMobileItem('Skripte', 'scripts')
+      this.createNoMobileItem('Skripte', '/scripts')
     ]
   }
 
   private nestedItems: NestedCustomMenuItem[] = [
-    this.createNestedItem('Kampagnen Verwaltung', 'abenteuer/kampagne/erstellen', 'Administration', EDIT_KAMPAGNE),
-    this.createNestedItem('Export', 'administration/export', 'Administration', FULL_EXPORT),
-    this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
-    this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
-    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER)
+    this.createNestedItem('Kampagnen Verwaltung', '/abenteuer/kampagne/erstellen', 'Administration', EDIT_KAMPAGNE),
+    this.createNestedItem('Export', '/administration/export', 'Administration', FULL_EXPORT),
+    this.createNestedItem('Import', '/administration/import', 'Administration', FULL_IMPORT),
+    this.createNestedItem('Nutzer-Erstellung', '/administration/user', 'Administration', CREATE_USER),
+    this.createNestedItem('Meister', '/administration/meister', 'Administration', CREATE_USER)
   ];
 
 
-  private zauberItem = this.createItem('Zauber', 'held/zauber');
+  private zauberItem = this.createItem('Zauber', '/held/zauber');
 
   private heldenItems: CustomMenuItem[] =
     [
-      this.createItem('Übersicht', 'held/uebersicht'),
-      this.createItem('Mobil', 'held/mobil'),
-      this.createItem('Steigern', 'held/steigern'),
-      this.createItem('Inventar', 'held/inventar'),
-      this.createItem('Geld', 'held/geld'),
+      this.createItem('Übersicht', '/held/uebersicht'),
+      this.createItem('Mobil', '/held/mobil'),
+      this.createItem('Steigern', '/held/steigern'),
+      this.createItem('Inventar', '/held/inventar'),
+      this.createItem('Geld', '/held/geld'),
       this.zauberItem,
-      this.createItem('Talente', 'held/talente'),
-      this.createItem('Ereignisse', 'held/ereignisse')
+      this.createItem('Talente', '/held/talente'),
+      this.createItem('Ereignisse', '/held/ereignisse')
     ];
 
   private heldItem: CustomMenuItem = this.createItem('Held', null, this.heldenItems);
 
   private createItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
+    if (link && link[0] !== '/') {
+      console.error('Link has no leading slash' , link);
+    }
     return {
       label,
-      command: () => this.routingService.navigateByUrl(link),
+      routerLink: link,
       mobile: true,
-      items
+      items,
+      height: 30
     };
   }
 
@@ -93,7 +100,8 @@ export class MenuService {
       label,
       command: () => this.routingService.navigateByUrl(link),
       mobile: false,
-      items
+      items,
+      height: 30
     };
   }
 

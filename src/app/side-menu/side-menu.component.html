@@ -1,0 +1,17 @@
+
+<ng-container *ngFor="let item of menuItems">
+
+  <div [ngClass]="{clickable: item.routerLink, selected: item.routerLink === current}" class="menu-item" (click)="onItemClick(item)">
+    <i class="pi" *ngIf="item.items" [ngClass]="{'pi-chevron-circle-right': !item.expanded, 'pi-chevron-circle-down': item.expanded}"></i>
+    {{item.label}}
+  </div>
+
+  <ng-container *ngIf="item.items && item.expanded">
+    <ng-container *ngFor="let child of item.items">
+      <div [ngClass]="{selected: child.routerLink === current}"  [style.height.px]="child.height" class="clickable menu-item child" (click)="onItemClick(child)">
+        {{child.label}}
+      </div>
+    </ng-container>
+  </ng-container>
+
+</ng-container>
