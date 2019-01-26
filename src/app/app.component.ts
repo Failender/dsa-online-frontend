@@ -10,7 +10,7 @@ import {RoutingService} from './shared/routing.service';
 })
 export class AppComponent {
 
-  public menuVisible = true;
+  public menuVisible = false;
   constructor(private messageService: MessageService, routingService: RoutingService) {
     (window as any).global = window;
     routingService.routing.asObservable()
