@@ -10,7 +10,7 @@
   </div>
 
 </p-card>
-<!--<app-abenteuer-erstellen [kampagne]="kampagneData" *ngIf="canEdit; else tabelle"></app-abenteuer-erstellen>-->
-<!--<ng-template #tabelle>-->
+<app-abenteuer-erstellen [kampagne]="kampagneData" *ngIf="canEdit; else tabelle"></app-abenteuer-erstellen>
+<ng-template #tabelle>
   <app-abenteuer-tabelle [abenteuer]="abenteuer"></app-abenteuer-tabelle>
-<!--</ng-template>-->
+</ng-template>

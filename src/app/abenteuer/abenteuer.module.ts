@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {AbenteuerlogComponent} from "./abenteuerlog/abenteuerlog.component";
 import {AbenteuerRoutingComponent} from "./abenteuer-routing/abenteuer-routing.component";
 import {AbenteuerDialogComponent} from "./abenteuer-dialog/abenteuer-dialog.component";
@@ -30,16 +30,16 @@ export const routes: Routes = [
     component: AbenteuerlogComponent
   },
   {
+    path: 'kampagne/erstellen',
+    component: CampaignAdminComponent
+  },
+  {
     path: 'kampagnen/:id',
     component: CampaignRoutingComponent
   },
   {
     path: 'kampagnen',
     component: CampaignsComponent
-  },
-  {
-    path: 'erstellen',
-    component: CampaignAdminComponent
   },
   {
     path: ':id',

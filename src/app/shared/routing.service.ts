@@ -12,6 +12,7 @@ export class RoutingService {
   }
 
   public navigateByUrl(url: string) {
+    console.debug('NAVIGATE', url)
     if (!url) {
       return;
     }

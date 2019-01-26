@@ -116,6 +116,4 @@ export class AbenteuerService {
     const dateNr = this.kalenderService.toNumber(datum.toNumericalString());
     return this.restService.post(`abenteuer/${abenteuerid}/date/${dateNr}`);
   }
-
-
 }

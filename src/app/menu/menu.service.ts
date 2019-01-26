@@ -7,8 +7,7 @@ import {
   CREATE_USER,
   EDIT_KAMPAGNE,
   FULL_EXPORT,
-  FULL_IMPORT,
-  MEISTER
+  FULL_IMPORT
 } from "../shared/service/authentication/authentication.service";
 import {RoutingService} from '../shared/routing.service';
 import {isMobile} from "../util/constants";
@@ -48,12 +47,11 @@ export class MenuService {
   }
 
   private nestedItems: NestedCustomMenuItem[] = [
-    this.createNestedItem('Kampagnen Verwaltung', 'administration/kampagnen', 'Administration', EDIT_KAMPAGNE),
+    this.createNestedItem('Kampagnen Verwaltung', 'abenteuer/kampagne/erstellen', 'Administration', EDIT_KAMPAGNE),
     this.createNestedItem('Export', 'administration/export', 'Administration', FULL_EXPORT),
     this.createNestedItem('Import', 'administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', 'administration/user', 'Administration', CREATE_USER),
-    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER),
-    this.createNestedItem('Abenteuer erstellen', 'abenteuer/erstellen', 'Administration', MEISTER)
+    this.createNestedItem('Meister', 'administration/meister', 'Administration', CREATE_USER)
   ];
 
 
