@@ -2,7 +2,7 @@
 <div class="ui-g" style="margin:5px">
   <p-checkbox [ngModel]="displayProbeFull" [binary]="true" (onChange)="displayProbeFull = $event" label="Eigenschaften in Probe anzeigen"></p-checkbox>
 </div>
-<button pButton label="Spracherkennung starten" (click)="recognize()"></button>
+<!--<button pButton label="Spracherkennung starten" (click)="recognize()"></button>-->
 <table *ngIf="held">
   <tr>
     <td *ngFor="let eigenschaft of eigenschaften">
@@ -11,7 +11,19 @@
   </tr>
 </table>
 
-<app-favoriten-tabelle [displayProbeFull]="displayProbeFull" [data]="speechData" *ngIf="held" [allowAddFavorites]="allowAddFavorites"
-                    [favoriten]="favoriten" (favoriteAdded)="addFavorite($event)" (favoriteRemoved)="removeFavorite($event)"></app-favoriten-tabelle>
+<!--<app-favoriten-tabelle [displayProbeFull]="displayProbeFull" [data]="speechData" *ngIf="held" [allowAddFavorites]="allowAddFavorites"-->
+                    <!--[favoriten]="favoriten" (favoriteAdded)="addFavorite($event)" (favoriteRemoved)="removeFavorite($event)"></app-favoriten-tabelle>-->
 <app-favoriten-tabelle [displayProbeFull]="displayProbeFull" [data]="data" *ngIf="held" [allowAddFavorites]="allowAddFavorites"
                     [favoriten]="favoriten" (favoriteAdded)="addFavorite($event)" (favoriteRemoved)="removeFavorite($event)"></app-favoriten-tabelle>
+
+<ng-container *ngIf="mobilInfo">
+
+  <div class="ui-g">
+    Lep: {{mobilInfo.lep}} | {{mobilInfo.maxLep}}
+  </div>
+
+  <div class="ui-g" *ngIf="mobilInfo.maxAsp !== 0">
+    Asp: {{mobilInfo.asp}} | {{mobilInfo.maxAsp}}
+  </div>
+
+</ng-container>

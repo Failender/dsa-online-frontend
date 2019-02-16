@@ -4,15 +4,19 @@ import {HeldenComponent} from "../helden-component/helden-component.component";
 import {RoutingService} from "../../shared/routing.service";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {map} from "rxjs/operators";
+import {HeldMobilService} from "./held-mobil.service";
 
 @Component({
   selector: 'app-held-mobil',
   templateUrl: './held-mobil.component.html',
-  styleUrls: ['./held-mobil.component.css']
+  styleUrls: ['./held-mobil.component.css'],
+  providers: [HeldMobilService]
 })
 export class HeldMobilComponent extends HeldenComponent {
 
   public data;
+
+  public mobilInfo;
 
   public speechData = [];
 
@@ -33,11 +37,14 @@ export class HeldMobilComponent extends HeldenComponent {
 
   public displayProbeFull = true
 
-  constructor(heldenService: HeldenService, router: RoutingService, authenticationService: AuthenticationService, private zone: NgZone) {
+  constructor(heldenService: HeldenService, router: RoutingService, authenticationService: AuthenticationService, private zone: NgZone,
+              private heldMobilService: HeldMobilService) {
     super(heldenService, router, authenticationService);
   }
 
   init() {
+    this.heldMobilService.getMobilInformation(this.versioninfo.id)
+      .subscribe(data => this.mobilInfo = data);
     this.heldenService.getFavoriten(this.versioninfo.id)
       .pipe(map(data => {
         data.forEach(entry => entry.probeFull = this.mapProbe(entry.probe))
@@ -45,6 +52,7 @@ export class HeldMobilComponent extends HeldenComponent {
       }))
       .subscribe(data => this.data = data);
     this.setupVoiceRecognition();
+
 
   }
 
@@ -68,7 +76,6 @@ export class HeldMobilComponent extends HeldenComponent {
           bestHit = talent;
         }
       });
-      console.debug(bestHit)
       this.zone.run(() => {
         this.speechData.push(bestHit);
 

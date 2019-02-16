@@ -3,3 +3,8 @@ table, td {
   border-collapse: collapse;
   background-color: lightgray;
 }
+
+
+div {
+  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
