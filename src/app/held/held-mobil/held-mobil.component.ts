@@ -25,7 +25,7 @@ export class HeldMobilComponent extends HeldenComponent {
   public eigenschaften = [
     {name: "mut", short: "MU"},
     {name: "klugheit", short: "KL"},
-    {name: "intuition", short: "IN"},
+    {name: "intuitiqon", short: "IN"},
     {name: "charisma", short: "CH"},
     {name: "fingerfertigkeit", short: "FF"},
     {name: "gewandtheit", short: "GE"},
