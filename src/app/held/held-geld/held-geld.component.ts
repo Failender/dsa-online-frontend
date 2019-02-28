@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {HeldenService} from '../../meine-helden/helden.service';
 import {RoutingService} from '../../shared/routing.service';
@@ -21,6 +21,8 @@ export class HeldGeldComponent extends HeldenComponent {
     }
   );
 
+
+  public ereignisse = [];
   public waehrungen;
 
   public muenzen;
@@ -36,7 +38,7 @@ export class HeldGeldComponent extends HeldenComponent {
         this.loading = false;
         this.muenzen = data;
       });
-
+    this.ereignisse = this.held.ereignisse.ereignis.filter(data => data.bemerkung === 'Geldbörse')
     this.heldGeldService.getWaehrungen()
       .subscribe(data => this.waehrungen = data);
   }
