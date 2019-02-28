@@ -32,5 +32,25 @@
 
   </table>
 
+  <div *ngIf="meister" class="">
+    <div class="ui-g">
+      <div class="ui-sm-12 ui-md-5">
+        <app-edit-dsa-date [(date)]="createEventDatum"></app-edit-dsa-date>
+      </div>
+      <div class="ui-sm-12 ui-md-6">
+        Name: <input pInputText [(ngModel)]="createEventName">
+      </div>
+
+      <div class="ui-md-6 ui-sm-12">
+        <button pButton (click)="createEvent()" label="Event erstellen" [disabled]="!createEventName"></button>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+
 </ng-container>
 

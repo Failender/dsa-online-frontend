@@ -26,6 +26,10 @@ export class EreignisseTabelleComponent implements OnInit {
     if (data.alterzustand === 0 || data.alterzustand && (data.neuerzustand !== 0 || data.alterzustand !== 0 )) {
       return data.alterzustand + '->' + data.neuerzustand;
     }
+    // Money gain event from DGO
+    if (data.neuerzustand) {
+      return data.neuerzustand;
+    }
     return '';
   }
 

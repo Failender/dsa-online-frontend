@@ -13,6 +13,7 @@ export interface GruppeInfo {
   userGroup: boolean;
   name: string;
   image: string;
+  datum: number;
 }
 export interface GruppeSelectItem extends SelectItem {
   value: GruppeInfo;
