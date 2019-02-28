@@ -6,6 +6,7 @@ import {GruppenService} from "../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {RoutingService} from "../shared/routing.service";
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dsa-kalender',
@@ -33,14 +34,17 @@ export class CalendarComponent implements OnInit, OnDestroy {
               private router: RoutingService) { }
 
   ngOnInit() {
-    this.sub = combineLatest(this.gruppenService.getCurrentGroup(), this.heuteChanged.asObservable())
+
+    this.sub = combineLatest(this.gruppenService.getCurrentGroup().pipe(tap(gruppe => {
+      if(gruppe.datum) {
+        this.heute = this.kalenderService.toDsaDatum(gruppe.datum);
+        this.heuteChanged.next(this.heute);
+      }
+    })), this.heuteChanged.asObservable())
       .subscribe(([gruppe, heute]) => {
         this.gruppe = gruppe.id;
         this.meister = gruppe.meister;
-        if(gruppe.datum) {
-          this.heute = this.kalenderService.toDsaDatum(gruppe.datum);
-          this.heuteChanged.next(this.heute);
-        }
+
 
         this.kalenderService.buildMonth(heute, gruppe.id)
           .subscribe(data => this.monat = data);
