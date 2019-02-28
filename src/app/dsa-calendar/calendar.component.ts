@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.meister = gruppe.meister;
         if(gruppe.datum) {
           this.heute = this.kalenderService.toDsaDatum(gruppe.datum);
+          this.heuteChanged.next(this.heute);
         }
 
         this.kalenderService.buildMonth(heute, gruppe.id)
