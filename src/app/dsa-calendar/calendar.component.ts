@@ -18,10 +18,16 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   public heute: DsaDatum = new DsaDatum(1015, 3, 4);
 
+  public createEventDatum = new DsaDatum(1015, 3, 4);
+  public createEventName: string = 'asd';
+
   public monat: KalenderDaten;
 
   public heuteChanged = new Subject<DsaDatum>();
   private sub: Subscription;
+
+  public meister;
+  private gruppe;
 
   constructor(private kalenderService: KalenderService, private gruppenService: GruppenService, private route: ActivatedRoute,
               private router: RoutingService) { }
@@ -29,6 +35,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = combineLatest(this.gruppenService.getCurrentGroup(), this.heuteChanged.asObservable())
       .subscribe(([gruppe, heute]) => {
+        this.gruppe = gruppe.id;
+        this.meister = gruppe.meister;
+        if(gruppe.datum) {
+          this.heute = this.kalenderService.toDsaDatum(gruppe.datum);
+        }
+
         this.kalenderService.buildMonth(heute, gruppe.id)
           .subscribe(data => this.monat = data);
       });
@@ -91,9 +103,16 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   onEventClick($event, event) {
     $event.stopPropagation();
-    if(event.type === 'ABENTEUER') {
+    if (event.type === 'ABENTEUER') {
       this.router.navigateByUrl(`/abenteuer/${event.id}`);
     }
     return false;
+  }
+
+  createEvent() {
+    this.kalenderService.createEvent(this.createEventName, this.createEventDatum, this.gruppe)
+      .subscribe(data => {
+        this.heuteChanged.next(this.heute);
+      })
   }
 }

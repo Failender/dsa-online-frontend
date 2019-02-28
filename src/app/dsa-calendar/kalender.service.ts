@@ -65,6 +65,11 @@ export class KalenderService {
 
   }
 
+  public createEvent(name: string, datum: DsaDatum, gruppe) {
+    const date = this.toNumber(datum.toNumericalString());
+    return this.restService.post(`events`, {name, date, type: 'GRUPPE', ownerId: gruppe});
+  }
+
   private mapEventResponse(data: EventResponse, datum: DsaDatum, gruppe: number): KalenderDaten {
 
     const legende = new Set();

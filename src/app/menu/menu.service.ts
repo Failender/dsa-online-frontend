@@ -98,7 +98,7 @@ export class MenuService {
   private createNoMobileItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
     return {
       label,
-      command: () => this.routingService.navigateByUrl(link),
+      routerLink: link,
       mobile: false,
       items,
       height: 30
