@@ -6,7 +6,7 @@ COPY library/package.json /usr/src/app/library
 RUN npm set loglevel warn --global
 RUN npm install --silent
 COPY ./library /usr/src/app/library
-RUN ng build dsa-components
+RUN npm build
 WORKDIR /usr/src/app/library/dist/dsa-components
 RUN npm link
 
