@@ -7,7 +7,7 @@ RUN npm set loglevel warn --global
 RUN npm install --silent
 COPY ./library /usr/src/app/library
 RUN npm build
-WORKDIR /usr/src/app/library/dist\dsa-components
+WORKDIR /usr/src/app/library/dist/dsa-components
 RUN npm link
 
 #Step 2 - Build App using the build library as link
