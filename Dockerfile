@@ -19,9 +19,9 @@ RUN npm install --silent
 RUN npm link dsa-components
 COPY . /usr/src/app
 RUN npm run build
-RUN mv /usr/src/app/dist/assets/ /usr/src/app/dist/asset
-RUN mkdir /usr/src/app/dist/assets/
-RUN mv /usr/src/app/dist/asset/ /usr/src/app/dist/assets/assets
+RUN mv /usr/src/app/app/dist/assets/ /usr/src/app/app/dist/asset
+RUN mkdir /usr/src/app/app/dist/assets/
+RUN mv /usr/src/app/app/dist/asset/ /usr/src/app/app/dist/assets/assets
 
 FROM nginx:1.13-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
