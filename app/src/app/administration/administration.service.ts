@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {RestService} from '../shared/service/rest/rest.service';
+import {RestService} from 'dsa-components';
 import {Observable} from "rxjs/index";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdministrationService {
 
   constructor(private restService: RestService) { }

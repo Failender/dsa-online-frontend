@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Userauthentication} from '../authentication/userauthentication';
-
+import {Inject, Injectable, InjectionToken} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
 import {NEVER, Observable, throwError,} from "rxjs";
 import {catchError} from 'rxjs/operators';
-import {MessageService} from "dsa-components";
+import {Userauthentication} from "./userauthentication";
+import {MessageService} from "./message.service";
+
+export const REST_URI_TOKEN = new InjectionToken('REST_URI')
 
 @Injectable()
 export class RestService {
@@ -14,22 +14,22 @@ export class RestService {
   private PASSWORD = 'X-PASSWORD';
 
   public authentication: Userauthentication;
-  constructor(private http: HttpClient, private messageService: MessageService) {
+  constructor(private http: HttpClient, private messageService: MessageService, @Inject(REST_URI_TOKEN) private restUri: string) {
   }
 
 
   public get(adress: string, asResponse?: boolean, handler?: any) {
-    return this.http.get(environment.rest + adress, this.buildOptions(asResponse))
+    return this.http.get(this.restUri + adress, this.buildOptions(asResponse))
       .pipe(catchError((e) => this.handleError(e, handler)));
   }
 
   public delete(adress: string, asResponse?: boolean) {
-    return this.http.delete(environment.rest + adress, this.buildOptions(asResponse))
+    return this.http.delete(this.restUri+ adress, this.buildOptions(asResponse))
       .pipe(catchError((e) => this.handleError(e)));
   }
 
   public post(adress: string, body?: any, asResponse?: boolean) {
-    return this.http.post(environment.rest + adress, body, this.buildOptions(asResponse))
+    return this.http.post(this.restUri+ adress, body, this.buildOptions(asResponse))
       .pipe(catchError((event) => this.handleError(event)));
   }
 

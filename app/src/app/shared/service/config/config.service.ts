@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {RestService} from '../rest/rest.service';
+import {Injectable} from '@angular/core';
+import {RestService} from 'dsa-components';
 
 @Injectable({
   providedIn: 'root'

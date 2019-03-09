@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RestService} from '../shared/service/rest/rest.service';
+import {RestService} from 'dsa-components';
 import {Observable, ReplaySubject} from "rxjs";
 import {tap} from 'rxjs/operators';
 

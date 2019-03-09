@@ -28,12 +28,11 @@ import {
   TooltipModule
 } from 'primeng/primeng';
 import {AuthenticationService} from './shared/service/authentication/authentication.service';
-import {RestService} from './shared/service/rest/rest.service';
+import {MessageService, REST_URI_TOKEN, ServicesModule} from 'dsa-components';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {HomeComponent} from './home/home.component';
-import {MessageService} from "dsa-components";
 import {MeineHeldenComponent} from './meine-helden/meine-helden.component';
 import {NutzerVerwaltungComponent} from './administration/nutzer-verwaltung/nutzer-verwaltung.component';
 import {SessionService} from './shared/service/session/session.service';
@@ -84,6 +83,7 @@ import {HeldGeldComponent} from './held/held-geld/held-geld.component';
 import {HeldGeldService} from './held/held-geld/held-geld.service';
 import {HeldMobilComponent} from './held/held-mobil/held-mobil.component';
 import {SideMenuComponent} from "./side-menu/side-menu.component";
+import {environment} from "../environments/environment";
 
 const appRoutes: Routes = [
   {
@@ -167,12 +167,13 @@ registerLocaleData(localeDe, 'de');
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
-    ), CardModule, SidebarModule,
+    ), CardModule, SidebarModule, ServicesModule.forRoot()
 
   ],
-  providers: [AuthenticationService, RestService, MessageService, VersionService, SessionService, HeldenService, UserService, HeldGeldService,
-    GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService
-    , { provide: LOCALE_ID, useValue: 'de' }
+  providers: [AuthenticationService, VersionService, SessionService, HeldenService, UserService, HeldGeldService,
+    GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService, MessageService
+    , { provide: LOCALE_ID, useValue: 'de' },
+    {provide: REST_URI_TOKEN, useValue: environment.rest}
     ],
   bootstrap: [AppComponent]
 })

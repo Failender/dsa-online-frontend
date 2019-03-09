@@ -1,4 +1,4 @@
-import {Userauthentication} from '../authentication/userauthentication';
+import {Userauthentication} from 'dsa-components';
 
 export class AuthenticationLocaleStorageObject {
 

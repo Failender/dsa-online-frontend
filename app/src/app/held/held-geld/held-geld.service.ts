@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RestService} from '../../shared/service/rest/rest.service';
+import {RestService} from 'dsa-components';
 
 @Injectable()
 export class HeldGeldService {
@@ -21,3 +21,4 @@ export class HeldGeldService {
   }
 
 }
+

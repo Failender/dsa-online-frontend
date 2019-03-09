@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DsaDatum, KalendarTag, KalenderDaten, START_YEAR, YEAR_LENGTH} from "./data";
-import {RestService} from "../shared/service/rest/rest.service";
+import {RestService} from 'dsa-components';
 import {Observable} from "rxjs/index";
 import {map} from "rxjs/internal/operators";
 

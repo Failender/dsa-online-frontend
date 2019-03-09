@@ -1,4 +1,4 @@
-import {RestService} from "../../shared/service/rest/rest.service";
+import {RestService} from 'dsa-components';
 import {Injectable} from "@angular/core";
 
 

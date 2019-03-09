@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {RestService} from './service/rest/rest.service';
+import {RestService} from 'dsa-components';
 import {SelectItem} from 'primeng/api';
 import {HeldenInfo} from '../meine-helden/helden.service';
 import {AuthenticationService} from "./service/authentication/authentication.service";

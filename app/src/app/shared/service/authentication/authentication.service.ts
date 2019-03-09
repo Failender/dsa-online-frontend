@@ -1,15 +1,12 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {RestService} from '../rest/rest.service';
+import {MessageService, RestService, Userauthentication} from 'dsa-components';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Message} from 'primeng/api';
-import {Userauthentication} from './userauthentication';
-import {catchError, flatMap, tap} from "rxjs/operators";
-import {MessageService} from "dsa-components";
+import {catchError, tap} from "rxjs/operators";
 import {SessionService} from "../session/session.service";
 import {HeldenService} from '../../../meine-helden/helden.service';
 import {NEVER, Observable, of, ReplaySubject} from "rxjs";
 import {mergeMap} from 'rxjs/internal/operators';
-import {GruppenService} from "../../gruppen.service";
 
 export const MEISTER = 'MEISTER';
 export const FULL_IMPORT = 'FULL_IMPORT';
