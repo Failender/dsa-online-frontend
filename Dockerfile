@@ -16,6 +16,7 @@ WORKDIR /usr/src/app/app
 COPY app/package.json /usr/src/app/app
 RUN npm set loglevel warn --global
 RUN npm install --silent
+RUN npm link dsa-components
 COPY . /usr/src/app
 RUN npm run build
 RUN mv /usr/src/app/dist/assets/ /usr/src/app/dist/asset
