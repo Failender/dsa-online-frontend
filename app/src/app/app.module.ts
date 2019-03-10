@@ -36,7 +36,6 @@ import {HomeComponent} from './home/home.component';
 import {MeineHeldenComponent} from './meine-helden/meine-helden.component';
 import {NutzerVerwaltungComponent} from './administration/nutzer-verwaltung/nutzer-verwaltung.component';
 import {SessionService} from './shared/service/session/session.service';
-import {HeldenInfoTabelleComponent} from './shared/helden-info-tabelle/helden-info-tabelle.component';
 import {TableModule} from 'primeng/table';
 import {registerLocaleData} from '@angular/common';
 
@@ -47,17 +46,13 @@ import {HeldEreignisseComponent} from './held/held-ereignisse/held-ereignisse.co
 import {HeldTalenteComponent} from './held/held-talente/held-talente.component';
 import {HeldZauberComponent} from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './shared/gruppen.service';
-import {AlteVersionLadenDialogComponent} from './shared/alte-version-laden-dialog/alte-version-laden-dialog.component';
-import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
-import {PdfComponent} from './shared/pdf/pdf.component';
 import {GroupviewComponent} from './group-view/groupview.component';
 import {HeldVergleichComponent} from './held/held-vergleich/held-vergleich.component';
 import {CalendarComponent} from './dsa-calendar/calendar.component';
 import {SkriptComponent} from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
-import {AlteVersionHochladenComponent} from './shared/alte-version-hochladen/alte-version-hochladen.component';
 import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
 import {AbenteuerService} from "./abenteuer/abenteuer.service";
 import {FullExportComponent} from './administration/full-export/full-export.component';
@@ -67,23 +62,25 @@ import {MeisterVerwaltungComponent} from './administration/meister-verwaltung/me
 import {UserService} from "./administration/nutzer-verwaltung/user.service";
 import {CurrentHeldComponent} from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
-import {SelectGruppeDialogComponent} from './shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component';
 import {ResultDisplayComponent} from './skripte/result-display/result-display.component';
 import {TextResultComponent} from './skripte/result-display/text-result/text-result.component';
 import {TableResultComponent} from './skripte/result-display/table-result/table-result.component';
 import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.component';
 
 import {MonacoEditorModule, NgxMonacoEditorConfig} from "ngx-monaco-editor";
-import {TablesModule} from "./shared/tables/tables.module";
 import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
 import {HeldSteigernComponent} from './held/held-steigern/held-steigern.component';
 import {HeldInventarComponent} from './held/held-inventar/held-inventar.component';
-import {HeldQuicknavComponent} from './held/held-quicknav/held-quicknav.component';
 import {HeldGeldComponent} from './held/held-geld/held-geld.component';
 import {HeldGeldService} from './held/held-geld/held-geld.service';
 import {HeldMobilComponent} from './held/held-mobil/held-mobil.component';
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {environment} from "../environments/environment";
+import {HeldModule} from "./held/held.module";
+import {HeldenInfoTabelleComponent} from "./shared/helden-info-tabelle/helden-info-tabelle.component";
+import {AlteVersionLadenDialogComponent} from "./shared/alte-version-laden-dialog/alte-version-laden-dialog.component";
+import {AlteVersionHochladenComponent} from "./shared/alte-version-hochladen/alte-version-hochladen.component";
+import {SelectGruppeDialogComponent} from "./shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component";
 
 const appRoutes: Routes = [
   {
@@ -131,39 +128,28 @@ registerLocaleData(localeDe, 'de');
     HomeComponent,
     MeineHeldenComponent,
     NutzerVerwaltungComponent,
-    HeldenInfoTabelleComponent,
-    HeldUebersichtComponent,
-    AlteVersionLadenDialogComponent,
-    HeldEreignisseComponent,
-    HeldTalenteComponent,
-    HeldZauberComponent,
-    PdfComponent,
     GroupviewComponent,
-    HeldVergleichComponent,
     CalendarComponent,
     SkriptComponent,
-    AlteVersionHochladenComponent,
     FullExportComponent,
     FullImportComponent,
     MeisterVerwaltungComponent,
     CurrentHeldComponent,
-    SelectGruppeDialogComponent,
     ResultDisplayComponent,
     TextResultComponent,
     TableResultComponent,
     SkriptRoutingComponent,
-    HeldSteigernComponent,
-    HeldInventarComponent,
-    HeldQuicknavComponent,
-    HeldGeldComponent,
-    HeldMobilComponent
+    HeldenInfoTabelleComponent,
+    AlteVersionLadenDialogComponent,
+    AlteVersionHochladenComponent,
+    SelectGruppeDialogComponent
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
-    HttpClientModule, ButtonModule, CheckboxModule, TablesModule, DropdownModule, EditDsaDateModule,
-    AccordionModule, PdfViewerModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,
-    MonacoEditorModule.forRoot(monacoConfig),
+    HttpClientModule, ButtonModule, CheckboxModule, DropdownModule, EditDsaDateModule,
+    AccordionModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,
+    MonacoEditorModule.forRoot(monacoConfig), HeldModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
