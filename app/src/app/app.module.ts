@@ -46,7 +46,6 @@ import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
 import {GroupviewComponent} from './group-view/groupview.component';
 import {CalendarComponent} from './dsa-calendar/calendar.component';
-import {SkriptComponent} from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
 import {VersionService} from "./shared/alte-version-laden-dialog/version.service";
 import {AbenteuerService} from "./abenteuer/abenteuer.service";
@@ -57,12 +56,6 @@ import {MeisterVerwaltungComponent} from './administration/meister-verwaltung/me
 import {UserService} from "./administration/nutzer-verwaltung/user.service";
 import {CurrentHeldComponent} from './current-held/current-held.component';
 import {CardModule} from "primeng/card";
-import {ResultDisplayComponent} from './skripte/result-display/result-display.component';
-import {TextResultComponent} from './skripte/result-display/text-result/text-result.component';
-import {TableResultComponent} from './skripte/result-display/table-result/table-result.component';
-import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.component';
-
-import {MonacoEditorModule, NgxMonacoEditorConfig} from "ngx-monaco-editor";
 import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {environment} from "../environments/environment";
@@ -79,6 +72,7 @@ const appRoutes: Routes = [
     data: { title: 'Home' }
   },
   {path: 'abenteuer', loadChildren: './abenteuer/abenteuer.module#AbenteuerModule'},
+  {path: 'skripte', loadChildren: './skripte/skript.module#SkriptModule'},
   {path: 'held', loadChildren: './held/held.module#HeldModule'},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
@@ -87,16 +81,9 @@ const appRoutes: Routes = [
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'gruppen', component: GroupviewComponent, data: {title: 'Öffentliche Helden'}},
   { path: 'kalender', component: CalendarComponent, data: {title: 'Kalender'}},
-  { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
-  { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
-
   { path: '**', redirectTo : '/home' }
 ];
 
-const monacoConfig: NgxMonacoEditorConfig = {
-  baseUrl: './assets', // configure base path for monaco editor
-  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
-};
 
 registerLocaleData(localeDe, 'de');
 
@@ -112,15 +99,10 @@ registerLocaleData(localeDe, 'de');
     NutzerVerwaltungComponent,
     GroupviewComponent,
     CalendarComponent,
-    SkriptComponent,
     FullExportComponent,
     FullImportComponent,
     MeisterVerwaltungComponent,
     CurrentHeldComponent,
-    ResultDisplayComponent,
-    TextResultComponent,
-    TableResultComponent,
-    SkriptRoutingComponent,
     HeldenInfoTabelleComponent,
     AlteVersionLadenDialogComponent,
     AlteVersionHochladenComponent,
@@ -131,7 +113,7 @@ registerLocaleData(localeDe, 'de');
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, DropdownModule, EditDsaDateModule,
     AccordionModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,
-    MonacoEditorModule.forRoot(monacoConfig), HeldModule,
+    HeldModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

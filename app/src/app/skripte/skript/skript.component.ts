@@ -150,7 +150,7 @@ export class SkriptComponent implements OnInit {
   }
 
   open() {
-    this.router.navigateByUrl('scripts/' + this.current.id);
+    this.router.navigateByUrl('skripte/' + this.current.id);
   }
 
   onInit(event) {

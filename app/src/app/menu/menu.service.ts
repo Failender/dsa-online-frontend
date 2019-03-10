@@ -45,7 +45,7 @@ export class MenuService {
 
   public protectedItems = {
     'EDIT_SCRIPTS': [
-      this.createNoMobileItem('Skripte', '/scripts')
+      this.createNoMobileItem('Skripte', '/skripte')
     ]
   }
 

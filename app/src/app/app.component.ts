@@ -17,6 +17,9 @@ export class AppComponent {
       .subscribe(() => {
         this.menuVisible = false;
       });
+
+    routingService.navigateByUrl('/skripte')
+
   }
 
 
