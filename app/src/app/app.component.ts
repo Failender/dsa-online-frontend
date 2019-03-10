@@ -18,8 +18,6 @@ export class AppComponent {
         this.menuVisible = false;
       });
 
-    routingService.navigateByUrl('/skripte')
-
   }
 
 
