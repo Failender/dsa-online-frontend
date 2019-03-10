@@ -41,15 +41,10 @@ import {registerLocaleData} from '@angular/common';
 
 import localeDe from '@angular/common/locales/de';
 import {HeldenService} from './meine-helden/helden.service';
-import {HeldUebersichtComponent} from './held/held-uebersicht/held-uebersicht.component';
-import {HeldEreignisseComponent} from './held/held-ereignisse/held-ereignisse.component';
-import {HeldTalenteComponent} from './held/held-talente/held-talente.component';
-import {HeldZauberComponent} from './held/held-zauber/held-zauber.component';
 import {GruppenService} from './shared/gruppen.service';
 import {MenuService} from "./menu/menu.service";
 import {RoutingService} from "./shared/routing.service";
 import {GroupviewComponent} from './group-view/groupview.component';
-import {HeldVergleichComponent} from './held/held-vergleich/held-vergleich.component';
 import {CalendarComponent} from './dsa-calendar/calendar.component';
 import {SkriptComponent} from './skripte/skript/skript.component';
 import {DialogModule} from "primeng/dialog";
@@ -69,11 +64,6 @@ import {SkriptRoutingComponent} from './skripte/skript-routing/skript-routing.co
 
 import {MonacoEditorModule, NgxMonacoEditorConfig} from "ngx-monaco-editor";
 import {EditDsaDateModule} from "./edit-dsa-date/edit-dsa-date.module";
-import {HeldSteigernComponent} from './held/held-steigern/held-steigern.component';
-import {HeldInventarComponent} from './held/held-inventar/held-inventar.component';
-import {HeldGeldComponent} from './held/held-geld/held-geld.component';
-import {HeldGeldService} from './held/held-geld/held-geld.service';
-import {HeldMobilComponent} from './held/held-mobil/held-mobil.component';
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {environment} from "../environments/environment";
 import {HeldModule} from "./held/held.module";
@@ -89,24 +79,16 @@ const appRoutes: Routes = [
     data: { title: 'Home' }
   },
   {path: 'abenteuer', loadChildren: './abenteuer/abenteuer.module#AbenteuerModule'},
+  {path: 'held', loadChildren: './held/held.module#HeldModule'},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
   { path: 'administration/import', component: FullImportComponent, data: {title: 'Import'}},
   { path: 'administration/meister', component: MeisterVerwaltungComponent, data: {title: 'Import'}},
   { path: 'helden', component: MeineHeldenComponent, data: {title: 'Meine Helden'}},
   { path: 'gruppen', component: GroupviewComponent, data: {title: 'Öffentliche Helden'}},
-  { path: 'held/uebersicht', component: HeldUebersichtComponent, data: {title: 'Übersicht'}},
-  { path: 'held/ereignisse', component: HeldEreignisseComponent, data: {title: 'Ereignisse'}},
-  { path: 'held/talente', component: HeldTalenteComponent, data: {title: 'Talente'}},
-  { path: 'held/zauber', component: HeldZauberComponent, data: {title: 'Zauber'}},
-  { path: 'held/inventar', component: HeldInventarComponent, data: {title: 'Inventar'}},
-  { path: 'held/steigern', component: HeldSteigernComponent, data: {title: 'Steigern'}},
-  { path: 'held/geld', component: HeldGeldComponent, data: {title: 'Geld'}},
-  { path: 'held/mobil', component: HeldMobilComponent, data: {title: 'Mobil'}},
   { path: 'kalender', component: CalendarComponent, data: {title: 'Kalender'}},
   { path: 'scripts', component: SkriptComponent, data: {title: 'Skripte'}},
   { path: 'scripts/:id', component: SkriptRoutingComponent, data: {title: 'Skripte'}},
-  { path: 'held/vergleichen/:id/:from/:to', component: HeldVergleichComponent, data: {title: 'Vergleichen'}},
 
   { path: '**', redirectTo : '/home' }
 ];
@@ -156,7 +138,7 @@ registerLocaleData(localeDe, 'de');
     ), CardModule, SidebarModule, ServicesModule.forRoot()
 
   ],
-  providers: [AuthenticationService, VersionService, SessionService, HeldenService, UserService, HeldGeldService,
+  providers: [AuthenticationService, VersionService, SessionService, HeldenService, UserService,
     GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService, MessageService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: REST_URI_TOKEN, useValue: environment.rest}

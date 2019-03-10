@@ -24,8 +24,8 @@ export class HeldQuicknavComponent extends HeldenComponent {
     this.zauberButton = this.held.zauberliste.zauber.length !== 0;
     this.activatedRoute.url
       .subscribe(data => {
-        if(data.length === 2) {
-          this.subroute = data[1].path;
+        if(data.length === 1) {
+          this.subroute = data[0].path;
         }
       });
   }
