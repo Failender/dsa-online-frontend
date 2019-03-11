@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ScriptHelperInformation, Skript, SkriptService, SkriptVariable} from '../skript.service';
 import {SelectItem} from "primeng/api";
 import {MessageService} from "dsa-components";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {combineLatest, Subject} from "rxjs";
 
 @Component({

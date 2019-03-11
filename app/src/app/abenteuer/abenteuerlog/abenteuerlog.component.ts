@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AbenteuerService} from "../abenteuer.service";
 import {GruppeInfo, GruppenService} from "../../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-abenteuerlog',

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {RestService} from 'dsa-components';
 import {Observable, ReplaySubject} from "rxjs";
 import {tap} from 'rxjs/operators';
+import {RestService} from './rest.service';
 
 @Injectable()
 export class HeldenService {

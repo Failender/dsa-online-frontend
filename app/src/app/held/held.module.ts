@@ -26,11 +26,11 @@ import {
 } from "primeng/primeng";
 import {PdfComponent} from "../shared/pdf/pdf.component";
 import {PdfViewerModule} from "ng2-pdf-viewer";
-import {EreignisseTabelleComponent} from "../shared/tables/ereignisse-tabelle/ereignisse-tabelle.component";
+import {EreignisseTabelleComponent} from "./tables/ereignisse-tabelle/ereignisse-tabelle.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FavoritenTabelleComponent} from "../shared/tables/favoriten-tabelle/favoriten-tabelle.component";
-import {TalenteTabelleComponent} from "../shared/tables/talente-tabelle/talente-tabelle.component";
-import {ZauberTabelleComponent} from "../shared/tables/zauber-tabelle/zauber-tabelle.component";
+import {FavoritenTabelleComponent} from "./tables/favoriten-tabelle/favoriten-tabelle.component";
+import {TalenteTabelleComponent} from "./tables/talente-tabelle/talente-tabelle.component";
+import {ZauberTabelleComponent} from "./tables/zauber-tabelle/zauber-tabelle.component";
 import {RouterModule, Routes} from "@angular/router";
 
 

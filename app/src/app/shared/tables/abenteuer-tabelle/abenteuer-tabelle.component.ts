@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
-import {RoutingService} from "../../routing.service";
+import {RoutingService} from "dsa-components";
 import {AbenteuerDto, AbenteuerService} from "../../../abenteuer/abenteuer.service";
 import {GruppenService} from "../../gruppen.service";
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SessionService} from "../shared/service/session/session.service";
-import {HeldenService} from "../meine-helden/helden.service";
+import {HeldenService} from "dsa-components";
 import {MenuItem} from "primeng/api";
 import {
   AuthenticationService,
@@ -9,7 +9,7 @@ import {
   FULL_EXPORT,
   FULL_IMPORT
 } from "../shared/service/authentication/authentication.service";
-import {RoutingService} from '../shared/routing.service';
+import {RoutingService} from 'dsa-components';
 import {isMobile} from "../util/constants";
 
 export interface CustomMenuItem extends MenuItem {
@@ -30,6 +30,8 @@ interface NestedCustomMenuItem extends MenuItem {
 @Injectable()
 export class MenuService {
 
+  private itemsToUnload: CustomMenuItem[] = [];
+  private heldItems: CustomMenuItem[] = [];
 
   public items: CustomMenuItem[] = [
     this.createItem('Home', '/home'),
@@ -74,7 +76,7 @@ export class MenuService {
 
   private heldItem: CustomMenuItem = this.createItem('Held', null, this.heldenItems);
 
-  private createItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
+  public createItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
     if (link && link[0] !== '/') {
       console.error('Link has no leading slash' , link);
     }
@@ -87,7 +89,7 @@ export class MenuService {
     };
   }
 
-  private createNestedItem(label: string, link: string, parent: string, permission: string): NestedCustomMenuItem {
+  public createNestedItem(label: string, link: string, parent: string, permission: string): NestedCustomMenuItem {
     return {
       parent,
       item: this.createItem(label, link),
@@ -95,7 +97,7 @@ export class MenuService {
     };
   }
 
-  private createNoMobileItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
+  public createNoMobileItem(label: string, link: string, items?: CustomMenuItem[]): CustomMenuItem {
     return {
       label,
       routerLink: link,
@@ -104,9 +106,6 @@ export class MenuService {
       height: 30
     };
   }
-
-  private itemsToUnload: CustomMenuItem[] = [];
-  private heldItems: CustomMenuItem[] = [];
 
   private removeHeldItems() {
     this.heldItems.forEach(item => {

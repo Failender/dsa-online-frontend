@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
-import {HeldenInfo, HeldenService} from '../../meine-helden/helden.service';
+import {HeldenInfo, HeldenService} from 'dsa-components';
 import {MenuItem, SelectItem} from "primeng/api";
 import {GruppenService} from '../gruppen.service';
 import {MessageService} from "dsa-components";
-import {RoutingService} from "../routing.service";
+import {RoutingService} from "dsa-components";
 import {environment} from "../../../environments/environment";
 import {AuthenticationService} from "../service/authentication/authentication.service";
 

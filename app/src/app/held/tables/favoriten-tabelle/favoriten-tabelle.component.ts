@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FavorisierbarTabelleComponent} from "../favorisierbar-tabelle/favorisierbar.tabelle.component";
+import {FavorisierbarTabelleComponent} from "../../favorisierbar-tabelle/favorisierbar.tabelle.component";
 
 @Component({
   selector: 'app-favoriten-tabelle',

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthenticationRequiredComponent} from '../../shared/authentication-required/authentication-required.component';
-import {RoutingService} from '../../shared/routing.service';
+import {RoutingService} from 'dsa-components';
 import {AuthenticationService} from '../../shared/service/authentication/authentication.service';
 import {Title} from '@angular/platform-browser';
 import {environment} from "../../../environments/environment";

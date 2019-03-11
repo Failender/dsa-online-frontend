@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {ActivatedRoute} from "@angular/router";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {MessageService} from "dsa-components";

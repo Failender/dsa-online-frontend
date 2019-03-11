@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Message} from 'primeng/api';
-import {MessageService} from "dsa-components";
-import {RoutingService} from './shared/routing.service';
+import {MessageService, RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-root',

@@ -28,7 +28,7 @@ import {
   TooltipModule
 } from 'primeng/primeng';
 import {AuthenticationService} from './shared/service/authentication/authentication.service';
-import {MessageService, REST_URI_TOKEN, ServicesModule} from 'dsa-components';
+import {REST_URI_TOKEN, ServicesModule} from 'dsa-components';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
@@ -40,10 +40,9 @@ import {TableModule} from 'primeng/table';
 import {registerLocaleData} from '@angular/common';
 
 import localeDe from '@angular/common/locales/de';
-import {HeldenService} from './meine-helden/helden.service';
 import {GruppenService} from './shared/gruppen.service';
 import {MenuService} from "./menu/menu.service";
-import {RoutingService} from "./shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {GroupviewComponent} from './group-view/groupview.component';
 import {CalendarComponent} from './dsa-calendar/calendar.component';
 import {DialogModule} from "primeng/dialog";
@@ -120,8 +119,8 @@ registerLocaleData(localeDe, 'de');
     ), CardModule, SidebarModule, ServicesModule.forRoot()
 
   ],
-  providers: [AuthenticationService, VersionService, SessionService, HeldenService, UserService,
-    GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService, MessageService
+  providers: [AuthenticationService, VersionService, SessionService, UserService,
+    GruppenService, MenuService, RoutingService, AbenteuerService, AdministrationService
     , { provide: LOCALE_ID, useValue: 'de' },
     {provide: REST_URI_TOKEN, useValue: environment.rest}
     ],

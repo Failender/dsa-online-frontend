@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HeldenService} from '../../meine-helden/helden.service';
+import {HeldenService} from 'dsa-components';
 
 interface DifferenceInfo {
   heldname: string;

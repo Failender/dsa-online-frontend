@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../shared/service/authentication/authentication.service';
 import {MenuService} from "./menu.service";
-import {RoutingService} from "../shared/routing.service";
+import {RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-menu',

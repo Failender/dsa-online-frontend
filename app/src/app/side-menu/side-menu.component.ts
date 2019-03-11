@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CustomMenuItem} from "../menu/menu.service";
 import {NavigationEnd, Router} from "@angular/router";
-import {RoutingService} from "../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {filter, take} from "rxjs/operators";
 import {interval} from "rxjs";
 
@@ -39,19 +39,19 @@ export class SideMenuComponent {
         item.items.forEach(entry => {
           entry.height = 0;
         });
-        interval(10)
-          .pipe(take(30))
+        interval(30)
+          .pipe(take(10))
           .subscribe(data => {
-            item.items.forEach(entry => entry.height = (data + 1));
+            item.items.forEach(entry => entry.height = (data + 3));
           });
       } else {
-        interval(10)
-          .pipe(take(30))
+        interval(30)
+          .pipe(take(10))
           .subscribe(data => {
-            if(data === 29) {
+            if(data === 9) {
               item.expanded = false;
             }
-            item.items.forEach(entry => entry.height = 30 - (data + 1));
+            item.items.forEach(entry => entry.height = 30 - (data + 3));
           });
       }
     } else {

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HeldenComponent} from "../helden-component/helden-component.component";
-import {HeldenService} from "../../meine-helden/helden.service";
-import {RoutingService} from "../../shared/routing.service";
+import {HeldenService} from "dsa-components";
+import {RoutingService} from "dsa-components";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {MessageService} from "dsa-components";
 import {FormControl, FormGroup, Validators} from "@angular/forms";

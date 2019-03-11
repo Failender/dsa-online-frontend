@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {HeldenInfo, HeldenService} from './helden.service';
+import {HeldenInfo, HeldenService} from 'dsa-components';
 import {AuthenticationRequiredComponent} from '../shared/authentication-required/authentication-required.component';
 import {AuthenticationService} from '../shared/service/authentication/authentication.service';
-import {MessageService} from "dsa-components";
-import {RoutingService} from "../shared/routing.service";
+import {MessageService, RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-meine-helden',

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {ActivatedRoute} from "@angular/router";
 import {HeldenComponent} from "../helden-component/helden-component.component";
-import {HeldenService} from "../../meine-helden/helden.service";
+import {HeldenService} from "dsa-components";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 
 @Component({

@@ -5,7 +5,7 @@ import {combineLatest, Subject, Subscription} from "rxjs/index";
 import {GruppenService} from "../shared/gruppen.service";
 import {SelectItem} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
-import {RoutingService} from "../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {tap} from 'rxjs/operators';
 
 @Component({

@@ -3,7 +3,7 @@ import {CampaignService} from "../campaign.service";
 import {GruppenService} from "../../shared/gruppen.service";
 import {flatMap} from "rxjs/operators";
 import {tap} from "rxjs/internal/operators";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-kampagnen',

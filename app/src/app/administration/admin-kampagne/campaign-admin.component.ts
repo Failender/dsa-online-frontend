@@ -4,7 +4,7 @@ import {CampaignService} from "../../campaign/campaign.service";
 import {MessageService} from "dsa-components";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService, EDIT_KAMPAGNE} from "../../shared/service/authentication/authentication.service";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-admin-kampagne',

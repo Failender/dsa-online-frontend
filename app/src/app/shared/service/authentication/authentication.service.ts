@@ -1,10 +1,10 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {MessageService, RestService, Userauthentication} from 'dsa-components';
+import {MessageService, RestService, Userauthentication, HeldenService} from 'dsa-components';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Message} from 'primeng/api';
 import {catchError, tap} from "rxjs/operators";
 import {SessionService} from "../session/session.service";
-import {HeldenService} from '../../../meine-helden/helden.service';
+
 import {NEVER, Observable, of, ReplaySubject} from "rxjs";
 import {mergeMap} from 'rxjs/internal/operators';
 

@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnDestroy, ViewChild} from "@angular/core";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectItem} from "primeng/api";
 import {GruppenService} from "../../shared/gruppen.service";

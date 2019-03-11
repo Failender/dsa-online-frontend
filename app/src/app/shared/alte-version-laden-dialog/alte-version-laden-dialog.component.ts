@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {HeldenInfo} from '../../meine-helden/helden.service';
+import {HeldenInfo} from 'dsa-components';
 import {VersionService} from './version.service';
 import {SelectItem} from 'primeng/api';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RoutingService} from '../routing.service';
-import {MessageService} from "dsa-components";
+
+import {MessageService, RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-alte-version-laden-dialog',

@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {HeldenService} from '../../meine-helden/helden.service';
+import {HeldenService} from 'dsa-components';
 import {AuthenticationService} from '../../shared/service/authentication/authentication.service';
 import {HeldenComponent} from '../helden-component/helden-component.component';
 import {environment} from '../../../environments/environment';
-import {RoutingService} from "../../shared/routing.service";
+import {RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-held-uebersicht',

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
-import {HeldenInfo} from "../../../meine-helden/helden.service";
+import {HeldenInfo} from "dsa-components";
 import {GruppenService} from "../../gruppen.service";
 import {MessageService} from "dsa-components";
 

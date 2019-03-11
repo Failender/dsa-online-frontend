@@ -1,6 +1,6 @@
 import {OnInit} from '@angular/core';
-import {HeldenService, VersionInfo} from '../../meine-helden/helden.service';
-import {RoutingService} from "../../shared/routing.service";
+import {HeldenService, VersionInfo} from 'dsa-components';
+import {RoutingService} from "dsa-components";
 import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
 import {first} from "rxjs/operators";
 

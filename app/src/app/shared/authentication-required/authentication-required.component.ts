@@ -1,6 +1,6 @@
 import {OnInit} from '@angular/core';
 import {AuthenticationService} from '../service/authentication/authentication.service';
-import {RoutingService} from "../routing.service";
+import {RoutingService} from "dsa-components";
 import {first} from 'rxjs/operators';
 
 export abstract class AuthenticationRequiredComponent implements OnInit {

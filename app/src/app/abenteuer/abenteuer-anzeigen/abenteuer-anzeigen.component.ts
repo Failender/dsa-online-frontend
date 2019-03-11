@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {AbenteuerDto, AbenteuerService} from "../abenteuer.service";
-import {RoutingService} from "../../shared/routing.service";
-import {MessageService} from "dsa-components";
+
+import {MessageService,RoutingService} from "dsa-components";
 
 @Component({
   selector: 'app-abenteuer-anzeigen',

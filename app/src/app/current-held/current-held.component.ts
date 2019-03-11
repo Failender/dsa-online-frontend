@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HeldenService} from "../meine-helden/helden.service";
+import {HeldenService} from "dsa-components";
 
 @Component({
   selector: 'app-current-held',
