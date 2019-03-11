@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SessionService} from "../shared/service/session/session.service";
-import {HeldenService} from "dsa-components";
+import {HeldenService, RoutingService} from "dsa-components";
 import {MenuItem} from "primeng/api";
 import {
   AuthenticationService,
@@ -9,7 +9,6 @@ import {
   FULL_EXPORT,
   FULL_IMPORT
 } from "../shared/service/authentication/authentication.service";
-import {RoutingService} from 'dsa-components';
 import {isMobile} from "../util/constants";
 
 export interface CustomMenuItem extends MenuItem {
@@ -38,6 +37,7 @@ export class MenuService {
     this.createItem('Gruppen Ansicht', '/gruppen'),
     this.createItem('Abenteuer', '/abenteuer'),
     this.createItem('Kampagnen', '/abenteuer/kampagnen'),
+    this.createItem('Kampf', '/kampf'),
     this.createNoMobileItem('Kalender', '/kalender'),
   ];
 

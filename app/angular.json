@@ -35,7 +35,9 @@
             ],
          
 
-            "scripts": []
+            "scripts": [
+              "node_modules/konva/konva.js"
+            ]
           },
           "configurations": {
             "production": {

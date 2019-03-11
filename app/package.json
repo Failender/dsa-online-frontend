@@ -25,6 +25,7 @@
     "core-js": "^2.4.1",
     "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
+    "konva": "^3.2.0",
     "ng2-pdf-viewer": "^5.0.1",
     "ngx-masonry": "^1.1.2",
     "ngx-monaco-editor": "^6.0.0",

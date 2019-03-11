@@ -28,7 +28,7 @@ import {
   TooltipModule
 } from 'primeng/primeng';
 import {AuthenticationService} from './shared/service/authentication/authentication.service';
-import {REST_URI_TOKEN, ServicesModule} from 'dsa-components';
+import {REST_URI_TOKEN, RoutingService, ServicesModule} from 'dsa-components';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
@@ -42,7 +42,6 @@ import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import {GruppenService} from './shared/gruppen.service';
 import {MenuService} from "./menu/menu.service";
-import {RoutingService} from "dsa-components";
 import {GroupviewComponent} from './group-view/groupview.component';
 import {CalendarComponent} from './dsa-calendar/calendar.component';
 import {DialogModule} from "primeng/dialog";
@@ -63,6 +62,7 @@ import {HeldenInfoTabelleComponent} from "./shared/helden-info-tabelle/helden-in
 import {AlteVersionLadenDialogComponent} from "./shared/alte-version-laden-dialog/alte-version-laden-dialog.component";
 import {AlteVersionHochladenComponent} from "./shared/alte-version-hochladen/alte-version-hochladen.component";
 import {SelectGruppeDialogComponent} from "./shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component";
+import {KampfModule} from "./kampf/kampf.module";
 
 const appRoutes: Routes = [
   {
@@ -72,6 +72,7 @@ const appRoutes: Routes = [
   },
   {path: 'abenteuer', loadChildren: './abenteuer/abenteuer.module#AbenteuerModule'},
   {path: 'skripte', loadChildren: './skripte/skript.module#SkriptModule'},
+  {path: 'kampf', loadChildren: './kampf/kampf.module#KampfModule'},
   {path: 'held', loadChildren: './held/held.module#HeldModule'},
   { path: 'administration/user', component: NutzerVerwaltungComponent, data: {title: 'Nutzer-Verwaltung'}},
   { path: 'administration/export', component: FullExportComponent, data: {title: 'Export'}},
@@ -108,7 +109,7 @@ registerLocaleData(localeDe, 'de');
     SelectGruppeDialogComponent
   ],
   imports: [
-    BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
+    BrowserAnimationsModule, MultiSelectModule, KampfModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, DropdownModule, EditDsaDateModule,
     AccordionModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,
