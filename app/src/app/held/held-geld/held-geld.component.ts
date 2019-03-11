@@ -21,6 +21,7 @@ export class HeldGeldComponent extends HeldenComponent {
     }
   );
 
+  public ereignisse = [];
   public waehrungen;
 
   public muenzen;
@@ -36,7 +37,7 @@ export class HeldGeldComponent extends HeldenComponent {
         this.loading = false;
         this.muenzen = data;
       });
-
+    this.ereignisse = this.held.ereignisse.ereignis.filter(data => data.bemerkung === 'Geldbörse')
     this.heldGeldService.getWaehrungen()
       .subscribe(data => this.waehrungen = data);
   }
