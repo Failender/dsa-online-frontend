@@ -62,7 +62,6 @@ import {HeldenInfoTabelleComponent} from "./shared/helden-info-tabelle/helden-in
 import {AlteVersionLadenDialogComponent} from "./shared/alte-version-laden-dialog/alte-version-laden-dialog.component";
 import {AlteVersionHochladenComponent} from "./shared/alte-version-hochladen/alte-version-hochladen.component";
 import {SelectGruppeDialogComponent} from "./shared/helden-info-tabelle/select-gruppe-dialog/select-gruppe-dialog.component";
-import {KampfModule} from "./kampf/kampf.module";
 
 const appRoutes: Routes = [
   {
@@ -70,6 +69,7 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' }
   },
+  {path: '', redirectTo : '/home', pathMatch: 'full'},
   {path: 'abenteuer', loadChildren: './abenteuer/abenteuer.module#AbenteuerModule'},
   {path: 'skripte', loadChildren: './skripte/skript.module#SkriptModule'},
   {path: 'kampf', loadChildren: './kampf/kampf.module#KampfModule'},
@@ -109,7 +109,7 @@ registerLocaleData(localeDe, 'de');
     SelectGruppeDialogComponent
   ],
   imports: [
-    BrowserAnimationsModule, MultiSelectModule, KampfModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
+    BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,
     BrowserModule, DialogModule, MessageModule, PanelModule, GrowlModule, ReactiveFormsModule, FormsModule, MenuModule, TabMenuModule,
     HttpClientModule, ButtonModule, CheckboxModule, DropdownModule, EditDsaDateModule,
     AccordionModule, InputTextModule, InputTextareaModule, TooltipModule, TableModule,

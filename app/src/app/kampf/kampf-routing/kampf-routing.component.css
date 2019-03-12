@@ -1,0 +1,13 @@
+
+.remove-button {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 0px;
+  right: 33px;
+}
+

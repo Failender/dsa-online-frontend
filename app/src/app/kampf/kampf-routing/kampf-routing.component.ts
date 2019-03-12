@@ -12,47 +12,55 @@ export class KampfRoutingComponent implements OnInit {
   private backgroundlayer;
 
   private playerLayer;
+  private stage;
 
   ngOnInit() {
-    const stage = new Konva.Stage({
+    this.stage = new Konva.Stage({
       container: 'konvas-container',
-      width: 500,
-      height: 500
+      width: 958,
+      height: 958
     })
 
     this.backgroundlayer = new Konva.Layer();
 
     this.playerLayer = new Konva.Layer();
 // add the layer to the stage
-    stage.add(this.backgroundlayer);
-    stage.add(this.playerLayer);
+    this.stage.add(this.backgroundlayer);
+    this.stage.add(this.playerLayer);
 // draw the image
     this.backgroundlayer.draw();
-    this.addImage(stage.width(), stage.height(),
+    this.addImage(this.stage.width(), this.stage.height(),
       'https://preview.redd.it/dpakjvmefdl21.jpg?width=960&crop=smart&auto=webp&s=aea57549e5e93b2e689f95d3cecd7814b370875d', () => {
-        this.addIcon();
+        this.addIcon(200, 200, 'axe');
+        this.addIcon(300, 200, 'bow');
+        this.addIcon(300, 300, 'mage');
+        this.addIcon(250, 200, 'dualsword');
       });
 
 
   }
 
-  private addIcon() {
+  private addIcon(x, y, type: string) {
 
     const circle = new Konva.Circle({
-      x: 200,
-      y: 200,
-      radius: 80,
-      stroke:'red'
+      x, y,
+      radius: 16,
+      stroke: 'red',
+      draggable: true
     });
 
     const image = new Image();
     image.onload = () => {
-      circle.fillPatternOffset({x:50, y:70})
+      circle.fillPatternOffset({x: 16, y: 16})
       circle.fillPatternImage(image);
-      circle.scale({x:0.2, y:0.2})
+
       circle.draw();
     }
-    image.src = "https://cdn2.iconfinder.com/data/icons/fire-fighting-glyph/64/44_fire-axe-fighting-128.png";
+
+    circle.on('dragend', () => {
+      console.debug(circle, circle.attrs.x, circle.attrs.y);
+    })
+    image.src = `assets/icons/${type}.png`;
     this.playerLayer.add(circle);
   }
 
@@ -69,11 +77,26 @@ export class KampfRoutingComponent implements OnInit {
       this.backgroundlayer.add(element);
       element.fillRadialGradientEndPointY(20);
       this.backgroundlayer.draw();
-      if(callback) {
+      if (callback) {
         callback();
       }
     }
     image.src = src;
+  }
+
+  scaleUp() {
+    this.stage.height(this.stage.height() * 2);
+    this.stage.width(this.stage.width() * 2);
+    this.stage.scale({x: 2, y: 2});
+    this.stage.draw();
+  }
+
+  scaleDown() {
+    this.stage.height(this.stage.height() * 0.5);
+    this.stage.width(this.stage.width() * 0.5);
+
+    this.stage.scale({x: 0.5, y: 0.5});
+    this.stage.draw();
   }
 
 
