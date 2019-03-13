@@ -42,16 +42,16 @@ export class SideMenuComponent {
         interval(30)
           .pipe(take(10))
           .subscribe(data => {
-            item.items.forEach(entry => entry.height = (data + 3));
+            item.items.forEach(entry => entry.height = (data * 3));
           });
       } else {
         interval(30)
           .pipe(take(10))
           .subscribe(data => {
-            if(data === 9) {
+            if (data === 9) {
               item.expanded = false;
             }
-            item.items.forEach(entry => entry.height = 30 - (data + 3));
+            item.items.forEach(entry => entry.height = 30 - (data * 3));
           });
       }
     } else {

@@ -33,6 +33,11 @@ export class RestService {
       .pipe(catchError((event) => this.handleError(event)));
   }
 
+  public put(adress: string, body?: any, asResponse?: boolean) {
+    return this.http.put(this.restUri + adress, body, this.buildOptions(asResponse))
+      .pipe(catchError((event) => this.handleError(event)));
+  }
+
   private handleError(error: HttpErrorResponse, handler?: any): Observable<any> {
     if (handler) {
       return handler(error);

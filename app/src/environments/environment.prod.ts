@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  rest : '/api/'
+  rest : '/api/',
+  ws: ''
 };
