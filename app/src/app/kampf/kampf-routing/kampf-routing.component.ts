@@ -25,6 +25,7 @@ export class KampfRoutingComponent implements OnInit {
   private stompClient;
 
   ngOnInit() {
+    console.debug('WEBOSCKET ADRESS', environment.ws);
     const ws = new SockJS(environment.ws);
     this.stompClient = Stomp.over(ws);
     this.stage = new Konva.Stage({
