@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   rest : '/api/',
-  ws: ''
+  ws: '/api/websocket'
 };
