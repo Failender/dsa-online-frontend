@@ -3,6 +3,7 @@ import {KampfRoutingComponent} from './kampf-routing/kampf-routing.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {KampfService} from "./kampf.service";
+import { KampfErstellenComponent } from './kampf-erstellen/kampf-erstellen.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,7 @@ const routes: Routes = [
 @NgModule({
 
   imports: [RouterModule.forChild(routes),  ButtonModule],
-  declarations: [KampfRoutingComponent],
+  declarations: [KampfRoutingComponent, KampfErstellenComponent],
   providers: [KampfService]
 })
 export class KampfModule {

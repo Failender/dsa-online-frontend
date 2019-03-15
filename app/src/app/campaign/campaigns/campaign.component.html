@@ -29,6 +29,7 @@
 
         <td>
           <button pButton icon="pi pi-search" (click)="openKampagne(data.id)"></button>
+          <button pButton icon="pi pi-images" (click)="openAssets(data.id)"></button>
           <button *ngIf="delete" pButton icon="pi pi-trash" (click)="deleteKampagne(data.id)"></button>
         </td>
       </tr>

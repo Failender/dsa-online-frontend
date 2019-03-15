@@ -14,7 +14,7 @@ import {AbenteuerTabelleComponent} from "../shared/tables/abenteuer-tabelle/aben
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DialogModule} from "primeng/dialog";
 import {CardModule} from "primeng/card";
-import {ButtonModule, DropdownModule, PanelModule} from "primeng/primeng";
+import {ButtonModule, CheckboxModule, DropdownModule, FileUploadModule, GalleriaModule, PanelModule} from "primeng/primeng";
 import {EditDsaDateModule} from "../edit-dsa-date/edit-dsa-date.module";
 import {AbenteuerErstellenComponent} from "./abenteuer-erstellen/abenteuer-erstellen.component";
 import {RouterModule, Routes} from "@angular/router";
@@ -23,6 +23,7 @@ import {CampaignAdminComponent} from "../administration/admin-kampagne/campaign-
 import {CampaignRoutingComponent} from "../campaign/campaign-routing/campaign-routing.component";
 import {CampaignComponent} from "../campaign/campaign/campaign.component";
 import {CampaignDialogComponent} from "../campaign/campaign-dialog/campaign-dialog.component";
+import {AssetManagmentComponent} from "../campaign/asset-managment/asset-managment.component";
 
 export const routes: Routes = [
   {
@@ -38,6 +39,11 @@ export const routes: Routes = [
     component: CampaignRoutingComponent
   },
   {
+    path: 'kampagnen/:id/assets',
+    component: AssetManagmentComponent
+  },
+
+  {
     path: 'kampagnen',
     component: CampaignsComponent
   },
@@ -49,11 +55,11 @@ export const routes: Routes = [
 @NgModule({
   declarations: [AbenteuerlogComponent, AbenteuerRoutingComponent, AbenteuerDialogComponent, AbenteuerAnzeigenComponent,
   AddSeBonusDialogComponent, AddLmBonusDialogComponent, AddNoteBonusDialogComponent, AddApBonusDialogComponent, AbenteuerTabelleComponent,
-  AbenteuerlogComponent, AbenteuerErstellenComponent,
+  AbenteuerlogComponent, AbenteuerErstellenComponent, AssetManagmentComponent,
     CampaignsComponent, CampaignComponent, CampaignRoutingComponent, CampaignDialogComponent, CampaignAdminComponent],
   imports: [
     CommonModule, NgxMasonryModule, TableModule, FormsModule, DialogModule, CardModule, ReactiveFormsModule, DropdownModule, EditDsaDateModule,
-    RouterModule.forChild(routes), ButtonModule, PanelModule
+    RouterModule.forChild(routes), ButtonModule, PanelModule, FileUploadModule, CheckboxModule, GalleriaModule
   ],
   exports: [AbenteuerTabelleComponent, RouterModule]
 })
