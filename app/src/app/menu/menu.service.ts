@@ -7,7 +7,7 @@ import {
   CREATE_USER,
   EDIT_KAMPAGNE,
   FULL_EXPORT,
-  FULL_IMPORT
+  FULL_IMPORT, MEISTER
 } from "../shared/service/authentication/authentication.service";
 import {isMobile} from "../util/constants";
 
@@ -56,7 +56,8 @@ export class MenuService {
     this.createNestedItem('Export', '/administration/export', 'Administration', FULL_EXPORT),
     this.createNestedItem('Import', '/administration/import', 'Administration', FULL_IMPORT),
     this.createNestedItem('Nutzer-Erstellung', '/administration/user', 'Administration', CREATE_USER),
-    this.createNestedItem('Meister', '/administration/meister', 'Administration', CREATE_USER)
+    this.createNestedItem('Meister', '/administration/meister', 'Administration', CREATE_USER),
+    this.createNestedItem('Kampf erstellen', '/kampf/erstellen', 'Meister', MEISTER),
   ];
 
 

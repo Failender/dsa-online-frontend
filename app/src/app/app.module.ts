@@ -106,7 +106,7 @@ registerLocaleData(localeDe, 'de');
     HeldenInfoTabelleComponent,
     AlteVersionLadenDialogComponent,
     AlteVersionHochladenComponent,
-    SelectGruppeDialogComponent
+    SelectGruppeDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule, MultiSelectModule, FileUploadModule, InputSwitchModule, PanelMenuModule, KeyFilterModule,

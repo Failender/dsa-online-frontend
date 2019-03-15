@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {CampaignService} from "../campaign.service";
+import {CampaignService} from "../../shared/abenteuer/campaign.service";
 import {flatMap} from "rxjs/operators";
 import {GruppenService} from "../../shared/gruppen.service";
 import {AbenteuerService} from "../../abenteuer/abenteuer.service";

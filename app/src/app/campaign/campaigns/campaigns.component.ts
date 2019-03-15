@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from "@angular/core";
-import {CampaignService} from "../campaign.service";
+import {CampaignService} from "../../shared/abenteuer/campaign.service";
 import {GruppenService} from "../../shared/gruppen.service";
 import {flatMap} from "rxjs/operators";
 import {tap} from "rxjs/internal/operators";

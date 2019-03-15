@@ -31,6 +31,7 @@ export interface Kampf {
   id: number;
   gegner: Gegner[];
   readonly: boolean;
+  image: string;
 }
 
 export interface Gegner {
@@ -41,4 +42,10 @@ export interface Gegner {
   ally: boolean;
   hpPercentage: number;
   konva: any;
+}
+
+export interface UpdateTeilnehmerPosition {
+  x: number;
+  y: number;
+  gegner: number;
 }

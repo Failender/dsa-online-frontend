@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {GruppenService} from "../../shared/gruppen.service";
-import {CampaignService} from "../../campaign/campaign.service";
+import {CampaignService} from "../../shared/abenteuer/campaign.service";
 import {MessageService} from "dsa-components";
 import {AuthenticationRequiredComponent} from "../../shared/authentication-required/authentication-required.component";
 import {AuthenticationService, EDIT_KAMPAGNE} from "../../shared/service/authentication/authentication.service";

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Asset, AssetService} from "../../shared/assets/asset.service";
-import {CampaignService} from "../campaign.service";
+import {Asset, AssetService} from "../../../shared/abenteuer/asset.service";
+import {CampaignService} from "../../../shared/abenteuer/campaign.service";
 import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 import {first, flatMap, map, tap, withLatestFrom} from "rxjs/operators";
-import {GruppenService} from "../../shared/gruppen.service";
-import {AuthenticationService} from "../../shared/service/authentication/authentication.service";
-import {environment} from "../../../environments/environment";
+import {GruppenService} from "../../../shared/gruppen.service";
+import {AuthenticationService} from "../../../shared/service/authentication/authentication.service";
+import {environment} from "../../../../environments/environment";
 import {MessageService} from "dsa-components";
 
 @Component({
