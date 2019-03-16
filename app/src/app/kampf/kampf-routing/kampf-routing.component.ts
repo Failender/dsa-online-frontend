@@ -19,7 +19,6 @@ export class KampfRoutingComponent implements OnInit, OnDestroy {
 
   public kampf;
 
-  public teilnehmerChange;
   private stompClient;
 
   private onDestroySub;
@@ -50,10 +49,7 @@ export class KampfRoutingComponent implements OnInit, OnDestroy {
 
                 this.setKampf(kampf);
               } else {
-                // this.kampfservice.startKampf(gruppe.id)
-                //   .subscribe(response => {
-                //     this.setKampf(response);
-                //   });
+                this.kampf = null;
               }
             });
         });
@@ -67,9 +63,10 @@ export class KampfRoutingComponent implements OnInit, OnDestroy {
     }
     this.onKampfChangeSubs = [];
     this.kampf = kampf;
+    this.kampf.readonly = true;
     this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/teilnehmer/position`, message => {
       const body = JSON.parse(message.body);
-      this.teilnehmerChange(body);
+      this.component.teilehmerChange(body);
     }));
     this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/scale`, message => {
       const scale = message.body;
@@ -80,6 +77,16 @@ export class KampfRoutingComponent implements OnInit, OnDestroy {
       const image = message.body;
       this.component.setImage(image);
     }));
+
+    this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/component/add`, message => {
+      this.component.addComponent(JSON.parse(message.body));
+    }));
+
+    this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/component/update`, message => {
+      this.component.onComponentChange(JSON.parse(message.body));
+    }));
+
+
   }
 
   public gegnerChange(gegner: Gegner) {

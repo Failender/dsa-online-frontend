@@ -1,2 +1,6 @@
 <app-asset-selector (assetSelected)="onAssetSelection($event)"></app-asset-selector>
-<app-kampf-render [kampf]="kampf" (teilnehmerChangeIn)="teilnehmerChange = $event" *ngIf="kampf"></app-kampf-render>
+<div class="ui-g">
+  <button pButton label="Kreis" (click)="kreis()"></button>
+  <button pButton label="Kampf veröffentlichen" (click)="publish()"></button>
+</div>
+<app-kampf-render [kampf]="kampf" (teilnehmerChangeIn)="teilnehmerChange = $event" (componentChange)="onComponentChange($event)" *ngIf="kampf"></app-kampf-render>

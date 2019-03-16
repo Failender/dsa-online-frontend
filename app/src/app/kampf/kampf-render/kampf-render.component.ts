@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Gegner, Kampf, UpdateTeilnehmerPosition} from "../kampf.service";
+import {Gegner, Kampf, KampfComponent, UpdateTeilnehmerPosition} from "../kampf.service";
 import {environment} from "../../../environments/environment";
+
+export const HIDE_CIRCLE = 'hide-circle';
 
 @Component({
   selector: 'app-kampf-render',
@@ -12,8 +14,10 @@ export class KampfRenderComponent implements OnChanges {
 
   @Input() public kampf: Kampf;
 
-  @Output() public teilnehmerChangeOut = new EventEmitter<Gegner>();
-  @Output() public teilnehmerChangeIn = new EventEmitter<any>();
+  @Output() public teilnehmerChange = new EventEmitter<Gegner>();
+
+
+  @Output() public componentChange = new EventEmitter<KampfComponent>();
 
   private backgroundlayer;
   private playerLayer;
@@ -32,9 +36,6 @@ export class KampfRenderComponent implements OnChanges {
       height: window.innerHeight
     });
 
-
-
-    this.teilnehmerChangeIn.next(this.teilehmerChange.bind(this));
     this.backgroundlayer = new Konva.Layer();
 
     this.playerLayer = new Konva.Layer();
@@ -46,9 +47,11 @@ export class KampfRenderComponent implements OnChanges {
 
     this.setKampf(this.kampf);
 
+    this.playerLayer.draw();
+
   }
 
-  private teilehmerChange(body: UpdateTeilnehmerPosition) {
+  public teilehmerChange(body: UpdateTeilnehmerPosition) {
 
     const gegner = this.kampf.gegner.find(entry => entry.id === body.gegner);
 
@@ -57,6 +60,18 @@ export class KampfRenderComponent implements OnChanges {
     this.playerLayer.draw();
   }
 
+  public onComponentChange(component: KampfComponent) {
+
+    const comp = this.kampf.components.find(entry => entry.id === component.id);
+
+
+    comp.konva.absolutePosition({x: component.x, y: component.y});
+    comp.konva.draw();
+    this.playerLayer.draw();
+  }
+
+
+
   private setKampf(kampf: Kampf) {
     this.kampf = kampf;
 
@@ -64,6 +79,47 @@ export class KampfRenderComponent implements OnChanges {
       this.addGegnerIcon(gegner);
     });
 
+    kampf.components.forEach(entry => this.renderComponent(entry));
+
+  }
+
+  public addComponent(component: KampfComponent) {
+    component.id = this.kampf.components.length;
+    this.kampf.components.push(component);
+    this.renderComponent(component);
+  }
+
+  private renderComponent(component: KampfComponent) {
+    if (component.type === HIDE_CIRCLE) {
+      let circle;
+      if (this.kampf.readonly) {
+        circle = new Konva.Circle({
+          x: component.x, y: component.y,
+          radius: component.parameter.radius + component.parameter.vision,
+          stroke: 'black',
+        });
+        circle.strokeWidth(component.parameter.radius * 2);
+      } else {
+        circle = new Konva.Circle({
+          x: component.x, y: component.y,
+          radius: component.parameter.vision,
+          stroke: 'black',
+          strokeWidth: 1
+        });
+        circle.draggable(true);
+
+        circle.on('dragend', () => {
+          component.x = circle.attrs.x;
+          component.y = circle.attrs.y;
+          this.componentChange.next(component);
+        });
+
+
+      }
+      component.konva = circle;
+      this.playerLayer.add(circle);
+      this.playerLayer.draw();
+    }
   }
 
   private addGegnerIcon(gegner: Gegner) {
@@ -100,7 +156,7 @@ export class KampfRenderComponent implements OnChanges {
     group.on('dragend', () => {
       gegner.x = group.attrs.x;
       gegner.y = group.attrs.y;
-      this.teilnehmerChangeOut.next(gegner);
+      this.teilnehmerChange.next(gegner);
     })
     image.src = `assets/icons/${gegner.icon}.png`;
     this.playerLayer.add(group);

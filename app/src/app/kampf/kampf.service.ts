@@ -22,6 +22,20 @@ export class KampfService {
     return this.restService.put(`kampf/${kampfid}/gegner`, gegner);
   }
 
+  public addComponent(kampfid: number, component: KampfComponent) {
+    return this.restService.post(`kampf/${kampfid}/component`, component);
+  }
+
+  public updateComponent(kampfid: number, component: KampfComponent) {
+    const konva = component.konva;
+    delete component.konva;
+    const obs = this.restService.put(`kampf/${kampfid}/component`, component);
+    component.konva = konva;
+    return obs;
+  }
+
+
+
 
 }
 
@@ -32,6 +46,16 @@ export interface Kampf {
   gegner?: Gegner[];
   readonly?: boolean;
   image?: string;
+  components?: KampfComponent[];
+}
+
+export interface KampfComponent {
+  type: string;
+  x: number;
+  y: number;
+  parameter: any;
+  id?: number;
+  konva?: any;
 }
 
 export interface Gegner {
