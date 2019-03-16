@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {environment} from "../../../environments/environment";
@@ -12,7 +12,7 @@ import {KampfRenderComponent} from "../kampf-render/kampf-render.component";
   templateUrl: './kampf-routing.component.html',
   styleUrls: ['./kampf-routing.component.css']
 })
-export class KampfRoutingComponent implements OnInit {
+export class KampfRoutingComponent implements OnInit, OnDestroy {
 
   constructor(private kampfservice: KampfService, private gruppenService: GruppenService) {
   }
@@ -34,7 +34,7 @@ export class KampfRoutingComponent implements OnInit {
     this.stompClient.connect({}, frame => {
 
 
-      this.onDestroySub = this.gruppenService.getCurrentGroup().pipe(first())
+      this.onDestroySub = this.gruppenService.getCurrentGroup()
         .subscribe(gruppe => {
 
           if (this.onGroupChangeSub) {
@@ -85,6 +85,19 @@ export class KampfRoutingComponent implements OnInit {
   public gegnerChange(gegner: Gegner) {
     this.kampfservice.updateGegnerPosition(this.kampf.id, gegner)
       .subscribe();
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.onGroupChangeSub) {
+      this.onGroupChangeSub.unsubscribe();
+    }
+    if (this.onDestroySub) {
+      this.onDestroySub.unsubscribe();
+    }
+    if (this.onKampfChangeSubs) {
+      this.onKampfChangeSubs.forEach(entry => entry.unsubscribe());
+    }
   }
 
 
