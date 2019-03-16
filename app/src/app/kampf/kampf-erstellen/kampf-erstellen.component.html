@@ -1,2 +1,2 @@
-<app-asset-selector></app-asset-selector>
+<app-asset-selector (assetSelected)="onAssetSelection($event)"></app-asset-selector>
 <app-kampf-render [kampf]="kampf" (teilnehmerChangeIn)="teilnehmerChange = $event" *ngIf="kampf"></app-kampf-render>

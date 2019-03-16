@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Gegner, Kampf, UpdateTeilnehmerPosition} from "../kampf.service";
 import {environment} from "../../../environments/environment";
-import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-kampf-render',
   templateUrl: './kampf-render.component.html',
   styleUrls: ['./kampf-render.component.css']
 })
-export class KampfRenderComponent implements OnInit {
+export class KampfRenderComponent implements OnChanges {
 
 
   @Input() public kampf: Kampf;
@@ -20,12 +19,17 @@ export class KampfRenderComponent implements OnInit {
   private playerLayer;
   private stage;
 
-  ngOnInit() {
+
+  private backgroundImage;
+  private scaleFactor = 1.5;
+  private currentScale = 1;
+
+  ngOnChanges(changes: SimpleChanges) {
 
     this.stage = new Konva.Stage({
       container: 'konvas-container',
-      width: 958,
-      height: 958
+      width: window.innerWidth,
+      height: window.innerHeight
     });
 
 
@@ -34,15 +38,11 @@ export class KampfRenderComponent implements OnInit {
     this.backgroundlayer = new Konva.Layer();
 
     this.playerLayer = new Konva.Layer();
-// add the layer to the stage
     this.stage.add(this.backgroundlayer);
     this.stage.add(this.playerLayer);
-// draw the image
-    this.backgroundlayer.draw();
+   this.backgroundlayer.draw();
     const image = environment.rest + "assets/"  + this.kampf.image;
-    console.debug(image);
-    this.addImage(this.stage.width(), this.stage.height(),
-      image, () => {});
+    this.addImage(image, () => {});
 
     this.setKampf(this.kampf);
 
@@ -106,16 +106,18 @@ export class KampfRenderComponent implements OnInit {
     this.playerLayer.add(group);
   }
 
-  private addImage(width, height, src, callback?) {
+  private addImage(src, callback?) {
     const image = new Image();
     image.onload = () => {
       const element = new Konva.Image({
-        width: width,
-        height: height,
+        width: image.width,
+        height: image.height,
         x: 0,
         y: 0,
         image: image
       })
+      this.backgroundImage = element;
+      element.draggable(true);
       this.backgroundlayer.add(element);
       element.fillRadialGradientEndPointY(20);
       this.backgroundlayer.draw();
@@ -126,18 +128,32 @@ export class KampfRenderComponent implements OnInit {
     image.src = src;
   }
 
+  public scaleTo(scale: number) {
+    const factor = scale / this.currentScale;
+    this.stage.height(this.stage.height() * factor);
+    this.stage.width(this.stage.width() * factor);
+    this.stage.scale({x: scale, y: scale});
+
+  }
+
+  public setImage(image: string) {
+    console.error(image)
+  }
+
   scaleUp() {
-    this.stage.height(this.stage.height() * 2);
-    this.stage.width(this.stage.width() * 2);
-    this.stage.scale({x: 2, y: 2});
+    this.currentScale *= this.scaleFactor;
+    this.stage.height(this.stage.height() * this.scaleFactor);
+    this.stage.width(this.stage.width() * this.scaleFactor);
+    this.stage.scale({x: this.currentScale, y: this.currentScale});
     this.stage.draw();
   }
 
   scaleDown() {
-    this.stage.height(this.stage.height() * 0.5);
-    this.stage.width(this.stage.width() * 0.5);
-
-    this.stage.scale({x: 0.5, y: 0.5});
+    const scale = 1 / this.scaleFactor;
+    this.currentScale *= scale;
+    this.stage.height(this.stage.height() * scale);
+    this.stage.width(this.stage.width() * scale);
+    this.stage.scale({x: this.currentScale, y: 1 / this.currentScale});
     this.stage.draw();
   }
 

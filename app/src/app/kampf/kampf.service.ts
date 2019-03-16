@@ -27,11 +27,11 @@ export class KampfService {
 
 
 export interface Kampf {
-  gruppe: number;
-  id: number;
-  gegner: Gegner[];
-  readonly: boolean;
-  image: string;
+  gruppe?: number;
+  id?: number;
+  gegner?: Gegner[];
+  readonly?: boolean;
+  image?: string;
 }
 
 export interface Gegner {

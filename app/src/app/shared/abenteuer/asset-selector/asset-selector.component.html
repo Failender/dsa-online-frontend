@@ -1,3 +1,5 @@
 
-<p-dropdown placeholder="Währung" [options]="kampagnen" appendTo="body" [style]="{width: '100%'}"></p-dropdown>
-{{kampagnen | json}}
+<p-panel header="Asset auswählen" toggleable="true">
+  <p-dropdown placeholder="Kampagne" [options]="kampagnen" appendTo="body" [style]="{width: '100%'}" (onChange)="onKampagneSelect($event)"></p-dropdown>
+  <app-asset-galery [assets]="assets" (assetSelected)="assetSelected.next($event)"></app-asset-galery>
+</p-panel>

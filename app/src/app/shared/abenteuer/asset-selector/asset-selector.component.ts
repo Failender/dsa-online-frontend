@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {GruppenService} from "../../gruppen.service";
 import {CampaignService} from "../campaign.service";
+import {Asset, AssetService} from "../asset.service";
 
 @Component({
   selector: 'app-asset-selector',
@@ -12,10 +13,13 @@ export class AssetSelectorComponent implements OnInit, OnDestroy {
   private sub;
 
   public kampagnen;
-  constructor(private gruppenService: GruppenService, private kampagnenService: CampaignService) { }
+  public assets: Asset[];
+
+  @Output() public assetSelected = new EventEmitter<Asset>();
+  constructor(private gruppenService: GruppenService, private kampagnenService: CampaignService, private assetService: AssetService) { }
 
   ngOnInit() {
-    const sub = this.gruppenService.getCurrentGroup()
+    this.sub = this.gruppenService.getCurrentGroup()
       .subscribe(gruppe => {
         this.kampagnenService.getKampagnen(gruppe.id)
           .subscribe(kampagnen => this.kampagnen = kampagnen.map(entry => {
@@ -30,6 +34,11 @@ export class AssetSelectorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  onKampagneSelect(event) {
+    this.assetService.assetsForKampagne(event.value)
+      .subscribe(data => this.assets = data);
   }
 
 }
