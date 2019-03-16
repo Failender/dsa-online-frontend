@@ -10,8 +10,8 @@ export class KampfService {
   }
 
 
-  public startKampf(gruppe: number): Observable<Kampf> {
-    return this.restService.post(`kampf/start/${gruppe}`);
+  public startKampf(gruppe: number, kampf: Kampf): Observable<Kampf> {
+    return this.restService.post(`kampf/start/${gruppe}`, kampf);
   }
 
   public getKampfForGruppe(gruppe: number): Observable<Kampf> {

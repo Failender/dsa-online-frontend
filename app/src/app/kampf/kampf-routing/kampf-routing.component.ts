@@ -22,6 +22,10 @@ export class KampfRoutingComponent implements OnInit {
   public teilnehmerChange;
   private stompClient;
 
+  private onDestroySub;
+  private onGroupChangeSub;
+  private onKampfChangeSubs;
+
   @ViewChild(KampfRenderComponent) private component: KampfRenderComponent;
 
   ngOnInit() {
@@ -29,18 +33,27 @@ export class KampfRoutingComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, frame => {
 
-      this.gruppenService.getCurrentGroup().pipe(first())
+
+      this.onDestroySub = this.gruppenService.getCurrentGroup().pipe(first())
         .subscribe(gruppe => {
+
+          if (this.onGroupChangeSub) {
+            this.onGroupChangeSub.unsubscribe();
+          }
+          this.onGroupChangeSub = this.stompClient.subscribe(`/kampf/gruppe/${gruppe.id}`, message => {
+            const kampf = JSON.parse(message.body);
+            this.setKampf(kampf);
+          });
           this.kampfservice.getKampfForGruppe(gruppe.id)
             .subscribe(kampf => {
               if (kampf) {
 
                 this.setKampf(kampf);
               } else {
-                this.kampfservice.startKampf(gruppe.id)
-                  .subscribe(response => {
-                    this.setKampf(response);
-                  });
+                // this.kampfservice.startKampf(gruppe.id)
+                //   .subscribe(response => {
+                //     this.setKampf(response);
+                //   });
               }
             });
         });
@@ -49,22 +62,24 @@ export class KampfRoutingComponent implements OnInit {
   }
 
   private setKampf(kampf: Kampf) {
+    if (this.onKampfChangeSubs) {
+      this.onKampfChangeSubs.forEach(entry => entry.unsubscribe());
+    }
+    this.onKampfChangeSubs = [];
     this.kampf = kampf;
-    this.stompClient.subscribe(`/kampf/${kampf.id}/teilnehmer/position`, message => {
+    this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/teilnehmer/position`, message => {
       const body = JSON.parse(message.body);
       this.teilnehmerChange(body);
-    });
-    this.stompClient.subscribe(`/kampf/${kampf.id}/scale`, message => {
+    }));
+    this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/scale`, message => {
       const scale = message.body;
-      console.debug('SCALING TO', scale);
       this.component.scaleTo(scale);
-      //this.teilnehmerChange(body);
-    });
+    }));
 
-    this.stompClient.subscribe(`/kampf/${kampf.id}/image`, message => {
+    this.onKampfChangeSubs.push(this.stompClient.subscribe(`/kampf/${kampf.id}/image`, message => {
       const image = message.body;
       this.component.setImage(image);
-    });
+    }));
   }
 
   public gegnerChange(gegner: Gegner) {
