@@ -17,7 +17,7 @@ export class KampfRoutingComponent implements OnInit {
   constructor(private kampfservice: KampfService, private gruppenService: GruppenService) {
   }
 
-  private kampf;
+  public kampf;
 
   public teilnehmerChange;
   private stompClient;
